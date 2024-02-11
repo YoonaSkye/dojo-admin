@@ -1,4 +1,4 @@
-import { StorageEnum } from '@/types/enum';
+import { StorageEnum } from '#/enum';
 
 export const getItem = <T>(key: StorageEnum): T | null => {
   let value = null;
