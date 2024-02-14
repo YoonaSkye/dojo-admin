@@ -1,7 +1,11 @@
-import { create } from 'zustand';
-import { UserToken, UserInfo } from '@/types/entity';
+import { UserInfo, UserToken } from '#/entity';
+import { StorageEnum } from '#/enum';
+import userService, { SignInReq } from '@/api/services/userService';
 import { getItem, removeItem, setItem } from '@/utils/storage';
-import { StorageEnum } from '@/types/enum';
+import { useNavigate } from 'react-router-dom';
+import { create } from 'zustand';
+
+const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 
 type UserStore = {
   userInfo: Partial<UserInfo>;
@@ -35,8 +39,23 @@ const useUserStore = create<UserStore>((set) => ({
 
 export const useUserInfo = () => useUserStore((store) => store.userInfo);
 export const useUserToken = () => useUserStore((store) => store.userToken);
-export const useUserPermissions = () =>
+export const useUserPermission = () =>
   useUserStore((store) => store.userInfo.permissions);
 export const useUserActions = () => useUserStore((store) => store.actions);
 
-export const useSignIn = () => {};
+export const useSignIn = () => {
+  const navigate = useNavigate();
+  const { setUserInfo, setUserToken } = useUserActions();
+
+  const signIn = async (data: SignInReq) => {
+    const res = await userService.signin(data);
+    if (res[0].data) {
+      const { user, accessToken, refreshToken } = res[0].data;
+      setUserToken({ accessToken, refreshToken });
+      setUserInfo(user);
+      navigate(HOMEPAGE);
+    }
+  };
+
+  return signIn;
+};

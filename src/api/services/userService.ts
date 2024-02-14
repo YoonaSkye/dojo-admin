@@ -1,3 +1,4 @@
+import { Result } from '#/api';
 import { UserInfo, UserToken } from '#/entity';
 import request from '../request';
 
@@ -13,7 +14,7 @@ export interface SignUpReq extends SignInReq {
 export type SignInRes = UserToken & { user: UserInfo };
 
 export enum UserApi {
-  SignIn = '/auth/login',
+  SignIn = '/api/auth/login',
   SignUp = '/auth/signup',
   Logout = '/auth/logout',
   Refresh = 'auth/refresh',
@@ -21,7 +22,7 @@ export enum UserApi {
 }
 
 const signin = (data: SignInReq) =>
-  request.post<SignInRes>(UserApi.SignIn, data);
+  request.post<Result<SignInRes>>(UserApi.SignIn, data);
 const signup = (data: SignInReq) =>
   request.post<SignInRes>(UserApi.SignUp, data);
 const logout = () => request.get(UserApi.Logout);

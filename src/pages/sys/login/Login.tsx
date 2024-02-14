@@ -24,5 +24,3 @@ export default function Login() {
     </Layout>
   );
 }
-
-// m-auto flex flex-col !h-screen w-full max-w-[480px] px-[16px] lg:px-[64px]

@@ -1,19 +1,31 @@
+import { SignInReq } from '@/api/services/userService';
+import { useSignIn } from '@/store/userStore';
 import {
   Alert,
   Button,
   Checkbox,
   Col,
+  Divider,
   Form,
   Input,
   Row,
   Tag,
-  Divider,
 } from 'antd';
 import { useState } from 'react';
 import { AiFillGithub, AiFillGoogleCircle, AiFillWechat } from 'react-icons/ai';
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
+  const signIn = useSignIn();
+
+  const handleFinish = async ({ username, password }: SignInReq) => {
+    setLoading(true);
+    try {
+      await signIn({ username, password });
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <>
       <div className="mb-4 text-2xl font-bold xl:text-3xl">登录</div>
@@ -22,9 +34,10 @@ export default function LoginForm() {
         size="large"
         initialValues={{
           remember: true,
-          username: 'admin@gamil.com',
+          username: 'admin@gmail.com',
           password: 'demo1234',
         }}
+        onFinish={handleFinish}
       >
         <div className="mb-4 flex flex-col">
           <Alert

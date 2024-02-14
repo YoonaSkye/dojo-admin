@@ -4,12 +4,14 @@ import {
   RouteObject,
   RouterProvider,
 } from 'react-router-dom';
-import { AppRouteObject } from '@/types/router';
+import { AppRouteObject } from '#/router';
 
 // TODO: 后续对路由进行懒加载处理
 import Login from '@/pages/sys/login/Login';
 // import AuthGuard from './components/AuthGuard';
 import DashboardLayout from '@/layouts/dashboard';
+import { usePermissionRoutes } from '@/router/hooks/use-permission-routes';
+import AuthGuard from './components/AuthGuard';
 
 const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 
@@ -25,16 +27,19 @@ const Not_Found_Page_Route: AppRouteObject = {
 
 export default function Router() {
   // TODO：完善动态路由功能
+  const permissonRoutes = usePermissionRoutes();
   const asyncRoutes: AppRouteObject = {
     // TODO: 完善路由守卫功能
     path: '/',
-    // element: (
-    //   <AuthGuard>
-
-    //   </AuthGuard>
-    // )
-    element: <DashboardLayout />,
-    children: [{ index: true, element: <Navigate to={HOMEPAGE} replace /> }],
+    element: (
+      <AuthGuard>
+        <DashboardLayout />
+      </AuthGuard>
+    ),
+    children: [
+      { index: true, element: <Navigate to={HOMEPAGE} replace /> },
+      ...permissonRoutes,
+    ],
   };
 
   // TODO：路由：异步路由 + 同步路由
