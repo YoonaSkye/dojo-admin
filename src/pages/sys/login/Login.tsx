@@ -1,10 +1,21 @@
 import { Layout, Typography } from 'antd';
 import DojoImage from '@/assets/images/background/dojo.png';
 import LoginForm from './LoginForm';
+import { useUserToken } from '@/store/userStore';
+import { Navigate } from 'react-router-dom';
+
+const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 import { useTranslation } from 'react-i18next';
 
 export default function Login() {
+  const token = useUserToken();
   const { t } = useTranslation();
+
+  // 判断用户是否有权限
+  if (token.accessToken) {
+    // 如果有授权，则跳转到首页
+    return <Navigate to={HOMEPAGE} replace />;
+  }
   return (
     <Layout className="relative flex min-h-screen w-full flex-row">
       <div className="hidden md:flex grow flex-col items-center justify-center gap-[80px]">

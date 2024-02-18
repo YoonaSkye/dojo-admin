@@ -8,10 +8,9 @@ import { AppRouteObject } from '#/router';
 
 // TODO: 后续对路由进行懒加载处理
 import Login from '@/pages/sys/login/Login';
-// import AuthGuard from './components/AuthGuard';
+import AuthGuard from './components/AuthGuard';
 import DashboardLayout from '@/layouts/dashboard';
 import { usePermissionRoutes } from '@/router/hooks/use-permission-routes';
-import AuthGuard from './components/AuthGuard';
 
 const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 
@@ -42,7 +41,7 @@ export default function Router() {
     ],
   };
 
-  // TODO：路由：异步路由 + 同步路由
+  // 路由：异步路由 + 同步路由
   const routes: AppRouteObject[] = [
     LoginRoute,
     asyncRoutes,
