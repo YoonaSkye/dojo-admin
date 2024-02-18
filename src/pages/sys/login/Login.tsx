@@ -1,8 +1,10 @@
 import { Layout, Typography } from 'antd';
 import DojoImage from '@/assets/images/background/dojo.png';
 import LoginForm from './LoginForm';
+import { useTranslation } from 'react-i18next';
 
 export default function Login() {
+  const { t } = useTranslation();
   return (
     <Layout className="relative flex min-h-screen w-full flex-row">
       <div className="hidden md:flex grow flex-col items-center justify-center gap-[80px]">
@@ -15,7 +17,8 @@ export default function Login() {
           alt="Dojo Image"
         />
         <Typography.Text className="flex flex-row gap-[16px] text-2xl">
-          开箱即用的中后台管理系统
+          {/* 开箱即用的中后台管理系统 */}
+          {t('sys.login.signInSecondTitle')}
         </Typography.Text>
       </div>
       <div className="m-auto flex !h-screen w-full max-w-[480px] flex-col justify-center px-[16px] lg:px-[64px]">
