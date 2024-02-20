@@ -60,7 +60,7 @@ function transformPermissionToMenuRoutes(
       path: route,
       meta: {
         label,
-        key: '123',
+        key: getCompleteRoute(permission, flattenedPermissons),
         hideMenu: !!hide,
         disabled: status === BasicStatus.DISABLE,
       },
@@ -97,4 +97,34 @@ function transformPermissionToMenuRoutes(
 
     return appRoute;
   });
+}
+
+/**
+ * Splicing from the root permission route to the current permission route
+ * @param {Permission} permission - current permission
+ * @param {Permission[]} flattenedPermissions - flattened permission array
+ * @param {string} route - parent permission route
+ * @returns {string} - The complete route after splicing
+ */
+function getCompleteRoute(
+  permission: Permission,
+  flattenedPermissions: Permission[],
+  route = ''
+) {
+  const currentRoute = route
+    ? `/${permission.route}${route}`
+    : `/${permission.route}`;
+
+  if (permission.parentId) {
+    const parentPermission = flattenedPermissions.find(
+      (p) => p.id === permission.parentId
+    )!;
+    return getCompleteRoute(
+      parentPermission,
+      flattenedPermissions,
+      currentRoute
+    );
+  }
+
+  return currentRoute;
 }
