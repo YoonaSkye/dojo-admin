@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
+import 'virtual:svg-icons-register';
 import App from './App.tsx';
 import { worker } from './mock';
 // i18n
