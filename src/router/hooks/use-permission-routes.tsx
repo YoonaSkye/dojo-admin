@@ -66,6 +66,8 @@ function transformPermissionToMenuRoutes(
       },
     };
 
+    if (icon) appRoute.meta!.icon = icon;
+
     if (type === PermissionType.CATALOGUE) {
       appRoute.meta!.hideTab = true;
       if (!parentId) {
