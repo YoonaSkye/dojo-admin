@@ -8,12 +8,16 @@ import { Menu, MenuProps } from 'antd';
 import { ItemType } from 'antd/es/menu/hooks/useItems';
 import { BsArrowRightCircle, BsArrowLeftCircle } from 'react-icons/bs';
 import { menuFilter } from '@/router/utils';
+import { useLocation, useMatches, useNavigate } from 'react-router-dom';
 
 export default function Nav() {
   const collapsed = useCollapsed();
   const { setCollapsed } = useUserActions();
   const routeToMenuFn = useRouteToMenu();
   const permissionRoutes = usePermissionRoutes();
+  const { pathname } = useLocation();
+  const matches = useMatches();
+  const navigate = useNavigate();
 
   /** state */
   const [openKeys, setOpenKeys] = useState<string[]>([]);
@@ -25,8 +29,29 @@ export default function Nav() {
     const menuRoutes = menuFilter(permissionRoutes);
     const menus = routeToMenuFn(menuRoutes);
     setMenuList(menus);
-    console.log(menus);
   }, [permissionRoutes, routeToMenuFn]);
+
+  useEffect(() => {
+    const openKeys = matches
+      .filter((match) => match.pathname !== '/')
+      .map((match) => match.pathname);
+
+    setOpenKeys(openKeys);
+    setSelectedKeys([pathname]);
+  }, [pathname, matches]);
+
+  // events
+  const onOpenChange: MenuProps['onOpenChange'] = (keys) => {
+    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
+    if (latestOpenKey) {
+      setOpenKeys(keys);
+    } else {
+      setOpenKeys([]);
+    }
+  };
+  const onClick: MenuProps['onClick'] = ({ key }) => {
+    navigate(key);
+  };
 
   return (
     <div className={`flex flex-col ${collapsed ? 'w-[90px]' : 'w-[260px]'}`}>
@@ -62,8 +87,8 @@ export default function Nav() {
           defaultSelectedKeys={selectedKeys}
           selectedKeys={selectedKeys}
           openKeys={openKeys}
-          // onOpenChange={onOpenChange}
-          // onClick={onClick}
+          onOpenChange={onOpenChange}
+          onClick={onClick}
           // style={menuStyle}
           inlineCollapsed={collapsed}
         />
