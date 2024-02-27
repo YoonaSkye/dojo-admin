@@ -1,8 +1,7 @@
 import { AppRouteObject } from '#/router';
 
 import type { ItemType } from 'antd/es/menu/hooks/useItems';
-import SvgIcon from '@/components/icon/svg-icon';
-import Iconify from '@/components/icon/iconify-icon';
+import { SvgIcon, Iconify } from '@/components/icon';
 
 import { useTranslation } from 'react-i18next';
 import { useCallback } from 'react';
