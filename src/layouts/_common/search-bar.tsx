@@ -1,10 +1,19 @@
 import { IconButton, SvgIcon } from '@/components/icon';
-import { Input, InputRef, Modal, Tag } from 'antd';
+import { useFlattenedRoutes } from '@/router/hooks';
+import { Empty, Input, InputRef, Modal, Tag } from 'antd';
 import { useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
+import parse from 'autosuggest-highlight/parse';
+import match from 'autosuggest-highlight/match';
+import Scrollbar from '@/components/scrollbar';
 
 export default function SearchBar() {
+  const { t } = useTranslation();
+  const flattenedRoutes = useFlattenedRoutes();
+
   const [search, setSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchResult, setSearchResult] = useState(flattenedRoutes);
   const inputRef = useRef<InputRef>(null);
 
   const handleOpen = () => {
@@ -39,6 +48,9 @@ export default function SearchBar() {
         onCancel={handleCancel}
         closeIcon={false}
         afterOpenChange={handleAfterOpenChange}
+        bodyStyle={{
+          height: '400px',
+        }}
         title={
           <Input
             ref={inputRef}
@@ -71,9 +83,39 @@ export default function SearchBar() {
           </div>
         }
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        {searchResult.length === 0 ? (
+          <Empty />
+        ) : (
+          <Scrollbar>
+            <div className="py-2">
+              {searchResult.map(({ key, label }, index) => {
+                const partsTitle = parse(
+                  t(label),
+                  match(t(label), searchQuery)
+                );
+                const partsKey = parse(t(key), match(t(key), searchQuery));
+                return (
+                  <div className="flex flex-col cursor-pointer w-full px-4 py-2 rounded-lg border-dashed border-b-indigo-500">
+                    <div className="flex justify-between">
+                      <div className="">
+                        <div className="font-medium">
+                          {partsTitle.map((item) => (
+                            <span key={item.text}>{item.text}</span>
+                          ))}
+                        </div>
+                        <div className="text-xs">
+                          {partsKey.map((item) => (
+                            <span key={item.text}>{item.text}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </Scrollbar>
+        )}
       </Modal>
     </>
   );
