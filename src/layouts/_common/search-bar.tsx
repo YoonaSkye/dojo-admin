@@ -9,6 +9,7 @@ import match from 'autosuggest-highlight/match';
 import Scrollbar from '@/components/scrollbar';
 import { useThemeToken } from '@/theme/hooks';
 import Color from 'color';
+import { ne } from '@faker-js/faker';
 
 export default function SearchBar() {
   const { t } = useTranslation();
@@ -17,6 +18,8 @@ export default function SearchBar() {
 
   // ref
   const inputRef = useRef<InputRef>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+
   // state
   const [search, setSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -57,6 +60,7 @@ export default function SearchBar() {
       nextIndex = searchResult.length - 1;
     }
     setSelectedItemIndex(nextIndex);
+    scrollSelectedItemIntoView(nextIndex);
   });
 
   useKeyPressEvent('ArrowDown', (event) => {
@@ -67,6 +71,7 @@ export default function SearchBar() {
       nextIndex = 0;
     }
     setSelectedItemIndex(nextIndex);
+    scrollSelectedItemIntoView(nextIndex);
   });
 
   useKeyPressEvent('Enter', (event) => {
@@ -82,6 +87,16 @@ export default function SearchBar() {
   useKeyPressEvent('Escape', () => {
     handleCancel();
   });
+
+  const scrollSelectedItemIntoView = (index: number) => {
+    if (listRef.current) {
+      const selectedItem = listRef.current.children[index];
+      selectedItem.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    }
+  };
 
   const handleOpen = () => {
     setSearch(true);
@@ -165,7 +180,7 @@ export default function SearchBar() {
           <Empty />
         ) : (
           <Scrollbar>
-            <div className="py-2">
+            <div ref={listRef} className="py-2">
               {searchResult.map(({ key, label }, index) => {
                 const partsTitle = parse(
                   t(label),
