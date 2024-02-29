@@ -2,6 +2,7 @@ import { IconButton, SvgIcon } from '@/components/icon';
 import { useFlattenedRoutes } from '@/router/hooks';
 import { Empty, Input, InputRef, Modal, Tag } from 'antd';
 import { useState, useRef, CSSProperties, useEffect } from 'react';
+import { useEvent, useKeyPressEvent } from 'react-use';
 import { useTranslation } from 'react-i18next';
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
@@ -37,6 +38,50 @@ export default function SearchBar() {
     setSearchResult(result);
     setSelectedItemIndex(0);
   }, [searchQuery, flattenedRoutes, t]);
+
+  const handleMetaK = (event: KeyboardEvent) => {
+    if (event.metaKey && event.key === 'k') {
+      handleOpen();
+    }
+  };
+
+  // 注册键盘事件 [command + k ]打开搜索框
+  useEvent('keydown', handleMetaK);
+
+  // 注册键盘 上下左右 enter 键 事件
+  useKeyPressEvent('ArrowUp', (event) => {
+    if (!search) return;
+    event.preventDefault();
+    let nextIndex = selectedItemIndex - 1;
+    if (nextIndex < 0) {
+      nextIndex = searchResult.length - 1;
+    }
+    setSelectedItemIndex(nextIndex);
+  });
+
+  useKeyPressEvent('ArrowDown', (event) => {
+    if (!search) return;
+    event.preventDefault();
+    let nextIndex = selectedItemIndex + 1;
+    if (nextIndex > searchResult.length - 1) {
+      nextIndex = 0;
+    }
+    setSelectedItemIndex(nextIndex);
+  });
+
+  useKeyPressEvent('Enter', (event) => {
+    if (!search || searchResult.length === 0) return;
+    event.preventDefault();
+    const selectItem = searchResult[selectedItemIndex].key;
+    if (selectItem) {
+      handleSelect(selectItem);
+      setSearch(false);
+    }
+  });
+
+  useKeyPressEvent('Escape', () => {
+    handleCancel();
+  });
 
   const handleOpen = () => {
     setSearch(true);
