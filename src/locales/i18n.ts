@@ -9,14 +9,17 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    detection: {
+      convertDetectedLanguage: (lng) => lng.replace('-', '_'),
+    },
     debug: true,
     fallbackLng: 'en-US',
     interpolation: {
       escapeValue: false, // react already safes from xss
     },
     resources: {
-      'en-US': { translation: en_US },
-      'zh-CN': { translation: zh_CN },
+      en_US: { translation: en_US },
+      zh_CN: { translation: zh_CN },
     },
   });
 

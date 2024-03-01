@@ -1,6 +1,7 @@
 import { IconButton, SvgIcon } from '@/components/icon';
 import { useCollapsed } from '@/store/userStore';
 import SearchBar from '../_common/search-bar';
+import LocalPicker from '@/components/local-picker';
 
 export default function Header() {
   const collapsed = useCollapsed();
@@ -24,7 +25,7 @@ export default function Header() {
           {/* searchBar */}
           <SearchBar />
           {/* localPicker */}
-
+          <LocalPicker />
           {/* github icon */}
 
           {/* notice button */}

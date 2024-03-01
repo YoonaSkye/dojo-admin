@@ -9,7 +9,6 @@ import match from 'autosuggest-highlight/match';
 import Scrollbar from '@/components/scrollbar';
 import { useThemeToken } from '@/theme/hooks';
 import Color from 'color';
-import { ne } from '@faker-js/faker';
 
 export default function SearchBar() {
   const { t } = useTranslation();
@@ -186,9 +185,10 @@ export default function SearchBar() {
                   t(label),
                   match(t(label), searchQuery)
                 );
-                const partsKey = parse(t(key), match(t(key), searchQuery));
+                const partsKey = parse(key, match(key, searchQuery));
                 return (
                   <div
+                    key={key}
                     className="flex flex-col cursor-pointer w-full px-4 py-2 rounded-lg border-dashed border-b-indigo-500"
                     style={index === selectedItemIndex ? activeStyle : {}}
                     onClick={() => handleSelect(key)}
