@@ -1,7 +1,8 @@
-import { IconButton, SvgIcon } from '@/components/icon';
+import { IconButton, SvgIcon, Iconify } from '@/components/icon';
 import { useCollapsed } from '@/store/userStore';
 import SearchBar from '../_common/search-bar';
 import LocalPicker from '@/components/local-picker';
+import SettingButton from '../_common/setting-button';
 
 export default function Header() {
   const collapsed = useCollapsed();
@@ -27,11 +28,17 @@ export default function Header() {
           {/* localPicker */}
           <LocalPicker />
           {/* github icon */}
-
+          <IconButton
+            onClick={() =>
+              window.open('https://github.com/YoonaSkye/dojo-admin')
+            }
+          >
+            <Iconify icon="mdi:github" size={24} />
+          </IconButton>
           {/* notice button */}
 
           {/* setting button */}
-
+          <SettingButton />
           {/* account button */}
         </div>
       </div>
