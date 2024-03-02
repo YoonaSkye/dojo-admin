@@ -4,13 +4,15 @@ import { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { useThemeToken } from '@/theme/hooks';
 import { useSettingActions, useSettings } from '@/store/settingStore';
-import { ThemeLayout, ThemeMode } from '#/enum';
+import { ThemeColorPresets, ThemeLayout, ThemeMode } from '#/enum';
+import { colorPrimarys } from '@/theme/antd/theme';
+import { MdCircle } from 'react-icons/md';
 
 export default function SettingButton() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { colorTextSecondary, colorPrimary, colorBgBase } = useThemeToken();
   const settings = useSettings();
-  const { themeMode, themeLayout } = settings;
+  const { themeMode, themeLayout, themeColorPresets } = settings;
   const { setSettings } = useSettingActions();
 
   const setThemeMode = (themeMode: ThemeMode) => {
@@ -24,6 +26,13 @@ export default function SettingButton() {
     setSettings({
       ...settings,
       themeLayout,
+    });
+  };
+
+  const setThemeColorPresets = (themeColorPresets: ThemeColorPresets) => {
+    setSettings({
+      ...settings,
+      themeColorPresets,
     });
   };
 
@@ -197,6 +206,37 @@ export default function SettingButton() {
           </div>
 
           {/* theme presets */}
+          <div>
+            <div
+              className="mb-3 text-base font-semibold"
+              style={{ color: colorTextSecondary }}
+            >
+              Presets
+            </div>
+            <div className="grid grid-cols-3 gap-x-4 gap-y-3">
+              {Object.entries(colorPrimarys).map(([preset, color]) => (
+                <Card
+                  key={preset}
+                  className="flex h-14 w-full cursor-pointer items-center justify-center"
+                  style={{
+                    backgroundColor:
+                      themeColorPresets === preset ? `${color}14` : '',
+                  }}
+                  onClick={() =>
+                    setThemeColorPresets(preset as ThemeColorPresets)
+                  }
+                >
+                  <div style={{ color }}>
+                    <MdCircle
+                      style={{
+                        fontSize: themeColorPresets === preset ? 24 : 12,
+                      }}
+                    />
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
 
           {/* page connfig */}
         </div>
