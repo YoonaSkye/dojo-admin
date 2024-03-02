@@ -1,5 +1,5 @@
 import { IconButton, SvgIcon } from '@/components/icon';
-import { Button, Card, Drawer } from 'antd';
+import { Button, Card, Drawer, Switch } from 'antd';
 import { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { useThemeToken } from '@/theme/hooks';
@@ -10,9 +10,11 @@ import { MdCircle } from 'react-icons/md';
 
 export default function SettingButton() {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const { colorTextSecondary, colorPrimary, colorBgBase } = useThemeToken();
+  const { colorTextSecondary, colorPrimary, colorBgBase, colorTextTertiary } =
+    useThemeToken();
   const settings = useSettings();
-  const { themeMode, themeLayout, themeColorPresets } = settings;
+  const { themeMode, themeLayout, themeColorPresets, breadCrumb, multiTab } =
+    settings;
   const { setSettings } = useSettingActions();
 
   const setThemeMode = (themeMode: ThemeMode) => {
@@ -33,6 +35,20 @@ export default function SettingButton() {
     setSettings({
       ...settings,
       themeColorPresets,
+    });
+  };
+
+  const setBreadCrumn = (checked: boolean) => {
+    setSettings({
+      ...settings,
+      breadCrumb: checked,
+    });
+  };
+
+  const setMultiTab = (checked: boolean) => {
+    setSettings({
+      ...settings,
+      multiTab: checked,
     });
   };
 
@@ -239,6 +255,38 @@ export default function SettingButton() {
           </div>
 
           {/* page connfig */}
+          <div>
+            <div
+              className="mb-3 text-base font-semibold"
+              style={{ color: colorTextSecondary }}
+            >
+              Page
+            </div>
+            <div className="flex flex-col gap-2">
+              <div
+                className="flex items-center justify-between"
+                style={{ color: colorTextTertiary }}
+              >
+                <div>BreadCrumb</div>
+                <Switch
+                  size="small"
+                  checked={breadCrumb}
+                  onChange={(checked) => setBreadCrumn(checked)}
+                />
+              </div>
+              <div
+                className="flex items-center justify-between"
+                style={{ color: colorTextTertiary }}
+              >
+                <div>Multi Tab</div>
+                <Switch
+                  size="small"
+                  checked={multiTab}
+                  onChange={(checked) => setMultiTab(checked)}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </Drawer>
     </>
