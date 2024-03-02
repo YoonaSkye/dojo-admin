@@ -4,13 +4,13 @@ import { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { useThemeToken } from '@/theme/hooks';
 import { useSettingActions, useSettings } from '@/store/settingStore';
-import { ThemeMode } from '#/enum';
+import { ThemeLayout, ThemeMode } from '#/enum';
 
 export default function SettingButton() {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const { colorTextSecondary, colorPrimary } = useThemeToken();
+  const { colorTextSecondary, colorPrimary, colorBgBase } = useThemeToken();
   const settings = useSettings();
-  const { themeMode } = settings;
+  const { themeMode, themeLayout } = settings;
   const { setSettings } = useSettingActions();
 
   const setThemeMode = (themeMode: ThemeMode) => {
@@ -19,6 +19,18 @@ export default function SettingButton() {
       themeMode,
     });
   };
+
+  const setThemeLayout = (themeLayout: ThemeLayout) => {
+    setSettings({
+      ...settings,
+      themeLayout,
+    });
+  };
+
+  const layoutBackground = (layout: ThemeLayout) =>
+    themeLayout === layout
+      ? `linear-gradient(135deg, ${colorBgBase} 0%, ${colorPrimary} 100%)`
+      : '#919eab';
 
   return (
     <>
@@ -79,8 +91,110 @@ export default function SettingButton() {
           </div>
 
           {/* theme layout */}
-
-          {/* theme strech */}
+          <div>
+            <div
+              className="mb-3 text-base font-semibold"
+              style={{ color: colorTextSecondary }}
+            >
+              Layout
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              {/* vertical 布局 */}
+              <Card
+                className="h-14 cursor-pointer"
+                onClick={() => setThemeLayout(ThemeLayout.Vertical)}
+                bodyStyle={{
+                  padding: 0,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100%',
+                }}
+              >
+                <div className="flex flex-col gap-1 p-1 h-full w-7 flex-shrink-0">
+                  <div
+                    className="h-2 w-2 rounded flex-shrink-0"
+                    style={{
+                      background: layoutBackground(ThemeLayout.Vertical),
+                    }}
+                  />
+                  <div
+                    className="h-1 w-full rounded flex-shrink-0 opacity-50"
+                    style={{
+                      background: layoutBackground(ThemeLayout.Vertical),
+                    }}
+                  />
+                  <div
+                    className="h-1 max-w-[12px] rounded flex-shrink-0 opacity-20"
+                    style={{
+                      background: layoutBackground(ThemeLayout.Vertical),
+                    }}
+                  />
+                </div>
+                <div className="h-full w-full flex-1 flex-grow p-1">
+                  <div
+                    className="h-full w-full rounded opacity-20"
+                    style={{
+                      background: layoutBackground(ThemeLayout.Vertical),
+                    }}
+                  />
+                </div>
+              </Card>
+              {/* horizontal 布局 */}
+              <Card
+                className="h-14 cursor-pointer"
+                onClick={() => setThemeLayout(ThemeLayout.Horizontal)}
+                bodyStyle={{
+                  padding: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100%',
+                }}
+              >
+                <div className="flex h-4 w-full items-center gap-1  p-1">
+                  <div
+                    className="h-2 w-2 flex-shrink-0 rounded"
+                    style={{
+                      background: layoutBackground(ThemeLayout.Horizontal),
+                    }}
+                  />
+                  <div
+                    className="h-1 w-4 flex-shrink-0 rounded opacity-50"
+                    style={{
+                      background: layoutBackground(ThemeLayout.Horizontal),
+                    }}
+                  />
+                  <div
+                    className="h-1 w-3 flex-shrink-0 rounded opacity-20"
+                    style={{
+                      background: layoutBackground(ThemeLayout.Horizontal),
+                    }}
+                  />
+                </div>
+                <div className="h-full w-full flex-1 flex-grow p-1">
+                  <div
+                    className="h-full w-full rounded opacity-20"
+                    style={{
+                      background: layoutBackground(ThemeLayout.Horizontal),
+                    }}
+                  />
+                </div>
+              </Card>
+              {/* <Card
+                className="h-14 cursor-pointer"
+                // onClick={}
+                bodyStyle={{
+                  padding: 0,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100%',
+                }}
+              ></Card> */}
+            </div>
+          </div>
 
           {/* theme presets */}
 

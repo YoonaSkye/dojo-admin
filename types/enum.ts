@@ -21,6 +21,12 @@ export enum ThemeMode {
   Dark = 'dark',
 }
 
+export enum ThemeLayout {
+  Vertical = 'vertical',
+  Horizontal = 'horizontal',
+  Mini = 'mini',
+}
+
 export enum ThemeColorPresets {
   Default = 'default',
   Cyan = 'cyan',
