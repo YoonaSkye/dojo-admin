@@ -80,6 +80,7 @@ export default function SettingButton() {
             <CloseOutlined className="text-gray-400" />
           </IconButton>
         }
+        // TODO: full screen function
         footer={<Button>footer: 全屏按钮</Button>}
       >
         <div className="flex flex-col gap-6 p-6">

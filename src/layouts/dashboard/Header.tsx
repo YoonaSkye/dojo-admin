@@ -3,6 +3,7 @@ import { useCollapsed } from '@/store/userStore';
 import SearchBar from '../_common/search-bar';
 import LocalPicker from '@/components/local-picker';
 import SettingButton from '../_common/setting-button';
+import AccountDropdown from '../_common/account-dropdown';
 
 export default function Header() {
   const collapsed = useCollapsed();
@@ -40,6 +41,7 @@ export default function Header() {
           {/* setting button */}
           <SettingButton />
           {/* account button */}
+          <AccountDropdown />
         </div>
       </div>
     </header>
