@@ -7,8 +7,8 @@ import CurrentDownload from './CurrentDownload';
 import AreaDownload from './AreaDownload';
 import NewInvoice from './NewInvoice';
 import TopRelated from './TopRelated';
-import TopInstalled from './TopInstalled';
-import TopAuthor from './TopAuthor';
+// import TopInstalled from './TopInstalled';
+// import TopAuthor from './TopAuthor';
 
 export default function Workbench() {
   return (

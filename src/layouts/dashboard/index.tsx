@@ -1,17 +1,39 @@
+import { useEffect, useState, useRef, useCallback } from 'react';
+import { useScroll } from 'framer-motion';
 import Header from './Header';
 import Main from './Main';
 import Nav from './Nav';
+
 export default function DashboardLayout() {
+  const [offsetTop, setOffsetTop] = useState(false);
+  const mainRef = useRef(null);
+  const { scrollY } = useScroll({
+    container: mainRef,
+  });
+  const onOffsetTop = useCallback(() => {
+    scrollY.on('change', (scrollHeight) => {
+      if (scrollHeight > 0) {
+        setOffsetTop(true);
+      } else {
+        setOffsetTop(false);
+      }
+    });
+  }, [scrollY]);
+
+  useEffect(() => {
+    onOffsetTop();
+  }, [onOffsetTop]);
+
   return (
     <div className="flex h-screen overflow-hidden">
       {/* layout 采用两栏布局 */}
       {/* header 采用绝对布局 */}
-      <Header />
+      <Header offsetTop={offsetTop} />
       {/* nav */}
       <Nav />
       {/* main content */}
       {/* DashboardLayout */}
-      <Main />
+      <Main ref={mainRef} />
     </div>
   );
 }
