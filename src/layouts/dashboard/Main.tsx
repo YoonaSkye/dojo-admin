@@ -8,14 +8,17 @@ type Props = {
 
 const Main = forwardRef<HTMLDivElement, Props>(({ offsetTop = false }, ref) => {
   const collapsed = useCollapsed();
+
   return (
     <div
       ref={ref}
-      className={`w-full h-full overflow-auto pt-[80px] ${
+      className={`w-full h-full flex overflow-auto pt-[80px] ${
         collapsed ? 'md:w-[calc(100%-90px)]' : 'md:w-[calc(100%-260px)]'
       }`}
     >
-      <Outlet />
+      <div className={`flex-grow sm:p-2`}>
+        <Outlet />
+      </div>
     </div>
   );
 });

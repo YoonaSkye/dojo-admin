@@ -1,12 +1,9 @@
 import { Dropdown, MenuProps } from 'antd';
 import { IconButton, SvgIcon } from '../icon';
 import useLocale, { LANGUAGE_MAP } from '@/locales/useLocale';
-import { LocalEnum } from '#/enum';
-type Locale = keyof typeof LocalEnum;
 
 export default function LocalPicker() {
   const { locale, setLocale } = useLocale();
-  console.log(locale);
 
   const localeList: MenuProps['items'] = Object.values(LANGUAGE_MAP).map(
     (item) => {

@@ -28,7 +28,7 @@ export default function Header({ offsetTop = false }: Props) {
       <div
         className="flex flex-grow items-center justify-between px-4 text-gray backdrop-blur xl:px-6 2xl:px-10"
         style={{
-          height: offsetTop ? 64 : 80,
+          height: offsetTop ? '64px' : '80px',
           transition: 'height 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
         }}
       >
