@@ -6,11 +6,38 @@ import { Button, Card, Popconfirm, Table, Tag } from 'antd';
 import type { TableProps } from 'antd';
 import { isNil } from 'ramda';
 import { useTranslation } from 'react-i18next';
+import PermissionModal, { type PermissionModalProps } from './permission-modal';
+import { useState } from 'react';
+
+const defaultPermissionValue: Permission = {
+  id: '',
+  parentId: '',
+  name: '',
+  label: '',
+  route: '',
+  component: '',
+  icon: '',
+  hide: false,
+  status: BasicStatus.ENABLE,
+  type: PermissionType.CATALOGUE,
+};
 
 export default function PermissionPage() {
   const permissions = useUserPermission();
   const { t } = useTranslation();
-  console.log(permissions);
+
+  const [permissionModalProps, setPermissionModalProps] =
+    useState<PermissionModalProps>({
+      formValue: { ...defaultPermissionValue },
+      title: 'New',
+      show: false,
+      onOk: () => {
+        setPermissionModalProps((prev) => ({ ...prev, show: false }));
+      },
+      onCancel: () => {
+        setPermissionModalProps((prev) => ({ ...prev, show: false }));
+      },
+    });
 
   const columns: TableProps<Permission>['columns'] = [
     {
@@ -44,7 +71,6 @@ export default function PermissionPage() {
       title: 'Component',
       dataIndex: 'component',
       key: 'component',
-      // width: 60
     },
     {
       title: 'Status',
@@ -72,7 +98,7 @@ export default function PermissionPage() {
       width: 100,
       render: (_, record) => (
         <div className="flex w-full justify-center text-gray">
-          <IconButton>
+          <IconButton onClick={() => onEdit(record)}>
             <Iconify icon="solar:pen-bold-duotone" size={18} />
           </IconButton>
           <Popconfirm
@@ -94,9 +120,40 @@ export default function PermissionPage() {
     },
   ];
 
+  const onCreate = () => {
+    setPermissionModalProps((prev) => ({
+      ...prev,
+      show: true,
+      ...defaultPermissionValue,
+    }));
+  };
+
+  const onEdit = (formValue: Permission) => {
+    setPermissionModalProps((prev) => ({
+      ...prev,
+      show: true,
+      title: 'Edit',
+      formValue,
+    }));
+  };
+
   return (
-    <Card title="权限列表" extra={<Button type="primary">New</Button>}>
-      <Table rowKey="id" columns={columns} dataSource={permissions} />
+    <Card
+      title="权限列表"
+      extra={
+        <Button type="primary" onClick={onCreate}>
+          New
+        </Button>
+      }
+    >
+      <Table
+        rowKey="id"
+        columns={columns}
+        dataSource={permissions}
+        size="small"
+        pagination={false}
+      />
+      <PermissionModal {...permissionModalProps} />
     </Card>
   );
 }
