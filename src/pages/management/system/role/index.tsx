@@ -4,10 +4,31 @@ import { IconButton, Iconify } from '@/components/icon';
 import { ROLE_LIST } from '@/mock/assets';
 import type { TableProps } from 'antd';
 import { Button, Card, Popconfirm, Table, Tag } from 'antd';
+import { useState } from 'react';
+import { RoleModal, RoleModalProps } from './role-modal';
 
 const ROLES: Role[] = ROLE_LIST;
 
+const DEFAULE_ROLE_VALUE: Role = {
+  id: '',
+  name: '',
+  label: '',
+  status: BasicStatus.ENABLE,
+  permission: [],
+};
+
 export default function RolePage() {
+  const [roleModalPros, setRoleModalProps] = useState<RoleModalProps>({
+    formValue: { ...DEFAULE_ROLE_VALUE },
+    title: 'New',
+    show: false,
+    onOk: () => {
+      setRoleModalProps((prev) => ({ ...prev, show: false }));
+    },
+    onCancel: () => {
+      setRoleModalProps((prev) => ({ ...prev, show: false }));
+    },
+  });
   const columns: TableProps<Role>['columns'] = [
     {
       title: 'Name',
@@ -52,7 +73,7 @@ export default function RolePage() {
       width: 100,
       render: (_, record) => (
         <div className="flex w-full justify-center text-gray">
-          <IconButton>
+          <IconButton onClick={() => onEdit(record)}>
             <Iconify icon="solar:pen-bold-duotone" size={18} />
           </IconButton>
           <Popconfirm
@@ -73,8 +94,37 @@ export default function RolePage() {
       ),
     },
   ];
+
+  const onCreate = () => {
+    setRoleModalProps((prev) => ({
+      ...prev,
+      show: true,
+      title: 'Create New',
+      formValue: {
+        ...prev.formValue,
+        ...DEFAULE_ROLE_VALUE,
+      },
+    }));
+  };
+
+  const onEdit = (formValue: Role) => {
+    setRoleModalProps((prev) => ({
+      ...prev,
+      show: true,
+      title: 'Edit',
+      formValue,
+    }));
+  };
+
   return (
-    <Card title="角色列表" extra={<Button type="primary">New</Button>}>
+    <Card
+      title="角色列表"
+      extra={
+        <Button type="primary" onClick={onCreate}>
+          New
+        </Button>
+      }
+    >
       <Table
         rowKey="id"
         columns={columns}
@@ -82,6 +132,8 @@ export default function RolePage() {
         size="small"
         pagination={false}
       />
+
+      <RoleModal {...roleModalPros} />
     </Card>
   );
 }
