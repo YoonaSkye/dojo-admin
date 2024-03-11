@@ -1,4 +1,4 @@
-import { Layout, Typography } from 'antd';
+import { Typography } from 'antd';
 import DojoImage from '@/assets/images/background/dojo.png';
 import LoginForm from './LoginForm';
 import { useUserToken } from '@/store/userStore';
@@ -6,6 +6,7 @@ import { Navigate } from 'react-router-dom';
 
 const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 import { useTranslation } from 'react-i18next';
+import LocalPicker from '@/components/local-picker';
 
 export default function Login() {
   const token = useUserToken();
@@ -17,7 +18,7 @@ export default function Login() {
     return <Navigate to={HOMEPAGE} replace />;
   }
   return (
-    <Layout className="relative flex min-h-screen w-full flex-row">
+    <div className="relative flex min-h-screen w-full flex-row">
       <div className="hidden md:flex grow flex-col items-center justify-center gap-[80px]">
         <div className="text-3xl font-bold leading-normal lg:text-4xl xl:text-5xl">
           Dojo Admin
@@ -35,6 +36,9 @@ export default function Login() {
       <div className="m-auto flex !h-screen w-full max-w-[480px] flex-col justify-center px-[16px] lg:px-[64px]">
         <LoginForm />
       </div>
-    </Layout>
+      <div className="absolute right-2 top-0">
+        <LocalPicker />
+      </div>
+    </div>
   );
 }

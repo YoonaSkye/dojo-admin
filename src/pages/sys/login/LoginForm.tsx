@@ -12,11 +12,13 @@ import {
   Tag,
 } from 'antd';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AiFillGithub, AiFillGoogleCircle, AiFillWechat } from 'react-icons/ai';
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const signIn = useSignIn();
+  const { t } = useTranslation();
 
   const handleFinish = async ({ username, password }: SignInReq) => {
     setLoading(true);
@@ -45,13 +47,13 @@ export default function LoginForm() {
             description={
               <div className="flex flex-col">
                 <div className="flex mb-2">
-                  <Tag color="blue">Admin账号:</Tag>
+                  <Tag color="blue">Admin {t('sys.login.userName')}:</Tag>
                   <strong className="ml-1">
                     <span>admin@gamil.com</span>
                   </strong>
                 </div>
                 <div className="flex">
-                  <Tag color="blue">password密码:</Tag>
+                  <Tag color="blue">{t('sys.login.password')}:</Tag>
                   <strong className="ml-1">
                     <span>demo1234</span>
                   </strong>
