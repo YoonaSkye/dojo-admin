@@ -30,7 +30,13 @@ export default function PermissionModal({
   }, [formValue, form]);
 
   return (
-    <Modal title={title} open={show} onOk={onOk} onCancel={onCancel}>
+    <Modal
+      forceRender
+      title={title}
+      open={show}
+      onOk={onOk}
+      onCancel={onCancel}
+    >
       <Form
         initialValues={formValue}
         form={form}
@@ -99,14 +105,14 @@ export default function PermissionModal({
         <Form.Item label="Order" name="order">
           <InputNumber style={{ width: '100%' }} />
         </Form.Item>
-      </Form>
 
-      <Form.Item label="Status" name="status" required>
-        <Radio.Group optionType="button" buttonStyle="solid">
-          <Radio value={BasicStatus.ENABLE}> Enable </Radio>
-          <Radio value={BasicStatus.DISABLE}> Disable </Radio>
-        </Radio.Group>
-      </Form.Item>
+        <Form.Item label="Status" name="status" required>
+          <Radio.Group optionType="button" buttonStyle="solid">
+            <Radio value={BasicStatus.ENABLE}> Enable </Radio>
+            <Radio value={BasicStatus.DISABLE}> Disable </Radio>
+          </Radio.Group>
+        </Form.Item>
+      </Form>
     </Modal>
   );
 }
