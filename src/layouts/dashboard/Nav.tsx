@@ -9,6 +9,7 @@ import { ItemType } from 'antd/es/menu/hooks/useItems';
 import { BsArrowRightCircle, BsArrowLeftCircle } from 'react-icons/bs';
 import { menuFilter } from '@/router/utils';
 import { useLocation, useMatches, useNavigate } from 'react-router-dom';
+import { useThemeToken } from '@/theme/hooks';
 
 export default function Nav() {
   const collapsed = useCollapsed();
@@ -18,6 +19,7 @@ export default function Nav() {
   const { pathname } = useLocation();
   const matches = useMatches();
   const navigate = useNavigate();
+  const { colorTextBase, colorBgElevated, colorBorder } = useThemeToken();
 
   /** state */
   const [openKeys, setOpenKeys] = useState<string[]>([]);
@@ -64,6 +66,11 @@ export default function Nav() {
         <button
           className="absolute right-0 top-7 z-50 hidden md:block h-6 w-6 translate-x-1/2"
           onClick={() => setCollapsed(!collapsed)}
+          style={{
+            color: colorTextBase,
+            borderColor: colorTextBase,
+            fontSize: 16,
+          }}
         >
           {collapsed ? (
             <BsArrowRightCircle size={20} />
@@ -89,7 +96,7 @@ export default function Nav() {
           openKeys={openKeys}
           onOpenChange={onOpenChange}
           onClick={onClick}
-          // style={menuStyle}
+          style={{ background: colorBgElevated }}
           inlineCollapsed={collapsed}
         />
       </Scrollbar>
