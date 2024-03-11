@@ -10,6 +10,7 @@ import { BsArrowRightCircle, BsArrowLeftCircle } from 'react-icons/bs';
 import { menuFilter } from '@/router/utils';
 import { useLocation, useMatches, useNavigate } from 'react-router-dom';
 import { useThemeToken } from '@/theme/hooks';
+import Color from 'color';
 
 export default function Nav() {
   const collapsed = useCollapsed();
@@ -56,7 +57,12 @@ export default function Nav() {
   };
 
   return (
-    <div className={`flex flex-col ${collapsed ? 'w-[90px]' : 'w-[260px]'}`}>
+    <div
+      className={`flex flex-col ${collapsed ? 'w-[90px]' : 'w-[260px]'}`}
+      style={{
+        borderRight: `1px dashed ${Color(colorBorder).alpha(0.6).toString()}`,
+      }}
+    >
       <div className="relative flex h-20 items-center justify-center py-4">
         {collapsed ? (
           <Logo classname="text-lg" />
