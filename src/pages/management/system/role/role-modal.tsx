@@ -36,7 +36,13 @@ export function RoleModal({
   }, [formValue, form]);
 
   return (
-    <Modal title={title} open={show} onOk={onOk} onCancel={onCancel}>
+    <Modal
+      forceRender
+      title={title}
+      open={show}
+      onOk={onOk}
+      onCancel={onCancel}
+    >
       <Form
         initialValues={formValue}
         form={form}
