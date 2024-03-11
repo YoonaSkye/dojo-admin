@@ -6,6 +6,8 @@ import SettingButton from '../_common/setting-button';
 import AccountDropdown from '../_common/account-dropdown';
 import { useThemeToken } from '@/theme/hooks';
 import Color from 'color';
+import { useSettings } from '@/store/settingStore';
+import BreadCrumb from '../_common/bread-crumb';
 
 type Props = {
   offsetTop?: boolean;
@@ -14,6 +16,7 @@ type Props = {
 export default function Header({ offsetTop = false }: Props) {
   const collapsed = useCollapsed();
   const { colorBgElevated } = useThemeToken();
+  const { breadCrumb } = useSettings();
 
   return (
     <header
@@ -36,7 +39,9 @@ export default function Header({ offsetTop = false }: Props) {
           <IconButton className="h-10 w-10 md:hidden">
             <SvgIcon icon="ic-menu" size="24" />
           </IconButton>
-          <div className="hidden md:block">breadcrumb</div>
+          <div className="hidden md:block">
+            {breadCrumb ? <BreadCrumb /> : null}
+          </div>
         </div>
 
         <div className="flex">
