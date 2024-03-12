@@ -2,6 +2,8 @@ import { forwardRef } from 'react';
 import { useCollapsed } from '@/store/userStore';
 import { Outlet } from 'react-router-dom';
 import { Content } from 'antd/es/layout/layout';
+import { useSettings } from '@/store/settingStore';
+import MultiTabs from './multi-tabs';
 
 type Props = {
   offsetTop?: boolean;
@@ -9,6 +11,7 @@ type Props = {
 
 const Main = forwardRef<HTMLDivElement, Props>(({ offsetTop = false }, ref) => {
   const collapsed = useCollapsed();
+  const { multiTab } = useSettings();
 
   return (
     <Content
@@ -18,7 +21,7 @@ const Main = forwardRef<HTMLDivElement, Props>(({ offsetTop = false }, ref) => {
       }`}
     >
       <div className={`m-auto h-full w-full flex-grow sm:p-2`}>
-        <Outlet />
+        {multiTab ? <MultiTabs /> : <Outlet />}
       </div>
     </Content>
   );

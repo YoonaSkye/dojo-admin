@@ -13,11 +13,11 @@ export interface RouteMeta {
   /**
    * menu prefix icon
    */
-  icon?: ReactNode;
+  icon?: React.ReactNode;
   /**
    * menu suffix icon
    */
-  suffix?: ReactNode;
+  suffix?: React.ReactNode;
   /**
    * hide in menu
    */
