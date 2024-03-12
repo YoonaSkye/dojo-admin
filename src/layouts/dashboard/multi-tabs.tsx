@@ -18,7 +18,9 @@ export default function MultiTabs() {
   const { colorBgElevated } = useThemeToken();
 
   // 渲染单个tab label
-  const renderTabLabel = (tab: KeepAliveTab) => {};
+  const renderTabLabel = (tab: KeepAliveTab) => {
+    // TODO: 右键tab菜单功能，支持关闭、关闭其它、刷新操作
+  };
 
   // 所有tabs
   const tabItems: TabsProps['items'] = useMemo(() => {
@@ -30,6 +32,7 @@ export default function MultiTabs() {
   }, [tabs]);
 
   // 自定义渲染 tab bar
+  // TODO: 可拖拽的Tabbar
   const renderTabBar: TabsProps['renderTabBar'] = (props, DefaultTabBar) => (
     <StickyBox
       offsetTop={0}

@@ -177,15 +177,15 @@ const MANAGEMENT_PERMISSION = {
       type: PermissionType.CATALOGUE,
       route: 'system',
       children: [
-        {
-          id: '1985890042972842',
-          parentId: '0249937641030250',
-          label: 'sys.menu.system.organization',
-          name: 'Organization',
-          type: PermissionType.MENU,
-          route: 'organization',
-          component: '/management/system/organization/index.tsx',
-        },
+        // {
+        //   id: '1985890042972842',
+        //   parentId: '0249937641030250',
+        //   label: 'sys.menu.system.organization',
+        //   name: 'Organization',
+        //   type: PermissionType.MENU,
+        //   route: 'organization',
+        //   component: '/management/system/organization/index.tsx',
+        // },
         {
           id: '4359580910369984',
           parentId: '0249937641030250',
