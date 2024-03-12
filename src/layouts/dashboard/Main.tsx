@@ -1,8 +1,8 @@
-import { forwardRef } from 'react';
-import { useCollapsed } from '@/store/userStore';
-import { Outlet } from 'react-router-dom';
-import { Content } from 'antd/es/layout/layout';
 import { useSettings } from '@/store/settingStore';
+import { useCollapsed } from '@/store/userStore';
+import { Content } from 'antd/es/layout/layout';
+import { forwardRef } from 'react';
+import { Outlet } from 'react-router-dom';
 import MultiTabs from './multi-tabs';
 
 type Props = {

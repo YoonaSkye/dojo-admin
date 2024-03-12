@@ -1,9 +1,12 @@
 import useKeepAlive, { KeepAliveTab } from '@/hooks/use-keep-alive';
 import { useRouter } from '@/router/hooks';
+import { useThemeToken } from '@/theme/hooks';
 import type { TabsProps } from 'antd';
 import { Tabs } from 'antd';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import StickyBox from 'react-sticky-box';
+import Color from 'color';
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
 
@@ -12,6 +15,7 @@ export default function MultiTabs() {
     useKeepAlive();
   const { t } = useTranslation();
   const { push } = useRouter();
+  const { colorBgElevated } = useThemeToken();
 
   // 渲染单个tab label
   const renderTabLabel = (tab: KeepAliveTab) => {};
@@ -26,7 +30,18 @@ export default function MultiTabs() {
   }, [tabs]);
 
   // 自定义渲染 tab bar
-  const renderTabBar = () => {};
+  const renderTabBar: TabsProps['renderTabBar'] = (props, DefaultTabBar) => (
+    <StickyBox
+      offsetTop={0}
+      offsetBottom={20}
+      style={{
+        zIndex: 1,
+        background: Color(colorBgElevated).alpha(1).toString(),
+      }}
+    >
+      <DefaultTabBar {...props} />
+    </StickyBox>
+  );
 
   const onChange = (key: string) => {
     setActiveTabRoutePath(key);
@@ -57,6 +72,7 @@ export default function MultiTabs() {
       activeKey={activeTabRoutePath}
       onChange={onChange}
       onEdit={onEdit}
+      renderTabBar={renderTabBar}
     />
   );
 }

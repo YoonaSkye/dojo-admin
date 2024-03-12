@@ -20,7 +20,7 @@ export default function Header({ offsetTop = false }: Props) {
 
   return (
     <header
-      className={`z-20 shadow-sm fixed md:right-0 md:left-auto ${
+      className={`z-20 fixed md:right-0 md:left-auto ${
         collapsed ? 'md:w-[calc(100%-90px)]' : 'md:w-[calc(100%-260px)]'
       }`}
       style={{
@@ -31,7 +31,8 @@ export default function Header({ offsetTop = false }: Props) {
       <div
         className="flex flex-grow items-center justify-between px-4 text-gray backdrop-blur xl:px-6 2xl:px-10"
         style={{
-          height: offsetTop ? '64px' : '80px',
+          // height: offsetTop ? '64px' : '80px',
+          height: '80px',
           transition: 'height 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
         }}
       >
