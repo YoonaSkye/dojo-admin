@@ -140,8 +140,10 @@ export default function SearchBar() {
         onCancel={handleCancel}
         closeIcon={false}
         afterOpenChange={handleAfterOpenChange}
-        bodyStyle={{
-          height: '400px',
+        styles={{
+          body: {
+            height: '400px',
+          },
         }}
         title={
           <Input

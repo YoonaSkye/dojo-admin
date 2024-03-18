@@ -71,7 +71,7 @@ export default function SettingButton() {
         onClose={() => setDrawerOpen(false)}
         open={drawerOpen}
         closeIcon={false}
-        bodyStyle={{ padding: 0 }}
+        styles={{ body: { padding: 0 } }}
         extra={
           <IconButton
             onClick={() => setDrawerOpen(false)}
