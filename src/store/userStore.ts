@@ -66,6 +66,8 @@ export const useSignIn = () => {
 
   const signIn = async (data: SignInReq) => {
     const res = await userService.signin(data);
+    console.log(res);
+
     if (res[0].data) {
       const { user, accessToken, refreshToken } = res[0].data;
       setUserToken({ accessToken, refreshToken });
