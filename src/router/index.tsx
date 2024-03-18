@@ -11,6 +11,7 @@ import Login from '@/pages/sys/login/Login';
 import AuthGuard from './components/AuthGuard';
 import DashboardLayout from '@/layouts/dashboard';
 import { usePermissionRoutes } from '@/router/hooks/use-permission-routes';
+import { ErrorRoutes } from './routes/error-routes';
 
 const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 
@@ -45,6 +46,7 @@ export default function Router() {
   const routes: AppRouteObject[] = [
     LoginRoute,
     asyncRoutes,
+    ErrorRoutes,
     Not_Found_Page_Route,
   ];
 
