@@ -34,11 +34,11 @@ export default function DashboardLayout() {
 
   const verticalLayout = (
     <>
-      <Header offsetTop={offsetTop} />
-      <div className="z-50 hidden h-full flex-shrink-0 md:block">
+      <Header />
+      <div className="z-50 hidden h-full shadow flex-shrink-0 md:block">
         <Nav />
       </div>
-      <Main ref={mainRef} offsetTop={offsetTop} />
+      <Main ref={mainRef} />
     </>
   );
 
@@ -46,7 +46,7 @@ export default function DashboardLayout() {
     <div className="relative flex flex-1 flex-col">
       <Header />
       <NavHorizontal />
-      <Main ref={mainRef} offsetTop={offsetTop} />
+      <Main ref={mainRef} />
     </div>
   );
 
