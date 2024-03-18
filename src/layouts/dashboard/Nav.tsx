@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Logo from '@/components/logo';
 import Scrollbar from '@/components/scrollbar';
 import { usePermissionRoutes } from '@/router/hooks/use-permission-routes';
-import { useRouteToMenu } from '@/router/hooks/use-route-menu';
+import { useRouteToMenu } from '@/router/hooks/';
 import { useCollapsed, useUserActions } from '@/store/userStore';
 import { Menu, MenuProps } from 'antd';
 import { ItemType } from 'antd/es/menu/hooks/useItems';

@@ -1,12 +1,18 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef, useCallback, Suspense } from 'react';
 import { useScroll } from 'framer-motion';
 import Header from './Header';
 import Main from './Main';
 import Nav from './Nav';
+import NavHorizontal from './nav-horizontal';
 import { useThemeToken } from '@/theme/hooks';
+import { useSettings } from '@/store/settingStore';
+import { ThemeLayout } from '#/enum';
+import { Spin } from 'antd';
 
 export default function DashboardLayout() {
   const { colorBgElevated, colorTextBase } = useThemeToken();
+  const { themeLayout } = useSettings();
+
   const [offsetTop, setOffsetTop] = useState(false);
   const mainRef = useRef(null);
   const { scrollY } = useScroll({
@@ -26,19 +32,33 @@ export default function DashboardLayout() {
     onOffsetTop();
   }, [onOffsetTop]);
 
+  const verticalLayout = (
+    <>
+      <Header offsetTop={offsetTop} />
+      <div className="z-50 hidden h-full flex-shrink-0 md:block">
+        <Nav />
+      </div>
+      <Main ref={mainRef} offsetTop={offsetTop} />
+    </>
+  );
+
+  const horizontalLayout = (
+    <div className="relative flex flex-1 flex-col">
+      <Header />
+      <NavHorizontal />
+      <Main ref={mainRef} offsetTop={offsetTop} />
+    </div>
+  );
+
+  const layout =
+    themeLayout !== ThemeLayout.Horizontal ? verticalLayout : horizontalLayout;
+
   return (
     <div
       className="flex h-screen overflow-hidden"
       style={{ background: colorBgElevated, color: colorTextBase }}
     >
-      {/* layout 采用两栏布局 */}
-      {/* header 采用绝对布局 */}
-      <Header offsetTop={offsetTop} />
-      {/* nav */}
-      <Nav />
-      {/* main content */}
-      {/* DashboardLayout */}
-      <Main ref={mainRef} />
+      <Suspense fallback={<Spin />}>{layout}</Suspense>
     </div>
   );
 }

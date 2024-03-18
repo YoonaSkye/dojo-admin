@@ -8,6 +8,8 @@ import { useThemeToken } from '@/theme/hooks';
 import Color from 'color';
 import { useSettings } from '@/store/settingStore';
 import BreadCrumb from '../_common/bread-crumb';
+import { ThemeLayout } from '#/enum';
+import Logo from '@/components/logo';
 
 type Props = {
   offsetTop?: boolean;
@@ -16,13 +18,20 @@ type Props = {
 export default function Header({ offsetTop = false }: Props) {
   const collapsed = useCollapsed();
   const { colorBgElevated } = useThemeToken();
-  const { breadCrumb } = useSettings();
+  const { breadCrumb, themeLayout } = useSettings();
+
+  const position =
+    themeLayout === ThemeLayout.Horizontal ? 'relative' : 'fixed';
+  const layout =
+    themeLayout === ThemeLayout.Horizontal
+      ? 'w-screen'
+      : collapsed
+      ? 'md:w-[calc(100%-90px)]'
+      : 'md:w-[calc(100%-260px)]';
 
   return (
     <header
-      className={`z-20 fixed md:right-0 md:left-auto ${
-        collapsed ? 'md:w-[calc(100%-90px)]' : 'md:w-[calc(100%-260px)]'
-      }`}
+      className={`z-20 ${position} md:right-0 md:left-auto ${layout}`}
       style={{
         backgroundColor: Color(colorBgElevated).alpha(1).toString(),
       }}
@@ -37,9 +46,14 @@ export default function Header({ offsetTop = false }: Props) {
         }}
       >
         <div className="flex items-baseline">
-          <IconButton className="h-10 w-10 md:hidden">
-            <SvgIcon icon="ic-menu" size="24" />
-          </IconButton>
+          {themeLayout !== ThemeLayout.Horizontal ? (
+            <IconButton className="h-10 w-10 md:hidden">
+              <SvgIcon icon="ic-menu" size="24" />
+            </IconButton>
+          ) : (
+            <Logo className="mr-2 text-xl" />
+          )}
+
           <div className="hidden md:block">
             {breadCrumb ? <BreadCrumb /> : null}
           </div>
