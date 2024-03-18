@@ -65,9 +65,9 @@ export default function Nav() {
     >
       <div className="relative flex h-20 items-center justify-center py-4">
         {collapsed ? (
-          <Logo classname="text-lg" />
+          <Logo className="text-lg" />
         ) : (
-          <Logo classname="text-4xl" />
+          <Logo className="text-4xl" />
         )}
         <button
           className="absolute right-0 top-7 z-50 hidden md:block h-6 w-6 translate-x-1/2"
