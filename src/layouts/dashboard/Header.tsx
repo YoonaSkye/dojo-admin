@@ -5,7 +5,6 @@ import LocalPicker from '@/components/local-picker';
 import SettingButton from '../_common/setting-button';
 import AccountDropdown from '../_common/account-dropdown';
 import { useThemeToken } from '@/theme/hooks';
-import Color from 'color';
 import { useSettings } from '@/store/settingStore';
 import BreadCrumb from '../_common/bread-crumb';
 import { ThemeLayout } from '#/enum';
@@ -13,13 +12,14 @@ import Logo from '@/components/logo';
 import { Drawer } from 'antd';
 import Nav from './Nav';
 import { useState } from 'react';
+import Color from 'color';
 
 export default function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const collapsed = useCollapsed();
   const { setCollapsed } = useUserActions();
-  const { colorBgElevated, colorText } = useThemeToken();
+  const { colorBgElevated, colorPrimary } = useThemeToken();
   const { breadCrumb, themeLayout } = useSettings();
 
   const position =
@@ -30,6 +30,7 @@ export default function Header() {
       : collapsed
       ? 'md:w-[calc(100%-90px)]'
       : 'md:w-[calc(100%-260px)]';
+  const hoverColor = Color(colorPrimary).toString();
 
   return (
     <>
@@ -62,7 +63,11 @@ export default function Header() {
                   className="h-10 w-10 rounded-none mr-2 hidden md:block"
                   onClick={() => setCollapsed(!collapsed)}
                 >
-                  <SvgIcon icon="ic-menu" size="24" />
+                  <SvgIcon
+                    icon="ic-menu"
+                    size="24"
+                    style={{ color: colorPrimary }}
+                  />
                 </IconButton>
               </>
             ) : (
@@ -96,7 +101,7 @@ export default function Header() {
           </div>
         </div>
       </header>
-      {/* <Drawer
+      <Drawer
         placement="left"
         onClose={() => setDrawerOpen(false)}
         open={drawerOpen}
@@ -108,8 +113,8 @@ export default function Header() {
         // bodyStyle={{ padding: 0, overflow: 'hidden' }}
         width="auto"
       >
-        <Nav />
-      </Drawer> */}
+        <Nav closeSideBarDrawer={() => setDrawerOpen(false)} />
+      </Drawer>
     </>
   );
 }

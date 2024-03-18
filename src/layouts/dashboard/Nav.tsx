@@ -9,7 +9,11 @@ import { menuFilter } from '@/router/utils';
 import { useLocation, useMatches, useNavigate } from 'react-router-dom';
 import { useThemeToken } from '@/theme/hooks';
 
-export default function Nav() {
+type Props = {
+  closeSideBarDrawer?: () => void;
+};
+
+export default function Nav(props: Props) {
   const collapsed = useCollapsed();
 
   const routeToMenuFn = useRouteToMenu();
@@ -50,6 +54,7 @@ export default function Nav() {
   };
   const onClick: MenuProps['onClick'] = ({ key }) => {
     navigate(key);
+    props?.closeSideBarDrawer?.();
   };
 
   return (
