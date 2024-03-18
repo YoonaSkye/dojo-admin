@@ -330,6 +330,7 @@ const MENU_LEVEL_PERMISSION = {
   icon: 'ic-menulevel',
   type: PermissionType.CATALOGUE,
   route: 'menu-level',
+  status: BasicStatus.DISABLE,
   order: 5,
   children: [
     {
@@ -440,6 +441,7 @@ const OTHERS_PERMISSION = [
     icon: 'solar:calendar-bold-duotone',
     type: PermissionType.MENU,
     route: 'calendar',
+    status: BasicStatus.DISABLE,
     component: '/sys/others/calendar/index.tsx',
   },
   {
@@ -450,6 +452,7 @@ const OTHERS_PERMISSION = [
     icon: 'solar:clipboard-bold-duotone',
     type: PermissionType.MENU,
     route: 'kanban',
+    status: BasicStatus.DISABLE,
     component: '/sys/others/kanban/index.tsx',
   },
   {
@@ -472,6 +475,7 @@ const OTHERS_PERMISSION = [
     type: PermissionType.MENU,
     route: 'label',
     newFeature: true,
+    status: BasicStatus.DISABLE,
     component: '/sys/others/blank.tsx',
   },
   {
@@ -482,6 +486,7 @@ const OTHERS_PERMISSION = [
     icon: 'ic_external',
     type: PermissionType.CATALOGUE,
     route: 'frame',
+    status: BasicStatus.DISABLE,
     children: [
       {
         id: '9884486809510480',
@@ -505,16 +510,16 @@ const OTHERS_PERMISSION = [
       },
     ],
   },
-  {
-    id: '0941594969900756',
-    parentId: '',
-    label: 'sys.menu.blank',
-    name: 'Disabled',
-    icon: 'ic_blank',
-    type: PermissionType.MENU,
-    route: 'blank',
-    component: '/sys/others/blank.tsx',
-  },
+  // {
+  //   id: '0941594969900756',
+  //   parentId: '',
+  //   label: 'sys.menu.blank',
+  //   name: 'Disabled',
+  //   icon: 'ic_blank',
+  //   type: PermissionType.MENU,
+  //   route: 'blank',
+  //   component: '/sys/others/blank.tsx',
+  // },
 ];
 
 export const PERMISSION_LIST = [
