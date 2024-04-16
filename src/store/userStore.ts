@@ -4,7 +4,7 @@ import userService, { SignInReq } from '@/api/services/userService';
 import { getItem, removeItem, setItem } from '@/utils/storage';
 import { useNavigate } from 'react-router-dom';
 import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 
 const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 
