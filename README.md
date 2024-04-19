@@ -1,7 +1,8 @@
 <div align="center"> 
 <br> 
 <br>
-<h1><img src='./src/assets/images/background/dojo.png' height=''140'>Dojo Admin 🌈
+<img src='./src/assets/images/background/dojo.png' height='140'>
+<h1>Dojo Admin 🌈
 </h1>
 </div>
 
@@ -11,7 +12,10 @@ Dojo Admin 是一个现代化的后台管理模板，基于 React 18、Zustand�
 
 ## 预览
 
--
+| ![login.png](/public//demo/login-page.png)           | ![dashboard.png](/public/demo/dashboard.png) |
+| ---------------------------------------------------- | -------------------------------------------- |
+| ![dark-mode.png](/public/demo/dark-mode.png)         | ![setting.png](/public/demo/setting.png)     |
+| ![dark-mode.png](/public/demo/horizontal-layout.png) |
 
 ## 特性
 
