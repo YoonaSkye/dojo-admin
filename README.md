@@ -1,13 +1,13 @@
 <div align="center"> 
 <br> 
 <br>
-<h1>Dojo Admin 
+<h1><img src='./src/assets/images/background/dojo.png' height=''140'>Dojo Admin 🌈
 </h1>
 </div>
 
 ## 简介
 
-Dojo Admin 是一个现代化的后台管理模板，基于 React 18、Vite、Ant Design 和 TypeScript 构建。它旨在帮助开发人员快速搭建功能强大的后台管理系统。
+Dojo Admin 是一个现代化的后台管理模板，基于 React 18、Zustand、Vite、Ant Design 和 TypeScript 构建。它旨在帮助开发人员快速搭建功能强大的后台管理系统。
 
 ## 预览
 
@@ -15,18 +15,17 @@ Dojo Admin 是一个现代化的后台管理模板，基于 React 18、Vite、An
 
 ## 特性
 
-- 使用 React 18 hooks 进行构建。
-- 基于 Vite 进行快速开发和热模块替换。
-- 集成 Ant Design，提供丰富的 UI 组件和设计模式。
-- 使用 TypeScript 编写，提供类型安全性和更好的开发体验。
-- 响应式设计，适应各种屏幕尺寸和设备。
-- 灵活的路由配置，支持多级嵌套路由。
-- 集成权限管理，根据用户角色控制页面访问权限。
-- 集成国际化支持，轻松切换多语言。
-- 集成常见的后台管理功能，如用户管理、角色管理、权限管理等。
-- 可定制的主题和样式，以满足您的品牌需求。
+- 使用 React18 + TypeScript 开发，整个项目使用高质量 Hooks + TypeScript 代码完成
+- 项目菜单、路由权限使用 动态路由 控制，完全根据后端菜单数据动态生成路由
+- 使用 zustand 作为状态管理工具，集成 zustand-persist 持久化工具
+- 使用 Ant-Design 5 组件库开发，将 Design Token 注入到 CSS 变量中，方便配置项目主题
+- 项目支持多布局：横向布局、经典布局（可开启菜单分割功能）、纵向布局
+- 项目支持多主题：主题颜色、暗黑模式配置
+- 项目其它功能：菜单手风琴模式、无限级菜单、多标签页、详情页标签、面包屑导航
+- 集成权限管理，根据用户角色控制页面访问权限
+- 集成国际化支持，轻松切换多语言
+- 集成常见的后台管理功能，如用户管理、角色管理、权限管理等
 - 基于 MSW 和 Faker.js 的 Mock 方案
-- 使用 Zustand 进行状态管理
 
 ## 快速开始
 
