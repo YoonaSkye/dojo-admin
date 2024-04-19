@@ -1,6 +1,5 @@
-<div align="center"> 
-<br> 
-<br>
+<div align="center">
+<br />
 <img src='./src/assets/images/background/dojo.png' height='140'>
 <h1>Dojo Admin 🌈
 </h1>
@@ -24,12 +23,12 @@ Dojo Admin 是一个现代化的后台管理模板，基于 React 18、Zustand�
 - 使用 zustand 作为状态管理工具，集成 zustand-persist 持久化工具
 - 使用 Ant-Design 5 组件库开发，将 Design Token 注入到 CSS 变量中，方便配置项目主题
 - 项目支持多布局：横向布局、经典布局（可开启菜单分割功能）、纵向布局
-- 项目支持多主题：主题颜色、暗黑模式配置
-- 项目其它功能：菜单手风琴模式、无限级菜单、多标签页、详情页标签、面包屑导航
+- 项目支持多主题：多标签页、面包屑导航
 - 集成权限管理，根据用户角色控制页面访问权限
 - 集成国际化支持，轻松切换多语言
 - 集成常见的后台管理功能，如用户管理、角色管理、权限管理等
 - 基于 MSW 和 Faker.js 的 Mock 方案
+- 支持 token 无感刷新和请求数量限流功能
 
 ## 快速开始
 
