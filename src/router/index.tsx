@@ -1,23 +1,24 @@
+import { AppRouteObject } from '#/router';
 import {
   createHashRouter,
   Navigate,
   RouteObject,
   RouterProvider,
 } from 'react-router-dom';
-import { AppRouteObject } from '#/router';
 
 // TODO: 后续对路由进行懒加载处理
-import Login from '@/pages/sys/login/Login';
-import AuthGuard from './components/AuthGuard';
+// import Login from '@/pages/sys/login/Login';
 import DashboardLayout from '@/layouts/dashboard';
 import { usePermissionRoutes } from '@/router/hooks/use-permission-routes';
+import { lazy } from 'react';
+import AuthGuard from './components/AuthGuard';
 import { ErrorRoutes } from './routes/error-routes';
 
 const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 
 const LoginRoute: AppRouteObject = {
   path: '/login',
-  element: <Login />,
+  Component: lazy(() => import('@/pages/sys/login/Login')),
 };
 
 const Not_Found_Page_Route: AppRouteObject = {
