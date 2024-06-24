@@ -9,6 +9,8 @@ import { useSettings } from '@/store/settingStore';
 import { ThemeLayout } from '#/enum';
 import { Spin } from 'antd';
 
+// const {Header, Sider, Content} = Layout
+
 export default function DashboardLayout() {
   const { colorBgElevated, colorTextBase } = useThemeToken();
   const { themeLayout } = useSettings();

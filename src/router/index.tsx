@@ -9,6 +9,7 @@ import {
 // TODO: 后续对路由进行懒加载处理
 // import Login from '@/pages/sys/login/Login';
 import DashboardLayout from '@/layouts/dashboard';
+import DefaultLayout from '@/layouts/default';
 import { usePermissionRoutes } from '@/router/hooks/use-permission-routes';
 import { lazy } from 'react';
 import AuthGuard from './components/AuthGuard';
@@ -34,7 +35,8 @@ export default function Router() {
     path: '/',
     element: (
       <AuthGuard>
-        <DashboardLayout />
+        {/* <DashboardLayout /> */}
+        <DefaultLayout />
       </AuthGuard>
     ),
     children: [

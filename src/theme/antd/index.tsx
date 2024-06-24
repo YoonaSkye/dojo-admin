@@ -38,7 +38,9 @@ export default function AntdConfig({
       }}
     >
       {/* https://ant.design/docs/react/compatible-style-cn#styleprovider */}
-      <StyleProvider hashPriority="high">{children}</StyleProvider>
+      {/* 不提升antd css选择器权重 */}
+      {/* <StyleProvider hashPriority="high">{children}</StyleProvider> */}
+      {children}
     </ConfigProvider>
   );
 }
