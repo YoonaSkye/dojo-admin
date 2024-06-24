@@ -8,6 +8,7 @@ import { Menu } from 'antd';
 import type { MenuProps } from 'antd';
 import { menuFilter } from '@/router/utils';
 import Logo from '@/components/logo';
+import Scrollbar from '@/components/scrollbar';
 
 type Props = {
   closeSideBarDrawer?: () => void;
@@ -58,11 +59,6 @@ export default function LayoutMenu(props: Props) {
   };
 
   return (
-    // <
-    //   className={`flex h-full flex-col overflow-x-hidden ${
-    //     collapsed ? 'w-[90px]' : 'w-[260px]'
-    //   }`}
-    // >
     <>
       <div
         className="relative flex h-20 items-center justify-center py-4"
@@ -73,19 +69,23 @@ export default function LayoutMenu(props: Props) {
 
       {/* Sidebar menu */}
 
-      <Menu
-        mode="inline"
-        items={menuList}
-        className="h-full !border-none"
-        defaultOpenKeys={openKeys}
-        defaultSelectedKeys={selectedKeys}
-        selectedKeys={selectedKeys}
-        openKeys={openKeys}
-        onOpenChange={onOpenChange}
-        onClick={onClick}
-        style={{ background: colorBgElevated }}
-        inlineCollapsed={collapsed}
-      />
+      <Scrollbar
+        style={{
+          height: 'calc(100vh - 80px)',
+        }}
+      >
+        <Menu
+          mode="inline"
+          items={menuList}
+          defaultOpenKeys={openKeys}
+          defaultSelectedKeys={selectedKeys}
+          selectedKeys={selectedKeys}
+          openKeys={openKeys}
+          onOpenChange={onOpenChange}
+          onClick={onClick}
+          inlineCollapsed={collapsed}
+        />
+      </Scrollbar>
     </>
   );
 }

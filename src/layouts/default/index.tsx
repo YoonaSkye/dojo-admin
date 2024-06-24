@@ -15,7 +15,12 @@ export default function DefaultLayout() {
   return (
     <Layout className="flex flex-col w-full min-h-full bg-[#f4f7f9]">
       <Layout className="min-h-full">
-        <Sider trigger={null} collapsible collapsed={collapsed}>
+        <Sider
+          trigger={null}
+          collapsible
+          collapsed={collapsed}
+          style={{ background: colorBgContainer }}
+        >
           <LayoutMenu />
         </Sider>
         <Layout>
