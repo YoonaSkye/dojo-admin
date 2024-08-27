@@ -19,7 +19,7 @@ export default function DefaultLayout() {
           trigger={null}
           collapsible
           collapsed={collapsed}
-          style={{ background: colorBgContainer }}
+          // style={{ background: colorBgContainer }}
         >
           <LayoutMenu />
         </Sider>

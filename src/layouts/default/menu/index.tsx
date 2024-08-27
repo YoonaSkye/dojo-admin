@@ -62,7 +62,7 @@ export default function LayoutMenu(props: Props) {
     <>
       <div
         className="relative flex h-20 items-center justify-center py-4"
-        style={{ background: colorBgElevated }}
+        // style={{ background: colorBgElevated }}
       >
         <Logo />
       </div>
@@ -76,6 +76,7 @@ export default function LayoutMenu(props: Props) {
       >
         <Menu
           mode="inline"
+          theme="dark"
           items={menuList}
           defaultOpenKeys={openKeys}
           defaultSelectedKeys={selectedKeys}
