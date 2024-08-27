@@ -56,6 +56,8 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    /* extra */
+    --sidebar: 222.34deg 10.43% 12.27%;
   }
 }
 
@@ -66,4 +68,10 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+#root, html, body {
+  height: 100%;
+  overscroll-behavior: none;
+  width: 100%;
 }
