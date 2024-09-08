@@ -1,18 +1,9 @@
 import { SignInReq } from '@/api/services/userService';
 import { useSignIn } from '@/store/userStore';
-import {
-  Alert,
-  Button,
-  Checkbox,
-  Col,
-  Divider,
-  Form,
-  Input,
-  Row,
-  Tag,
-} from 'antd';
+import { Checkbox, Col, Form, Input, Row, Button } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Button as ShadButton } from '@/components/ui/button';
 import { AiFillGithub, AiFillGoogleCircle, AiFillWechat } from 'react-icons/ai';
 
 export default function LoginForm() {
@@ -30,7 +21,6 @@ export default function LoginForm() {
   };
   return (
     <>
-      <div className="mb-4 text-2xl font-bold xl:text-3xl">登录</div>
       <Form
         name="login"
         size="large"
@@ -41,28 +31,6 @@ export default function LoginForm() {
         }}
         onFinish={handleFinish}
       >
-        <div className="mb-4 flex flex-col">
-          <Alert
-            type="info"
-            description={
-              <div className="flex flex-col">
-                <div className="flex mb-2">
-                  <Tag color="blue">Admin {t('sys.login.userName')}:</Tag>
-                  <strong className="ml-1">
-                    <span>admin@gamil.com</span>
-                  </strong>
-                </div>
-                <div className="flex">
-                  <Tag color="blue">{t('sys.login.password')}:</Tag>
-                  <strong className="ml-1">
-                    <span>demo1234</span>
-                  </strong>
-                </div>
-              </div>
-            }
-          />
-        </div>
-
         <Form.Item
           name="username"
           rules={[{ required: true, message: '请输入账号' }]}
@@ -111,12 +79,43 @@ export default function LoginForm() {
           </Col>
         </Row>
 
-        <Divider className="!text-xs">其他登录方式</Divider>
-
-        <div className="flex cursor-pointer justify-around text-2xl">
-          <AiFillGithub />
-          <AiFillWechat />
-          <AiFillGoogleCircle />
+        <div className="w-full sm:mx-auto md:max-w-md">
+          <div className="mt-4 flex items-center justify-between">
+            <span className="border-input w-[35%] border-b dark:border-gray-600"></span>
+            <span className="text-muted-foreground text-center text-xs uppercase">
+              其他登录方式
+            </span>
+            <span className="border-input w-[35%] border-b dark:border-gray-600"></span>
+          </div>
+          <div className="mt-4 flex flex-wrap justify-center">
+            <ShadButton
+              variant="outline"
+              size="icon"
+              className="rounded-full outline-none flex items-center gap-1"
+            >
+              <AiFillWechat />
+            </ShadButton>
+            <ShadButton
+              variant="outline"
+              size="icon"
+              className="rounded-full outline-none flex items-center gap-1"
+            >
+              <AiFillGithub />
+            </ShadButton>
+            <ShadButton
+              variant="outline"
+              size="icon"
+              className="rounded-full outline-none flex items-center gap-1"
+            >
+              <AiFillGoogleCircle />
+            </ShadButton>
+          </div>
+        </div>
+        <div className="mt-3 text-center text-sm">
+          还没有账号?{' '}
+          <span className="text-primary hover:text-primary-hover active:text-primary-active cursor-pointer text-sm font-normal">
+            创建账号
+          </span>
         </div>
       </Form>
     </>

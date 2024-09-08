@@ -1,0 +1,12 @@
+.login-background {
+  background: linear-gradient(154deg, 
+  rgba(7, 7, 9, 0.08235) 30%, 
+  hsl(212 100% 45% / 30%) 48%, 
+  rgba(7, 7, 9, 0.08235) 64%);
+  filter: blur(100px);
+}
+
+
+.bg-background-deep {
+  background-color: hsl(216 20.11% 95.47%);
+}
