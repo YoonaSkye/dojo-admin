@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/breadcrumb';
 import CommandMenu from '@/layouts//_common/command-menu';
 import AccountMenu from '@/layouts/_common/account-menu';
+import LanguageToggle from '@/layouts/_common/language-toggle';
 
 export default function DefaultLayout() {
   const asideStyle: CSSProperties = {
@@ -94,9 +95,12 @@ export default function DefaultLayout() {
             </div>
             <div className="flex h-full min-w-0 flex-1 items-center"></div>
             <div className="flex h-full min-w-0 flex-shrink-0 items-center">
+              {/* 搜索按钮 */}
               <div className="mr-1 sm:mr-4">
                 <CommandMenu />
               </div>
+
+              {/* 亮暗模式切换按钮 */}
               <div className="mr-2 mt-[2px]">
                 <Button
                   variant="outline"
@@ -106,15 +110,13 @@ export default function DefaultLayout() {
                   <MoonIcon className="size-4" />
                 </Button>
               </div>
+
+              {/* 国际化按钮 */}
               <div className="mr-2">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="rounded-full outline-none flex items-center gap-1"
-                >
-                  <Languages className="size-4" />
-                </Button>
+                <LanguageToggle />
               </div>
+
+              {/* 全屏按钮 */}
               <Button
                 variant="outline"
                 size="icon"
@@ -122,6 +124,8 @@ export default function DefaultLayout() {
               >
                 <Maximize className="size-4" />
               </Button>
+
+              {/* 消息通知 */}
               <Button
                 variant="outline"
                 size="icon"
