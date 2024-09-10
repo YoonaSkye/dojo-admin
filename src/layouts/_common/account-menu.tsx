@@ -5,12 +5,35 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuShortcut,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import avatar from '@/assets/images/avatar-v1.webp';
 import { cn } from '@/lib/utils';
 import { useRouter } from '@/router/hooks';
-import { useUserActions, useUserInfo } from '@/store/userStore';
+import { useUserActions } from '@/store/userStore';
+import { BookOpenTextIcon, LogOutIcon } from 'lucide-react';
+import { AiFillGithub } from 'react-icons/ai';
+
+const accountMenuItems: {
+  label: string;
+  key: number;
+  icon: React.ReactNode;
+  link: string;
+}[] = [
+  {
+    label: '文档',
+    key: 0,
+    icon: <BookOpenTextIcon className="mr-2 size-4" />,
+    link: '/',
+  },
+  {
+    label: 'Github',
+    key: 1,
+    icon: <AiFillGithub className="mr-2 size-4" />,
+    link: '/',
+  },
+];
 
 export default function AccountMenu() {
   const { clearUserInfoAndToken } = useUserActions();
@@ -27,7 +50,7 @@ export default function AccountMenu() {
   };
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className="outline-none">
         <div className="hover:bg-accent ml-1 mr-2 cursor-pointer rounded-full p-1.5">
           <div className="hover:text-accent-foreground flex-center">
             <div className="size-8 relative flex flex-shrink-0 items-center">
@@ -72,11 +95,24 @@ export default function AccountMenu() {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>文档</DropdownMenuItem>
-        <DropdownMenuItem>Github</DropdownMenuItem>
-        <DropdownMenuItem>问题 & 帮助</DropdownMenuItem>
+        {accountMenuItems.map(({ label, key, icon, link }) => {
+          return (
+            <DropdownMenuItem
+              className="mx-1 leading-8"
+              key={key}
+              onClick={() => replace(link)}
+            >
+              {icon}
+              {label}
+            </DropdownMenuItem>
+          );
+        })}
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={logout}>退出</DropdownMenuItem>
+        <DropdownMenuItem onClick={logout}>
+          <LogOutIcon className="mr-2 size-4" />
+          退出登录
+          <DropdownMenuShortcut>⌥ Q</DropdownMenuShortcut>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

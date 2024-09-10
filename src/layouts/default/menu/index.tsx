@@ -28,7 +28,6 @@ export default function LayoutMenu(props: Props) {
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>(['']);
   const [menuList, setMenuList] = useState<ItemType[]>([]);
-  console.log(menuList);
 
   useEffect(() => {
     const menuRoutes = menuFilter(permissionRoutes);
