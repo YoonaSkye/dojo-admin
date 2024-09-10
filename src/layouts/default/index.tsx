@@ -8,10 +8,10 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import CommandMenu from '../_common/command-menu';
+import CommandMenu from '@/layouts//_common/command-menu';
+import AccountMenu from '@/layouts/_common/account-menu';
 
 export default function DefaultLayout() {
   const asideStyle: CSSProperties = {
@@ -95,15 +95,6 @@ export default function DefaultLayout() {
             <div className="flex h-full min-w-0 flex-1 items-center"></div>
             <div className="flex h-full min-w-0 flex-shrink-0 items-center">
               <div className="mr-1 sm:mr-4">
-                {/* <div className="md:bg-accent group flex h-8 cursor-pointer items-center gap-3 rounded-2xl border-none bg-none px-2 py-0.5 outline-none">
-                  <SearchIcon className="text-muted-foreground group-hover:text-foreground size-4 group-hover:opacity-100" />
-                  <span className="text-muted-foreground group-hover:text-foreground hidden text-xs duration-300 md:block">
-                    搜索
-                  </span>
-                  <span className="bg-background border-foreground/60 text-muted-foreground group-hover:text-foreground relative hidden rounded-sm rounded-r-xl px-1.5 py-1 text-xs leading-none group-hover:opacity-100 md:block">
-                    ⌘ <kbd>K</kbd>
-                  </span>
-                </div> */}
                 <CommandMenu />
               </div>
               <div className="mr-2 mt-[2px]">
@@ -138,13 +129,8 @@ export default function DefaultLayout() {
               >
                 <Bell className="size-4" />
               </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full mr-2"
-              >
-                <Bell className="size-4" />
-              </Button>
+
+              <AccountMenu />
             </div>
           </header>
         </div>
