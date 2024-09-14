@@ -58,7 +58,7 @@ export default function DefaultLayout() {
       >
         <LayoutMenu />
       </aside>
-      <div className="flex flex-1 flex-col overflow-hidden transition-all duration-300 ease-in">
+      <div className="flex flex-1 flex-col transition-all duration-300 ease-in">
         <div
           className="overflow-hidden transition-all duration-200"
           style={headerStyle}
@@ -175,7 +175,7 @@ export default function DefaultLayout() {
           </section> */}
         </div>
         <main
-          className="bg-background-deep relative transition-[margin-top] duration-200"
+          className="bg-background-deep transition-[margin-top] duration-200"
           style={{
             flex: '1 1 0%',
             padding: '0px',

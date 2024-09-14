@@ -7,7 +7,7 @@ import { useMemo, useCallback, CSSProperties } from 'react';
 import { useTranslation } from 'react-i18next';
 import StickyBox from 'react-sticky-box';
 import Color from 'color';
-import { Bell } from 'lucide-react';
+import { RotateCwIcon, ChevronDownIcon, Minimize2Icon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Label from './Label';
 
@@ -46,18 +46,21 @@ export default function MultiTabs() {
   /**
    * 渲染单个tab
    */
-  const renderTabLabel = (tab: KeepAliveTab) => {
-    if (tab.hideTab) return null;
-    return (
-      <div
-        className={cn('tabs-chrome__item group h-full -mr-3', {
-          'is-active': tab.key === activeTabRoutePath,
-        })}
-      >
-        <Label>{t(tab.label)}</Label>
-      </div>
-    );
-  };
+  const renderTabLabel = useCallback(
+    (tab: KeepAliveTab) => {
+      if (tab.hideTab) return null;
+      return (
+        <div
+          className={cn('tabs-chrome__item group h-full -mr-3', {
+            'is-active': tab.key === activeTabRoutePath,
+          })}
+        >
+          <Label>{t(tab.label)}</Label>
+        </div>
+      );
+    },
+    [activeTabRoutePath]
+  );
 
   /**
    * 渲染所有tab
@@ -67,9 +70,8 @@ export default function MultiTabs() {
       key: tab.key,
       label: renderTabLabel(tab),
       children: <div className="p-5">{tab.children}</div>,
-      // closable: false,
     }));
-  }, [tabs]);
+  }, [tabs, renderTabLabel]);
 
   /**
    * 自定义 渲染 tabbar
@@ -77,6 +79,8 @@ export default function MultiTabs() {
   // TODO: 可拖拽的Tabbar
   const renderTabBar: TabsProps['renderTabBar'] = (props, DefaultTabBar) => (
     <StickyBox
+      offsetTop={50}
+      offsetBottom={50}
       style={{
         zIndex: 1,
         background: Color(themeToken.colorBgElevated).alpha(1).toString(),
@@ -97,17 +101,16 @@ export default function MultiTabs() {
         </div>
         <div className="flex items-center justify-center h-full">
           <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
-            <Bell className="size-4" />
+            <RotateCwIcon className="size-4" />
           </div>
           <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
-            <Bell className="size-4" />
+            <ChevronDownIcon className="size-4" />
           </div>
           <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
-            <Bell className="size-4" />
+            <Minimize2Icon className="size-4" />
           </div>
         </div>
       </div>
-      {/* <DefaultTabBar {...props} /> */}
     </StickyBox>
   );
 
