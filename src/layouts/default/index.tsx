@@ -10,9 +10,11 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import CommandMenu from '@/layouts//_common/command-menu';
 import AccountMenu from '@/layouts/_common/account-menu';
 import LanguageToggle from '@/layouts/_common/language-toggle';
+import MultiTabs from '../dashboard/multi-tabs';
 
 export default function DefaultLayout() {
   const asideStyle: CSSProperties = {
@@ -29,7 +31,8 @@ export default function DefaultLayout() {
   };
 
   const headerStyle: CSSProperties = {
-    height: '86px',
+    // height: '88px',
+    height: '50px',
     left: '230px',
     position: 'fixed',
     top: '0px',
@@ -39,17 +42,27 @@ export default function DefaultLayout() {
 
   return (
     <div className="relative flex min-h-full w-full">
+      <div
+        className="dark h-full transition-all duration-150"
+        style={{
+          flex: '0 0 230px',
+          marginLeft: '0px',
+          maxWidth: '230px',
+          minWidth: '230px',
+          width: '230px',
+        }}
+      ></div>
       <aside
         className="dark bg-sidebar border-border border-r fixed left-0 top-0 h-full transition-all duration-150"
         style={asideStyle}
       >
         <LayoutMenu />
       </aside>
-      <div
-        className="flex flex-1 flex-col overflow-hidden transition-all duration-300 ease-in"
-        style={headerStyle}
-      >
-        <div className="overflow-hidden transition-all duration-200">
+      <div className="flex flex-1 flex-col overflow-hidden transition-all duration-300 ease-in">
+        <div
+          className="overflow-hidden transition-all duration-200"
+          style={headerStyle}
+        >
           <header
             className="light border-border bg-header top-0 flex w-full flex-[0_0_auto] items-center border-b transition-[margin-top] duration-200"
             style={{
@@ -137,8 +150,40 @@ export default function DefaultLayout() {
               <AccountMenu />
             </div>
           </header>
+          {/* <section
+            className="border-border bg-background flex w-full border-b transition-all"
+            style={{
+              height: '38px',
+              marginLeft: '0px',
+              width: '100%',
+            }}
+          >
+            <div className="flex h-full flex-1">
+              <div className="pt-[3px] size-full flex-1"></div>
+            </div>
+            <div className="flex items-center justify-center h-full">
+              <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
+                <Bell className="size-4" />
+              </div>
+              <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
+                <Bell className="size-4" />
+              </div>
+              <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
+                <Bell className="size-4" />
+              </div>
+            </div>
+          </section> */}
         </div>
-        <main className=""></main>
+        <main
+          className="bg-background-deep relative transition-[margin-top] duration-200"
+          style={{
+            flex: '1 1 0%',
+            padding: '0px',
+            marginTop: '50px',
+          }}
+        >
+          <MultiTabs />
+        </main>
       </div>
     </div>
   );
