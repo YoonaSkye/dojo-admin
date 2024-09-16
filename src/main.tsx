@@ -6,6 +6,7 @@ import { worker } from './mock';
 // i18n
 import './locales/i18n.ts';
 import './index.css';
+import '@/theme/design-tokens/index.ts';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>

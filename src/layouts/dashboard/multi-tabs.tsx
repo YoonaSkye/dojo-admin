@@ -51,6 +51,9 @@ export default function MultiTabs() {
       if (tab.hideTab) return null;
       return (
         <div
+          style={{
+            '--gap': '7px',
+          }}
           className={cn('tabs-chrome__item group h-full -mr-3', {
             'is-active': tab.key === activeTabRoutePath,
           })}
