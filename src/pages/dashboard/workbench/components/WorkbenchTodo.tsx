@@ -1,13 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import type { WorkbenchTrendItem } from '../../typing';
+import { Checkbox } from '@/components/ui/checkbox';
+import type { WorkbenchTodoItem } from '../../typing';
+import { cn } from '@/lib/utils';
 
 interface Props {
-  items: WorkbenchTrendItem[];
+  items: WorkbenchTodoItem[];
   title: string;
   className?: string;
 }
 
-export default function WorkbenchTrends({ items, title, className }: Props) {
+export default function WorkbenchTodo({ items, title, className }: Props) {
   return (
     <Card className={className}>
       <CardHeader className="py-4">
@@ -16,9 +18,20 @@ export default function WorkbenchTrends({ items, title, className }: Props) {
       <CardContent className="flex flex-wrap p-5 pt-0">
         <ul className="divide-border w-full divide-y" role="list">
           {items.map((item) => (
-            <li key={item.title} className="flex justify-between gap-x-6 py-5">
+            <li
+              key={item.title}
+              className={cn(
+                { 'select-none line-through opacity-60': item.completed },
+                'flex justify-between gap-x-6 py-5'
+              )}
+            >
               <div className="flex min-w-0 items-center gap-x-4">
-                icon
+                {/* checkbox 需要封装 */}
+                <Checkbox id="name" checked={item.completed} />
+                <label
+                  htmlFor="name"
+                  className="ml-2 cursor-pointer text-sm"
+                ></label>
                 <div className="min-w-0 flex-auto">
                   <p className="text-foreground text-sm font-semibold leading-6">
                     {item.title}

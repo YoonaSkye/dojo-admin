@@ -27,9 +27,24 @@ interface WorkbenchTrendItem {
   title: string;
 }
 
+interface WorkbenchQuickNavItem {
+  color?: string;
+  icon: React.ReactNode | string;
+  title: string;
+}
+
+interface WorkbenchTodoItem {
+  completed: boolean;
+  content: string;
+  date: string;
+  title: string;
+}
+
 export type {
   AnalysisOverviewItem,
   TabOption,
   WorkbenchProjectItem,
   WorkbenchTrendItem,
+  WorkbenchQuickNavItem,
+  WorkbenchTodoItem,
 };

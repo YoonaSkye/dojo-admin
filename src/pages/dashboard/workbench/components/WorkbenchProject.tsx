@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { WorkbenchProjectItem } from '../../typing';
+import type { WorkbenchProjectItem } from '../../typing';
 import { cn } from '@/lib/utils';
 
 interface Props {

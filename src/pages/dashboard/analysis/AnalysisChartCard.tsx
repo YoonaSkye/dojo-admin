@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface AnalysisChartCardProps {
   title: string;
-  className: string;
+  className?: string;
   children: React.ReactNode;
 }
 
