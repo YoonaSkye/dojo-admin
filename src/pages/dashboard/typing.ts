@@ -11,4 +11,25 @@ type TabOption = {
   value: string;
 };
 
-export type { AnalysisOverviewItem, TabOption };
+interface WorkbenchProjectItem {
+  color?: string;
+  content: string;
+  date: string;
+  group: string;
+  icon: React.ReactNode | string;
+  title: string;
+}
+
+interface WorkbenchTrendItem {
+  avatar: string;
+  content: string;
+  date: string;
+  title: string;
+}
+
+export type {
+  AnalysisOverviewItem,
+  TabOption,
+  WorkbenchProjectItem,
+  WorkbenchTrendItem,
+};
