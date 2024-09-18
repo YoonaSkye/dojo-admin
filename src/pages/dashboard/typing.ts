@@ -1,5 +1,5 @@
 interface AnalysisOverviewItem {
-  icon: React.ReactNode | string;
+  icon: string;
   title: string;
   totalTitle: string;
   totalValue: number;
@@ -16,7 +16,7 @@ interface WorkbenchProjectItem {
   content: string;
   date: string;
   group: string;
-  icon: React.ReactNode | string;
+  icon: string;
   title: string;
 }
 
@@ -29,7 +29,7 @@ interface WorkbenchTrendItem {
 
 interface WorkbenchQuickNavItem {
   color?: string;
-  icon: React.ReactNode | string;
+  icon: string;
   title: string;
 }
 

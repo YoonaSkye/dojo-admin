@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { WorkbenchProjectItem } from '../../typing';
 import { cn } from '@/lib/utils';
+import { Iconify } from '@/components/icon';
 
 interface Props {
   items: WorkbenchProjectItem[];
@@ -25,7 +26,11 @@ export default function WorkbenchProject({ items, title }: Props) {
             )}
           >
             <div className="flex items-center">
-              icon
+              <Iconify
+                icon={item.icon}
+                color={item.color}
+                className="size-8 transition-all duration-300 group-hover:scale-110"
+              />
               <span className="ml-4 text-lg font-medium">{item.title}</span>
             </div>
             <div className="text-foreground/80 mt-4 flex h-10">

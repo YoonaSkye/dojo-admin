@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { WorkbenchTrendItem } from '../../typing';
+import { Iconify } from '@/components/icon';
 
 interface Props {
   items: WorkbenchTrendItem[];
@@ -15,10 +16,16 @@ export default function WorkbenchTrends({ items, title, className }: Props) {
       </CardHeader>
       <CardContent className="flex flex-wrap p-5 pt-0">
         <ul className="divide-border w-full divide-y" role="list">
-          {items.map((item) => (
-            <li key={item.title} className="flex justify-between gap-x-6 py-5">
+          {items.map((item, index) => (
+            <li
+              key={`${item.title}-${index}`}
+              className="flex justify-between gap-x-6 py-5"
+            >
               <div className="flex min-w-0 items-center gap-x-4">
-                icon
+                <Iconify
+                  icon={item.avatar}
+                  className="size-10 flex-none rounded-full"
+                />
                 <div className="min-w-0 flex-auto">
                   <p className="text-foreground text-sm font-semibold leading-6">
                     {item.title}

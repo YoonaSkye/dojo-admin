@@ -1,7 +1,7 @@
 import LayoutMenu from './menu';
 import { CSSProperties } from 'react';
 import { Button } from '@/components/ui/button';
-import { SearchIcon, MoonIcon, Languages, Maximize, Bell } from 'lucide-react';
+import { Menu, MoonStar, Maximize, Bell, Settings } from '@/icons';
 
 import {
   Breadcrumb,
@@ -10,7 +10,7 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+
 import CommandMenu from '@/layouts//_common/command-menu';
 import AccountMenu from '@/layouts/_common/account-menu';
 import LanguageToggle from '@/layouts/_common/language-toggle';
@@ -75,22 +75,7 @@ export default function DefaultLayout() {
               size="icon"
               className="my-0 ml-2 mr-1 rounded-md"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-align-justify"
-              >
-                <line x1="4" x2="20" y1="12" y2="12" />
-                <line x1="4" x2="20" y1="6" y2="6" />
-                <line x1="4" x2="20" y1="18" y2="18" />
-              </svg>
+              <Menu className="size-4" />
             </Button>
             {/* 面包屑 */}
             <div className="flex-center hidden lg:block">
@@ -113,6 +98,17 @@ export default function DefaultLayout() {
                 <CommandMenu />
               </div>
 
+              {/* theme设置按钮 */}
+              <div className="mr-2">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="rounded-full mr-2"
+                >
+                  <Settings className="size-4" />
+                </Button>
+              </div>
+
               {/* 亮暗模式切换按钮 */}
               <div className="mr-2 mt-[2px]">
                 <Button
@@ -120,7 +116,7 @@ export default function DefaultLayout() {
                   size="icon"
                   className="is-dark theme-toggle cursor-pointer border-none bg-none rounded-full"
                 >
-                  <MoonIcon className="size-4" />
+                  <MoonStar className="size-4" />
                 </Button>
               </div>
 
@@ -147,32 +143,10 @@ export default function DefaultLayout() {
                 <Bell className="size-4" />
               </Button>
 
+              {/* 个人信息按钮 */}
               <AccountMenu />
             </div>
           </header>
-          {/* <section
-            className="border-border bg-background flex w-full border-b transition-all"
-            style={{
-              height: '38px',
-              marginLeft: '0px',
-              width: '100%',
-            }}
-          >
-            <div className="flex h-full flex-1">
-              <div className="pt-[3px] size-full flex-1"></div>
-            </div>
-            <div className="flex items-center justify-center h-full">
-              <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
-                <Bell className="size-4" />
-              </div>
-              <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
-                <Bell className="size-4" />
-              </div>
-              <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
-                <Bell className="size-4" />
-              </div>
-            </div>
-          </section> */}
         </div>
         <main
           className="bg-background-deep transition-[margin-top] duration-200"

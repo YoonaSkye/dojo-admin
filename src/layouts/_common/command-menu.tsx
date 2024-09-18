@@ -11,7 +11,7 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command';
-import { ArrowUpIcon, ArrowDownIcon, CornerDownLeftIcon } from 'lucide-react';
+import { ArrowUp, ArrowDown, CornerDownLeft, MdiKeyboardEsc } from '@/icons';
 import { useTranslation } from 'react-i18next';
 import { useFlattenedRoutes } from '@/router/hooks';
 import { useThemeToken } from '@/theme/hooks';
@@ -156,30 +156,15 @@ function CommandMenuFooter() {
     <div className="flex sm:flex-row sm:justify-end sm:gap-x-2 flex-row items-center justify-end border-t p-2">
       <div className="flex w-full justify-start text-xs text-muted-foreground">
         <div className="mr-2 flex items-center">
-          <CornerDownLeftIcon className="mr-1 size-3" />
+          <CornerDownLeft className="mr-1 size-3" />
           选择
         </div>
         <div className="mr-2 flex items-center">
-          <ArrowUpIcon className="mr-1 size-3" />
-          <ArrowDownIcon className="mr-1 size-3" /> 导航
+          <ArrowUp className="mr-1 size-3" />
+          <ArrowDown className="mr-1 size-3" /> 导航
         </div>
         <div className="flex items-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
-            aria-hidden="true"
-            role="img"
-            className="mr-1 size-3 iconify iconify--mdi"
-            width="1em"
-            height="1em"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="currentColor"
-              d="M1 7h6v2H3v2h4v2H3v2h4v2H1zm10 0h4v2h-4v2h2a2 2 0 0 1 2 2v2c0 1.11-.89 2-2 2H9v-2h4v-2h-2a2 2 0 0 1-2-2V9c0-1.1.9-2 2-2m8 0h2a2 2 0 0 1 2 2v1h-2V9h-2v6h2v-1h2v1c0 1.11-.89 2-2 2h-2a2 2 0 0 1-2-2V9c0-1.1.9-2 2-2"
-            ></path>
-          </svg>{' '}
-          关闭
+          <MdiKeyboardEsc /> 关闭
         </div>
       </div>
     </div>

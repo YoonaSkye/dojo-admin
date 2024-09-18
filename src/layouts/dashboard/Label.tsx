@@ -72,9 +72,9 @@ export default function Label({ children }: { children: React.ReactNode }) {
           <g
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
           >
             <path d="M3 3v18h18"></path>
             <path d="M7 12v5h12V8l-5 5l-4-4Z"></path>

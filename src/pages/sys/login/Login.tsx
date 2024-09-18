@@ -1,12 +1,10 @@
-import { Typography } from 'antd';
-import DojoImage from '@/assets/images/background/dojo.png';
-import LoginForm from './LoginForm';
 import { useUserToken } from '@/store/userStore';
+import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
+import LoginForm from './LoginForm';
 
 const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
-import { useTranslation } from 'react-i18next';
-import LocalPicker from '@/components/local-picker';
+
 import logo from '@/assets/images/logo.png';
 import Slogan from './Slogan';
 import './login.css';
@@ -58,48 +56,6 @@ export default function Login() {
               </span>
             </p>
           </div>
-          {/* <div className="relative mb-6">
-            <input
-              id="username"
-              className="border-input bg-input-background ring-offset-background placeholder:text-muted-foreground/60 focus-visible:ring-ring focus:border-primary flex h-10 w-full rounded-md border p-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-              type="text"
-              autoComplete="off"
-              required
-              placeholder="Vben"
-            />
-          </div>
-          <div className="relative">
-            <div className="relative mb-6">
-              <input
-                id="password"
-                className="border-input bg-input-background ring-offset-background placeholder:text-muted-foreground/60 focus-visible:ring-ring focus:border-primary flex h-10 w-full rounded-md border p-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-                type="text"
-                autoComplete="off"
-                required
-                placeholder="123456"
-              />
-            </div>
-            <div className="hover:text-foreground text-foreground/60 absolute inset-y-0 right-0 top-3 flex cursor-pointer pr-3 text-lg leading-5">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                className="lucide lucide-eye-off-icon size-4"
-              >
-                <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"></path>
-                <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"></path>
-                <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"></path>
-                <path d="m2 2 20 20"></path>
-              </svg>
-            </div>
-          </div>
-          <div className="mb-6 mt-4 flex justify-between"></div> */}
           <LoginForm />
         </div>
       </div>

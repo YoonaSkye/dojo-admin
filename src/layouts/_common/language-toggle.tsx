@@ -7,7 +7,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { Languages } from 'lucide-react';
+import { Languages } from '@/icons';
 import useLocale, { LANGUAGE_MAP } from '@/locales/useLocale';
 
 export default function LanguageToggle() {
@@ -23,7 +23,7 @@ export default function LanguageToggle() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="outline-none">
+      <DropdownMenuTrigger asChild className="outline-none">
         <Button
           variant="outline"
           size="icon"

@@ -1,10 +1,10 @@
 import { SignInReq } from '@/api/services/userService';
+import { Button as ShadButton } from '@/components/ui/button';
+import { MdiGithub, MdiGoogle, MdiQqchat, MdiWechat } from '@/icons';
 import { useSignIn } from '@/store/userStore';
-import { Checkbox, Col, Form, Input, Row, Button } from 'antd';
+import { Button, Checkbox, Col, Form, Input, Row } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button as ShadButton } from '@/components/ui/button';
-import { AiFillGithub, AiFillGoogleCircle, AiFillWechat } from 'react-icons/ai';
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
@@ -93,21 +93,28 @@ export default function LoginForm() {
               size="icon"
               className="rounded-full outline-none flex items-center gap-1"
             >
-              <AiFillWechat />
+              <MdiWechat />
             </ShadButton>
             <ShadButton
               variant="outline"
               size="icon"
               className="rounded-full outline-none flex items-center gap-1"
             >
-              <AiFillGithub />
+              <MdiQqchat />
             </ShadButton>
             <ShadButton
               variant="outline"
               size="icon"
               className="rounded-full outline-none flex items-center gap-1"
             >
-              <AiFillGoogleCircle />
+              <MdiGithub />
+            </ShadButton>
+            <ShadButton
+              variant="outline"
+              size="icon"
+              className="rounded-full outline-none flex items-center gap-1"
+            >
+              <MdiGoogle />
             </ShadButton>
           </div>
         </div>
