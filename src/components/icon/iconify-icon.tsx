@@ -7,7 +7,7 @@ interface Props extends IconProps {
 }
 export default function Iconify({
   icon,
-  size = '1em',
+  size,
   className = '',
   ...other
 }: Props) {
@@ -16,7 +16,7 @@ export default function Iconify({
       icon={icon}
       width={size}
       height={size}
-      className={`anticon m-auto inline-flex align-middle ${className}`}
+      className={className}
       {...other}
     />
   );
