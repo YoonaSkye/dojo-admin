@@ -1,4 +1,4 @@
-import AnalysisChartCard from '../analysis/AnalysisChartCard';
+import AnalysisChartCard from '../analysis/components/AnalysisChartCard';
 import type {
   WorkbenchProjectItem,
   WorkbenchQuickNavItem,

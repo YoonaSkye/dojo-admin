@@ -1,14 +1,14 @@
-// import { AnalysisOverviewItem } from '../typing';
-import type { TabOption } from '../typing';
-import AnalysisChartCard from './AnalysisChartCard';
-import AnalysisChartsTabs from './AnalysisChartsTabs';
-import AnalysisOverview from './AnalysisOverview';
-import AnalyticsTrends from './AnalyticsTrends';
-import AnalyticsVisits from './AnalyticsVisits';
+import type { AnalysisOverviewItem, TabOption } from '../typing';
+import AnalysisChartCard from './components/AnalysisChartCard';
+import AnalysisChartsTabs from './components/AnalysisChartsTabs';
+import AnalysisOverview from './components/AnalysisOverview';
+import AnalyticsTrends from './components/AnalyticsTrends';
+import AnalyticsVisits from './components/AnalyticsVisits';
 
 const overviewItems: AnalysisOverviewItem[] = [
   {
     // icon: SvgCardIcon,
+    icon: 'svg:card',
     title: '用户量',
     totalTitle: '总用户量',
     totalValue: 120_000,
@@ -16,6 +16,7 @@ const overviewItems: AnalysisOverviewItem[] = [
   },
   {
     // icon: SvgCakeIcon,
+    icon: 'svg:cake',
     title: '访问量',
     totalTitle: '总访问量',
     totalValue: 500_000,
@@ -23,6 +24,7 @@ const overviewItems: AnalysisOverviewItem[] = [
   },
   {
     // icon: SvgDownloadIcon,
+    icon: 'svg:download',
     title: '下载量',
     totalTitle: '总下载量',
     totalValue: 120_000,
@@ -30,6 +32,7 @@ const overviewItems: AnalysisOverviewItem[] = [
   },
   {
     // icon: SvgBellIcon,
+    icon: 'svg:bell',
     title: '使用量',
     totalTitle: '总使用量',
     totalValue: 50_000,

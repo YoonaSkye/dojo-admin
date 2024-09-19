@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { TabOption } from '../typing';
+import { TabOption } from '../../typing';
 
 interface Props {
   tabs: TabOption[];
