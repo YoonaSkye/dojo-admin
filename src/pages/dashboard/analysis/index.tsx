@@ -1,9 +1,12 @@
+import BaseChart from '@/echarts/BaseChart';
 import type { AnalysisOverviewItem, TabOption } from '../typing';
 import AnalysisChartCard from './components/AnalysisChartCard';
 import AnalysisChartsTabs from './components/AnalysisChartsTabs';
 import AnalysisOverview from './components/AnalysisOverview';
 import AnalyticsTrends from './components/AnalyticsTrends';
 import AnalyticsVisits from './components/AnalyticsVisits';
+
+import { dataOption, sourceOption, salesOption } from './config';
 
 const overviewItems: AnalysisOverviewItem[] = [
   {
@@ -53,28 +56,25 @@ const chartTabs: TabOption[] = [
 
 export default function Analysis() {
   return (
-    <div className="">
+    <div className="overflow-hidden">
       <AnalysisOverview items={overviewItems} />
-      <AnalysisChartsTabs tabs={chartTabs} className="mt-5">
-        <AnalyticsTrends />
-        <AnalyticsVisits />
-      </AnalysisChartsTabs>
+      <AnalysisChartsTabs tabs={chartTabs} className="mt-5" />
 
       <div className="mt-5 w-full md:flex">
         <AnalysisChartCard
           className="mt-5 md:mr-4 md:mt-0 md:w-1/3"
           title="访问数量"
         >
-          AnalyticsVisitsData
+          <BaseChart options={dataOption} />
         </AnalysisChartCard>
         <AnalysisChartCard
           className="mt-5 md:mr-4 md:mt-0 md:w-1/3"
           title="访问来源"
         >
-          AnalyticsVisitsSource
+          <BaseChart options={sourceOption} />
         </AnalysisChartCard>
         <AnalysisChartCard className="mt-5 md:mt-0 md:w-1/3" title="访问来源">
-          AnalyticsVisitsSales
+          <BaseChart options={salesOption} />
         </AnalysisChartCard>
       </div>
     </div>
