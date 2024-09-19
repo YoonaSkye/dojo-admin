@@ -1,18 +1,21 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TabOption } from '../../typing';
+import { cn } from '@/lib/utils';
 
 interface Props {
   tabs: TabOption[];
   children: React.ReactNode;
+  className?: string;
 }
 
 export default function AnalysisChartsTabs({
   tabs,
   children,
+  className,
   ...props
 }: Props) {
   return (
-    <div className="card-box w-full px-4 pb-5 pt-3">
+    <div className={cn('card-box w-full px-4 pb-5 pt-3', className)}>
       <Tabs defaultValue="trends" className="w-[400px]">
         <TabsList>
           {tabs.map((tab) => (

@@ -55,7 +55,7 @@ export default function Analysis() {
   return (
     <div className="">
       <AnalysisOverview items={overviewItems} />
-      <AnalysisChartsTabs tabs={chartTabs}>
+      <AnalysisChartsTabs tabs={chartTabs} className="mt-5">
         <AnalyticsTrends />
         <AnalyticsVisits />
       </AnalysisChartsTabs>
