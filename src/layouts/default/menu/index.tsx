@@ -96,6 +96,7 @@ export default function LayoutMenu(props: Props) {
                 darkItemHoverBg: '#2E3033',
                 darkItemSelectedColor: '#FAFAFA',
                 darkItemColor: '#F2F2F2CC',
+                collapsedWidth: 59,
               },
             },
           }}
@@ -114,7 +115,6 @@ export default function LayoutMenu(props: Props) {
           />
         </ConfigProvider>
       </ScrollArea>
-      <div style={{ height: '42px' }}></div>
     </>
   );
 }
