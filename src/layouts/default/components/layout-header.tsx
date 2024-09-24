@@ -13,6 +13,7 @@ import LanguageToggle from '@/layouts/_common/language-toggle';
 import { useCollapsed, useUserActions } from '@/store/userStore';
 import { CSSProperties } from 'react';
 import { NAV_COLLAPSED_WIDTH, NAV_WIDTH } from './config';
+import Preference from '@/layouts/_common/preference';
 
 export default function LayoutHeader() {
   const collapsed = useCollapsed();
@@ -40,7 +41,7 @@ export default function LayoutHeader() {
         }}
       >
         <Button
-          variant="outline"
+          variant="icon"
           size="icon"
           className="my-0 ml-2 mr-1 rounded-md"
           onClick={() => setCollapsed(!collapsed)}
@@ -70,15 +71,16 @@ export default function LayoutHeader() {
 
           {/* theme设置按钮 */}
           <div className="mr-2">
-            <Button variant="outline" size="icon" className="rounded-full mr-2">
+            {/* <Button variant="outline" size="icon" className="rounded-full mr-2">
               <Settings className="size-4" />
-            </Button>
+            </Button> */}
+            <Preference />
           </div>
 
           {/* 亮暗模式切换按钮 */}
           <div className="mr-2 mt-[2px]">
             <Button
-              variant="outline"
+              variant="icon"
               size="icon"
               className="is-dark theme-toggle cursor-pointer border-none bg-none rounded-full"
             >
@@ -92,12 +94,12 @@ export default function LayoutHeader() {
           </div>
 
           {/* 全屏按钮 */}
-          <Button variant="outline" size="icon" className="rounded-full mr-2">
+          <Button variant="icon" size="icon" className="rounded-full mr-2">
             <Maximize className="size-4" />
           </Button>
 
           {/* 消息通知 */}
-          <Button variant="outline" size="icon" className="rounded-full mr-2">
+          <Button variant="icon" size="icon" className="rounded-full mr-2">
             <Bell className="size-4" />
           </Button>
 

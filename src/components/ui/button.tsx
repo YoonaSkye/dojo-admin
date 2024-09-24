@@ -10,23 +10,40 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        // default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        // destructive:
+        //   'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+        // outline:
+        //   // 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
+        //   'hover:bg-accent hover:text-accent-foreground text-foreground/80',
+        // secondary:
+        //   'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        // ghost: 'hover:bg-accent hover:text-accent-foreground',
+        // link: 'text-primary underline-offset-4 hover:underline',
+        default:
+          'bg-primary text-primary-foreground shadow hover:bg-primary/90',
         destructive:
-          'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-        outline:
-          // 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
-          'hover:bg-accent hover:text-accent-foreground text-foreground/80',
-        secondary:
-          'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+          'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive-hover',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
+        heavy: 'hover:bg-heavy hover:text-heavy-foreground',
+        icon: 'hover:bg-accent hover:text-accent-foreground text-foreground/80',
         link: 'text-primary underline-offset-4 hover:underline',
+        outline:
+          'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
+        secondary:
+          'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
       },
       size: {
-        default: 'h-10 px-4 py-2',
-        sm: 'h-9 rounded-md px-3',
-        lg: 'h-11 rounded-md px-8',
+        // default: 'h-10 px-4 py-2',
+        // sm: 'h-9 rounded-md px-3',
+        // lg: 'h-11 rounded-md px-8',
         // icon: 'h-10 w-10',
-        icon: 'h-8 w-8 px-1 text-lg',
+        // icon: 'h-8 w-8 px-1 text-lg',
+        default: 'h-9 px-4 py-2',
+        icon: 'h-8 w-8 rounded-sm px-1 text-lg',
+        lg: 'h-10 rounded-md px-8',
+        sm: 'h-8 rounded-md px-3 text-xs',
+        xs: 'h-8 w-8 rounded-sm px-1 text-xs',
       },
     },
     defaultVariants: {

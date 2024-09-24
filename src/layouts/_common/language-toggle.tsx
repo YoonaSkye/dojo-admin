@@ -25,7 +25,7 @@ export default function LanguageToggle() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="outline-none">
         <Button
-          variant="outline"
+          variant="icon"
           size="icon"
           className="rounded-full outline-none flex items-center gap-1"
         >
