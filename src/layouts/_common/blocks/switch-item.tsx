@@ -6,11 +6,14 @@ interface Props {
   disabled?: boolean;
   children?: React.ReactNode;
   className?: string;
+  shortcut?: string;
+  title?: string;
 }
 export default function SwitchItem({
   disabled = false,
-  children,
   className,
+  shortcut,
+  title,
 }: Props) {
   const [checked, setChecked] = useState(false);
   const handleClick = () => {
@@ -25,7 +28,11 @@ export default function SwitchItem({
       )}
       onClick={() => handleClick()}
     >
-      <span className="flex items-center text-sm">{children}</span>
+      <span className="flex items-center text-sm">{title}</span>
+
+      <span className="ml-auto mr-2 text-xs opacity-60">
+        <kbd>{shortcut}</kbd>
+      </span>
       <Switch checked={checked} onCheckedChange={setChecked} />
     </div>
   );

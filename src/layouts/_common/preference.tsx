@@ -17,6 +17,8 @@ import SwitchItem from './blocks/switch-item';
 import Builtin from './blocks/theme/builtin';
 import Radius from './blocks/theme/radius';
 import Theme from './blocks/theme/theme';
+import Layout from './blocks/layout/layout';
+import Sidebar from './blocks/layout/sidebar';
 
 const tabs = [
   {
@@ -98,15 +100,31 @@ export default function Preference() {
                 <Radius />
               </Block>
               <Block title="其他">
-                <SwitchItem>色弱模式</SwitchItem>
-                <SwitchItem>灰色模式</SwitchItem>
+                <SwitchItem title="色弱模式" />
+                <SwitchItem title="灰色模式" />
               </Block>
             </TabsContent>
             <TabsContent value="layout" key="layout">
-              Make changes to your account here.
+              <Block title="布局">
+                <Layout />
+              </Block>
+              <Block title="侧边栏">
+                <Sidebar />
+              </Block>
+              <Block title="顶栏">
+                <SwitchItem title="显示顶栏" />
+              </Block>
+              <Block title="面包屑导航">
+                <SwitchItem title="开启面包屑导航" />
+              </Block>
             </TabsContent>
             <TabsContent value="shortcutKey" key="shortcutKey">
-              Make changes to your account here.
+              <Block title="全局">
+                <SwitchItem title="快捷键" />
+                <SwitchItem title="全局搜索" shortcut="⌘ K" />
+                <SwitchItem title="退出登录" shortcut="⌥ Q" />
+                <SwitchItem title="锁定屏幕" shortcut="⌥ L" />
+              </Block>
             </TabsContent>
             <TabsContent value="general" key="general">
               Make changes to your account here.
