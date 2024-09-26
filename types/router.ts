@@ -1,4 +1,4 @@
-import { RouteObject } from 'react-router-dom';
+import { Params, RouteObject } from 'react-router-dom';
 
 // 扩展meta元信息接口
 export interface RouteMeta {
@@ -42,6 +42,12 @@ export interface RouteMeta {
    * external link and iframe need
    */
   frameSrc?: string;
+  /**
+   * dynamic route params
+   *
+   * @example /user/:id
+   */
+  params?: Params<string>;
 }
 
 export type AppRouteObject = {

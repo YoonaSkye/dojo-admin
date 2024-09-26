@@ -1,4 +1,5 @@
 import MultiTabs from '../dashboard/multi-tabs';
+import MultiTabsProvider from '../dashboard/multi-tabs-provider';
 import LayoutHeader from './components/layout-header';
 import LayoutSidebar from './components/layout-sidebar';
 
@@ -16,7 +17,9 @@ export default function DefaultLayout() {
             marginTop: '50px',
           }}
         >
-          <MultiTabs />
+          <MultiTabsProvider>
+            <MultiTabs />
+          </MultiTabsProvider>
         </main>
       </div>
     </div>
