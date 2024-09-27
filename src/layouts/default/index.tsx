@@ -1,5 +1,5 @@
-import MultiTabs from '../dashboard/multi-tabs';
-import MultiTabsProvider from '../dashboard/multi-tabs-provider';
+import MultiTabs from './tabbar/multi-tabs';
+import MultiTabsProvider from './tabbar/multi-tabs-provider';
 import LayoutHeader from './components/layout-header';
 import LayoutSidebar from './components/layout-sidebar';
 
