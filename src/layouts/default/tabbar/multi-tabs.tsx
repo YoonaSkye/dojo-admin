@@ -6,29 +6,20 @@ import type { TabsProps } from 'antd';
 import { ConfigProvider, Tabs } from 'antd';
 import Color from 'color';
 import { ChevronDownIcon, Minimize2Icon, RotateCwIcon } from 'lucide-react';
-import { CSSProperties, useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import StickyBox from 'react-sticky-box';
+import TabContextMenu from './tab-context-menu';
 import Label from './Label';
 import { useMultiTabsContext } from './multi-tabs-provider';
-import TabContextMenu from '../../_common/tab-context-menu';
+import TabDropdownMenu from './tab-dropdown-menu';
 
 export default function MultiTabs() {
   const { t } = useTranslation();
   const { push } = useRouter();
   const themeToken = useThemeToken();
 
-  const {
-    tabs,
-    activeTabRoutePath,
-    setTabs,
-    closeTab,
-    refreshTab,
-    closeOthersTab,
-    closeAll,
-    closeLeft,
-    closeRight,
-  } = useMultiTabsContext();
+  const { tabs, activeTabRoutePath, closeTab } = useMultiTabsContext();
 
   /**
    * 渲染单个tab
@@ -105,9 +96,11 @@ export default function MultiTabs() {
           <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
             <RotateCwIcon className="size-4" />
           </div>
-          <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
-            <ChevronDownIcon className="size-4" />
-          </div>
+          <TabDropdownMenu>
+            <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
+              <ChevronDownIcon className="size-4" />
+            </div>
+          </TabDropdownMenu>
           <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
             <Minimize2Icon className="size-4" />
           </div>

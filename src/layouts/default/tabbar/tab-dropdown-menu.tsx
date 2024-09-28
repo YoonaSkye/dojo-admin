@@ -1,37 +1,35 @@
 import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuSeparator,
-  ContextMenuTrigger,
-} from '@/components/ui/context-menu';
-import { Fragment, PropsWithChildren, useMemo } from 'react';
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+
+import { KeepAliveTab } from '@/hooks/use-keep-alive';
 import {
   ArrowLeftToLine,
   ArrowRightLeft,
   ArrowRightToLine,
-  ExternalLink,
   FoldHorizontal,
-  Fullscreen,
-  Minimize2,
   RotateCw,
   X,
 } from '@/icons';
-import { useMultiTabsContext } from '../default/tabbar/multi-tabs-provider';
+import { Fragment, PropsWithChildren } from 'react';
 import { useLocation } from 'react-router-dom';
-import { KeepAliveTab } from '@/hooks/use-keep-alive';
+import { useMultiTabsContext } from './multi-tabs-provider';
 
 const contentIsMaximize = false;
 
 type Props = PropsWithChildren & {
-  tab: KeepAliveTab;
+  tab?: KeepAliveTab;
 };
 
-export default function TabContextMenu({ children, tab }: Props) {
+export default function TabDropdownMenu({ children, tab }: Props) {
   const {
     tabs,
     activeTabRoutePath,
-    setTabs,
     closeTab,
     refreshTab,
     closeOthersTab,
@@ -40,6 +38,7 @@ export default function TabContextMenu({ children, tab }: Props) {
     closeRight,
   } = useMultiTabsContext();
   const { pathname } = useLocation();
+  // const currentTab = tabs.find((item) => item.key === pathname)?.key;
 
   /**
    * 获取操作是否禁用
@@ -68,7 +67,7 @@ export default function TabContextMenu({ children, tab }: Props) {
     };
   }
 
-  const createContextMenus = (tabKey: string) => {
+  const createContextMenus = (tabKey: string = pathname) => {
     const {
       disabledCloseAll,
       disabledCloseCurrent,
@@ -89,43 +88,34 @@ export default function TabContextMenu({ children, tab }: Props) {
         key: 'close',
         text: '关闭',
       },
+
       // {
       //   handler: async () => {
-      //     await toggleTabPin(tab);
+      //     if (!contentIsMaximize.value) {
+      //       await router.push(tab.fullPath);
+      //     }
+      //     toggleMaximize();
       //   },
-      //   icon: affixTab ? PinOff : Pin,
-      //   key: 'affix',
-      //   text: affixTab
-      //     ? $t('preferences.tabbar.contextMenu.unpin')
-      //     : $t('preferences.tabbar.contextMenu.pin'),
+      //   icon: contentIsMaximize ? Minimize2 : Fullscreen,
+      //   key: contentIsMaximize ? 'restore-maximize' : 'maximize',
+      //   text: contentIsMaximize ? '还原' : '最大化',
       // },
       {
-        // handler: async () => {
-        //   if (!contentIsMaximize.value) {
-        //     await router.push(tab.fullPath);
-        //   }
-        //   toggleMaximize();
-        // },
-        icon: contentIsMaximize ? Minimize2 : Fullscreen,
-        key: contentIsMaximize ? 'restore-maximize' : 'maximize',
-        text: contentIsMaximize ? '还原' : '最大化',
-      },
-      {
         disabled: disabledRefresh,
-        // handler: refreshTab,
+        handler: () => refreshTab(tabKey),
         icon: RotateCw,
         key: 'reload',
         text: '重新加载',
       },
-      {
-        // handler: async () => {
-        //   await openTabInNewWindow(tab);
-        // },
-        icon: ExternalLink,
-        key: 'open-in-new-window',
-        separator: true,
-        text: '新窗口打开',
-      },
+      // {
+      //   handler: async () => {
+      //     await openTabInNewWindow(tab);
+      //   },
+      //   icon: ExternalLink,
+      //   key: 'open-in-new-window',
+      //   separator: true,
+      //   text: '新窗口打开',
+      // },
 
       {
         disabled: disabledCloseLeft,
@@ -148,16 +138,16 @@ export default function TabContextMenu({ children, tab }: Props) {
       },
       {
         disabled: disabledCloseOther,
-        // handler: async () => {
-        //   await closeOtherTabs(tab);
-        // },
+        handler: () => {
+          closeOthersTab(tabKey);
+        },
         icon: FoldHorizontal,
         key: 'close-other',
         text: '关闭其他标签页',
       },
       {
         disabled: disabledCloseAll,
-        // handler: closeAllTabs,
+        handler: () => closeAll(),
         icon: ArrowRightLeft,
         key: 'close-all',
         text: '关闭全部标签页',
@@ -166,7 +156,7 @@ export default function TabContextMenu({ children, tab }: Props) {
     return menus;
   };
 
-  const menus = createContextMenus(tab.key);
+  const menus = createContextMenus(tab?.key);
 
   const handleClick = (menu) => {
     if (menu.disabled) {
@@ -176,26 +166,32 @@ export default function TabContextMenu({ children, tab }: Props) {
   };
 
   return (
-    <ContextMenu>
-      <ContextMenuTrigger>{children}</ContextMenuTrigger>
-      <ContextMenuContent>
-        {menus.map((menu) => (
-          <Fragment key={menu.key}>
-            <ContextMenuItem
-              className="cursor-pointer"
-              disabled={menu.disabled}
-              onClick={(event) => {
-                event.stopPropagation();
-                handleClick(menu);
-              }}
-            >
-              <menu.icon className="mr-2 size-4 text-lg" />
-              {menu.text}
-            </ContextMenuItem>
-            {menu.separator && <ContextMenuSeparator />}
-          </Fragment>
-        ))}
-      </ContextMenuContent>
-    </ContextMenu>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild className="flex h-full items-center gap-1">
+        {children}
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start" className="">
+        <DropdownMenuGroup>
+          {menus.map((menu) => (
+            <Fragment key={menu.key}>
+              <DropdownMenuItem
+                className="data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground text-foreground/80 mb-1 cursor-pointer"
+                disabled={menu.disabled}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  handleClick(menu);
+                }}
+              >
+                <menu.icon className="mr-2 size-4 text-lg" />
+                {menu.text}
+              </DropdownMenuItem>
+              {menu.separator && (
+                <DropdownMenuSeparator className="bg-border" />
+              )}
+            </Fragment>
+          ))}
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

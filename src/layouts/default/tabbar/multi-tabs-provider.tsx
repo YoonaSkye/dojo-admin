@@ -53,8 +53,6 @@ export default function MultiTabsProvider({ children }: PropsWithChildren) {
   // current route meta
   const currentRouteMeta = useCurrentRouteMeta();
   const location = useLocation();
-  // console.log(location);
-  console.log(tabs);
 
   // active tab
   const activeTabRoutePath = useMemo(() => {
@@ -110,7 +108,10 @@ export default function MultiTabsProvider({ children }: PropsWithChildren) {
   /**
    * Close all tabs then navigate to the home page
    */
-  const closeAll = useCallback(() => {}, []);
+  const closeAll = useCallback(() => {
+    setTabs([]);
+    push(HOMEPAGE);
+  }, [push]);
 
   /**
    * Close all tabs in the left of specified tab
@@ -141,7 +142,20 @@ export default function MultiTabsProvider({ children }: PropsWithChildren) {
   /**
    * Refresh specified tab
    */
-  const refreshTab = useCallback(() => {}, []);
+  const refreshTab = useCallback(
+    (path = activeTabRoutePath) => {
+      setTabs((prev) => {
+        const index = prev.findIndex((item) => item.key === path);
+
+        if (index >= 0) {
+          prev[index].timeStamp = getTimeStamp();
+        }
+
+        return [...prev];
+      });
+    },
+    [activeTabRoutePath]
+  );
 
   useEffect(() => {
     setTabs((prev) => prev.filter((item) => !item.hideTab));
@@ -150,13 +164,9 @@ export default function MultiTabsProvider({ children }: PropsWithChildren) {
     let { key } = currentRouteMeta;
     const { outlet: children, params = {} } = currentRouteMeta;
 
-    console.log(key);
-
     const isExisted = tabs.find((item) => item.key === key);
 
     if (!isExisted) {
-      console.log('新增');
-
       setTabs((prev) => [
         ...prev,
         { ...currentRouteMeta, key, children, timeStamp: getTimeStamp() },
@@ -173,8 +183,19 @@ export default function MultiTabsProvider({ children }: PropsWithChildren) {
       closeOthersTab,
       closeLeft,
       closeRight,
+      closeAll,
+      refreshTab,
     }),
-    [activeTabRoutePath, tabs, closeTab, closeOthersTab, closeLeft, closeRight]
+    [
+      activeTabRoutePath,
+      tabs,
+      closeTab,
+      closeOthersTab,
+      closeLeft,
+      closeRight,
+      closeAll,
+      refreshTab,
+    ]
   );
 
   return (
