@@ -25,6 +25,7 @@ export function useCurrentRouteMeta() {
     if (!lastRoute) return;
 
     const { pathname, params } = lastRoute;
+
     const matchedRouteMeta = flattenedRoutes.find((item) => {
       const replacedKey = replaceDynamicParams(item.key, params);
       return replacedKey === pathname || `${replacedKey}/` === pathname;
