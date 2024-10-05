@@ -2,7 +2,7 @@ export default function Slogan() {
   return (
     <svg
       className="animate-float h-64 w-2/5"
-      enable-background="new 0 0 800 800"
+      enableBackground="new 0 0 800 800"
       version="1.1"
       viewBox="0 0 800 800"
       x="0px"
@@ -409,20 +409,20 @@ export default function Slogan() {
               </linearGradient>
               <path
                 id="path-4"
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="M355.7,393.8L18,198.7
 					c-4-2.3-4-8.1,0-10.4L337.8,3.6c7.4-4.3,16.5-4.3,24,0l340.1,196.5c4,2.3,4,8.1,0,10.4L384.4,393.8
 					C375.5,398.9,364.6,398.9,355.7,393.8z"
                 fill="url(#path-4_1_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
               />
             </g>
             <g filter="url(#filter-5)">
               <path
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="M355.7,393.8L18,198.7c-4-2.3-4-8.1,0-10.4L337.8,3.6c7.4-4.3,16.5-4.3,24,0
 					l340.1,196.5c4,2.3,4,8.1,0,10.4L384.4,393.8C375.5,398.9,364.6,398.9,355.7,393.8z"
-                fill-rule="evenodd"
+                fillRule="evenodd"
               />
             </g>
           </g>
@@ -432,7 +432,7 @@ export default function Slogan() {
 			L339.8,21.9c6.7-3.9,15-3.9,21.7,0l308.6,178.3c3.6,2.1,3.6,7.4,0,9.5L382.1,376C374.1,380.7,364.1,380.7,356.1,376z"
             fill="none"
             stroke="#FFFFFF"
-            stroke-width="0.9511"
+            strokeWidth="0.9511"
           />
         </g>
         <g id="Group" transform="translate(0.000000, 259.000000)">
@@ -487,20 +487,20 @@ export default function Slogan() {
               </linearGradient>
               <path
                 id="path-9"
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="M395.2,437.6L20,220.8
 					c-4.5-2.6-4.5-9,0-11.6L375.3,4c8.2-4.8,18.4-4.8,26.6,0l377.9,218.3c4.5,2.6,4.5,9,0,11.6L427.1,437.6
 					C417.2,443.3,405.1,443.3,395.2,437.6z"
                 fill="url(#path-9_1_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
               />
             </g>
             <g filter="url(#filter-10)">
               <path
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="M395.2,437.6L20,220.8c-4.5-2.6-4.5-9,0-11.6L375.3,4c8.2-4.8,18.4-4.8,26.6,0
 					l377.9,218.3c4.5,2.6,4.5,9,0,11.6L427.1,437.6C417.2,443.3,405.1,443.3,395.2,437.6z"
-                fill-rule="evenodd"
+                fillRule="evenodd"
               />
             </g>
           </g>
@@ -509,7 +509,7 @@ export default function Slogan() {
 			c7.5-4.3,16.7-4.3,24.2,0l342.9,198.1c4.1,2.3,4.1,8.2,0,10.5L424.6,417.8C415.6,423,404.6,423,395.6,417.8z"
             fill="none"
             stroke="#FFFFFF"
-            stroke-width="1.0568"
+            strokeWidth="1.0568"
           />
         </g>
         <g id="编组备份-4" transform="translate(386.000000, 561.000000)">
@@ -530,9 +530,9 @@ export default function Slogan() {
                 </linearGradient>
                 <polygon
                   id="path-13"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                   fill="url(#path-13_1_)"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   points="0.1,13.9 24.1,27.8 48.1,13.9
 						24.1,0.1 					"
                 />
@@ -561,17 +561,17 @@ export default function Slogan() {
                   />
                 </linearGradient>
                 <polygon
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                   fill="url(#SVGID_4_)"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   points="0.1,13.9 24.1,27.8 48.1,13.9 24.1,0.1
 						"
                 />
               </g>
               <g filter="url(#filter-14)">
                 <polygon
-                  clip-rule="evenodd"
-                  fill-rule="evenodd"
+                  clipRule="evenodd"
+                  fillRule="evenodd"
                   points="0.1,13.9 24.1,27.8 48.1,13.9 24.1,0.1 					"
                 />
               </g>
@@ -591,9 +591,9 @@ export default function Slogan() {
             </linearGradient>
             <polygon
               id="Stroke-3"
-              clip-rule="evenodd"
+              clipRule="evenodd"
               fill="url(#Stroke-3_1_)"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               points="24.1,55.5 24.1,27.8 0.1,13.9
 				0.1,41.6 			"
             />
@@ -612,9 +612,9 @@ export default function Slogan() {
             </linearGradient>
             <polygon
               id="Stroke-5"
-              clip-rule="evenodd"
+              clipRule="evenodd"
               fill="url(#Stroke-5_1_)"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               points="24.1,55.5 24.1,27.8
 				48.1,13.9 48.1,41.6 			"
             />
@@ -635,10 +635,10 @@ export default function Slogan() {
 
           <polygon
             id="矩形"
-            clip-rule="evenodd"
-            enable-background="new    "
+            clipRule="evenodd"
+            enableBackground="new    "
             fill="url(#矩形_1_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             opacity="0.1977"
             points="
 			0,0 48.2,0 48.2,83.7 24.1,97.3 0,83.7 		"
@@ -661,20 +661,20 @@ export default function Slogan() {
               </linearGradient>
               <path
                 id="path-19"
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="M63.4,312.7l-62-35.9
 					c-1.9-1.1-1.9-3.8,0-4.9l151.1-87.4c3.5-2,7.8-2,11.3,0l63.1,36.6c1.9,1.1,1.9,3.8,0,4.9L77,312.7
 					C72.8,315.2,67.6,315.2,63.4,312.7z"
                 fill="url(#path-19_1_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
               />
             </g>
             <g filter="url(#filter-20)">
               <path
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="M63.4,312.7l-62-35.9c-1.9-1.1-1.9-3.8,0-4.9l151.1-87.4c3.5-2,7.8-2,11.3,0
 					l63.1,36.6c1.9,1.1,1.9,3.8,0,4.9L77,312.7C72.8,315.2,67.6,315.2,63.4,312.7z"
-                fill-rule="evenodd"
+                fillRule="evenodd"
               />
             </g>
           </g>
@@ -696,9 +696,9 @@ export default function Slogan() {
                   </linearGradient>
                   <polygon
                     id="path-23"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                     fill="url(#path-23_1_)"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     points="0.1,13.8 23.9,27.6
 							47.7,13.8 23.9,0.1 						"
                   />
@@ -727,17 +727,17 @@ export default function Slogan() {
                     />
                   </linearGradient>
                   <polygon
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                     fill="url(#SVGID_5_)"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     points="0.1,13.8 23.9,27.6 47.7,13.8 23.9,0.1
 													"
                   />
                 </g>
                 <g filter="url(#filter-24)">
                   <polygon
-                    clip-rule="evenodd"
-                    fill-rule="evenodd"
+                    clipRule="evenodd"
+                    fillRule="evenodd"
                     points="0.1,13.8 23.9,27.6 47.7,13.8 23.9,0.1 						"
                   />
                 </g>
@@ -756,9 +756,9 @@ export default function Slogan() {
                 <stop offset="1" style={{ stopColor: '#060071' }} />
               </linearGradient>
               <polygon
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 fill="url(#SVGID_6_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 points="23.9,182.3 23.9,27.6 0.1,13.8 0.1,168.5
 					"
               />
@@ -776,9 +776,9 @@ export default function Slogan() {
                 <stop offset="1" style={{ stopColor: '#060071' }} />
               </linearGradient>
               <polygon
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 fill="url(#SVGID_7_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 points="23.9,182.3 23.9,27.6 47.7,13.8 47.7,168.5
 									"
               />
@@ -800,9 +800,9 @@ export default function Slogan() {
                   </linearGradient>
                   <polygon
                     id="path-28"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                     fill="url(#path-28_1_)"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     points="0.1,13.8 23.9,27.6
 							47.7,13.8 23.9,0.1 						"
                   />
@@ -831,17 +831,17 @@ export default function Slogan() {
                     />
                   </linearGradient>
                   <polygon
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                     fill="url(#SVGID_8_)"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     points="0.1,13.8 23.9,27.6 47.7,13.8 23.9,0.1
 													"
                   />
                 </g>
                 <g filter="url(#filter-29)">
                   <polygon
-                    clip-rule="evenodd"
-                    fill-rule="evenodd"
+                    clipRule="evenodd"
+                    fillRule="evenodd"
                     points="0.1,13.8 23.9,27.6 47.7,13.8 23.9,0.1 						"
                   />
                 </g>
@@ -860,9 +860,9 @@ export default function Slogan() {
                 <stop offset="1" style={{ stopColor: '#f77' }} />
               </linearGradient>
               <polygon
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 fill="url(#SVGID_9_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 points="23.9,128.2 23.9,27.6 0.1,13.8 0.1,114.5
 					"
               />
@@ -880,9 +880,9 @@ export default function Slogan() {
                 <stop offset="1" style={{ stopColor: '#d73838' }} />
               </linearGradient>
               <polygon
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 fill="url(#SVGID_10_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 points="23.9,128.2 23.9,27.6 47.7,13.8 47.7,114.5
 									"
               />
@@ -904,9 +904,9 @@ export default function Slogan() {
                   </linearGradient>
                   <polygon
                     id="path-33"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                     fill="url(#path-33_1_)"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     points="0.1,196.8 23.9,210.6
 							47.7,196.8 23.9,183.1 						"
                   />
@@ -935,17 +935,17 @@ export default function Slogan() {
                     />
                   </linearGradient>
                   <polygon
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                     fill="url(#SVGID_11_)"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     points="0.1,196.8 23.9,210.6 47.7,196.8
 							23.9,183.1 						"
                   />
                 </g>
                 <g filter="url(#filter-34)">
                   <polygon
-                    clip-rule="evenodd"
-                    fill-rule="evenodd"
+                    clipRule="evenodd"
+                    fillRule="evenodd"
                     points="0.1,196.8 23.9,210.6 47.7,196.8 23.9,183.1 						"
                   />
                 </g>
@@ -967,10 +967,10 @@ export default function Slogan() {
                 />
               </linearGradient>
               <polygon
-                clip-rule="evenodd"
-                enable-background="new    "
+                clipRule="evenodd"
+                enableBackground="new    "
                 fill="url(#SVGID_12_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 opacity="0.3"
                 points="
 					0,130 48,130 48,196.7 24,210.6 0,196.7 				"
@@ -994,10 +994,10 @@ export default function Slogan() {
 
               <polygon
                 id="矩形备份"
-                clip-rule="evenodd"
-                enable-background="new    "
+                clipRule="evenodd"
+                enableBackground="new    "
                 fill="url(#矩形备份_1_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 opacity="0.3"
                 points="
 					46,81.7 94,81.7 94,148.5 70,162.3 46,148.5 				"
@@ -1021,10 +1021,10 @@ export default function Slogan() {
 
               <polygon
                 id="矩形备份-4"
-                clip-rule="evenodd"
-                enable-background="new    "
+                clipRule="evenodd"
+                enableBackground="new    "
                 fill="url(#矩形备份-4_1_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 opacity="0.3"
                 points="
 					89,0.7 137,0.7 137,67.5 113,81.3 89,67.5 				"
@@ -1043,9 +1043,9 @@ export default function Slogan() {
                 <stop offset="1" style={{ stopColor: '#004a8b' }} />
               </linearGradient>
               <polygon
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 fill="url(#SVGID_13_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 points="23.9,290 23.9,210.6 0.1,196.8 0.1,276.3
 					"
               />
@@ -1063,9 +1063,9 @@ export default function Slogan() {
                 <stop offset="1" style={{ stopColor: '#00048b' }} />
               </linearGradient>
               <polygon
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 fill="url(#SVGID_14_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 points="23.9,290 23.9,210.6 47.7,196.8 47.7,276.3
 									"
               />
@@ -1091,11 +1091,11 @@ export default function Slogan() {
                 <stop offset="1" style={{ stopColor: '#060071' }} />
               </linearGradient>
               <path
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="M161.7,23.6c82.6-8.7,153.2,19.5,157.7,62.9
 					c4.6,43.4-58.7,85.6-141.2,94.3C95.7,189.5,25,161.3,20.5,117.9S79.1,32.3,161.7,23.6z"
                 fill="url(#SVGID_15_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
               />
             </g>
             <g transform="translate(0.000000, 32.309947)">
@@ -1113,12 +1113,12 @@ export default function Slogan() {
                   <stop offset="1" style={{ stopColor: '#0c2ea7' }} />
                 </linearGradient>
                 <path
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                   d="M36.9,21.3c49.2-28.4,129.8-28.4,179,0
 						c9.7,5.6,17.5,12.2,23.4,19.4l13.5,0v39.3l-0.1,0c-1.3,19.3-13.6,38.3-36.8,51.7c-49.2,28.4-129.8,28.4-179,0
 						C13.7,118.4,1.4,99.4,0.1,80.1l-0.1,0V40.7l13.5,0C19.4,33.5,27.2,26.9,36.9,21.3z"
                   fill="url(#SVGID_16_)"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 />
               </g>
               <defs>
@@ -1147,20 +1147,20 @@ export default function Slogan() {
                 <g filter="url(#Adobe_OpacityMaskFilter)">
                   <path
                     id="path-41_1_"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                     d="M36.9,21.3c49.2-28.4,129.8-28.4,179,0
 							c9.7,5.6,17.5,12.2,23.4,19.4l13.5,0v39.3l-0.1,0c-1.3,19.3-13.6,38.3-36.8,51.7c-49.2,28.4-129.8,28.4-179,0
 							C13.7,118.4,1.4,99.4,0.1,80.1l-0.1,0V40.7l13.5,0C19.4,33.5,27.2,26.9,36.9,21.3z"
                     fill="#FFFFFF"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                   />
                 </g>
               </mask>
               <g filter="url(#filter-43)" mask="url(#mask-42_1_)">
                 <rect
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                   fill="#FFFFFF"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   height="86.4"
                   width="22.5"
                   x="18.3"
@@ -1184,19 +1184,19 @@ export default function Slogan() {
                 </linearGradient>
                 <path
                   id="path-45"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                   d="M36.9,21.3c-49.2,28.4-49.2,75,0,103.4
 						c49.2,28.4,129.8,28.4,179,0c49.2-28.4,49.2-75,0-103.4C166.7-7.1,86.2-7.1,36.9,21.3z"
                   fill="url(#path-45_1_)"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 />
               </g>
               <g filter="url(#filter-46)">
                 <path
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                   d="M36.9,21.3c-49.2,28.4-49.2,75,0,103.4c49.2,28.4,129.8,28.4,179,0
 						c49.2-28.4,49.2-75,0-103.4C166.7-7.1,86.2-7.1,36.9,21.3z"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 />
               </g>
             </g>
@@ -1219,12 +1219,12 @@ export default function Slogan() {
                   <stop offset="1" style={{ stopColor: '#adcbff' }} />
                 </linearGradient>
                 <path
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                   d="M29.5,17.1c39.4-22.8,103.8-22.8,143.2,0
 						c7.8,4.5,14,9.8,18.7,15.5l10.8,0v31.5l-0.1,0c-1.1,15.5-10.9,30.6-29.4,41.4c-39.4,22.8-103.8,22.8-143.2,0
 						C11,94.7,1.2,79.5,0.1,64.1l-0.1,0V32.6l10.8,0C15.5,26.8,21.8,21.6,29.5,17.1z"
                   fill="url(#SVGID_17_)"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 />
               </g>
               <defs>
@@ -1253,20 +1253,20 @@ export default function Slogan() {
                 <g filter="url(#Adobe_OpacityMaskFilter_1_)">
                   <path
                     id="path-48_1_"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                     d="M29.5,17.1c39.4-22.8,103.8-22.8,143.2,0
 							c7.8,4.5,14,9.8,18.7,15.5l10.8,0v31.5l-0.1,0c-1.1,15.5-10.9,30.6-29.4,41.4c-39.4,22.8-103.8,22.8-143.2,0
 							C11,94.7,1.2,79.5,0.1,64.1l-0.1,0V32.6l10.8,0C15.5,26.8,21.8,21.6,29.5,17.1z"
                     fill="#FFFFFF"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                   />
                 </g>
               </mask>
               <g filter="url(#filter-50)" mask="url(#mask-49_1_)">
                 <rect
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                   fill="#FFFFFF"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   height="69.1"
                   width="18"
                   x="14.6"
@@ -1290,19 +1290,19 @@ export default function Slogan() {
                 </linearGradient>
                 <path
                   id="path-52"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                   d="M30.5,315.1c-39.4,22.8-39.4,60,0,82.7
 						c39.4,22.8,103.8,22.8,143.2,0c39.4-22.8,39.4-60,0-82.7C134.4,292.3,69.9,292.3,30.5,315.1z"
                   fill="url(#path-52_1_)"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 />
               </g>
               <g filter="url(#filter-53)">
                 <path
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                   d="M30.5,315.1c-39.4,22.8-39.4,60,0,82.7c39.4,22.8,103.8,22.8,143.2,0
 						c39.4-22.8,39.4-60,0-82.7C134.4,292.3,69.9,292.3,30.5,315.1z"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 />
               </g>
             </g>
@@ -1323,12 +1323,12 @@ export default function Slogan() {
               />
             </linearGradient>
             <path
-              clip-rule="evenodd"
+              clipRule="evenodd"
               d="M202.7,0
 				l0,350.2c3.1,17-6.5,34.7-29,47.6c-39.4,22.8-103.8,22.8-143.2,0C12,387.1,2.2,373.1,1.1,359l-0.4,0V0H202.7z"
-              enable-background="new    "
+              enableBackground="new    "
               fill="url(#SVGID_18_)"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               opacity="0.3"
             />
           </g>
@@ -1352,11 +1352,11 @@ export default function Slogan() {
                 <stop offset="1" style={{ stopColor: '#060071' }} />
               </linearGradient>
               <ellipse
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 cx="41.9"
                 cy="39.8"
                 fill="url(#SVGID_19_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 rx="26.1"
                 ry="10.8"
               />
@@ -1375,11 +1375,11 @@ export default function Slogan() {
               <stop offset="1" style={{ stopColor: '#0a00c2' }} />
             </radialGradient>
             <circle
-              clip-rule="evenodd"
+              clipRule="evenodd"
               cx="24.5"
               cy="24.5"
               fill="url(#SVGID_20_)"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               r="24.5"
             />
           </g>
@@ -1401,11 +1401,11 @@ export default function Slogan() {
                 <stop offset="1" style={{ stopColor: '#060071' }} />
               </linearGradient>
               <ellipse
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 cx="69.8"
                 cy="66.4"
                 fill="url(#SVGID_21_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 rx="43.6"
                 ry="18"
               />
@@ -1424,11 +1424,11 @@ export default function Slogan() {
               <stop offset="1" style={{ stopColor: '#0a00c2' }} />
             </radialGradient>
             <circle
-              clip-rule="evenodd"
+              clipRule="evenodd"
               cx="40.8"
               cy="40.8"
               fill="url(#SVGID_22_)"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               r="40.8"
             />
           </g>
@@ -1519,7 +1519,7 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#fff', stopOpacity: '0' }} />
           </linearGradient>
           <polygon
-            enable-background="new    "
+            enableBackground="new    "
             fill="url(#SVGID_25_)"
             opacity="0.4"
             points="50,16.6 28.7,86.3 51,73.4 72.6,3.2 		"
@@ -1560,7 +1560,7 @@ export default function Slogan() {
             points="21.6,81.2 15,85 15,63
 			21.6,59.2 		"
             stroke="url(#XMLID_23_)"
-            stroke-width="0.5"
+            strokeWidth="0.5"
           />
 
           <linearGradient
@@ -1598,7 +1598,7 @@ export default function Slogan() {
             points="33.4,74.4 26.8,78.2
 			26.8,49.3 33.4,45.4 		"
             stroke="url(#XMLID_25_)"
-            stroke-width="0.5"
+            strokeWidth="0.5"
           />
 
           <linearGradient
@@ -1636,17 +1636,17 @@ export default function Slogan() {
             points="45.6,67.3 39,71.1 39,35.3
 			45.6,31.5 		"
             stroke="url(#XMLID_27_)"
-            stroke-width="0.5"
+            strokeWidth="0.5"
           />
         </g>
         <g id="人备份" transform="translate(364.000000, 134.000000)">
           <path
             id="Path"
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M78,41.6c0,0,6.5-5.1,7.6-5.4c7.2-2.4,8-1,9.4,0.7
 			c1.4,1.6-4,4.2-5.4,5.7c-0.7,0.8,4.5-1,3.9,1c-0.5,1.5-4.9,2.2-5.6,2.9s-5.3,3.8-5.3,3.8L78,41.6z"
             fill="#F7C19C"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
 
           <linearGradient
@@ -1662,15 +1662,15 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#306ef3' }} />
           </linearGradient>
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M53,81.7c5.3-2,34.6-33.6,34.6-33.6
 			c-3.3-7.5-9.4-7.6-9.4-7.6L50.5,61.6c0,0-24.3-19.7-28.7-21.7s12.7,33,12.7,33S47.8,83.7,53,81.7z"
             fill="url(#SVGID_26_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
           <g
             id="Oval"
-            enable-background="new    "
+            enableBackground="new    "
             filter="url(#filter-71)"
             opacity="0.5267"
           >
@@ -1690,11 +1690,11 @@ export default function Slogan() {
               <stop offset="1" style={{ stopColor: '#060071' }} />
             </linearGradient>
             <ellipse
-              clip-rule="evenodd"
+              clipRule="evenodd"
               cx="77.2"
               cy="256.5"
               fill="url(#SVGID_27_)"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               rx="62.8"
               ry="29.7"
             />
@@ -1713,26 +1713,26 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#122142' }} />
           </linearGradient>
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M6.3,242.5c-1.9,1.4-7.6,6.1-5.2,12.6
 			c2.4,6.5,8.7,4.1,12.8,2.9c4.1-1.2,9.3-4.2,15.3-5.1c6-0.9,12.9-5.5,5.8-8.6C30.3,242.2,6.3,242.5,6.3,242.5z"
             fill="url(#SVGID_28_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M51.7,252.1l-2.2,9.5c0,0-5.1,0.3-8.5-1.4
 			c-1.1-0.5-2-1.3-2.5-2.3l2.8-13.2l10.3-65.3l-9.3-33.8L16.9,246.6c0,0-3.1,1.6-6.5,0.4c-0.7-0.3-3.6-2-4.1-2.9l29.2-106.8l20,4.8
 			l8.5,45L51.7,252.1z"
             fill="#EFAD81"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M34.8,39.4l1.4-8.4c0,0-2-21.1,3.8-23.2s18.3-0.3,18.4,10
 			c0.1,10.4-0.1,19.3-4.6,19.1c-4.5-0.2-5.3-1-5.3-1l0.1,8.1L34.8,39.4z"
             fill="#F7C19C"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
 
           <linearGradient
@@ -1766,19 +1766,19 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#122142' }} />
           </linearGradient>
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M50.9,258.4c0,0-2.9,1.7-6.7,0.7c-3.8-1-4.4-3-5.6-3.1
 			c-1.2-0.1-5,6.2-5,11.4c0,3.4,4.2,6.7,13.4,5.6c10.7-1.3,9.7,1,19-1c9.3-1.9,6.1-7.6,0.7-8.2c-5.4-0.6-10.7-1.5-12.7-3
 			C52.1,259.4,50.9,258.4,50.9,258.4z"
             fill="url(#SVGID_30_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M129.6,67.3c-0.6,0.2-1.7,0.5-2.9,0.8c-0.6-0.4-1.4-2.4-2-2.7
 			c-1.2-0.5-3.1,3.8-3.9,4.9l-4.9,2.6l-0.9,9.2c2.5,0.1,5-1.1,7.5-1.4c1.4-0.3,13.7-6.6,15.5-10.8C139,67.4,133.6,65.7,129.6,67.3z"
             fill="#F7C19C"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
 
           <linearGradient
@@ -1813,21 +1813,21 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#3068e8' }} />
           </linearGradient>
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M53,18.9c0,0,10.3,1.5,10-5.4c-0.2-6.9-4.7-3.6-5.9-9.4
 			c-1.4-7-11-2.3-22.3,0c-14.1,2.8,4.7,43.2,4.6,26.7s1.7-4.4,7.1-5.3c0.8-0.6-1.1-2.6,0-3.9C48.3,19.9,53,18.9,53,18.9z"
             fill="url(#SVGID_32_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
         </g>
         <g id="Stroke-1备份-3" opacity="0.2645">
           <g filter="url(#filter-79)">
             <path
               id="path-78_1_"
-              clip-rule="evenodd"
+              clipRule="evenodd"
               d="M322.9,141.3c-49.2,28.4-49.2,75,0,103.4
 				c49.2,28.4,129.8,28.4,179,0c49.2-28.4,49.2-75,0-103.4C452.7,112.9,372.2,112.9,322.9,141.3z"
-              fill-rule="evenodd"
+              fillRule="evenodd"
             />
           </g>
           <g>
@@ -1871,7 +1871,7 @@ export default function Slogan() {
           id="Stroke-1备份-4"
           d="
 		M333.1,116c-43.6,25.3-43.6,66.7,0,92c43.6,25.3,115,25.3,158.6,0c43.6-25.3,43.6-66.7,0-92C448.1,90.7,376.8,90.7,333.1,116z"
-          enable-background="new    "
+          enableBackground="new    "
           fill="none"
           opacity="0.2645"
           stroke="url(#Stroke-1备份-4_1_)"
@@ -1894,7 +1894,7 @@ export default function Slogan() {
           id="Stroke-1备份-5"
           d="
 		M333.1,177c-43.6,25.3-43.6,66.7,0,92c43.6,25.3,115,25.3,158.6,0c43.6-25.3,43.6-66.7,0-92C448.1,151.7,376.8,151.7,333.1,177z"
-          enable-background="new    "
+          enableBackground="new    "
           fill="none"
           opacity="7.956659e-02"
           stroke="url(#Stroke-1备份-5_1_)"
@@ -1913,13 +1913,13 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#00209e' }} />
           </linearGradient>
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M84.6,54
 			v71.1c0,3.8-2.9,5.8-6.4,4.6c-14-5-27.2-11.1-39.4-18.1C25.4,103.8,14,95.3,4.7,86.3C2.1,83.6,0,78.4,0,74.6V3.5
 			c0-3.8,2.1-4.6,4.7-1.9c9.3,9,20.6,17.6,34.1,25.3C51,33.9,64.2,39.9,78.2,45C81.8,46.2,84.6,50.2,84.6,54z"
-            enable-background="new    "
+            enableBackground="new    "
             fill="url(#SVGID_34_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             opacity="0.5"
           />
 
@@ -1939,7 +1939,7 @@ export default function Slogan() {
             d="M33.5,44.1c11.8,6.8,21.4,23.4,21.4,37
 			c0,13.6-9.7,19.1-21.5,12.3C21.6,86.6,12,70,12,56.4C12.1,42.8,21.7,37.3,33.5,44.1z M33.4,85.5c8,4.6,14.6,0.9,14.6-8.3
 			c0-9.2-6.5-20.5-14.5-25.1c-8-4.6-14.6-0.9-14.6,8.3C18.9,69.6,25.4,80.9,33.4,85.5L33.4,85.5z"
-            enable-background="new    "
+            enableBackground="new    "
             fill="url(#SVGID_35_)"
             opacity="0.4"
           />
@@ -1957,11 +1957,11 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#2afadf' }} />
           </linearGradient>
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M33.5,44.1c11.8,6.8,21.4,23.4,21.4,37l-6.9-4
 			c0-9.2-6.5-20.5-14.5-25.1L33.5,44.1z"
             fill="url(#SVGID_36_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
         </g>
 
@@ -1982,13 +1982,13 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#00209e' }} />
           </linearGradient>
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M84.6,54
 			v71.1c0,3.8-2.9,5.8-6.4,4.6c-14-5-27.2-11.1-39.4-18.1C25.4,103.8,14,95.3,4.7,86.3C2.1,83.6,0,78.4,0,74.6V3.5
 			c0-3.8,2.1-4.6,4.7-1.9c9.3,9,20.6,17.6,34.1,25.3C51,33.9,64.2,39.9,78.2,45C81.8,46.2,84.6,50.2,84.6,54z"
-            enable-background="new    "
+            enableBackground="new    "
             fill="url(#SVGID_37_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             opacity="0.5"
           />
 
@@ -2008,7 +2008,7 @@ export default function Slogan() {
             d="M33.5,44.1c11.8,6.8,21.4,23.4,21.4,37
 			c0,13.6-9.7,19.1-21.5,12.3C21.6,86.6,12,70,12,56.4C12.1,42.8,21.7,37.3,33.5,44.1z M33.4,85.5c8,4.6,14.6,0.9,14.6-8.3
 			c0-9.2-6.5-20.5-14.5-25.1c-8-4.6-14.6-0.9-14.6,8.3C18.9,69.6,25.4,80.9,33.4,85.5L33.4,85.5z"
-            enable-background="new    "
+            enableBackground="new    "
             fill="url(#SVGID_38_)"
             opacity="0.4"
           />
@@ -2026,11 +2026,11 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#2afa91' }} />
           </linearGradient>
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M33.5,44.1c11.8,6.8,21.4,23.4,21.4,37l-6.9-4
 			c0-9.2-6.5-20.5-14.5-25.1L33.5,44.1z"
             fill="url(#SVGID_39_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
         </g>
         <g id="编组" transform="translate(457.000000, 235.000000)">
@@ -2047,13 +2047,13 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#00209e' }} />
           </linearGradient>
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M36.3,166.1
 			c-9.3,4.2-19.3,7.7-29.7,10.5c-3.6,1-6.6-1.4-6.6-5.1v-44.7c0-3.8,3-7.5,6.6-8.4C17,115.5,27,112,36.3,107.8
 			c4.8-2.2,9.5-4.6,13.9-7.2c28.4-16.5,43.1-38,44-59.6v54.4c0.8,23-13.8,46-44,63.6C45.8,161.5,41.1,163.9,36.3,166.1z"
-            enable-background="new    "
+            enableBackground="new    "
             fill="url(#SVGID_40_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             opacity="0.5"
           />
 
@@ -2070,12 +2070,12 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#00209e' }} />
           </linearGradient>
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M79.4,59.9
 			c-2.4-2.9-4.6-8.1-4.6-11.8V3.5c0-3.8,2.2-4.6,4.6-1.8c17.4,20.9,19.5,45,6.1,66.6C83.7,65.5,81.7,62.7,79.4,59.9z"
-            enable-background="new    "
+            enableBackground="new    "
             fill="url(#SVGID_41_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             opacity="0.5"
           />
 
@@ -2092,9 +2092,9 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#2afadf' }} />
           </linearGradient>
           <polygon
-            clip-rule="evenodd"
+            clipRule="evenodd"
             fill="url(#SVGID_42_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             points="57.1,146.8 57,135.5 51.4,138.7 51.4,150.9
 			"
           />
@@ -2113,9 +2113,9 @@ export default function Slogan() {
           </linearGradient>
           <polygon
             id="Path备份"
-            clip-rule="evenodd"
+            clipRule="evenodd"
             fill="url(#Path备份_1_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             points="77.7,133 77.7,121.7
 			72,124.9 72,137 		"
           />
@@ -2133,11 +2133,11 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#2afadf' }} />
           </linearGradient>
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M23.2,165.4c-1.9,0.7-3.8,1.4-5.7,2.1l-0.1-42.8
 			c1.9-0.6,3.8-1.3,5.7-1.9L23.2,165.4z"
             fill="url(#SVGID_43_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
 
           <linearGradient
@@ -2153,11 +2153,11 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#2afadf' }} />
           </linearGradient>
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M34.5,160.5c-1,0.5-2,1-3.1,1.4
 			c-0.8,0.4-1.7,0.8-2.6,1.1L28.7,144c0,0,0.1,0,0.1,0c0.9-0.4,1.7-0.8,2.6-1.1c1-0.5,2-0.9,3-1.4L34.5,160.5z"
             fill="url(#SVGID_44_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
 
           <linearGradient
@@ -2173,11 +2173,11 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#2afadf' }} />
           </linearGradient>
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M46.1,154.2c-0.6,0.4-1.2,0.7-1.9,1.1
 			c-1.2,0.7-2.5,1.4-3.8,2.1l-0.1-39.3l5.7-3.3L46.1,154.2z"
             fill="url(#SVGID_45_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
 
           <linearGradient
@@ -2194,11 +2194,11 @@ export default function Slogan() {
           </linearGradient>
           <path
             id="Path备份-2"
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M66.8,140.4
 			c-0.6,0.4-1.2,0.7-1.9,1.1c-1.2,0.7-2.5,1.4-3.8,2.1L61,118.7l5.7-3.3L66.8,140.4z"
             fill="url(#Path备份-2_1_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
         </g>
 
@@ -2219,13 +2219,13 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#00209e' }} />
           </linearGradient>
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M36.3,166.1
 			c-9.3,4.2-19.3,7.7-29.7,10.5c-3.6,1-6.6-1.4-6.6-5.1v-44.7c0-3.8,3-7.5,6.6-8.4C17,115.5,27,112,36.3,107.8
 			c4.8-2.2,9.5-4.6,13.9-7.2c28.4-16.5,43.1-38,44-59.6v54.4c0.8,23-13.8,46-44,63.6C45.8,161.5,41.1,163.9,36.3,166.1z"
-            enable-background="new    "
+            enableBackground="new    "
             fill="url(#SVGID_46_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             opacity="0.5"
           />
 
@@ -2242,12 +2242,12 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#00209e' }} />
           </linearGradient>
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M79.4,59.9
 			c-2.4-2.9-4.6-8.1-4.6-11.8V3.5c0-3.8,2.2-4.6,4.6-1.8c17.4,20.9,19.5,45,6.1,66.6C83.7,65.5,81.7,62.7,79.4,59.9z"
-            enable-background="new    "
+            enableBackground="new    "
             fill="url(#SVGID_47_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             opacity="0.5"
           />
 
@@ -2268,12 +2268,12 @@ export default function Slogan() {
             id="路径"
             d="
 			M84.5,110.9c-11.6-15.5-17.4-14.7-17.4,2.4c0,25.7-11.4,29.9-19.6,17.1c-8.2-12.9-23.3-14.6-28,13.6"
-            enable-background="new    "
+            enableBackground="new    "
             fill="none"
             opacity="0.6"
             stroke="url(#路径_1_)"
-            stroke-linecap="round"
-            stroke-width="3.5247"
+            strokeLinecap="round"
+            strokeWidth="3.5247"
           />
         </g>
         <g id="编组-11" transform="translate(558.000000, 306.000000)">
@@ -2295,11 +2295,11 @@ export default function Slogan() {
                 <stop offset="1" style={{ stopColor: '#060071' }} />
               </linearGradient>
               <path
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="M171.8,157.9c4.3,2.5,4.3,6.5,0,8.9L81.2,220
 					c-4.8,2.5-10.6,2.5-15.4,0L4.1,184.4c-4.3-2.5-4.3-6.5,0-8.9l90.5-53.2c4.8-2.5,10.6-2.5,15.4,0L171.8,157.9z"
                 fill="url(#SVGID_48_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
               />
             </g>
             <g id="编组-2" transform="translate(0.862170, 124.812382)">
@@ -2317,11 +2317,11 @@ export default function Slogan() {
                 <stop offset="1" style={{ stopColor: '#fff' }} />
               </linearGradient>
               <path
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="M141.8,37.5c4.3,2.5,4.3,6.5,0,8.9L80.4,82
 					c-4.8,2.5-10.6,2.5-15.4,0L3.2,46.4c-4.3-2.5-4.3-6.5,0-8.9L64.6,1.8c4.8-2.5,10.6-2.5,15.4,0L141.8,37.5z"
                 fill="url(#SVGID_49_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
               />
 
               <linearGradient
@@ -2340,11 +2340,11 @@ export default function Slogan() {
                 <stop offset="1" style={{ stopColor: '#2e42eb' }} />
               </linearGradient>
               <path
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="M72.8,78.5c-1.7,0.1-3.4-0.3-5-1.1L6.4,42L67.3,6.5
 					c1.5-0.8,3.2-1.1,5-1.1c1.7-0.1,3.4,0.3,5,1.1L138.6,42L77.7,77.3C76.2,78.1,74.5,78.5,72.8,78.5z"
                 fill="url(#SVGID_50_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
               />
 
               <linearGradient
@@ -2363,7 +2363,7 @@ export default function Slogan() {
                 <stop offset="1" style={{ stopColor: '#2e42eb' }} />
               </linearGradient>
               <path
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="M145,42c0,0.1,0,0.2,0,0.3s0,0.2,0,0.3s0,0.2-0.1,0.3
 					c-0.1,0.1-0.1,0.2-0.1,0.3s-0.1,0.2-0.1,0.3c0,0.1-0.1,0.2-0.2,0.3l-0.2,0.2c-0.1,0.1-0.2,0.3-0.3,0.4l-0.2,0.2
 					c-0.1,0.2-0.3,0.3-0.5,0.5l-0.2,0.2l-0.3,0.3l-0.3,0.2l-0.4,0.3l-0.4,0.3L80.5,82c-0.4,0.2-0.7,0.4-1.1,0.5l-0.3,0.1
@@ -2376,13 +2376,13 @@ export default function Slogan() {
 					c0.1-0.1,0.1-0.2,0.2-0.3s0.1-0.1,0.1-0.2v-0.1c0-0.1,0.1-0.2,0.1-0.3c0-0.1,0-0.2,0.1-0.2c0.1-0.1,0,0,0-0.1s0-0.2,0-0.3
 					s0-0.2,0-0.2c0-0.1,0-0.1,0-0.1l0,0L145,42z"
                 fill="url(#SVGID_51_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
               />
             </g>
             <g id="编组-2备份" transform="translate(8.400000, 103.200000)">
               <g
                 id="Path备份-3"
-                enable-background="new    "
+                enableBackground="new    "
                 filter="url(#filter-100)"
                 opacity="0.6817"
               >
@@ -2402,11 +2402,11 @@ export default function Slogan() {
                   <stop offset="1" style={{ stopColor: '#060071' }} />
                 </linearGradient>
                 <path
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                   d="M127.6,51.7c3.9,2.2,3.9,5.8,0,8L72.3,91.8
 						c-4.4,2.2-9.5,2.2-13.9,0L2.9,59.7c-3.8-2.2-3.9-5.8,0-8l55.2-32.1c4.4-2.2,9.5-2.2,13.9,0L127.6,51.7z"
                   fill="url(#SVGID_52_)"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 />
               </g>
 
@@ -2424,11 +2424,11 @@ export default function Slogan() {
                 <stop offset="1" style={{ stopColor: '#fff' }} />
               </linearGradient>
               <path
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="M127.6,33.7c3.9,2.2,3.9,5.8,0,8L72.3,73.8
 					c-4.4,2.2-9.5,2.2-13.9,0L2.9,41.7c-3.8-2.2-3.9-5.8,0-8L58.1,1.7c4.4-2.2,9.5-2.2,13.9,0L127.6,33.7z"
                 fill="url(#SVGID_53_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
               />
 
               <linearGradient
@@ -2447,11 +2447,11 @@ export default function Slogan() {
                 <stop offset="1" style={{ stopColor: '#2e42eb' }} />
               </linearGradient>
               <path
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="M65.5,70.6c-1.6,0.1-3.1-0.3-4.5-1L5.8,37.8L60.6,5.9
 					c1.4-0.7,2.9-1,4.5-1c1.6,0,3.1,0.3,4.5,1l55.2,31.9L69.9,69.6C68.6,70.3,67,70.6,65.5,70.6z"
                 fill="url(#SVGID_54_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
               />
 
               <linearGradient
@@ -2470,7 +2470,7 @@ export default function Slogan() {
                 <stop offset="1" style={{ stopColor: '#2e42eb' }} />
               </linearGradient>
               <path
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="M130.5,37.8c0,0.1,0,0.2,0,0.3c0,0.1,0,0.2,0,0.3
 					s0,0.2-0.1,0.3c-0.1,0.1,0,0.2-0.1,0.3s-0.1,0.2-0.1,0.2c0,0.1-0.1,0.2-0.1,0.3l-0.1,0.2c-0.1,0.1-0.1,0.2-0.2,0.3l-0.2,0.2
 					c-0.1,0.2-0.3,0.3-0.4,0.4l-0.2,0.2l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.4,0.2L72.4,73.8c-0.3,0.2-0.6,0.3-1,0.5l-0.3,0.1
@@ -2483,26 +2483,26 @@ export default function Slogan() {
 					c0-0.1,0.1-0.1,0.1-0.2V51c0-0.1,0.1-0.2,0.1-0.3s0-0.1,0.1-0.2c0.1-0.1,0,0,0,0s0-0.2,0-0.3c0-0.1,0-0.1,0-0.2s0-0.1,0-0.1l0,0
 					L130.5,37.8z"
                 fill="url(#SVGID_55_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
               />
             </g>
             <path
-              clip-rule="evenodd"
+              clipRule="evenodd"
               d="M63.9,130.7l0.1,0.4
 				L63.9,130.7z"
               fill="#666666"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               stroke="#000000"
-              stroke-width="0.6"
+              strokeWidth="0.6"
             />
             <path
-              clip-rule="evenodd"
+              clipRule="evenodd"
               d="M63.8,130l0.1,0.4
 				L63.8,130z"
               fill="#666666"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               stroke="#000000"
-              stroke-width="0.6"
+              strokeWidth="0.6"
             />
 
             <linearGradient
@@ -2557,16 +2557,16 @@ export default function Slogan() {
               />
             </linearGradient>
             <path
-              clip-rule="evenodd"
+              clipRule="evenodd"
               d="M7.3,0.1v142.4l61.4,35.4c1.5,0.8,3.3,1.1,5,1.1
 				c1.7,0.1,3.4-0.3,5-1.1l60.9-35.4V0L7.3,0.1z"
               fill="url(#SVGID_56_)"
-              fill-rule="evenodd"
+              fillRule="evenodd"
             />
           </g>
           <g id="编组备份-8" transform="translate(47.447727, 63.600000)">
             <g
-              enable-background="new    "
+              enableBackground="new    "
               filter="url(#filter-106)"
               opacity="0.3003"
             >
@@ -2586,9 +2586,9 @@ export default function Slogan() {
                 <stop offset="1" style={{ stopColor: '#060071' }} />
               </linearGradient>
               <polygon
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 fill="url(#SVGID_57_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 points="3.5,59.5 38.6,79.7 102.5,42.3 67.4,22.1
 					"
               />
@@ -2609,17 +2609,17 @@ export default function Slogan() {
                 </linearGradient>
                 <polygon
                   id="path-108"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                   fill="url(#path-108_1_)"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   points="0.2,20.4 35.3,40.6
 						70.4,20.4 35.3,0.1 					"
                 />
               </g>
               <g filter="url(#filter-109)">
                 <polygon
-                  clip-rule="evenodd"
-                  fill-rule="evenodd"
+                  clipRule="evenodd"
+                  fillRule="evenodd"
                   points="0.2,20.4 35.3,40.6 70.4,20.4 35.3,0.1 					"
                 />
               </g>
@@ -2638,9 +2638,9 @@ export default function Slogan() {
               <stop offset="1" style={{ stopColor: '#060071' }} />
             </linearGradient>
             <polygon
-              clip-rule="evenodd"
+              clipRule="evenodd"
               fill="url(#SVGID_58_)"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               points="35.2,81.1 35.2,40.6 0.1,20.4 0.1,60.9 			"
             />
             <g id="编组-10" transform="translate(4.431004, 28.063025)">
@@ -2696,9 +2696,9 @@ export default function Slogan() {
                     <g filter="url(#Adobe_OpacityMaskFilter_2_)">
                       <polygon
                         id="path-112_1_"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                         fill="#FFFFFF"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         points="0,7.3 6.3,10.9 6.3,3.7 0,0
 																	"
                       />
@@ -2775,9 +2775,9 @@ export default function Slogan() {
                     <g filter="url(#Adobe_OpacityMaskFilter_3_)">
                       <polygon
                         id="path-116_1_"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                         fill="#FFFFFF"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         points="0,7.3 6.3,10.9 6.3,3.7 0,0
 																	"
                       />
@@ -2854,9 +2854,9 @@ export default function Slogan() {
                     <g filter="url(#Adobe_OpacityMaskFilter_4_)">
                       <polygon
                         id="path-119_1_"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                         fill="#FFFFFF"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         points="0,7.3 6.3,10.9 6.3,3.7 0,0
 																	"
                       />
@@ -2934,9 +2934,9 @@ export default function Slogan() {
                     <g filter="url(#Adobe_OpacityMaskFilter_5_)">
                       <polygon
                         id="path-121_1_"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                         fill="#FFFFFF"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         points="0,7.3 6.3,10.9 6.3,3.7 0,0
 																	"
                       />
@@ -3013,9 +3013,9 @@ export default function Slogan() {
                     <g filter="url(#Adobe_OpacityMaskFilter_6_)">
                       <polygon
                         id="path-123_1_"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                         fill="#FFFFFF"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         points="0,7.3 6.3,10.9 6.3,3.7 0,0
 																	"
                       />
@@ -3092,9 +3092,9 @@ export default function Slogan() {
                     <g filter="url(#Adobe_OpacityMaskFilter_7_)">
                       <polygon
                         id="path-125_1_"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                         fill="#FFFFFF"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         points="0,7.3 6.3,10.9 6.3,3.7 0,0
 																	"
                       />
@@ -3172,9 +3172,9 @@ export default function Slogan() {
                     <g filter="url(#Adobe_OpacityMaskFilter_8_)">
                       <polygon
                         id="path-127_1_"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                         fill="#FFFFFF"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         points="0,7.3 6.3,10.9 6.3,3.7 0,0
 																	"
                       />
@@ -3251,9 +3251,9 @@ export default function Slogan() {
                     <g filter="url(#Adobe_OpacityMaskFilter_9_)">
                       <polygon
                         id="path-129_1_"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                         fill="#FFFFFF"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         points="0,7.3 6.3,10.9 6.3,3.7 0,0
 																	"
                       />
@@ -3330,9 +3330,9 @@ export default function Slogan() {
                     <g filter="url(#Adobe_OpacityMaskFilter_10_)">
                       <polygon
                         id="path-131_1_"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                         fill="#FFFFFF"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         points="0,7.3 6.3,10.9 6.3,3.7 0,0
 																	"
                       />
@@ -3373,9 +3373,9 @@ export default function Slogan() {
               <stop offset="1" style={{ stopColor: '#060071' }} />
             </linearGradient>
             <polygon
-              clip-rule="evenodd"
+              clipRule="evenodd"
               fill="url(#SVGID_77_)"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               points="35.3,81.1 35.3,40.6 70.4,20.4 70.4,60.9
 				"
             />
@@ -3425,9 +3425,9 @@ export default function Slogan() {
                     <g filter="url(#Adobe_OpacityMaskFilter_11_)">
                       <polygon
                         id="path-134_1_"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                         fill="#FFFFFF"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         points="0,7.3 6.3,10.9 6.3,3.7 0,0
 																	"
                       />
@@ -3493,9 +3493,9 @@ export default function Slogan() {
                     <g filter="url(#Adobe_OpacityMaskFilter_12_)">
                       <polygon
                         id="path-136_1_"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                         fill="#FFFFFF"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         points="0,7.3 6.3,10.9 6.3,3.7 0,0
 																	"
                       />
@@ -3561,9 +3561,9 @@ export default function Slogan() {
                     <g filter="url(#Adobe_OpacityMaskFilter_13_)">
                       <polygon
                         id="path-138_1_"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                         fill="#FFFFFF"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         points="0,7.3 6.3,10.9 6.3,3.7 0,0
 																	"
                       />
@@ -3630,9 +3630,9 @@ export default function Slogan() {
                     <g filter="url(#Adobe_OpacityMaskFilter_14_)">
                       <polygon
                         id="path-140_1_"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                         fill="#FFFFFF"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         points="0,7.3 6.3,10.9 6.3,3.7 0,0
 																	"
                       />
@@ -3698,9 +3698,9 @@ export default function Slogan() {
                     <g filter="url(#Adobe_OpacityMaskFilter_15_)">
                       <polygon
                         id="path-142_1_"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                         fill="#FFFFFF"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         points="0,7.3 6.3,10.9 6.3,3.7 0,0
 																	"
                       />
@@ -3766,9 +3766,9 @@ export default function Slogan() {
                     <g filter="url(#Adobe_OpacityMaskFilter_16_)">
                       <polygon
                         id="path-144_1_"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                         fill="#FFFFFF"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         points="0,7.3 6.3,10.9 6.3,3.7 0,0
 																	"
                       />
@@ -3835,9 +3835,9 @@ export default function Slogan() {
                     <g filter="url(#Adobe_OpacityMaskFilter_17_)">
                       <polygon
                         id="path-146_1_"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                         fill="#FFFFFF"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         points="0,7.3 6.3,10.9 6.3,3.7 0,0
 																	"
                       />
@@ -3903,9 +3903,9 @@ export default function Slogan() {
                     <g filter="url(#Adobe_OpacityMaskFilter_18_)">
                       <polygon
                         id="path-148_1_"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                         fill="#FFFFFF"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         points="0,7.3 6.3,10.9 6.3,3.7 0,0
 																	"
                       />
@@ -3971,9 +3971,9 @@ export default function Slogan() {
                     <g filter="url(#Adobe_OpacityMaskFilter_19_)">
                       <polygon
                         id="path-150_1_"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                         fill="#FFFFFF"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         points="0,7.3 6.3,10.9 6.3,3.7 0,0
 																	"
                       />
@@ -4030,16 +4030,16 @@ export default function Slogan() {
                 rx="14.6"
                 ry="66.6"
                 stroke="url(#SVGID_96_)"
-                stroke-width="0.6"
+                strokeWidth="0.6"
                 transform="matrix(-0.3746 0.9272 -0.9272 -0.3746 129.3914 -9.7912)"
               />
 
               <ellipse
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 cx="60.3"
                 cy="51.5"
                 fill="#FFFFFF"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 rx="1.7"
                 ry="1.7"
                 transform="matrix(2.765398e-06 1 -1 2.765398e-06 111.8035 -8.8797)"
@@ -4047,12 +4047,12 @@ export default function Slogan() {
 
               <ellipse
                 id="椭圆形备份"
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 cx="86"
                 cy="30.8"
-                enable-background="new    "
+                enableBackground="new    "
                 fill="#FFFFFF"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 opacity="0.2662"
                 rx="1.1"
                 ry="1"
@@ -4084,28 +4084,28 @@ export default function Slogan() {
                 rx="66.5"
                 ry="14.6"
                 stroke="url(#SVGID_97_)"
-                stroke-width="0.6"
+                strokeWidth="0.6"
                 transform="matrix(-0.9272 -0.3746 0.3746 -0.9272 116.2823 100.0875)"
               />
 
               <ellipse
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 cx="31.9"
                 cy="37"
                 fill="#FFFFFF"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 rx="1.7"
                 ry="1.7"
                 transform="matrix(-1 -5.213811e-07 5.213811e-07 -1 63.8725 74.0324)"
               />
 
               <ellipse
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 cx="85.8"
                 cy="30.8"
-                enable-background="new    "
+                enableBackground="new    "
                 fill="#FFFFFF"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 opacity="0.2662"
                 rx="1"
                 ry="1.1"
@@ -4151,25 +4151,25 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#84ffd1' }} />
           </linearGradient>
           <path
-            clip-rule="evenodd"
+            clipRule="evenodd"
             d="M11,185.8l126.9-73.2c2.3-1.4,4.2-5,4.2-8.1l1.4-97.1
 			c0-3.1-1.9-4.6-4.2-3.2L12.4,77.4c-2.3,1.4-4.2,5-4.2,8.1l-1.4,97.1C6.8,185.7,8.7,187.1,11,185.8z"
             fill="url(#SVGID_99_)"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
           <g opacity="0.3" transform="translate(95.618736, 40.248000)">
             <path
               d="M33.5,8.7L3.1,26.3c-1,0.6-2.2,0.2-2.8-0.7
 				c-0.2-0.3-0.3-0.7-0.3-1c0-2.2,1.2-4.2,3-5.2L33.5,1.7c1-0.6,2.2-0.2,2.8,0.7c0.2,0.3,0.3,0.7,0.3,1C36.6,5.7,35.4,7.7,33.5,8.7z
 				"
-              enable-background="new    "
+              enableBackground="new    "
               fill="#FFFFFF"
               opacity="0.3007"
             />
             <path
               d="M34,27.4L10.3,41c-0.8,0.4-1.7,0.2-2.1-0.6
 				C8,40.2,8,40,8,39.7c0-1.7,0.9-3.2,2.4-4.1L34,22c0.8-0.4,1.7-0.2,2.1,0.6c0.1,0.2,0.2,0.5,0.2,0.8C36.3,25,35.4,26.5,34,27.4z"
-              enable-background="new    "
+              enableBackground="new    "
               fill="#FFFFFF"
               opacity="0.3007"
             />
@@ -4177,7 +4177,7 @@ export default function Slogan() {
               d="M34,41.7L10.3,55.4c-0.8,0.4-1.7,0.2-2.1-0.6
 				C8,54.6,8,54.3,8,54c0-1.7,0.9-3.2,2.4-4.1L34,36.3c0.8-0.4,1.7-0.2,2.1,0.6c0.1,0.2,0.2,0.5,0.2,0.8
 				C36.3,39.3,35.4,40.9,34,41.7z"
-              enable-background="new    "
+              enableBackground="new    "
               fill="#FFFFFF"
               opacity="0.3007"
             />
@@ -4185,7 +4185,7 @@ export default function Slogan() {
               d="M34,56L10.3,69.7c-0.8,0.4-1.7,0.2-2.1-0.6
 				C8,68.9,8,68.6,8,68.3c0-1.7,0.9-3.2,2.4-4.1L34,50.6c0.8-0.4,1.7-0.2,2.1,0.6c0.1,0.2,0.2,0.5,0.2,0.8
 				C36.3,53.6,35.4,55.2,34,56z"
-              enable-background="new    "
+              enableBackground="new    "
               fill="#FFFFFF"
               opacity="0.3007"
             />
@@ -4204,7 +4204,7 @@ export default function Slogan() {
             <stop offset="1" style={{ stopColor: '#fff', stopOpacity: '0' }} />
           </linearGradient>
           <polygon
-            enable-background="new    "
+            enableBackground="new    "
             fill="url(#SVGID_100_)"
             opacity="0.4"
             points="93,31 53,161.5 94.8,137.4 135.2,6 		"
@@ -4241,13 +4241,13 @@ export default function Slogan() {
           </linearGradient>
 
           <polygon
-            enable-background="new    "
+            enableBackground="new    "
             fill="url(#SVGID_101_)"
             opacity="0.3007"
             points="
 			39.7,152 27.4,159.1 27.4,117.9 39.7,110.7 		"
             stroke="url(#SVGID_102_)"
-            stroke-width="0.5"
+            strokeWidth="0.5"
           />
 
           <g transform="translate(72.980000, 101.800000) scale(-1, 1) translate(-72.980000, -101.800000) translate(13.480000, 28.800000)">
@@ -4277,7 +4277,7 @@ export default function Slogan() {
               <stop offset="1" style={{ stopColor: '#fff' }} />
             </linearGradient>
             <path
-              clip-rule="evenodd"
+              clipRule="evenodd"
               d="
 				M117.6,103.3c-6-3.4-9-14.2-11.9-24.6c-2.9-10.2-5.7-20.7-11.4-24c-5.7-3.3-8.6,3.9-11.4,10.8c-2.9,7.1-5.9,14.4-11.9,10.9
 				c-6-3.5-9-14.2-11.8-24.6c-2.9-10.2-5.8-20.7-11.4-24s-8.6,3.9-11.4,10.8c-2.9,7.1-5.9,14.4-11.9,10.9c-6-3.4-9-14.2-11.8-24.6
@@ -4285,9 +4285,9 @@ export default function Slogan() {
 				c2.9-7.1,5.9-14.4,11.8-10.9s9,14.2,11.9,24.6c2.9,10.2,5.7,20.7,11.4,24c5.7,3.2,8.6-3.9,11.4-10.8c2.9-7.1,5.9-14.4,11.8-10.9
 				c6,3.5,9,14.2,11.9,24.6c2.9,10.2,5.8,20.7,11.4,24V103.3z"
               fill="url(#SVGID_103_)"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               stroke="url(#SVGID_104_)"
-              stroke-width="1.4256"
+              strokeWidth="1.4256"
             />
 
             <linearGradient
@@ -4307,40 +4307,40 @@ export default function Slogan() {
             </linearGradient>
             <path
               id="路径-2"
-              clip-rule="evenodd"
+              clipRule="evenodd"
               d="M0.6,0.5v77.2l117,67.6l0.5-42
 				c-3.3-3.2-5.5-5.6-6.5-7.3c-4.4-7.6-5.6-14.4-6.1-18.2c-1.1-7.7-9.1-26.4-15.2-23.3c-6.1,3.1-10.8,27.4-17.9,23.3
 				c-7-4-15.5-32-17.3-39.4S46,22.8,41.4,29.7c-1,1.5-4.9,9.1-6,11.5c-7.7,15.9-13.7,7.5-19.1-5C14.1,31.1,9.8,15.4,6.2,6.8
 				C5,3.9,3.2,1.8,0.6,0.5z"
               fill="url(#路径-2_1_)"
-              fill-rule="evenodd"
+              fillRule="evenodd"
             />
             <g id="编组-7" transform="translate(41.723113, 19.522022)">
               <path
                 id="Fill-11"
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="
 					M5.4,0.8c3,1.9,5.4,6.4,5.4,10.1c0,3.7-2.4,5.2-5.4,3.4C2.4,12.4,0,7.9,0,4.2C0,0.4,2.4-1.1,5.4,0.8"
-                enable-background="new    "
+                enableBackground="new    "
                 fill="#AA69FF"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 opacity="0.6"
               />
               <path
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="M9.7,10.7
 					c0,3.2-2,4.5-4.3,2.9C3,12,1.1,8.1,1.1,4.9c0-3.2,2-4.5,4.3-2.9S9.7,7.5,9.7,10.7z"
-                enable-background="new    "
+                enableBackground="new    "
                 fill="#7005FF"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 opacity="0.6"
               />
               <path
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="M7.4,9c0,1.6-1,2.2-2.2,1.4C4.1,9.6,3.1,7.6,3.1,6
 					c0-1.6,1-2.2,2.2-1.4S7.4,7.4,7.4,9z"
                 fill="#E7C769"
-                fill-rule="evenodd"
+                fillRule="evenodd"
               />
             </g>
           </g>
@@ -4376,13 +4376,13 @@ export default function Slogan() {
           </linearGradient>
 
           <polygon
-            enable-background="new    "
+            enableBackground="new    "
             fill="url(#SVGID_105_)"
             opacity="0.3007"
             points="
 			61.8,139.2 49.5,146.4 49.5,92.2 61.8,85.1 		"
             stroke="url(#SVGID_106_)"
-            stroke-width="0.5"
+            strokeWidth="0.5"
           />
 
           <linearGradient
@@ -4416,13 +4416,13 @@ export default function Slogan() {
           </linearGradient>
 
           <polygon
-            enable-background="new    "
+            enableBackground="new    "
             fill="url(#SVGID_107_)"
             opacity="0.3007"
             points="
 			84.7,126 72.3,133.2 72.3,66.1 84.7,59 		"
             stroke="url(#SVGID_108_)"
-            stroke-width="0.5"
+            strokeWidth="0.5"
           />
         </g>
         <g id="编组-16" transform="translate(51.000000, 152.000000)">
@@ -4443,13 +4443,13 @@ export default function Slogan() {
                   <stop offset="1" style={{ stopColor: '#7b74ff' }} />
                 </linearGradient>
                 <path
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                   d="M70.3,14.7c0,0.3,0,0.5,0,0.7
 						c1.5-1.4,3.2-2.6,4.8-3.5c5.6-3.2,10.6-3.3,14-0.8l11.1,6.6l-7.1,11c-2.1,10-8.9,20.5-17.2,25.7L23.9,84.6L18,95.1L6.2,88l0,0
 						C2.4,85.8,0,81.2,0,74.5c0-13.1,9.2-29.2,20.6-35.8c3-1.7,5.9-2.7,8.4-2.8c1.1-12.6,9.9-26.9,20.5-33
 						C61-3.8,70.3,1.6,70.3,14.7z"
                   fill="url(#SVGID_109_)"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 />
               </g>
               <defs>
@@ -4478,13 +4478,13 @@ export default function Slogan() {
                 <g filter="url(#Adobe_OpacityMaskFilter_20_)">
                   <path
                     id="path-167_1_"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                     d="M70.3,14.7c0,0.3,0,0.5,0,0.7
 							c1.5-1.4,3.2-2.6,4.8-3.5c5.6-3.2,10.6-3.3,14-0.8l11.1,6.6l-7.1,11c-2.1,10-8.9,20.5-17.2,25.7L23.9,84.6L18,95.1L6.2,88l0,0
 							C2.4,85.8,0,81.2,0,74.5c0-13.1,9.2-29.2,20.6-35.8c3-1.7,5.9-2.7,8.4-2.8c1.1-12.6,9.9-26.9,20.5-33
 							C61-3.8,70.3,1.6,70.3,14.7z"
                     fill="#FFFFFF"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                   />
                 </g>
               </mask>
@@ -4506,12 +4506,12 @@ export default function Slogan() {
 
               <path
                 id="矩形备份-3"
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="
 					M100.1-13.4l29.3,15.6l5.2,15.3C112,43,96.4,54.9,87.8,53.2S69.3,34.5,58.3,2.2c10.3-7,18.4-11.6,24.2-13.7
 					S94.1-14.3,100.1-13.4z"
                 fill="url(#矩形备份-3_1_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 mask="url(#mask-168_1_)"
               />
               <defs>
@@ -4540,13 +4540,13 @@ export default function Slogan() {
                 <g filter="url(#Adobe_OpacityMaskFilter_21_)">
                   <path
                     id="path-167_2_"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                     d="M70.3,14.7c0,0.3,0,0.5,0,0.7
 							c1.5-1.4,3.2-2.6,4.8-3.5c5.6-3.2,10.6-3.3,14-0.8l11.1,6.6l-7.1,11c-2.1,10-8.9,20.5-17.2,25.7L23.9,84.6L18,95.1L6.2,88l0,0
 							C2.4,85.8,0,81.2,0,74.5c0-13.1,9.2-29.2,20.6-35.8c3-1.7,5.9-2.7,8.4-2.8c1.1-12.6,9.9-26.9,20.5-33
 							C61-3.8,70.3,1.6,70.3,14.7z"
                     fill="#FFFFFF"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                   />
                 </g>
               </mask>
@@ -4568,11 +4568,11 @@ export default function Slogan() {
 
               <path
                 id="矩形备份-2"
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="
 					M41.8-13.4L71.1,2.2l5.2,15.3C53.7,43,38.1,54.9,29.5,53.2S11,34.5,0,2.2c10.3-7,18.4-11.6,24.2-13.7S35.8-14.3,41.8-13.4z"
                 fill="url(#矩形备份-2_1_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 mask="url(#mask-168_2_)"
               />
               <defs>
@@ -4601,13 +4601,13 @@ export default function Slogan() {
                 <g filter="url(#Adobe_OpacityMaskFilter_22_)">
                   <path
                     id="path-167_3_"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                     d="M70.3,14.7c0,0.3,0,0.5,0,0.7
 							c1.5-1.4,3.2-2.6,4.8-3.5c5.6-3.2,10.6-3.3,14-0.8l11.1,6.6l-7.1,11c-2.1,10-8.9,20.5-17.2,25.7L23.9,84.6L18,95.1L6.2,88l0,0
 							C2.4,85.8,0,81.2,0,74.5c0-13.1,9.2-29.2,20.6-35.8c3-1.7,5.9-2.7,8.4-2.8c1.1-12.6,9.9-26.9,20.5-33
 							C61-3.8,70.3,1.6,70.3,14.7z"
                     fill="#FFFFFF"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                   />
                 </g>
               </mask>
@@ -4627,11 +4627,11 @@ export default function Slogan() {
                 <stop offset="1" style={{ stopColor: '#0d04ab' }} />
               </linearGradient>
               <path
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="M29.1,35.9l29.3,15.6
 					l5.2,15.3C41,92.3,25.4,104.1,16.8,102.4c-8.7-1.7-18.5-18.7-29.5-50.9c10.3-7,18.4-11.6,24.2-13.7S23.1,35,29.1,35.9z"
                 fill="url(#SVGID_110_)"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 mask="url(#mask-168_3_)"
               />
             </g>
@@ -4650,13 +4650,13 @@ export default function Slogan() {
             </linearGradient>
             <path
               id="Fill-1备份"
-              clip-rule="evenodd"
+              clipRule="evenodd"
               d="M86.6,18.8
 				c10.3-6,18.6-1.1,18.7,10.7c0,11.6-7.9,25.6-17.9,31.8l-55.2,32l-0.4,0.2c-11.3,6.3-20.3,0.9-20.4-12.1
 				c0-13.1,9.2-29.2,20.6-35.8c3-1.7,5.9-2.7,8.4-2.8c1.1-12.6,9.9-26.9,20.5-33c11.4-6.6,20.7-1.3,20.8,11.9c0,0.3,0,0.5,0,0.7
 				C83.3,21,84.9,19.7,86.6,18.8"
               fill="url(#Fill-1备份_1_)"
-              fill-rule="evenodd"
+              fillRule="evenodd"
             />
           </g>
         </g>
