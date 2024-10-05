@@ -1,6 +1,7 @@
 import { UserToken } from '#/entity';
 import { StorageEnum } from '#/enum';
 import { getItem } from '@/utils/storage';
+import { merge } from '@/utils';
 import axios, {
   AxiosRequestConfig,
   AxiosResponse,
@@ -10,10 +11,24 @@ import axios, {
 
 export type Response<T> = Promise<[T, AxiosResponse<T>]>;
 
-class Request {
+class RequestClient {
   private axiosInstance;
-  constructor(config?: CreateAxiosDefaults) {
-    this.axiosInstance = axios.create(config);
+  /**
+   * 构造函数，用于创建Axios实例
+   * @param config - Axios请求配置，可选
+   */
+  constructor(config: CreateAxiosDefaults = {}) {
+    // 合并默认配置和传入的配置
+    const defaultConfig: CreateAxiosDefaults = {
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      // 默认超时时间
+      timeout: 10_000,
+    };
+    const { ...axiosConfig } = config;
+    const requestConfig = merge(axiosConfig, defaultConfig);
+    this.axiosInstance = axios.create(requestConfig);
 
     this.axiosInstance.interceptors.request.use((axiosConfig) =>
       this.requestInterceptor(axiosConfig)
@@ -44,35 +59,62 @@ class Request {
 
   private async responseErrorInterceptor(error: any): Promise<any> {}
 
-  request<T, D = any>(config: AxiosRequestConfig<D>): Response<T> {
-    return this.axiosInstance(config);
-  }
-
-  get<T, D = any>(url: string, config?: AxiosRequestConfig<D>): Response<T> {
-    return this.axiosInstance.get(url, config);
-  }
-
-  post<T, D = any>(
+  /**
+   * 通用的请求方法
+   */
+  public async request<T = any>(
     url: string,
-    data?: D,
-    config?: AxiosRequestConfig<D>
-  ): Response<T> {
-    return this.axiosInstance.post(url, data, config);
+    config: AxiosRequestConfig
+  ): Promise<T> {
+    try {
+      const response: AxiosResponse<T> = await this.axiosInstance({
+        url,
+        ...config,
+      });
+      return response as T;
+    } catch (error: any) {
+      throw error.response ? error.response.data : error;
+    }
   }
 
-  put<T, D = any>(
+  /**
+   * GET请求方法
+   */
+  public get<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    return this.request<T>(url, { ...config, method: 'GET' });
+  }
+
+  /**
+   * POST请求方法
+   */
+  public post<T = any>(
     url: string,
-    data?: D,
-    config?: AxiosRequestConfig<D>
-  ): Response<T> {
-    return this.axiosInstance.put(url, data, config);
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
+    return this.request<T>(url, { ...config, data, method: 'POST' });
   }
 
-  delete<T, D = any>(url: string, config?: AxiosRequestConfig<D>): Response<T> {
-    return this.axiosInstance.delete(url, config);
+  /**
+   * PUT请求方法
+   */
+  public put<T = any>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
+    return this.request<T>(url, { ...config, data, method: 'PUT' });
+  }
+
+  /**
+   * DELETE请求方法
+   */
+  public delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    return this.request<T>(url, { ...config, method: 'DELETE' });
   }
 }
 
-const request = new Request({ timeout: 60 * 1000 * 5 });
+const requestClient = new RequestClient();
+export const baseRequestClient = new RequestClient();
 
-export default request;
+export default requestClient;
