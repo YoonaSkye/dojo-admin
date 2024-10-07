@@ -1,10 +1,10 @@
 import { Permission } from '#/entity';
 import { BasicStatus, PermissionType } from '#/enum';
 import { AppRouteObject } from '#/router';
-import { useUserPermission } from '@/store/userStore';
+import { useAccessMenus } from '@/store/access';
 import { flattenTrees } from '@/utils/tree';
 import { isEmpty } from 'ramda';
-import { Suspense, useMemo, lazy } from 'react';
+import { lazy, Suspense, useMemo } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
 // 使用 import.meta.glob 获取所有路由组件
@@ -19,7 +19,7 @@ function resolveComponent(path: string) {
  * return routes about permission
  */
 export function usePermissionRoutes() {
-  const permissions = useUserPermission();
+  const permissions = useAccessMenus();
 
   return useMemo(() => {
     const flattenedPermissons = flattenTrees(permissions);

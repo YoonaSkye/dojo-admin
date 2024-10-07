@@ -1,9 +1,9 @@
-import { useUserToken } from '@/store/userStore';
+import { useAccessToken } from '@/store/access';
 import { useCallback, useEffect } from 'react';
 import { useRouter } from '../hooks/use-router';
 
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
-  const { accessToken } = useUserToken();
+  const accessToken = useAccessToken();
   const router = useRouter();
 
   const check = useCallback(() => {

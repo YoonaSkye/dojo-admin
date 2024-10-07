@@ -1,6 +1,4 @@
-import { UserToken } from '#/entity';
-import { StorageEnum } from '#/enum';
-import { getItem } from '@/utils/storage';
+import { useAccessStore } from '@/store/access';
 import { merge } from '@/utils';
 import axios, {
   AxiosRequestConfig,
@@ -43,7 +41,7 @@ class RequestClient {
   private async requestInterceptor(
     axiosConfig: InternalAxiosRequestConfig
   ): Promise<any> {
-    const { accessToken } = getItem<UserToken>(StorageEnum.Token) || {};
+    const { accessToken } = useAccessStore.getState() || {};
     if (accessToken) {
       axiosConfig.headers.Authorization = `Bearer ${accessToken}`;
     }

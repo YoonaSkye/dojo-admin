@@ -18,7 +18,7 @@ export const handlers = [
   // for the same "GET /user" request that
   // responds with a mock JSON response.
 
-  http.post('/api/auth/login', async ({ request }) => {
+  http.post('/auth/login', async ({ request }) => {
     const { username, password } = await request.json();
     const user = USER_LIST.find((item) => item.username === username);
     if (!password || !username) {
@@ -42,7 +42,6 @@ export const handlers = [
 
     return HttpResponse.json(
       responseSuccess({
-        user,
         accessToken: accessToken,
         refreshToken: refreshToken,
       })
@@ -85,10 +84,13 @@ export const handlers = [
         status: 401,
       });
     }
+    const user = USER_LIST.find((item) => item.username === userinfo.username);
 
-    const menus =
-      MOCK_MENUS.find((item) => item.username === userinfo.username)?.menus ??
-      [];
+    // const menus =
+    //   MOCK_MENUS.find((item) => item.username === userinfo.username)?.menus ??
+    //   [];
+
+    const menus = user.permissions;
 
     return HttpResponse.json(responseSuccess(menus));
   }),

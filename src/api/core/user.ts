@@ -39,7 +39,7 @@ interface UserInfo extends BasicUserInfo {
   token: string;
 }
 
-// export type { UserInfo };
+export type { UserInfo, BasicUserInfo };
 
 /**
  * 获取用户信息
