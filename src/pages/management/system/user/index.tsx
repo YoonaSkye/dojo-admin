@@ -1,7 +1,7 @@
 import { Role, UserInfo } from '#/entity';
 import { BasicStatus } from '#/enum';
 import { IconButton, Iconify } from '@/components/icon';
-import { USER_LIST } from '@/mock/assets';
+import { USER_LIST } from '@/mocks/assets';
 import { useThemeToken } from '@/theme/hooks';
 import type { TableProps } from 'antd';
 import { Button, Card, Popconfirm, Table, Tag } from 'antd';

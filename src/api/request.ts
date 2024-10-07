@@ -45,7 +45,7 @@ class RequestClient {
   ): Promise<any> {
     const { accessToken } = getItem<UserToken>(StorageEnum.Token) || {};
     if (accessToken) {
-      axiosConfig.headers.Authorization = `Bear ${accessToken}`;
+      axiosConfig.headers.Authorization = `Bearer ${accessToken}`;
     }
 
     return Promise.resolve(axiosConfig);
@@ -54,7 +54,13 @@ class RequestClient {
   private async responseSuccessInterceptor(
     response: AxiosResponse<any, any>
   ): Promise<any> {
-    return Promise.resolve([response.data, response]);
+    const { data: responseData, status } = response;
+    const { code, data, message: msg } = responseData;
+    if (status >= 200 && status < 400 && code === 0) {
+      return data;
+    }
+    throw new Error(`Error ${status}: ${msg}`);
+    // return Promise.resolve([response.data, response]);
   }
 
   private async responseErrorInterceptor(error: any): Promise<any> {}

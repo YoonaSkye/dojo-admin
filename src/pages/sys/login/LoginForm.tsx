@@ -26,8 +26,8 @@ export default function LoginForm() {
         size="large"
         initialValues={{
           remember: true,
-          username: 'admin@gmail.com',
-          password: 'demo1234',
+          username: 'vben',
+          password: '123456',
         }}
         onFinish={handleFinish}
       >

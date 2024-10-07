@@ -1,7 +1,7 @@
 import { Role } from '#/entity';
 import { BasicStatus } from '#/enum';
 import { IconButton, Iconify } from '@/components/icon';
-import { ROLE_LIST } from '@/mock/assets';
+import { ROLE_LIST } from '@/mocks/assets';
 import type { TableProps } from 'antd';
 import { Button, Card, Popconfirm, Table, Tag } from 'antd';
 import { useState } from 'react';
