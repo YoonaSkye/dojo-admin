@@ -1,4 +1,4 @@
-import { useCollapsed } from '@/store/userStore';
+import { useCollapsed } from '@/store/setting';
 import { CSSProperties } from 'react';
 import LayoutMenu from '../menu';
 import { NAV_COLLAPSED_WIDTH, NAV_WIDTH, Collapse_Height } from './config';

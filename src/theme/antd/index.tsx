@@ -1,5 +1,4 @@
 import { ConfigProvider, theme } from 'antd';
-import { StyleProvider } from '@ant-design/cssinjs';
 import {
   customThemeTokenConfig,
   themeModeToken,
@@ -8,7 +7,7 @@ import {
 } from './theme';
 
 import { ThemeMode } from '#/enum';
-import { useSettings } from '@/store/settingStore';
+import { useSettings } from '@/store/setting';
 
 export default function AntdConfig({
   children,

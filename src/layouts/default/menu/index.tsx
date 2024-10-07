@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { usePermissionRoutes, useRouteToMenu } from '@/router/hooks';
-import { useCollapsed } from '@/store/userStore';
+import { useCollapsed } from '@/store/setting';
 import { useThemeToken } from '@/theme/hooks';
 import { Link, useLocation, useMatches, useNavigate } from 'react-router-dom';
 import { ItemType } from 'antd/es/menu/hooks/useItems';

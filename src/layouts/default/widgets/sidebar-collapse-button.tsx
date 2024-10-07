@@ -1,8 +1,8 @@
 import { ChevronsLeft, ChevronsRight } from '@/icons';
-import { useCollapsed, useUserActions } from '@/store/userStore';
+import { useCollapsed, useSettingActions } from '@/store/setting';
 
 export default function SidebarCollapseButton() {
-  const { setCollapsed } = useUserActions();
+  const { setCollapsed } = useSettingActions();
   const collapsed = useCollapsed();
 
   return (

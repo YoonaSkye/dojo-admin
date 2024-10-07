@@ -10,14 +10,14 @@ import { Bell, Maximize, Menu, MoonStar, Settings } from '@/icons';
 import CommandMenu from '@/layouts//_common/command-menu';
 import AccountMenu from '@/layouts/_common/account-menu';
 import LanguageToggle from '@/layouts/_common/language-toggle';
-import { useCollapsed, useUserActions } from '@/store/userStore';
+import { useCollapsed, useSettingActions } from '@/store/setting';
 import { CSSProperties } from 'react';
 import { NAV_COLLAPSED_WIDTH, NAV_WIDTH } from './config';
 import Preference from '@/layouts/_common/preference';
 
 export default function LayoutHeader() {
   const collapsed = useCollapsed();
-  const { setCollapsed } = useUserActions();
+  const { setCollapsed } = useSettingActions();
   const headerStyle: CSSProperties = {
     height: '50px',
     left: collapsed ? `{${NAV_COLLAPSED_WIDTH}}px` : `{${NAV_WIDTH}}`,

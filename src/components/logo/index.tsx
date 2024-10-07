@@ -1,20 +1,11 @@
 import { useThemeToken } from '@/theme/hooks';
-// import { NavLink } from 'react-router-dom';
 import AppLogo from '@/assets/images/logo.png';
-import { useCollapsed } from '@/store/userStore';
+import { useCollapsed } from '@/store/setting';
 
 export default function Logo({ className = '' }: { className?: string }) {
   const { colorPrimary } = useThemeToken();
   const collapsed = useCollapsed();
   return (
-    // <NavLink to="/" className="no-underline">
-    //   <button
-    //     className={`font-semibold ${className}`}
-    //     style={{ color: colorPrimary }}
-    //   >
-    //     Logo
-    //   </button>
-    // </NavLink>
     <div className="h-12 py-[10px] pr-[10px] flex items-center pl-[7px] cursor-pointer">
       <img src={AppLogo} alt="logo" className="h-[32px] w-[32px]" />
       {!collapsed && (

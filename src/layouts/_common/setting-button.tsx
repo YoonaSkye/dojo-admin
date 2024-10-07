@@ -3,7 +3,7 @@ import { Button, Card, Drawer, Switch } from 'antd';
 import { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { useThemeToken } from '@/theme/hooks';
-import { useSettingActions, useSettings } from '@/store/settingStore';
+import { useSettingActions, useSettings } from '@/store/setting';
 import { ThemeColorPresets, ThemeLayout, ThemeMode } from '#/enum';
 import { colorPrimarys } from '@/theme/antd/theme';
 import { MdCircle } from 'react-icons/md';

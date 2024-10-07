@@ -1,17 +1,17 @@
+import avatar from '@/assets/images/avatar-v1.webp';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
   DropdownMenuShortcut,
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import avatar from '@/assets/images/avatar-v1.webp';
 import { cn } from '@/lib/utils';
 import { useRouter } from '@/router/hooks';
-import { useUserActions } from '@/store/userStore';
+
 import { BookOpenTextIcon, LogOutIcon } from 'lucide-react';
 import { AiFillGithub } from 'react-icons/ai';
 
@@ -36,12 +36,12 @@ const accountMenuItems: {
 ];
 
 export default function AccountMenu() {
-  const { clearUserInfoAndToken } = useUserActions();
+  // const { clearUserInfoAndToken } = useUserActions();
   const { replace } = useRouter();
 
   const logout = () => {
     try {
-      clearUserInfoAndToken();
+      // clearUserInfoAndToken();
     } catch (error) {
       console.log(error);
     } finally {
