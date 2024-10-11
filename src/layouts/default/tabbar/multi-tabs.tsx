@@ -1,4 +1,3 @@
-import { KeepAliveTab } from '@/hooks/use-keep-alive';
 import { cn } from '@/lib/utils';
 import { useRouter } from '@/router/hooks';
 import { useThemeToken } from '@/theme/hooks';
@@ -9,9 +8,9 @@ import { ChevronDownIcon, Minimize2Icon, RotateCwIcon } from 'lucide-react';
 import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import StickyBox from 'react-sticky-box';
-import TabContextMenu from './tab-context-menu';
 import Label from './Label';
-import { useMultiTabsContext } from './multi-tabs-provider';
+import { KeepAliveTab, useMultiTabsContext } from './multi-tabs-provider';
+import TabContextMenu from './tab-context-menu';
 import TabDropdownMenu from './tab-dropdown-menu';
 
 export default function MultiTabs() {
@@ -26,26 +25,22 @@ export default function MultiTabs() {
    */
   const renderTabLabel = useCallback(
     (tab: KeepAliveTab) => {
-      if (tab.hideTab) return null;
+      // if (tab.hideTab) return null;
       return (
         <div
           style={{
             '--gap': '7px',
           }}
           className={cn('tabs-chrome__item group h-full -mr-3', {
-            'is-active': tab.key === activeTabRoutePath,
+            'is-active': tab.pathname === activeTabRoutePath,
           })}
           onClick={() => {
-            push(tab.key);
+            push(tab.pathname);
           }}
         >
           <TabContextMenu tab={tab}>
-            <Label
-              closeTab={closeTab}
-              tabKey={tab.key}
-              closable={tabs.length > 1}
-            >
-              {t(tab.label)}
+            <Label closeTab={closeTab} tab={tab} closable={tabs.length > 1}>
+              {t(tab.title)}
             </Label>
           </TabContextMenu>
         </div>
@@ -58,12 +53,14 @@ export default function MultiTabs() {
    * 渲染所有tab
    */
   const tabItems: TabsProps['items'] = useMemo(() => {
-    return tabs.map((tab) => ({
-      key: tab.key,
-      label: renderTabLabel(tab),
-      closable: tabs.length > 1,
-      children: <div className="p-5">{tab.children}</div>,
-    }));
+    return tabs.map((tab) => {
+      return {
+        key: tab.pathname,
+        label: renderTabLabel(tab),
+        closable: tabs.length > 1,
+        children: <div className="p-5">{tab.children}</div>,
+      };
+    });
   }, [tabs, renderTabLabel]);
 
   /**

@@ -5,7 +5,6 @@ import {
   ContextMenuSeparator,
   ContextMenuTrigger,
 } from '@/components/ui/context-menu';
-import { KeepAliveTab } from '@/hooks/use-keep-alive';
 import {
   ArrowLeftToLine,
   ArrowRightLeft,
@@ -16,9 +15,7 @@ import {
 } from '@/icons';
 import { Fragment, PropsWithChildren } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useMultiTabsContext } from './multi-tabs-provider';
-
-const contentIsMaximize = false;
+import { KeepAliveTab, useMultiTabsContext } from './multi-tabs-provider';
 
 type Props = PropsWithChildren & {
   tab?: KeepAliveTab;
@@ -79,7 +76,6 @@ export default function TabContextMenu({ children, tab }: Props) {
       {
         disabled: disabledCloseCurrent,
         handler: () => {
-          console.log(tabKey);
           closeTab(tabKey);
         },
         icon: X,
@@ -154,7 +150,7 @@ export default function TabContextMenu({ children, tab }: Props) {
     return menus;
   };
 
-  const menus = createContextMenus(tab?.key);
+  const menus = createContextMenus(tab?.pathname);
 
   const handleClick = (menu) => {
     if (menu.disabled) {

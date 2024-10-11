@@ -9,7 +9,7 @@ interface MatchRouteType {
   // 要渲染的组件
   children: any;
   // 路由，和pathname区别是，详情页 pathname是 /:id，routePath是 /1
-  routePath: string;
+  // routePath: string;
   // 图标
   icon?: string;
 }
@@ -32,10 +32,10 @@ export function useMatchRoute(): MatchRouteType | undefined {
     if (!lastRoute?.handle) return;
 
     setMatchRoute({
-      title: (lastRoute?.handle as any)?.name,
+      title: (lastRoute?.handle as any)?.title,
       pathname,
       children,
-      routePath: lastRoute?.pathname || '',
+      // routePath: lastRoute?.pathname || '',
       icon: (lastRoute?.handle as any)?.icon,
     });
   }, [pathname]);

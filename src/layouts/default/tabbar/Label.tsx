@@ -1,14 +1,16 @@
+import { Iconify } from '@/components/icon';
 import { X } from '@/icons';
+import { KeepAliveTab } from './multi-tabs-provider';
 import './label.scss';
 
 interface Props {
   children: React.ReactNode;
   closeTab: (path?: string) => void;
-  tabKey: string;
+  tab?: KeepAliveTab;
   closable: boolean;
 }
 
-export default function Label({ children, closeTab, tabKey, closable }: Props) {
+export default function Label({ children, closeTab, tab, closable }: Props) {
   return (
     <div className="relative size-full h-[34px] px-1">
       {/* background */}
@@ -35,7 +37,7 @@ export default function Label({ children, closeTab, tabKey, closable }: Props) {
           <X
             onClick={(e) => {
               e.stopPropagation();
-              closeTab(tabKey);
+              closeTab(tab?.pathname);
             }}
             className="hover:bg-accent stroke-accent-foreground/80 hover:stroke-accent-foreground text-accent-foreground/80 group-[.is-active]:text-accent-foreground mt-[2px] size-3 cursor-pointer rounded-full transition-all"
           />
@@ -43,28 +45,10 @@ export default function Label({ children, closeTab, tabKey, closable }: Props) {
       </div>
       {/* main */}
       <div className="tabs-chrome__item-main group-[.is-active]:text-primary dark:group-[.is-active]:text-accent-foreground text-accent-foreground z-[2] mx-[calc(var(--gap)*2)] my-0 flex h-full items-center overflow-hidden rounded-tl-[5px] rounded-tr-[5px] pl-2 pr-4 duration-150">
-        <svg
-          data-v-c5fe917d=""
-          xmlns="http://www.w3.org/2000/svg"
-          xmlnsXlink="http://www.w3.org/1999/xlink"
-          aria-hidden="true"
-          role="img"
-          className="mr-1 flex size-4 items-center overflow-hidden iconify iconify--lucide"
-          width="1em"
-          height="1em"
-          viewBox="0 0 24 24"
-        >
-          <g
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-          >
-            <path d="M3 3v18h18"></path>
-            <path d="M7 12v5h12V8l-5 5l-4-4Z"></path>
-          </g>
-        </svg>
+        <Iconify
+          icon={tab?.icon}
+          className="mr-1 flex size-4 items-center overflow-hidden"
+        />
         <span className="flex-1 overflow-hidden whitespace-nowrap text-sm">
           {children}
         </span>

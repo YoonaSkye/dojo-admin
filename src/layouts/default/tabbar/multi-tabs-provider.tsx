@@ -1,7 +1,4 @@
-import { RouteMeta } from '#/router';
-import { useCurrentRouteMeta, useRouter } from '@/router/hooks';
-import { replaceDynamicParams } from '@/router/hooks/use-current-route-meta';
-import { isEmpty } from 'ramda';
+import { useMatchRoute, useRouter } from '@/router/hooks';
 import {
   createContext,
   PropsWithChildren,
@@ -11,11 +8,13 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { useLocation } from 'react-router-dom';
 
-export type KeepAliveTab = RouteMeta & {
+export interface KeepAliveTab {
+  title: string;
+  pathname: string;
+  icon?: any;
   children: any;
-};
+}
 
 type MultiTabsContextType = {
   tabs: KeepAliveTab[];
@@ -50,20 +49,11 @@ export function useMultiTabsContext() {
 export default function MultiTabsProvider({ children }: PropsWithChildren) {
   const { push } = useRouter();
   const [tabs, setTabs] = useState<KeepAliveTab[]>([]);
-  // current route meta
-  const currentRouteMeta = useCurrentRouteMeta();
-  const location = useLocation();
 
-  // active tab
-  const activeTabRoutePath = useMemo(() => {
-    if (!currentRouteMeta) return '';
-
-    const { key, params = {} } = currentRouteMeta;
-    if (!isEmpty(params)) {
-      return replaceDynamicParams(key, params);
-    }
-    return key;
-  }, [currentRouteMeta]);
+  // current active tab path
+  const [activeTabRoutePath, setActiveTabRoutePath] = useState<string>('');
+  // current match route
+  const matchRoute = useMatchRoute();
 
   /**
    * Close specified tab
@@ -73,16 +63,18 @@ export default function MultiTabsProvider({ children }: PropsWithChildren) {
       const tempTabs = [...tabs];
       if (tempTabs.length === 1) return;
 
-      const deleteTabIndex = tempTabs.findIndex((item) => item.key === path);
+      const deleteTabIndex = tempTabs.findIndex(
+        (item) => item.pathname === path
+      );
       if (deleteTabIndex === -1) return;
 
       if (deleteTabIndex > 0) {
         if (path === activeTabRoutePath) {
-          push(tempTabs[deleteTabIndex - 1].key);
+          push(tempTabs[deleteTabIndex - 1].pathname);
         }
       } else {
         if (path === activeTabRoutePath) {
-          push(tempTabs[deleteTabIndex + 1].key);
+          push(tempTabs[deleteTabIndex + 1].pathname);
         }
       }
 
@@ -97,7 +89,7 @@ export default function MultiTabsProvider({ children }: PropsWithChildren) {
    */
   const closeOthersTab = useCallback(
     (path = activeTabRoutePath) => {
-      setTabs((prev) => prev.filter((item) => item.key === path));
+      setTabs((prev) => prev.filter((item) => item.pathname === path));
       if (path !== activeTabRoutePath) {
         push(path);
       }
@@ -118,7 +110,7 @@ export default function MultiTabsProvider({ children }: PropsWithChildren) {
    */
   const closeLeft = useCallback(
     (path: string) => {
-      const currentTabIndex = tabs.findIndex((item) => item.key === path);
+      const currentTabIndex = tabs.findIndex((item) => item.pathname === path);
       const newTabs = tabs.slice(currentTabIndex);
       setTabs(newTabs);
       push(path);
@@ -131,7 +123,7 @@ export default function MultiTabsProvider({ children }: PropsWithChildren) {
    */
   const closeRight = useCallback(
     (path: string) => {
-      const currentTabIndex = tabs.findIndex((item) => item.key === path);
+      const currentTabIndex = tabs.findIndex((item) => item.pathname === path);
       const newTabs = tabs.slice(0, currentTabIndex + 1);
       setTabs(newTabs);
       push(path);
@@ -145,7 +137,7 @@ export default function MultiTabsProvider({ children }: PropsWithChildren) {
   const refreshTab = useCallback(
     (path = activeTabRoutePath) => {
       setTabs((prev) => {
-        const index = prev.findIndex((item) => item.key === path);
+        const index = prev.findIndex((item) => item.pathname === path);
 
         if (index >= 0) {
           prev[index].timeStamp = getTimeStamp();
@@ -158,21 +150,28 @@ export default function MultiTabsProvider({ children }: PropsWithChildren) {
   );
 
   useEffect(() => {
-    setTabs((prev) => prev.filter((item) => !item.hideTab));
+    if (!matchRoute) return;
+    const existKeepAliveTab = tabs.find(
+      (o) => o.pathname === matchRoute?.pathname
+    );
 
-    if (!currentRouteMeta) return;
-    let { key } = currentRouteMeta;
-    const { outlet: children, params = {} } = currentRouteMeta;
-
-    const isExisted = tabs.find((item) => item.key === key);
-
-    if (!isExisted) {
+    // 如果不存在则需要插入
+    if (!existKeepAliveTab) {
       setTabs((prev) => [
         ...prev,
-        { ...currentRouteMeta, key, children, timeStamp: getTimeStamp() },
+        {
+          title: matchRoute.title,
+          // pathname: getpathname(),
+          // routePath: matchRoute.routePath,
+          pathname: matchRoute.pathname,
+          children: matchRoute.children,
+          icon: matchRoute.icon,
+        },
       ]);
     }
-  }, [currentRouteMeta]);
+
+    setActiveTabRoutePath(matchRoute.pathname);
+  }, [matchRoute]);
 
   const defaultValue: MultiTabsContextType = useMemo(
     () => ({

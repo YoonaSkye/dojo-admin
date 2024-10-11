@@ -1,8 +1,7 @@
-import MultiTabs from './tabbar/multi-tabs';
-import MultiTabsProvider from './tabbar/multi-tabs-provider';
 import LayoutHeader from './components/layout-header';
 import LayoutSidebar from './components/layout-sidebar';
-import { Outlet } from 'react-router-dom';
+import MultiTabs from './tabbar/multi-tabs';
+import MultiTabsProvider from './tabbar/multi-tabs-provider';
 
 export default function DefaultLayout() {
   return (
@@ -18,10 +17,10 @@ export default function DefaultLayout() {
             marginTop: '50px',
           }}
         >
-          {/* <MultiTabsProvider>
+          <MultiTabsProvider>
             <MultiTabs />
-          </MultiTabsProvider> */}
-          <Outlet />
+          </MultiTabsProvider>
+          {/* <Outlet /> */}
         </main>
       </div>
     </div>

@@ -28,9 +28,7 @@ const Not_Found_Page_Route: RouteObject = {
 
 export default function Router() {
   // TODO：完善动态路由功能
-  // const permissonRoutes = usePermissionRoutes();
   const permissonRoutes = usePermission();
-  console.log('router', permissonRoutes);
 
   const asyncRoutes: RouteObject = {
     // TODO: 完善路由守卫功能
@@ -41,7 +39,7 @@ export default function Router() {
       </AuthGuard>
     ),
     children: [
-      { index: true, element: <Navigate to="/dashboard/analytics" replace /> },
+      { index: true, element: <Navigate to={HOMEPAGE} replace /> },
       ...permissonRoutes,
     ],
   };
@@ -53,7 +51,6 @@ export default function Router() {
     ErrorRoutes,
     Not_Found_Page_Route,
   ];
-  console.log(routes);
 
   const router = createHashRouter(routes as unknown as RouteObject[]);
 

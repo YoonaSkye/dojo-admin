@@ -67,7 +67,7 @@ export function useRouteToMenu() {
         const menuItem: any = [];
         const { handle, children, path } = item;
         if (handle) {
-          const { icon, title, name } = handle;
+          const { icon, title } = handle;
           menuItem.key = path;
           menuItem.label = (
             <div className="inline-flex w-full items-center justify-between">
@@ -76,7 +76,7 @@ export function useRouteToMenu() {
           );
 
           if (icon) {
-            <Iconify icon={icon} />;
+            menuItem.icon = <Iconify icon={icon} width="1em" height="1em" />;
           }
         }
         if (children) {
