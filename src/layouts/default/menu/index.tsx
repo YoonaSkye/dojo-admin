@@ -3,12 +3,14 @@ import { usePermissionRoutes, useRouteToMenu } from '@/router/hooks';
 import { useCollapsed } from '@/store/setting';
 import { useThemeToken } from '@/theme/hooks';
 import { Link, useLocation, useMatches, useNavigate } from 'react-router-dom';
-import { ItemType } from 'antd/es/menu/hooks/useItems';
 import { Menu, ConfigProvider } from 'antd';
 import type { MenuProps } from 'antd';
 import { menuFilter } from '@/router/utils';
 import AppLogo from '@/assets/images/logo.png';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { usePermission } from '@/router/hooks/use-permission';
+
+type MenuItem = Required<MenuProps>['items'][number];
 
 type Props = {
   closeSideBarDrawer?: () => void;
@@ -18,7 +20,8 @@ export default function LayoutMenu(props: Props) {
   const collapsed = useCollapsed();
 
   const routeToMenuFn = useRouteToMenu();
-  const permissionRoutes = usePermissionRoutes();
+  // const permissionRoutes = usePermissionRoutes();
+  const permissionRoutes = usePermission();
   const { pathname } = useLocation();
   const matches = useMatches();
   const navigate = useNavigate();
@@ -27,7 +30,10 @@ export default function LayoutMenu(props: Props) {
   /** state */
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>(['']);
-  const [menuList, setMenuList] = useState<ItemType[]>([]);
+  const [menuList, setMenuList] = useState<MenuItem[]>([]);
+  console.log(openKeys, selectedKeys);
+  console.log('matches', matches);
+  console.log('menus', menuList);
 
   useEffect(() => {
     const menuRoutes = menuFilter(permissionRoutes);

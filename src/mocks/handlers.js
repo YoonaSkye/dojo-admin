@@ -86,11 +86,11 @@ export const handlers = [
     }
     const user = USER_LIST.find((item) => item.username === userinfo.username);
 
-    // const menus =
-    //   MOCK_MENUS.find((item) => item.username === userinfo.username)?.menus ??
-    //   [];
+    const menus =
+      MOCK_MENUS.find((item) => item.username === userinfo.username)?.menus ??
+      [];
 
-    const menus = user.permissions;
+    // const menus = user.permissions;
 
     return HttpResponse.json(responseSuccess(menus));
   }),

@@ -1,19 +1,20 @@
 import { AppRouteObject, RouteMeta } from '#/router';
 import { ascend } from 'ramda';
+import { RouteObject } from 'react-router-dom';
 
 /**
  * return menu routes
  */
-export const menuFilter = (items: AppRouteObject[]) => {
-  return items
-    .filter((item) => {
-      const show = item.meta?.key;
-      if (show && item.children) {
-        item.children = menuFilter(item.children);
-      }
-      return show;
-    })
-    .sort(ascend((item) => item.order || Infinity));
+export const menuFilter = (items: RouteObject[]) => {
+  return items.filter((item) => {
+    // 过滤掉重定向路由
+    const show = item.handle;
+    if (show && item.children) {
+      item.children = menuFilter(item.children);
+    }
+    return show;
+  });
+  // .sort(ascend((item) => item.order || Infinity));
 };
 
 /**

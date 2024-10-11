@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 import { useRouter } from '@/router/hooks';
+import { useAccessActions } from '@/store/access';
 
 import { BookOpenTextIcon, LogOutIcon } from 'lucide-react';
 import { AiFillGithub } from 'react-icons/ai';
@@ -36,12 +37,13 @@ const accountMenuItems: {
 ];
 
 export default function AccountMenu() {
-  // const { clearUserInfoAndToken } = useUserActions();
+  const { setAccessToken, setRefreshToken } = useAccessActions();
   const { replace } = useRouter();
 
   const logout = () => {
     try {
-      // clearUserInfoAndToken();
+      setAccessToken(null);
+      setRefreshToken(null);
     } catch (error) {
       console.log(error);
     } finally {

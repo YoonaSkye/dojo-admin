@@ -51,29 +51,38 @@ export const MOCK_CODES = [
 const dashboardMenus = [
   {
     component: 'BasicLayout',
-    meta: {
+    handle: {
+      name: 'Dashboard',
+      icon: 'lucide:layout-dashboard',
       order: -1,
-      title: 'page.dashboard.title',
+      // title: 'page.dashboard.title',
+      title: 'sys.menu.dashboard',
     },
-    name: 'Dashboard',
-    path: '/',
+    path: '/dashboard',
     redirect: '/analytics',
     children: [
       {
-        name: 'Analytics',
-        path: '/analytics',
-        component: '/dashboard/analytics/index',
-        meta: {
+        path: '/dashboard/analytics',
+        // component: '/dashboard/analytics/index',
+        component: '/dashboard/analysis/index.tsx',
+        handle: {
+          name: 'Analytics',
           affixTab: true,
-          title: 'page.dashboard.analytics',
+          icon: 'lucide:area-chart',
+          // title: 'page.dashboard.analytics',
+          title: 'sys.menu.analysis',
         },
       },
       {
         name: 'Workspace',
-        path: '/workspace',
-        component: '/dashboard/workspace/index',
-        meta: {
-          title: 'page.dashboard.workspace',
+        path: '/dashboard/workspace',
+        // component: '/dashboard/workspace/index',
+        component: '/dashboard/workbench/index.tsx',
+        handle: {
+          name: 'Workspace',
+          icon: 'carbon:workspace',
+          // title: 'page.dashboard.workspace',
+          title: 'sys.menu.workbench',
         },
       },
     ],
@@ -84,7 +93,7 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
   const roleWithMenus = {
     admin: {
       component: '/demos/access/admin-visible',
-      meta: {
+      handle: {
         icon: 'mdi:button-cursor',
         title: 'page.demos.access.adminVisible',
       },
@@ -93,7 +102,7 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
     },
     super: {
       component: '/demos/access/super-visible',
-      meta: {
+      handle: {
         icon: 'mdi:button-cursor',
         title: 'page.demos.access.superVisible',
       },
@@ -102,7 +111,7 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
     },
     user: {
       component: '/demos/access/user-visible',
-      meta: {
+      handle: {
         icon: 'mdi:button-cursor',
         title: 'page.demos.access.userVisible',
       },
@@ -114,7 +123,7 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
   return [
     {
       component: 'BasicLayout',
-      meta: {
+      handle: {
         icon: 'ic:baseline-view-in-ar',
         keepAlive: true,
         order: 1000,
@@ -127,7 +136,7 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
         {
           name: 'AccessDemos',
           path: '/demosaccess',
-          meta: {
+          handle: {
             icon: 'mdi:cloud-key-outline',
             title: 'page.demos.access.backendPermissions',
           },
@@ -137,7 +146,7 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
               name: 'AccessPageControlDemo',
               path: '/demos/access/page-control',
               component: '/demos/access/index',
-              meta: {
+              handle: {
                 icon: 'mdi:page-previous-outline',
                 title: 'page.demos.access.pageAccess',
               },
@@ -146,7 +155,7 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
               name: 'AccessButtonControlDemo',
               path: '/demos/access/button-control',
               component: '/demos/access/button-control',
-              meta: {
+              handle: {
                 icon: 'mdi:button-cursor',
                 title: 'page.demos.access.buttonControl',
               },
@@ -155,7 +164,7 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
               name: 'AccessMenuVisible403Demo',
               path: '/demos/access/menu-visible-403',
               component: '/demos/access/menu-visible-403',
-              meta: {
+              handle: {
                 authority: ['no-body'],
                 icon: 'mdi:button-cursor',
                 menuVisibleWithForbidden: true,
@@ -172,15 +181,18 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
 
 export const MOCK_MENUS = [
   {
-    menus: [...dashboardMenus, ...createDemosMenus('super')],
+    // menus: [...dashboardMenus, ...createDemosMenus('super')],
+    menus: [...dashboardMenus],
     username: 'vben',
   },
   {
-    menus: [...dashboardMenus, ...createDemosMenus('admin')],
+    // menus: [...dashboardMenus, ...createDemosMenus('admin')],
+    menus: [...dashboardMenus],
     username: 'admin',
   },
   {
-    menus: [...dashboardMenus, ...createDemosMenus('user')],
+    // menus: [...dashboardMenus, ...createDemosMenus('user')],
+    menus: [...dashboardMenus],
     username: 'jack',
   },
 ];

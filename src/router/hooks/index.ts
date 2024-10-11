@@ -7,3 +7,4 @@ export { useMatchRouteMeta } from './use-match-route-meta';
 export { usePermissionRoutes } from './use-permission-routes';
 export { useRouteToMenu } from './use-route-menu';
 export { useRouter } from './use-router';
+export { useMatchRoute } from './use-match-route';
