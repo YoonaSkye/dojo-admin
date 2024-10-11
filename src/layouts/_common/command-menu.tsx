@@ -96,7 +96,7 @@ export default function CommandMenu({ ...props }: DialogProps) {
         />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup>
+          {/* <CommandGroup>
             {searchResult.map(({ key, label }) => {
               const partsTitle = parse(t(label), match(t(label), searchQuery));
               const partsKey = parse(key, match(key, searchQuery));
@@ -142,7 +142,7 @@ export default function CommandMenu({ ...props }: DialogProps) {
                 </CommandItem>
               );
             })}
-          </CommandGroup>
+          </CommandGroup> */}
         </CommandList>
         <CommandSeparator />
         <CommandMenuFooter />

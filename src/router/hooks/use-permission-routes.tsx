@@ -27,6 +27,7 @@ export function usePermissionRoutes() {
       permissions || [],
       flattenedPermissons
     );
+
     return [...permissonRoutes];
   }, [permissions]);
 }

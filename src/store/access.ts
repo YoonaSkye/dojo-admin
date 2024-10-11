@@ -57,7 +57,8 @@ interface AccessActions {
     setRefreshToken: (token: AccessToken) => void;
   };
 }
-const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
+// const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
+const HOMEPAGE = '/dashboard/analytics';
 
 export const useAccessStore = create<AccessState & AccessActions>()(
   persist(

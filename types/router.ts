@@ -50,6 +50,12 @@ export interface RouteMeta {
   params?: Params<string>;
 }
 
+export type RouteHandle = {
+  name: string;
+  title: string;
+  icon?: string;
+};
+
 export type AppRouteObject = {
   order?: number;
   meta?: RouteMeta;
@@ -58,23 +64,11 @@ export type AppRouteObject = {
 
 // 扩展meta元信息接口 另一种写法
 // 如何全局暴露出去？
-// declare module 'react-router' {
-//   interface IndexRouteObject {
-//     meta?: {
-//       menu?: boolean;
-//       title?: string;
-//       icon?: React.ReactNode;
-//       auth?: boolean;
-//     };
-//     name?: string;
-//   }
-//   interface NonIndexRouteObject {
-//     meta?: {
-//       menu?: boolean;
-//       title?: string;
-//       icon?: React.ReactNode;
-//       auth?: boolean;
-//     };
-//     name?: string;
-//   }
-// }
+declare module 'react-router' {
+  interface IndexRouteObject {
+    handle?: RouteObject['handle'] & RouteHandle;
+  }
+  interface NonIndexRouteObject {
+    handle?: RouteObject['handle'] & RouteHandle;
+  }
+}
