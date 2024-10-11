@@ -1,19 +1,13 @@
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
-import { Bell, Maximize, Menu, MoonStar, Settings } from '@/icons';
+import { Bell, Maximize, Menu, MoonStar } from '@/icons';
 import CommandMenu from '@/layouts//_common/command-menu';
 import AccountMenu from '@/layouts/_common/account-menu';
+import BreadCrumb from '@/layouts/_common/breadcrumb';
 import LanguageToggle from '@/layouts/_common/language-toggle';
+import Preference from '@/layouts/_common/preference';
 import { useCollapsed, useSettingActions } from '@/store/setting';
 import { CSSProperties } from 'react';
 import { NAV_COLLAPSED_WIDTH, NAV_WIDTH } from './config';
-import Preference from '@/layouts/_common/preference';
 
 export default function LayoutHeader() {
   const collapsed = useCollapsed();
@@ -50,17 +44,7 @@ export default function LayoutHeader() {
         </Button>
         {/* 面包屑 */}
         <div className="flex-center hidden lg:block">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/">概览</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/components">分析页</BreadcrumbLink>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+          <BreadCrumb />
         </div>
         <div className="flex h-full min-w-0 flex-1 items-center"></div>
         <div className="flex h-full min-w-0 flex-shrink-0 items-center">
