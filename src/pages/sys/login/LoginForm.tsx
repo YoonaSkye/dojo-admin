@@ -34,26 +34,28 @@ export default function LoginForm() {
       >
         <Form.Item
           name="username"
-          rules={[{ required: true, message: '请输入账号' }]}
+          rules={[{ required: true, message: t('authentication.usernameTip') }]}
         >
-          <Input placeholder="admin@gamil.com" />
+          <Input placeholder="vben" />
         </Form.Item>
         <Form.Item
           name="password"
-          rules={[{ required: true, message: '请输入密码' }]}
+          rules={[{ required: true, message: t('authentication.passwordTip') }]}
         >
-          <Input.Password type="password" placeholder="demo1234" />
+          <Input.Password type="password" placeholder="123456" />
         </Form.Item>
 
         <Form.Item>
           <Row>
             <Col span={12}>
               <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>记住我</Checkbox>
+                <Checkbox>{t('authentication.rememberMe')}</Checkbox>
               </Form.Item>
             </Col>
             <Col span={12} className="text-right">
-              <button className="underline">忘记密码</button>
+              <button className="underline">
+                {t('authentication.forgetPassword')}
+              </button>
             </Col>
           </Row>
         </Form.Item>
@@ -64,49 +66,54 @@ export default function LoginForm() {
             className="w-full bg-blue-500"
             loading={loading}
           >
-            登录
+            {t('common.login')}
           </Button>
         </Form.Item>
 
         <Row align="middle" gutter={8}>
-          <Col span={9} flex="1">
-            <Button className="w-full !text-sm">手机登录</Button>
+          <Col span={12} flex="1">
+            <Button className="w-full !text-sm">
+              {t('authentication.mobileLogin')}
+            </Button>
           </Col>
-          <Col span={9} flex="1">
-            <Button className="w-full !text-sm">二维码登录</Button>
+          <Col span={12} flex="1">
+            <Button className="w-full !text-sm">
+              {t('authentication.qrcodeLogin')}
+            </Button>
           </Col>
-          <Col span={6} flex="1">
+          {/* <Col span={6} flex="1">
             <Button className="w-full !text-sm">注册</Button>
-          </Col>
+          </Col> */}
         </Row>
 
         <div className="w-full sm:mx-auto md:max-w-md">
           <div className="mt-4 flex items-center justify-between">
             <span className="border-input w-[35%] border-b dark:border-gray-600"></span>
             <span className="text-muted-foreground text-center text-xs uppercase">
-              其他登录方式
+              {t('authentication.thirdPartyLogin')}
             </span>
             <span className="border-input w-[35%] border-b dark:border-gray-600"></span>
           </div>
           <div className="mt-4 flex flex-wrap justify-center">
+            {/* TODO: 重新封装button */}
             <ShadButton
               variant="outline"
               size="icon"
-              className="rounded-full outline-none flex items-center gap-1"
+              className="rounded-full outline-none flex items-center gap-1 mb-3"
             >
               <MdiWechat />
             </ShadButton>
             <ShadButton
               variant="outline"
               size="icon"
-              className="rounded-full outline-none flex items-center gap-1"
+              className="rounded-full outline-none flex items-center gap-1 mb-3"
             >
               <MdiQqchat />
             </ShadButton>
             <ShadButton
               variant="outline"
               size="icon"
-              className="rounded-full outline-none flex items-center gap-1"
+              className="rounded-full outline-none flex items-center gap-1 mb-3"
             >
               <MdiGithub />
             </ShadButton>
@@ -120,9 +127,9 @@ export default function LoginForm() {
           </div>
         </div>
         <div className="mt-3 text-center text-sm">
-          还没有账号?{' '}
+          {t('authentication.accountTip')}
           <span className="text-primary hover:text-primary-hover active:text-primary-active cursor-pointer text-sm font-normal">
-            创建账号
+            {t('authentication.createAccount')}
           </span>
         </div>
       </Form>

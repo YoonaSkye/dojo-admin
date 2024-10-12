@@ -1,7 +1,9 @@
 import common from './common.json';
-import sys from './sys.json';
+import authentication from './authentication.json';
+import en from './en-US.json';
 
 export default {
   ...common,
-  ...sys,
+  ...en,
+  ...authentication,
 };

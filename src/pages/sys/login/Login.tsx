@@ -35,10 +35,12 @@ export default function Login() {
           <div className="flex flex-col items-center justify-center -enter-x mr-20 h-full">
             <Slogan />
             <div className="text-1xl text-foreground mt-6 font-sans lg:text-2xl">
-              开箱即用的大型中后台管理系统
+              {/* 开箱即用的大型中后台管理系统 */}
+              {t('authentication.pageTitle')}
             </div>
             <div className="dark:text-muted-foreground mt-2">
-              工程化、高性能、跨组件库的前端模版
+              {/* 工程化、高性能、跨组件库的前端模版 */}
+              {t('authentication.pageDesc')}
             </div>
           </div>
         </div>
@@ -48,11 +50,11 @@ export default function Login() {
         <div className="enter-x mt-6 w-full sm:mx-auto md:max-w-md">
           <div className="mb-7 sm:mx-auto sm:w-full sm:max-w-md">
             <h2 className="text-foreground mb-3 text-3xl font-bold leading-9 tracking-tight lg:text-4xl">
-              欢迎回来 👋🏻{' '}
+              {t('authentication.welcomeBack')} 👋🏻{' '}
             </h2>
             <p className="text-muted-foreground lg:text-md text-sm">
               <span className="text-muted-foreground">
-                请输入您的帐户信息以开始管理您的项目
+                {t('authentication.loginSubtitle')}
               </span>
             </p>
           </div>
