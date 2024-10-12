@@ -50,40 +50,122 @@ export const MOCK_CODES = [
 
 const dashboardMenus = [
   {
+    name: 'Dashboard',
     component: 'BasicLayout',
     handle: {
-      name: 'Dashboard',
       icon: 'lucide:layout-dashboard',
       order: -1,
-      // title: 'page.dashboard.title',
-      title: 'sys.menu.dashboard',
+      title: 'page.dashboard.title',
     },
     path: '/dashboard',
     redirect: '/analytics',
     children: [
       {
+        name: 'Analytics',
         path: '/dashboard/analytics',
-        // component: '/dashboard/analytics/index',
         component: '/dashboard/analysis/index.tsx',
         handle: {
-          name: 'Analytics',
           affixTab: true,
           icon: 'lucide:area-chart',
-          // title: 'page.dashboard.analytics',
-          title: 'sys.menu.analysis',
+          title: 'page.dashboard.analytics',
         },
       },
       {
         name: 'Workspace',
         path: '/dashboard/workspace',
-        // component: '/dashboard/workspace/index',
         component: '/dashboard/workbench/index.tsx',
         handle: {
-          name: 'Workspace',
           icon: 'carbon:workspace',
-          // title: 'page.dashboard.workspace',
-          title: 'sys.menu.workbench',
+          title: 'page.dashboard.workspace',
         },
+      },
+    ],
+  },
+];
+
+const demosMenus = [
+  {
+    component: 'BasicLayout',
+    handle: {
+      icon: 'ic:baseline-view-in-ar',
+      keepAlive: true,
+      order: 1000,
+      title: 'page.demos.title',
+    },
+    name: 'Demos',
+    path: '/demos',
+    redirect: '/demos/access',
+    children: [
+      // 权限控制
+      {
+        handle: {
+          icon: 'mdi:shield-key-outline',
+          title: 'page.demos.access.frontendPermissions',
+        },
+        name: 'AccessDemos',
+        path: '/demos/access',
+        redirect: '/demos/access/page-control',
+        children: [
+          {
+            name: 'AccessPageControlDemo',
+            path: '/demos/access/page-control',
+            component: '/demos/access/index.tsx',
+            handle: {
+              icon: 'mdi:page-previous-outline',
+              title: 'page.demos.access.pageAccess',
+            },
+          },
+          {
+            name: 'AccessButtonControlDemo',
+            path: '/demos/access/button-control',
+            component: '/demos/access/button-control.tsx',
+            handle: {
+              icon: 'mdi:button-cursor',
+              title: 'page.demos.access.buttonControl',
+            },
+          },
+          // {
+          //   name: 'AccessMenuVisible403Demo',
+          //   path: '/demos/access/menu-visible-403',
+          //   component: '/demos/access/menu-visible-403.tsx',
+          //   handle: {
+          //     authority: ['no-body'],
+          //     icon: 'mdi:button-cursor',
+          //     menuVisibleWithForbidden: true,
+          //     title: 'page.demos.access.menuVisible403',
+          //   },
+          // },
+          // {
+          //   name: 'AccessSuperVisibleDemo',
+          //   path: '/demos/access/super-visible',
+          //   component: '#/views/demos/access/super-visible.tsx',
+          //   handle: {
+          //     authority: ['super'],
+          //     icon: 'mdi:button-cursor',
+          //     title: 'page.demos.access.superVisible',
+          //   },
+          // },
+          // {
+          //   name: 'AccessAdminVisibleDemo',
+          //   path: '/demos/access/admin-visible',
+          //   component: '/demos/access/admin-visible.tsx',
+          //   handle: {
+          //     authority: ['admin'],
+          //     icon: 'mdi:button-cursor',
+          //     title: 'page.demos.access.adminVisible',
+          //   },
+          // },
+          // {
+          //   name: 'AccessUserVisibleDemo',
+          //   path: '/demos/access/user-visible',
+          //   component: '/demos/access/user-visible.tsx',
+          //   handle: {
+          //     authority: ['user'],
+          //     icon: 'mdi:button-cursor',
+          //     title: 'page.demos.access.userVisible',
+          //   },
+          // },
+        ],
       },
     ],
   },
@@ -182,7 +264,7 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
 export const MOCK_MENUS = [
   {
     // menus: [...dashboardMenus, ...createDemosMenus('super')],
-    menus: [...dashboardMenus],
+    menus: [...dashboardMenus, ...demosMenus],
     username: 'vben',
   },
   {
