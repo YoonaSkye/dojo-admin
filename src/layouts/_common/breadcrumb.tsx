@@ -17,6 +17,7 @@ type Crumbs = {
   path: string;
 };
 
+//BUG: 面包屑更新时，太突兀，速度太快
 export default function BreadCrumb() {
   const { t } = useTranslation();
   const matches = useMatches();

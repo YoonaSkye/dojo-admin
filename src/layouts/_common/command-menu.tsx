@@ -58,14 +58,14 @@ export default function CommandMenu({ ...props }: DialogProps) {
   }, []);
 
   //刷选搜索结果
-  // useEffect(() => {
-  //   const result = flattenedRoutes.filter(
-  //     (item) =>
-  //       t(item.label).toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1 ||
-  //       t(item.key).toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1
-  //   );
-  //   setSearchResult(result);
-  // }, [searchQuery, flattenedRoutes, t]);
+  useEffect(() => {
+    const result = flattenedRoutes.filter(
+      (item) =>
+        t(item.label).toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1 ||
+        t(item.key).toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1
+    );
+    setSearchResult(result);
+  }, [searchQuery, flattenedRoutes, t]);
 
   const runCommand = useCallback((command: () => unknown) => {
     setOpen(false);
@@ -96,7 +96,7 @@ export default function CommandMenu({ ...props }: DialogProps) {
         />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
-          {/* <CommandGroup>
+          <CommandGroup>
             {searchResult.map(({ key, label }) => {
               const partsTitle = parse(t(label), match(t(label), searchQuery));
               const partsKey = parse(key, match(key, searchQuery));
@@ -142,7 +142,7 @@ export default function CommandMenu({ ...props }: DialogProps) {
                 </CommandItem>
               );
             })}
-          </CommandGroup> */}
+          </CommandGroup>
         </CommandList>
         <CommandSeparator />
         <CommandMenuFooter />

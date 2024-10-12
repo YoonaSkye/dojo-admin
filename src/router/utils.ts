@@ -20,10 +20,10 @@ export const menuFilter = (items: RouteObject[]) => {
 /**
  * return flattened routes
  */
-export const flattenMenuRoutes = (routes: AppRouteObject[]) => {
+export const flattenMenuRoutes = (routes: RouteObject[]) => {
   return routes.reduce<RouteMeta[]>((prev, item) => {
-    const { meta, children } = item;
-    if (meta) prev.push(meta);
+    const { handle, children, path } = item;
+    if (handle) prev.push({ ...handle, key: path, label: handle.title });
     if (children) prev.push(...flattenMenuRoutes(children));
     return prev;
   }, []);
