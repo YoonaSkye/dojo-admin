@@ -1,24 +1,14 @@
-import { ButtonProps } from 'antd';
-import { CSSProperties, ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
+import { Button } from '@/components/ui/button';
 
-type Props = {
-  children: ReactNode;
-  className?: string;
-  style?: CSSProperties;
-} & ButtonProps;
-export default function IconButton({
-  children,
-  className,
-  style,
-  onClick,
-}: Props) {
+export default function IconButton({ children }: PropsWithChildren) {
   return (
-    <button
-      style={style}
-      className={`flex cursor-pointer items-center justify-center rounded-full p-2 hover:bg-hover ${className}`}
-      onClick={onClick}
+    <Button
+      variant="icon"
+      size="icon"
+      className="rounded-full outline-none flex items-center gap-1"
     >
       {children}
-    </button>
+    </Button>
   );
 }

@@ -1,5 +1,5 @@
 import { SignInReq } from '@/api/services/userService';
-import { Button as ShadButton } from '@/components/ui/button';
+import { IconButton } from '@/components/icon';
 import { MdiGithub, MdiGoogle, MdiQqchat, MdiWechat } from '@/icons';
 import { useSignIn } from '@/store/access';
 import { Button, Checkbox, Col, Form, Input, Row } from 'antd';
@@ -81,9 +81,6 @@ export default function LoginForm() {
               {t('authentication.qrcodeLogin')}
             </Button>
           </Col>
-          {/* <Col span={6} flex="1">
-            <Button className="w-full !text-sm">注册</Button>
-          </Col> */}
         </Row>
 
         <div className="w-full sm:mx-auto md:max-w-md">
@@ -95,35 +92,18 @@ export default function LoginForm() {
             <span className="border-input w-[35%] border-b dark:border-gray-600"></span>
           </div>
           <div className="mt-4 flex flex-wrap justify-center">
-            {/* TODO: 重新封装button */}
-            <ShadButton
-              variant="outline"
-              size="icon"
-              className="rounded-full outline-none flex items-center gap-1 mb-3"
-            >
+            <IconButton>
               <MdiWechat />
-            </ShadButton>
-            <ShadButton
-              variant="outline"
-              size="icon"
-              className="rounded-full outline-none flex items-center gap-1 mb-3"
-            >
+            </IconButton>
+            <IconButton>
               <MdiQqchat />
-            </ShadButton>
-            <ShadButton
-              variant="outline"
-              size="icon"
-              className="rounded-full outline-none flex items-center gap-1 mb-3"
-            >
+            </IconButton>
+            <IconButton>
               <MdiGithub />
-            </ShadButton>
-            <ShadButton
-              variant="outline"
-              size="icon"
-              className="rounded-full outline-none flex items-center gap-1"
-            >
+            </IconButton>
+            <IconButton>
               <MdiGoogle />
-            </ShadButton>
+            </IconButton>
           </div>
         </div>
         <div className="mt-3 text-center text-sm">
