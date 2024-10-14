@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Bell, Maximize, Menu, MoonStar } from '@/icons';
+import { Bell, Maximize, Menu } from '@/icons';
 import CommandMenu from '@/layouts//_common/command-menu';
 import AccountMenu from '@/layouts/_common/account-menu';
 import BreadCrumb from '@/layouts/_common/breadcrumb';
@@ -8,6 +8,7 @@ import Preference from '@/layouts/_common/preference';
 import { useCollapsed, useSettingActions } from '@/store/setting';
 import { CSSProperties } from 'react';
 import { NAV_COLLAPSED_WIDTH, NAV_WIDTH } from './config';
+import ModeToggle from '@/layouts/_common/mode-toggle';
 
 export default function LayoutHeader() {
   const collapsed = useCollapsed();
@@ -63,13 +64,7 @@ export default function LayoutHeader() {
 
           {/* 亮暗模式切换按钮 */}
           <div className="mr-2 mt-[2px]">
-            <Button
-              variant="icon"
-              size="icon"
-              className="is-dark theme-toggle cursor-pointer border-none bg-none rounded-full"
-            >
-              <MoonStar className="size-4" />
-            </Button>
+            <ModeToggle />
           </div>
 
           {/* 国际化按钮 */}

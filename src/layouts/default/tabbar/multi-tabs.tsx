@@ -77,7 +77,7 @@ export default function MultiTabs() {
       }}
     >
       <div
-        className="flex transition-all border-b"
+        className="bg-background border-border flex transition-all border-b"
         style={{
           height: '38px',
           marginLeft: '0px',

@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 /* @layer base */
 
 /* @layer components */
@@ -43,4 +45,22 @@
   height: 100%;
   overscroll-behavior: none;
   width: 100%;
+}
+
+::view-transition-image-pair(root) {
+  isolation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+  display: block;
+}
+
+::view-transition-old(root) {
+  z-index: 999;
+}
+.dark::view-transition-new(root) {
+  z-index: 999;
 }

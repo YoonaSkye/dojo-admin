@@ -40,10 +40,7 @@ export default function BreadCrumb() {
         {breadCrumbs.map((crumb, index) => (
           <Fragment key={crumb.path}>
             <BreadcrumbItem>
-              <BreadcrumbLink
-                href="javascript:void 0"
-                onClick={() => navigate(crumb.path)}
-              >
+              <BreadcrumbLink onClick={() => navigate(crumb.path)}>
                 <div className="flex-center">
                   <Iconify icon={crumb.icon} className="mr-1 size-4" />
                   {t(crumb.title)}
