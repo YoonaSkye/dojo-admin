@@ -1,5 +1,5 @@
+import Loading from '@/components/loading';
 import { useAccessMenus } from '@/store/access';
-
 import { lazy, Suspense, useMemo } from 'react';
 import { Navigate, Outlet, RouteObject } from 'react-router-dom';
 
@@ -40,7 +40,7 @@ function generateRoutesByBackend(menuRoutes: RouteRecordRaw[]) {
     // layout转换
     if (component && component === 'BasicLayout') {
       route.element = (
-        <Suspense fallback={<p>Loading</p>}>
+        <Suspense fallback={<Loading />}>
           <Outlet />
         </Suspense>
       );
