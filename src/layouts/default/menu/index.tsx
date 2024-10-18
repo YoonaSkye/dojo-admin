@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
-import { usePermissionRoutes, useRouteToMenu } from '@/router/hooks';
+import Logo from '@/components/logo';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { useRouteToMenu } from '@/router/hooks';
+import { usePermission } from '@/router/hooks/use-permission';
+import { menuFilter } from '@/router/utils';
 import { useCollapsed } from '@/store/setting';
 import { useThemeToken } from '@/theme/hooks';
-import { Link, useLocation, useMatches, useNavigate } from 'react-router-dom';
-import { Menu, ConfigProvider } from 'antd';
 import type { MenuProps } from 'antd';
-import { menuFilter } from '@/router/utils';
-import AppLogo from '@/assets/images/logo.png';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { usePermission } from '@/router/hooks/use-permission';
+import { ConfigProvider, Menu } from 'antd';
+import { useEffect, useState } from 'react';
+import { useLocation, useMatches, useNavigate } from 'react-router-dom';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -64,22 +64,7 @@ export default function LayoutMenu(props: Props) {
   return (
     <>
       <div style={{ height: '50px' }}>
-        <div className="light flex h-full items-center text-lg">
-          <Link
-            to="/"
-            className="flex h-full items-center gap-2 overflow-hidden px-3 text-lg font-semibold leading-normal transition-all duration-500"
-          >
-            <img
-              src={AppLogo}
-              alt="Vben Admin"
-              className="relative rounded-none bg-transparent"
-              width={32}
-            />
-            <span className="text-primary dark:text-foreground truncate text-nowrap">
-              Vben Admin
-            </span>
-          </Link>
-        </div>
+        <Logo />
       </div>
 
       {/* Sidebar menu */}

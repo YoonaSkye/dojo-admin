@@ -1,17 +1,10 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import avatar from '@/assets/images/avatar-v1.webp';
+import IAvatar from '@/components/avatar';
 
 export default function WorkbenchHeader() {
   return (
     <div className="card-box p-4 py-6 lg:flex">
-      <div className="size-20 relative flex flex-shrink-0 items-center">
-        <Avatar>
-          <AvatarImage src={avatar} alt="vben" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-        {/* 暂时写死，应该动态决定 */}
-        <span className="bg-green-500 border-background absolute bottom-0 right-0 size-3 rounded-full border-2"></span>
-      </div>
+      <IAvatar src={avatar} className="size-20" />
 
       <div className="flex flex-col justify-center md:ml-6 md:mt-0">
         <h1 className="text-md font-semibold md:text-xl">

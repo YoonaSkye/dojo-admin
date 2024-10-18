@@ -1,18 +1,24 @@
-import { useThemeToken } from '@/theme/hooks';
 import AppLogo from '@/assets/images/logo.png';
-import { useCollapsed } from '@/store/setting';
+import { Link } from 'react-router-dom';
+import IAvatar from '../avatar';
 
-export default function Logo({ className = '' }: { className?: string }) {
-  const { colorPrimary } = useThemeToken();
-  const collapsed = useCollapsed();
+export default function Logo() {
   return (
-    <div className="h-12 py-[10px] pr-[10px] flex items-center pl-[7px] cursor-pointer">
-      <img src={AppLogo} alt="logo" className="h-[32px] w-[32px]" />
-      {!collapsed && (
-        <div className="ml-2 text-white text-base leading-normal font-bold truncate md:opacity-100">
-          Dojo admin
-        </div>
-      )}
+    <div className="light flex h-full items-center text-lg">
+      <Link
+        to="/"
+        className="flex h-full items-center gap-2 overflow-hidden px-3 text-lg leading-normal transition-all duration-500"
+      >
+        <IAvatar
+          src={AppLogo}
+          alt="vben admin Antd"
+          className="relative w-8 rounded-none bg-transparent"
+        />
+        {/* TODO: 是否考虑添加collapsed判断逻辑 */}
+        <span className="text-foreground truncate text-nowrap font-semibold">
+          Vben Admin Antd
+        </span>
+      </Link>
     </div>
   );
 }

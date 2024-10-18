@@ -1,5 +1,5 @@
 import avatar from '@/assets/images/avatar-v1.webp';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import IAvatar from '@/components/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -55,27 +55,19 @@ export default function AccountMenu() {
       <DropdownMenuTrigger className="outline-none">
         <div className="hover:bg-accent ml-1 mr-2 cursor-pointer rounded-full p-1.5">
           <div className="hover:text-accent-foreground flex-center">
-            <div className="size-8 relative flex flex-shrink-0 items-center">
-              <Avatar>
-                <AvatarImage src={avatar} alt="vben" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              {/* 暂时写死，应该动态决定 */}
-              <span className="bg-green-500 border-background absolute bottom-0 right-0 size-3 rounded-full border-2"></span>
-            </div>
+            <IAvatar src={avatar} alt="vben" className="size-8" dot />
           </div>
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mr-2 min-w-[240px] p-0 pb-1">
         <DropdownMenuLabel className="flex items-center p-3">
-          <div className="size-12 relative flex flex-shrink-0 items-center">
-            <Avatar>
-              <AvatarImage src={avatar} alt="vben" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            {/* 暂时写死，应该动态决定 */}
-            <span className="bg-green-500 border-background absolute bottom-0 right-0 size-3 rounded-full border-2"></span>
-          </div>
+          <IAvatar
+            src={avatar}
+            alt="vben"
+            className="size-12"
+            dot
+            dotClass="bottom-0 right-1 border-2 size-4 bg-green-500"
+          />
           <div className="ml-2 w-full">
             <div className="text-foreground mb-1 flex items-center text-sm font-medium">
               Vben
