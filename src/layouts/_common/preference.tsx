@@ -46,7 +46,7 @@ export default function Preference() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="icon" size="icon" className="rounded-full mr-2">
+        <Button variant="icon" size="icon" className="rounded-full">
           <Settings className="size-4" />
         </Button>
       </SheetTrigger>

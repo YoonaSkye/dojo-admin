@@ -9,6 +9,7 @@ import { useCollapsed, useSettingActions } from '@/store/setting';
 import { CSSProperties } from 'react';
 import { NAV_COLLAPSED_WIDTH, NAV_WIDTH } from './config';
 import ModeToggle from '@/layouts/_common/mode-toggle';
+import FullScreenButton from '@/layouts/_common/full-screen';
 
 export default function LayoutHeader() {
   const collapsed = useCollapsed();
@@ -55,30 +56,25 @@ export default function LayoutHeader() {
           </div>
 
           {/* theme设置按钮 */}
-          <div className="mr-2">
-            {/* <Button variant="outline" size="icon" className="rounded-full mr-2">
-              <Settings className="size-4" />
-            </Button> */}
+          <div className="mr-1">
             <Preference />
           </div>
 
           {/* 亮暗模式切换按钮 */}
-          <div className="mr-2 mt-[2px]">
+          <div className="mr-1 mt-[2px]">
             <ModeToggle />
           </div>
 
           {/* 国际化按钮 */}
-          <div className="mr-2">
+          <div className="mr-1">
             <LanguageToggle />
           </div>
 
           {/* 全屏按钮 */}
-          <Button variant="icon" size="icon" className="rounded-full mr-2">
-            <Maximize className="size-4" />
-          </Button>
+          <FullScreenButton className="mr-1" />
 
           {/* 消息通知 */}
-          <Button variant="icon" size="icon" className="rounded-full mr-2">
+          <Button variant="icon" size="icon" className="rounded-full mr-1">
             <Bell className="size-4" />
           </Button>
 
