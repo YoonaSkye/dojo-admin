@@ -4,11 +4,11 @@ import { useRouteToMenu } from '@/router/hooks';
 import { usePermission } from '@/router/hooks/use-permission';
 import { menuFilter } from '@/router/utils';
 import { useCollapsed } from '@/store/setting';
-import { useThemeToken } from '@/theme/hooks';
 import type { MenuProps } from 'antd';
 import { ConfigProvider, Menu } from 'antd';
 import { useEffect, useState } from 'react';
 import { useLocation, useMatches, useNavigate } from 'react-router-dom';
+import './index.scss';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -25,7 +25,6 @@ export default function LayoutMenu(props: Props) {
   const { pathname } = useLocation();
   const matches = useMatches();
   const navigate = useNavigate();
-  const { colorBgElevated } = useThemeToken();
 
   /** state */
   const [openKeys, setOpenKeys] = useState<string[]>([]);

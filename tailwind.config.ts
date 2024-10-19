@@ -53,10 +53,10 @@ const shadcnUiColors = {
 };
 
 const customColors = {
-  green: {
-    ...createColorsPalette('green'),
-    foreground: 'hsl(var(--success-foreground))',
-  },
+  // green: {
+  //   ...createColorsPalette('green'),
+  //   foreground: 'hsl(var(--success-foreground))',
+  // },
   header: {
     DEFAULT: 'hsl(var(--header))',
   },
@@ -68,10 +68,10 @@ const customColors = {
     DEFAULT: 'hsl(var(--main))',
   },
   overlay: 'hsl(var(--overlay))',
-  red: {
-    ...createColorsPalette('red'),
-    foreground: 'hsl(var(--destructive-foreground))',
-  },
+  // red: {
+  //   ...createColorsPalette('red'),
+  //   foreground: 'hsl(var(--destructive-foreground))',
+  // },
   sidebar: {
     deep: 'hsl(var(--sidebar-deep))',
     DEFAULT: 'hsl(var(--sidebar))',
@@ -84,10 +84,10 @@ const customColors = {
     ...createColorsPalette('warning'),
     DEFAULT: 'hsl(var(--warning))',
   },
-  yellow: {
-    ...createColorsPalette('yellow'),
-    foreground: 'hsl(var(--warning-foreground))',
-  },
+  // yellow: {
+  //   ...createColorsPalette('yellow'),
+  //   foreground: 'hsl(var(--warning-foreground))',
+  // },
 };
 
 const config = {

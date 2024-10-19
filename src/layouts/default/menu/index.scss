@@ -1,0 +1,23 @@
+$menu-item-color: hsl(var(--foreground) / 80%);
+
+.ant-menu-submenu-title {
+  &:hover {
+    .ant-menu-item-icon {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.ant-menu-item {
+  &:hover {
+    .ant-menu-item-icon {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.ant-menu-item-icon {
+  fill: $menu-item-color;
+  width: 16px;
+  height: 16px;
+}
