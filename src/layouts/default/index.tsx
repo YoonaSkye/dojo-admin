@@ -7,10 +7,10 @@ export default function DefaultLayout() {
   return (
     <div className="relative flex min-h-full w-full">
       <LayoutSidebar />
-      <div className="flex flex-1 flex-col transition-all duration-300 ease-in">
+      <div className="flex flex-1 flex-col transition-all duration-300 ease-in overflow-hidden">
         <LayoutHeader />
         <main
-          className="bg-background-deep transition-[margin-top] duration-200"
+          className="bg-background-deep transition-[margin-top] duration-200 overflow-hidden"
           style={{
             flex: '1 1 0%',
             padding: '0px',

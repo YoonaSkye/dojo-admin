@@ -1,22 +1,17 @@
 import { cn } from '@/lib/utils';
 import { useRouter } from '@/router/hooks';
-import { useThemeToken } from '@/theme/hooks';
 import type { TabsProps } from 'antd';
 import { ConfigProvider, Tabs } from 'antd';
-import Color from 'color';
-import { ChevronDownIcon, Minimize2Icon, RotateCwIcon } from 'lucide-react';
 import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import StickyBox from 'react-sticky-box';
 import Label from './Label';
 import { KeepAliveTab, useMultiTabsContext } from './multi-tabs-provider';
 import TabContextMenu from './tab-context-menu';
-import TabDropdownMenu from './tab-dropdown-menu';
+import './index.scss';
 
 export default function MultiTabs() {
   const { t } = useTranslation();
   const { push } = useRouter();
-  const themeToken = useThemeToken();
 
   const { tabs, activeTabRoutePath, closeTab } = useMultiTabsContext();
 
@@ -67,43 +62,46 @@ export default function MultiTabs() {
    * 自定义 渲染 tabbar
    */
   // TODO: 可拖拽的Tabbar
+  // 暂时解决overflow 和 sticky冲突，将tabbar直接设置为fixed
+  // 然后增加tab content margin + z-index来解决可见问题
+  // 但是右侧的三个图表变为不可见，待解决
   const renderTabBar: TabsProps['renderTabBar'] = (props, DefaultTabBar) => (
-    <StickyBox
-      offsetTop={50}
-      offsetBottom={50}
+    // <StickyBox
+    //   offsetTop={50}
+    //   offsetBottom={50}
+    //   style={{
+    //     zIndex: 1,
+    //     background: Color(themeToken.colorBgElevated).alpha(1).toString(),
+    //   }}
+    // >
+    <div
+      className="bg-background border-border flex transition-all border-b fixed top-[50px] z-10"
       style={{
-        zIndex: 1,
-        background: Color(themeToken.colorBgElevated).alpha(1).toString(),
+        height: '38px',
+        marginLeft: '0px',
+        width: '100%',
       }}
     >
-      <div
-        className="bg-background border-border flex transition-all border-b"
-        style={{
-          height: '38px',
-          marginLeft: '0px',
-          width: '100%',
-        }}
-      >
-        <div className="flex h-full flex-1 pt-[3px]">
-          <div className="size-full flex-1">
-            <DefaultTabBar {...props} />
-          </div>
-        </div>
-        <div className="flex items-center justify-center h-full">
-          <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
-            <RotateCwIcon className="size-4" />
-          </div>
-          <TabDropdownMenu>
-            <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
-              <ChevronDownIcon className="size-4" />
-            </div>
-          </TabDropdownMenu>
-          <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
-            <Minimize2Icon className="size-4" />
-          </div>
+      <div className="flex h-full flex-1 pt-[3px]">
+        <div className="size-full flex-1">
+          <DefaultTabBar {...props} />
         </div>
       </div>
-    </StickyBox>
+      {/* <div className="flex items-center justify-center h-full">
+        <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
+          <RotateCwIcon className="size-4" />
+        </div>
+        <TabDropdownMenu>
+          <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
+            <ChevronDownIcon className="size-4" />
+          </div>
+        </TabDropdownMenu>
+        <div className="flex items-center justify-center hover:bg-muted hover:text-foreground text-muted-foreground border-border h-full cursor-pointer border-l px-[9px] text-lg font-semibold">
+          <Minimize2Icon className="size-4" />
+        </div>
+      </div> */}
+    </div>
+    // </StickyBox>
   );
 
   return (
