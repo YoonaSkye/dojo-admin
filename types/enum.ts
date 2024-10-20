@@ -25,7 +25,7 @@ export enum ThemeMode {
 export enum ThemeLayout {
   Vertical = 'vertical',
   Horizontal = 'horizontal',
-  Mini = 'mini',
+  // Mini = 'mini',
 }
 
 export enum ThemeColorPresets {

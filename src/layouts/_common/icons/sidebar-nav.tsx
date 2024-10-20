@@ -11,7 +11,7 @@ export default function HeaderNav() {
         <rect
           id="svg_1"
           fill="currentColor"
-          fill-opacity="0.02"
+          fillOpacity="0.02"
           height="66"
           rx="4"
           stroke="null"
@@ -68,7 +68,7 @@ export default function HeaderNav() {
         <rect
           id="svg_8"
           fill="currentColor"
-          fill-opacity="0.08"
+          fillOpacity="0.08"
           height="9.07027"
           rx="2"
           stroke="null"
@@ -119,7 +119,7 @@ export default function HeaderNav() {
         <rect
           id="svg_13"
           fill="currentColor"
-          fill-opacity="0.08"
+          fillOpacity="0.08"
           height="21.51892"
           rx="2"
           stroke="null"
@@ -130,7 +130,7 @@ export default function HeaderNav() {
         <rect
           id="svg_14"
           fill="currentColor"
-          fill-opacity="0.08"
+          fillOpacity="0.08"
           height="20.97838"
           rx="2"
           stroke="null"
@@ -141,7 +141,7 @@ export default function HeaderNav() {
         <rect
           id="svg_15"
           fill="currentColor"
-          fill-opacity="0.08"
+          fillOpacity="0.08"
           height="21.65405"
           rx="2"
           stroke="null"

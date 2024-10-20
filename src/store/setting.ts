@@ -1,8 +1,6 @@
 import { create } from 'zustand';
-
-import { getItem, removeItem, setItem } from '@/utils/storage';
-
-import { StorageEnum, ThemeColorPresets, ThemeLayout, ThemeMode } from '#/enum';
+import { persist } from 'zustand/middleware';
+import { ThemeColorPresets, ThemeLayout, ThemeMode } from '#/enum';
 
 type SettingsType = {
   themeColorPresets: ThemeColorPresets;
@@ -22,28 +20,40 @@ type SettingStore = {
   };
 };
 
-const useSettingStore = create<SettingStore>((set) => ({
-  collapsed: false,
-  settings: getItem<SettingsType>(StorageEnum.Settings) || {
-    themeColorPresets: ThemeColorPresets.Default,
-    themeMode: ThemeMode.Light,
-    themeLayout: ThemeLayout.Vertical,
-    breadCrumb: true,
-    multiTab: true,
-  },
-  actions: {
-    setCollapsed: (collapsed: boolean) => {
-      set({ collapsed });
-    },
-    setSettings: (settings) => {
-      set({ settings });
-      setItem(StorageEnum.Settings, settings);
-    },
-    clearSettings() {
-      removeItem(StorageEnum.Settings);
-    },
-  },
-}));
+const initialStates = {
+  themeColorPresets: ThemeColorPresets.Default,
+  themeMode: ThemeMode.Light,
+  themeLayout: ThemeLayout.Vertical,
+  breadCrumb: true,
+  multiTab: true,
+};
+
+const useSettingStore = create<SettingStore>()(
+  persist(
+    (set) => ({
+      collapsed: false,
+      settings: {
+        themeColorPresets: ThemeColorPresets.Default,
+        themeMode: ThemeMode.Light,
+        themeLayout: ThemeLayout.Vertical,
+        breadCrumb: true,
+        multiTab: true,
+      },
+      actions: {
+        setCollapsed: (collapsed: boolean) => {
+          set({ collapsed });
+        },
+        setSettings: (settings) => {
+          set({ settings });
+        },
+        clearSettings() {
+          set({ settings: initialStates });
+        },
+      },
+    }),
+    { name: 'settings', partialize: ({ settings }) => ({ ...settings }) }
+  )
+);
 
 export const useCollapsed = () => useSettingStore((state) => state.collapsed);
 export const useSettings = () => useSettingStore((state) => state.settings);

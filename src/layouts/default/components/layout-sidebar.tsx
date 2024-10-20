@@ -46,7 +46,7 @@ export default function LayoutSidebar() {
         className="dark bg-sidebar border-border border-r fixed left-0 top-0 h-full transition-all duration-150"
         style={asideStyle}
       >
-        <LayoutMenu />
+        <LayoutMenu mode="inline" />
         <div style={collapseStyle}></div>
         <SidebarCollapseButton />
       </aside>

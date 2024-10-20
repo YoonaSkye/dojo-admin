@@ -14,9 +14,10 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 type Props = {
   closeSideBarDrawer?: () => void;
+  mode?: 'vertical' | 'horizontal' | 'inline';
 };
 
-export default function LayoutMenu(props: Props) {
+export default function LayoutMenu({ mode }: Props) {
   const collapsed = useCollapsed();
 
   const routeToMenuFn = useRouteToMenu();
@@ -57,7 +58,7 @@ export default function LayoutMenu(props: Props) {
   };
   const onClick: MenuProps['onClick'] = ({ key }) => {
     navigate(key);
-    props?.closeSideBarDrawer?.();
+    // props?.closeSideBarDrawer?.();
   };
 
   return (
@@ -89,7 +90,7 @@ export default function LayoutMenu(props: Props) {
           }}
         >
           <Menu
-            mode="inline"
+            mode={mode}
             theme="dark"
             items={menuList}
             defaultOpenKeys={openKeys}

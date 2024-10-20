@@ -1,8 +1,11 @@
 import clsx from 'clsx';
 import { HeaderNav, SidebarNav } from '../../icons';
 import { CircleHelp } from '@/icons';
+import { useSettingActions, useSettings } from '@/store/setting';
+import { ThemeLayout } from '#/enum';
 
-type LayoutType = 'header-nav' | 'sidebar-nav';
+// type LayoutType = 'header-nav' | 'sidebar-nav';
+type LayoutType = ThemeLayout;
 
 interface PresetItem {
   name: string;
@@ -11,24 +14,33 @@ interface PresetItem {
 }
 
 const components: Record<LayoutType, React.FC> = {
-  'header-nav': HeaderNav,
-  'sidebar-nav': SidebarNav,
+  horizontal: HeaderNav,
+  vertical: SidebarNav,
 };
 
 const PRESET: PresetItem[] = [
   {
     name: '垂直',
     tip: '侧边垂直菜单模式',
-    type: 'sidebar-nav',
+    type: ThemeLayout.Vertical,
   },
   {
     name: '水平',
     tip: '水平菜单模式，菜单全部显示在顶部',
-    type: 'header-nav',
+    type: ThemeLayout.Horizontal,
   },
 ];
 
 export default function Layout() {
+  const { setSettings } = useSettingActions();
+  const settings = useSettings();
+
+  const setThemeLayout = (themeLayout: ThemeLayout) => {
+    setSettings({
+      ...settings,
+      themeLayout,
+    });
+  };
   return (
     <div className="flex w-full justify-center gap-10">
       {PRESET.map((preset) => {
@@ -37,6 +49,7 @@ export default function Layout() {
           <div
             key={preset.name}
             className="flex w-[100px] cursor-pointer flex-col"
+            onClick={() => setThemeLayout(preset.type)}
           >
             <div className={clsx('outline-box flex-center')}>
               <Component />
