@@ -15,9 +15,10 @@ type MenuItem = Required<MenuProps>['items'][number];
 type Props = {
   closeSideBarDrawer?: () => void;
   mode?: 'vertical' | 'horizontal' | 'inline';
+  themeMode: 'dark' | 'light';
 };
 
-export default function LayoutMenu({ mode }: Props) {
+export default function LayoutMenu({ mode, themeMode }: Props) {
   const collapsed = useCollapsed();
 
   const routeToMenuFn = useRouteToMenu();
@@ -78,12 +79,18 @@ export default function LayoutMenu({ mode }: Props) {
           theme={{
             components: {
               Menu: {
-                darkItemBg: 'var(--sidebar)',
-                darkSubMenuItemBg: 'var(--sidebar)',
-                darkItemSelectedBg: '#2E3033',
-                darkItemHoverBg: '#2E3033',
-                darkItemSelectedColor: '#FAFAFA',
-                darkItemColor: '#F2F2F2CC',
+                darkItemBg: 'hsl(var(--menu))',
+                darkItemColor: 'hsl(var(--foreground) / 80%)',
+                darkItemHoverBg: 'hsl(var(--accent))',
+                darkItemSelectedBg: 'hsl(var(--accent))',
+                darkItemSelectedColor: 'hsl(var(--accent-foreground))',
+                darkSubMenuItemBg: 'hsl(var(--menu))',
+                itemBg: 'hsl(var(--menu))',
+                itemColor: 'hsl(var(--foreground))',
+                itemHoverBg: 'hsl(var(--accent))',
+                itemSelectedBg: 'hsl(var(--primary) / 15%)',
+                itemSelectedColor: 'hsl(var(--primary))',
+                subMenuItemBg: 'hsl(var(--menu))',
                 collapsedWidth: 59,
               },
             },
@@ -91,7 +98,7 @@ export default function LayoutMenu({ mode }: Props) {
         >
           <Menu
             mode={mode}
-            theme="dark"
+            theme={themeMode}
             items={menuList}
             defaultOpenKeys={openKeys}
             defaultSelectedKeys={selectedKeys}

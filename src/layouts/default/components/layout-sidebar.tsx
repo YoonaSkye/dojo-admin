@@ -3,8 +3,10 @@ import { CSSProperties } from 'react';
 import LayoutMenu from '../menu';
 import { NAV_COLLAPSED_WIDTH, NAV_WIDTH, Collapse_Height } from './config';
 import SidebarCollapseButton from '../widgets/sidebar-collapse-button';
+import { useTheme } from '@/store/theme';
 
 export default function LayoutSidebar() {
+  const themeMode = useTheme();
   const collapsed = useCollapsed();
   const hiddenSideStyle: CSSProperties = calcMenuWidthStyle(collapsed);
   const asideStyle: CSSProperties = {
@@ -43,10 +45,17 @@ export default function LayoutSidebar() {
         style={hiddenSideStyle}
       ></div>
       <aside
-        className="dark bg-sidebar border-border border-r fixed left-0 top-0 h-full transition-all duration-150"
+        className={`
+          ${
+            themeMode === 'light' ? 'light' : 'dark'
+          } bg-sidebar border-border border-r fixed left-0 top-0 h-full transition-all duration-150'
+        `}
         style={asideStyle}
       >
-        <LayoutMenu mode="inline" />
+        <LayoutMenu
+          mode="inline"
+          themeMode={themeMode === 'light' ? 'light' : 'dark'}
+        />
         <div style={collapseStyle}></div>
         <SidebarCollapseButton />
       </aside>

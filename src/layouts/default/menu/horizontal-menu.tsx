@@ -1,6 +1,7 @@
 import { useRouteToMenu } from '@/router/hooks';
 import { usePermission } from '@/router/hooks/use-permission';
 import { menuFilter } from '@/router/utils';
+import { useTheme } from '@/store/theme';
 import type { MenuProps } from 'antd';
 import { ConfigProvider, Menu } from 'antd';
 import { useEffect, useState } from 'react';
@@ -10,6 +11,7 @@ import { useLocation, useMatches, useNavigate } from 'react-router-dom';
 type MenuItem = Required<MenuProps>['items'][number];
 
 export default function HorizontalMenu() {
+  const themeMode = useTheme();
   const routeToMenuFn = useRouteToMenu();
   const permissionRoutes = usePermission();
   const { pathname } = useLocation();
@@ -42,13 +44,18 @@ export default function HorizontalMenu() {
       theme={{
         components: {
           Menu: {
-            darkItemBg: 'var(--sidebar)',
-            darkSubMenuItemBg: 'var(--sidebar)',
-            darkItemSelectedBg: '#2E3033',
-            darkItemHoverBg: '#2E3033',
-            darkItemSelectedColor: '#FAFAFA',
-            darkItemColor: '#F2F2F2CC',
-            collapsedWidth: 59,
+            darkItemBg: 'hsl(var(--menu))',
+            darkItemColor: 'hsl(var(--foreground) / 80%)',
+            darkItemHoverBg: 'hsl(var(--accent))',
+            darkItemSelectedBg: 'hsl(var(--accent))',
+            darkItemSelectedColor: 'hsl(var(--accent-foreground))',
+            darkSubMenuItemBg: 'hsl(var(--menu))',
+            itemBg: 'hsl(var(--menu))',
+            itemColor: 'hsl(var(--foreground))',
+            itemHoverBg: 'hsl(var(--accent))',
+            itemSelectedBg: 'hsl(var(--primary) / 15%)',
+            itemSelectedColor: 'hsl(var(--primary))',
+            subMenuItemBg: 'hsl(var(--menu))',
           },
         },
       }}
@@ -56,7 +63,7 @@ export default function HorizontalMenu() {
       <Menu
         mode="horizontal"
         className="w-full"
-        theme="light"
+        theme={themeMode === 'light' ? 'light' : 'dark'}
         items={menuList}
         defaultSelectedKeys={selectedKeys}
         selectedKeys={selectedKeys}
