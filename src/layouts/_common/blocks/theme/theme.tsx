@@ -1,10 +1,11 @@
 import { MoonStar, Sun, SunMoon } from '@/icons';
+import { useSetTheme, useTheme, type Theme } from '@/store/theme';
 import clsx from 'clsx';
 import type { LucideProps } from 'lucide-react';
-import { useState } from 'react';
+import { useRef } from 'react';
 import SwitchItem from '../switch-item';
 
-type ThemeModeType = 'auto' | 'dark' | 'light';
+type ThemeModeType = Theme;
 
 const THEME_PRESET: Array<{
   icon: React.FC<LucideProps>;
@@ -24,20 +25,22 @@ const THEME_PRESET: Array<{
   },
 ];
 export default function Theme() {
-  const [modelValue, setModelValue] = useState<ThemeModeType>('auto');
+  const themeValue = useTheme();
+  const setTheme = useSetTheme();
+  const modelValue = useRef<ThemeModeType>(themeValue);
 
   const nameView = (name: string) => {
     switch (name) {
       case 'light': {
-        // return $t('preferences.theme.light');
+        // return t('preferences.theme.light');
         return '浅色';
       }
       case 'dark': {
-        // return $t('preferences.theme.dark');
+        // return t('preferences.theme.dark');
         return '深色';
       }
       case 'auto': {
-        // return $t('preferences.followSystem');
+        // return t('preferences.followSystem');
         return '跟随系统';
       }
     }
@@ -50,12 +53,14 @@ export default function Theme() {
           className="flex cursor-pointer flex-col"
           key={theme.name}
           onClick={() => {
-            setModelValue(theme.name);
+            // setModelValue(theme.name);
+            modelValue.current = theme.name;
+            setTheme(theme.name);
           }}
         >
           <div
             className={clsx(
-              theme.name === modelValue && 'outline-box-active',
+              theme.name === modelValue.current && 'outline-box-active',
               'outline-box flex-center py-4'
             )}
           >

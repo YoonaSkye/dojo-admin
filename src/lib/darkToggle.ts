@@ -1,4 +1,5 @@
-type Theme = 'dark' | 'light' | 'system';
+type Theme = 'dark' | 'light' | 'auto';
+
 interface DarkThemeOptions {
   isDark: boolean;
   setTheme: (theme: Theme) => void;
@@ -13,7 +14,6 @@ export default function darkToggle(options: DarkThemeOptions) {
     coordinates: { x, y },
   } = options;
 
-  // @ts-expect-error
   if (!document.startViewTransition) {
     setTheme(isDark ? 'light' : 'dark');
   } else {
@@ -22,7 +22,6 @@ export default function darkToggle(options: DarkThemeOptions) {
       Math.max(x, innerWidth - x),
       Math.max(y, innerHeight - y)
     );
-    console.log(innerWidth, innerHeight);
 
     // 剪切路径
     const clipPath = [
@@ -30,7 +29,6 @@ export default function darkToggle(options: DarkThemeOptions) {
       `circle(${largerRadius}px at ${x}px ${y}px)`,
     ];
 
-    // @ts-expect-error
     const transition = document.startViewTransition(() => {
       setTheme(isDark ? 'light' : 'dark');
     });

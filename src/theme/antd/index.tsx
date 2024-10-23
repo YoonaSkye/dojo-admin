@@ -29,7 +29,7 @@ export default function AntdConfig({
 
     root.classList.remove('light', 'dark');
 
-    if (Itheme === 'system') {
+    if (Itheme === 'auto') {
       const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
         .matches
         ? 'dark'

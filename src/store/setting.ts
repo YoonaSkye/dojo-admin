@@ -1,10 +1,9 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { ThemeColorPresets, ThemeLayout, ThemeMode } from '#/enum';
+import { ThemeColorPresets, ThemeLayout } from '#/enum';
 
 type SettingsType = {
   themeColorPresets: ThemeColorPresets;
-  themeMode: ThemeMode;
   themeLayout: ThemeLayout;
   breadCrumb: boolean;
   multiTab: boolean;
@@ -22,7 +21,6 @@ type SettingStore = {
 
 const initialStates = {
   themeColorPresets: ThemeColorPresets.Default,
-  themeMode: ThemeMode.Light,
   themeLayout: ThemeLayout.Vertical,
   breadCrumb: true,
   multiTab: true,
@@ -34,7 +32,6 @@ const useSettingStore = create<SettingStore>()(
       collapsed: false,
       settings: {
         themeColorPresets: ThemeColorPresets.Default,
-        themeMode: ThemeMode.Light,
         themeLayout: ThemeLayout.Vertical,
         breadCrumb: true,
         multiTab: true,
@@ -51,7 +48,10 @@ const useSettingStore = create<SettingStore>()(
         },
       },
     }),
-    { name: 'settings', partialize: ({ settings }) => ({ ...settings }) }
+    {
+      name: 'settings',
+      partialize: ({ settings, collapsed }) => ({ settings, collapsed }),
+    }
   )
 );
 
