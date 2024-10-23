@@ -1,8 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Outlet, RouteObject } from 'react-router-dom';
 import { Spin } from 'antd';
-import SimpleLayout from '@/layouts/simple';
-import { AppRouteObject } from '#/router';
+
 import AuthGuard from '../components/AuthGuard';
 
 const Page403 = lazy(() => import('@/pages/sys/error/Page403'));
@@ -16,11 +15,9 @@ const Page500 = lazy(() => import('@/pages/sys/error/Page500'));
 export const ErrorRoutes: RouteObject = {
   element: (
     <AuthGuard>
-      <SimpleLayout>
-        <Suspense fallback={<Spin size="large" />}>
-          <Outlet />
-        </Suspense>
-      </SimpleLayout>
+      <Suspense fallback={<Spin size="large" />}>
+        <Outlet />
+      </Suspense>
     </AuthGuard>
   ),
   children: [

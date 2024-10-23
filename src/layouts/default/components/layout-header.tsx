@@ -1,21 +1,25 @@
+import { ThemeLayout } from '#/enum';
+import Logo from '@/components/logo';
 import { Button } from '@/components/ui/button';
 import { Bell, Menu } from '@/icons';
 import CommandMenu from '@/layouts//_common/command-menu';
 import AccountMenu from '@/layouts/_common/account-menu';
 import BreadCrumb from '@/layouts/_common/breadcrumb';
-import LanguageToggle from '@/layouts/_common/language-toggle';
-import Preference from '@/layouts/_common/preference';
-import { useCollapsed, useSettingActions, useSettings } from '@/store/setting';
-import { CSSProperties, useMemo } from 'react';
-import { NAV_COLLAPSED_WIDTH, NAV_WIDTH } from './config';
-import ModeToggle from '@/layouts/_common/mode-toggle';
 import FullScreenButton from '@/layouts/_common/full-screen';
-import { ThemeLayout } from '#/enum';
+import LanguageToggle from '@/layouts/_common/language-toggle';
+import ModeToggle from '@/layouts/_common/mode-toggle';
+import Preference from '@/layouts/_common/preference';
+import {
+  useCollapsed,
+  useSettingActions,
+  useThemeLayout,
+} from '@/store/setting';
+import { CSSProperties, useMemo } from 'react';
 import HorizontalMenu from '../menu/horizontal-menu';
-import Logo from '@/components/logo';
+import { NAV_COLLAPSED_WIDTH, NAV_WIDTH } from './config';
 
 export default function LayoutHeader() {
-  const { themeLayout } = useSettings();
+  const themeLayout = useThemeLayout();
   const collapsed = useCollapsed();
   const { setCollapsed } = useSettingActions();
   const isHeaderNav = useMemo(() => {

@@ -1,8 +1,8 @@
+import { ThemeLayout } from '#/enum';
+import { CircleHelp } from '@/icons';
+import { useSettingActions } from '@/store/setting';
 import clsx from 'clsx';
 import { HeaderNav, SidebarNav } from '../../icons';
-import { CircleHelp } from '@/icons';
-import { useSettingActions, useSettings } from '@/store/setting';
-import { ThemeLayout } from '#/enum';
 
 // type LayoutType = 'header-nav' | 'sidebar-nav';
 type LayoutType = ThemeLayout;
@@ -32,15 +32,8 @@ const PRESET: PresetItem[] = [
 ];
 
 export default function Layout() {
-  const { setSettings } = useSettingActions();
-  const settings = useSettings();
+  const { setThemeLayout } = useSettingActions();
 
-  const setThemeLayout = (themeLayout: ThemeLayout) => {
-    setSettings({
-      ...settings,
-      themeLayout,
-    });
-  };
   return (
     <div className="flex w-full justify-center gap-10">
       {PRESET.map((preset) => {

@@ -1,4 +1,3 @@
-import { AppRouteObject } from '#/router';
 import {
   createHashRouter,
   Navigate,
@@ -8,11 +7,10 @@ import {
 
 // TODO: 后续对路由进行懒加载处理
 import DefaultLayout from '@/layouts/default';
-import { usePermissionRoutes } from '@/router/hooks/use-permission-routes';
 import { lazy } from 'react';
 import AuthGuard from './components/AuthGuard';
-import { ErrorRoutes } from './routes/error-routes';
 import { usePermission } from './hooks/use-permission';
+import { ErrorRoutes } from './routes/error-routes';
 
 const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 

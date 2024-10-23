@@ -1,4 +1,4 @@
-import { useSettings } from '@/store/setting';
+import { useThemeLayout } from '@/store/setting';
 import LayoutHeader from './components/layout-header';
 import LayoutSidebar from './components/layout-sidebar';
 import MultiTabs from './tabbar/multi-tabs';
@@ -6,7 +6,7 @@ import MultiTabsProvider from './tabbar/multi-tabs-provider';
 import { ThemeLayout } from '#/enum';
 
 export default function DefaultLayout() {
-  const { themeLayout } = useSettings();
+  const themeLayout = useThemeLayout();
   return (
     <div className="relative flex min-h-full w-full">
       {themeLayout === ThemeLayout.Vertical && <LayoutSidebar />}

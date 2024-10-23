@@ -72,7 +72,7 @@ export default function Theme() {
         </div>
       ))}
       <SwitchItem className="mt-6" title="深色侧边栏" />
-      <SwitchItem title="深色顶栏" />
+      {/* <SwitchItem title="深色顶栏" /> */}
     </div>
   );
 }

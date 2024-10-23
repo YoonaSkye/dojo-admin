@@ -7,7 +7,6 @@ import {
 } from './theme';
 
 import { ThemeMode } from '#/enum';
-import { useSettings } from '@/store/setting';
 import { useEffect } from 'react';
 import { useTheme } from '@/store/theme';
 
@@ -16,13 +15,15 @@ export default function AntdConfig({
 }: {
   children: React.ReactNode;
 }) {
-  const { themeMode, themeColorPresets } = useSettings();
+  // const { themeMode, themeColorPresets } = useSettings();
+
   const Itheme = useTheme();
+  const themeMode = Itheme;
   const algorithm =
     themeMode === ThemeMode.Light
       ? theme.defaultAlgorithm
       : theme.darkAlgorithm;
-  const colorPrimary = colorPrimarys[themeColorPresets];
+  // const colorPrimary = colorPrimarys[themeColorPresets];
 
   useEffect(() => {
     const root = window.document.documentElement;
