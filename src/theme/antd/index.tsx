@@ -7,7 +7,7 @@ import {
 } from './theme';
 
 import { ThemeMode } from '#/enum';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useTheme } from '@/store/theme';
 
 export default function AntdConfig({
@@ -15,14 +15,21 @@ export default function AntdConfig({
 }: {
   children: React.ReactNode;
 }) {
-  // const { themeMode, themeColorPresets } = useSettings();
-
   const Itheme = useTheme();
-  const themeMode = Itheme;
-  const algorithm =
-    themeMode === ThemeMode.Light
-      ? theme.defaultAlgorithm
-      : theme.darkAlgorithm;
+  const algorithm = useMemo(() => {
+    let algorithm = theme.defaultAlgorithm;
+    if (Itheme === 'auto') {
+      algorithm = window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? theme.darkAlgorithm
+        : theme.defaultAlgorithm;
+      return algorithm;
+    }
+
+    algorithm =
+      Itheme === ThemeMode.Dark ? theme.darkAlgorithm : theme.defaultAlgorithm;
+    return algorithm;
+  }, [Itheme]);
+
   // const colorPrimary = colorPrimarys[themeColorPresets];
 
   useEffect(() => {
@@ -37,6 +44,7 @@ export default function AntdConfig({
         : 'light';
 
       root.classList.add(systemTheme);
+
       return;
     }
 
@@ -55,7 +63,7 @@ export default function AntdConfig({
           // ...customComponentConfig,
           // ...themeModeToken[themeMode].components,
         },
-        // algorithm,
+        algorithm,
       }}
     >
       {/* https://ant.design/docs/react/compatible-style-cn#styleprovider */}

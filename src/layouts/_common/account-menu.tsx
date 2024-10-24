@@ -11,7 +11,8 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 import { useRouter } from '@/router/hooks';
-import { useAccessActions } from '@/store/access';
+import { useAccessActions, useAccessStore } from '@/store/access';
+import { useUserStore } from '@/store/user';
 
 import { BookOpenTextIcon, LogOutIcon } from 'lucide-react';
 import { AiFillGithub } from 'react-icons/ai';
@@ -44,6 +45,8 @@ export default function AccountMenu() {
     try {
       setAccessToken(null);
       setRefreshToken(null);
+      useAccessStore.persist.clearStorage();
+      useUserStore.persist.clearStorage();
     } catch (error) {
       console.log(error);
     } finally {

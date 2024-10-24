@@ -81,7 +81,6 @@ export default function TabDropdownMenu({ children, tab }: Props) {
       {
         disabled: disabledCloseCurrent,
         handler: () => {
-          console.log(tabKey);
           closeTab(tabKey);
         },
         icon: X,

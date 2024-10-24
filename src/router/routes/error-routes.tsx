@@ -15,9 +15,11 @@ const Page500 = lazy(() => import('@/pages/sys/error/Page500'));
 export const ErrorRoutes: RouteObject = {
   element: (
     <AuthGuard>
-      <Suspense fallback={<Spin size="large" />}>
-        <Outlet />
-      </Suspense>
+      <div className="flex h-screen w-full flex-col">
+        <Suspense fallback={<Spin size="large" />}>
+          <Outlet />
+        </Suspense>
+      </div>
     </AuthGuard>
   ),
   children: [

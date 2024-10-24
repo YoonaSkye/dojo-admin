@@ -20,7 +20,6 @@ const resolveComponent = (path: string) => {
 
 export function usePermission() {
   const permissions = useAccessMenus();
-  // console.log('permission', permissions);
 
   return useMemo(() => {
     const asyncRoutes = generateRoutesByBackend(permissions);

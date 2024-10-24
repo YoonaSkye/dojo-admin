@@ -2,6 +2,7 @@ import { Params, RouteObject } from 'react-router-dom';
 
 // 扩展meta元信息接口
 export interface RouteMeta {
+  title: string;
   /**
    * antd menu selectedKeys
    */
@@ -13,7 +14,7 @@ export interface RouteMeta {
   /**
    * menu prefix icon
    */
-  icon?: React.ReactNode;
+  icon?: string;
   /**
    * menu suffix icon
    */
@@ -41,7 +42,7 @@ export interface RouteMeta {
   /**
    * external link and iframe need
    */
-  frameSrc?: string;
+  // frameSrc?: string;
   /**
    * dynamic route params
    *

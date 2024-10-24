@@ -14,6 +14,7 @@ export interface KeepAliveTab {
   pathname: string;
   icon?: any;
   children: any;
+  hideTab?: boolean;
 }
 
 type MultiTabsContextType = {
@@ -150,6 +151,8 @@ export default function MultiTabsProvider({ children }: PropsWithChildren) {
   );
 
   useEffect(() => {
+    setTabs((prev) => prev.filter((item) => !item.hideTab));
+
     if (!matchRoute) return;
     const existKeepAliveTab = tabs.find(
       (o) => o.pathname === matchRoute?.pathname
@@ -166,6 +169,7 @@ export default function MultiTabsProvider({ children }: PropsWithChildren) {
           pathname: matchRoute.pathname,
           children: matchRoute.children,
           icon: matchRoute.icon,
+          hideTab: matchRoute.hideTab,
         },
       ]);
     }

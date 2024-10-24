@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useMatches, useOutlet } from 'react-router-dom';
+import {
+  useLocation,
+  useMatches,
+  useNavigate,
+  useOutlet,
+} from 'react-router-dom';
+import { useFlattenedRoutes } from './use-flattened-routes';
 
 interface MatchRouteType {
   // 菜单名称
@@ -12,7 +18,9 @@ interface MatchRouteType {
   // routePath: string;
   // 图标
   icon?: string;
+  hideTab?: boolean;
 }
+const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 
 export function useMatchRoute(): MatchRouteType | undefined {
   // 获取路由组件实例
@@ -21,6 +29,9 @@ export function useMatchRoute(): MatchRouteType | undefined {
   const matches = useMatches();
   // 获取当前url
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  // 扁平化的路由meta信息
+  const flattenedRoutes = useFlattenedRoutes();
 
   const [matchRoute, setMatchRoute] = useState<MatchRouteType | undefined>();
 
@@ -28,16 +39,36 @@ export function useMatchRoute(): MatchRouteType | undefined {
   useEffect(() => {
     // 获取当前匹配的路由
     const lastRoute = matches.at(-1);
+    if (!lastRoute) return;
+    //BUG: 首次渲染，遇见<Navigate />组件， matches命中的是重定向路由，handle = null
+    // 在遇见/dashboard 重定向到/dashboard/analytics 也会遇见handle = null
 
-    if (!lastRoute?.handle) return;
+    const matchedRoute = flattenedRoutes.find(
+      (item) =>
+        lastRoute?.pathname === item.key ||
+        lastRoute.pathname === `${item.key}/`
+    );
 
-    setMatchRoute({
-      title: (lastRoute?.handle as any)?.title,
-      pathname,
-      children,
-      // routePath: lastRoute?.pathname || '',
-      icon: (lastRoute?.handle as any)?.icon,
-    });
+    if (matchedRoute) {
+      setMatchRoute({
+        title: matchedRoute.title,
+        pathname: matchedRoute.key,
+        children: children,
+        icon: matchedRoute.icon,
+        hideTab: matchedRoute.hideTab,
+      });
+    } else {
+      // 针对访问 / 路由
+      navigate(HOMEPAGE);
+    }
+
+    // setMatchRoute({
+    //   title: (lastRoute?.handle as any)?.title,
+    //   pathname,
+    //   children,
+    //   // routePath: lastRoute?.pathname || '',
+    //   icon: (lastRoute?.handle as any)?.icon,
+    // });
   }, [pathname]);
 
   return matchRoute;

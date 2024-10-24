@@ -56,9 +56,10 @@ const dashboardMenus = [
       icon: 'lucide:layout-dashboard',
       order: -1,
       title: 'page.dashboard.title',
+      hideTab: true,
     },
     path: '/dashboard',
-    redirect: '/analytics',
+    redirect: '/dashboard/analytics',
     children: [
       {
         name: 'Analytics',
@@ -68,6 +69,7 @@ const dashboardMenus = [
           affixTab: true,
           icon: 'lucide:area-chart',
           title: 'page.dashboard.analytics',
+          hideTab: false,
         },
       },
       {
@@ -77,6 +79,7 @@ const dashboardMenus = [
         handle: {
           icon: 'carbon:workspace',
           title: 'page.dashboard.workspace',
+          hideTab: false,
         },
       },
     ],
@@ -91,6 +94,7 @@ const demosMenus = [
       keepAlive: true,
       order: 1000,
       title: 'page.demos.title',
+      hideTab: true,
     },
     name: 'Demos',
     path: '/demos',
@@ -101,6 +105,7 @@ const demosMenus = [
         handle: {
           icon: 'mdi:shield-key-outline',
           title: 'page.demos.access.frontendPermissions',
+          hideTab: true,
         },
         name: 'AccessDemos',
         path: '/demos/access',
@@ -113,6 +118,7 @@ const demosMenus = [
             handle: {
               icon: 'mdi:page-previous-outline',
               title: 'page.demos.access.pageAccess',
+              hideTab: false,
             },
           },
           {
@@ -122,6 +128,7 @@ const demosMenus = [
             handle: {
               icon: 'mdi:button-cursor',
               title: 'page.demos.access.buttonControl',
+              hideTab: false,
             },
           },
           // {
