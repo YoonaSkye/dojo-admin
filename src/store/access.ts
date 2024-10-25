@@ -164,7 +164,9 @@ export const useSignIn = () => {
         setAccessCodes(accessCodes);
         setAccessMenus(menus);
 
-        navigate(HOMEPAGE, { replace: true });
+        // BUG: 直接navigate("/dashboard/analytics"), 从login页面跳转到首页，侧边栏menu无法展开
+        // 因为useMatches() 返回的只有['/dashborad/analytics']
+        navigate('/', { replace: true });
       }
     } catch (error) {
       console.log(error);
