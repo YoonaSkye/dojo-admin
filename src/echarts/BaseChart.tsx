@@ -7,7 +7,7 @@ import React, {
 import debounce from 'lodash-es/debounce';
 import echarts from './echarts.config';
 
-const EChart = (props, ref) => {
+const EChart = (props: any, ref: any) => {
   const {
     options,
     loading = false, // 受控
