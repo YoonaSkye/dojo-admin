@@ -10,12 +10,7 @@ interface Props {
   className?: string;
 }
 
-export default function AnalysisChartsTabs({
-  tabs,
-  children,
-  className,
-  ...props
-}: Props) {
+export default function AnalysisChartsTabs({ tabs, className }: Props) {
   return (
     /**有一个bug 图表在浏览器页面较大时展示，在浏览器页面缩小后，图表不会大小自适应，会出现水平滚轴 */
     <div className={cn('card-box w-full px-4 pb-5 pt-3', className)}>

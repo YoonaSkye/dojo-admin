@@ -2,7 +2,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { WorkbenchQuickNavItem } from '../../typing';
 import { cn } from '@/lib/utils';
 import { Iconify } from '@/components/icon';
-import { it } from 'node:test';
 
 interface Props {
   items: WorkbenchQuickNavItem[];

@@ -15,6 +15,8 @@ export interface KeepAliveTab {
   icon?: any;
   children: any;
   hideTab?: boolean;
+  timeStamp?: string;
+  key?: string;
 }
 
 type MultiTabsContextType = {

@@ -18,6 +18,7 @@ class RequestClient {
   constructor(config: CreateAxiosDefaults = {}) {
     // 合并默认配置和传入的配置
     const defaultConfig: CreateAxiosDefaults = {
+      baseURL: import.meta.env.VITE_APP_BASE_API,
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
@@ -61,7 +62,9 @@ class RequestClient {
     // return Promise.resolve([response.data, response]);
   }
 
-  private async responseErrorInterceptor(error: any): Promise<any> {}
+  private async responseErrorInterceptor(error: any): Promise<any> {
+    return error;
+  }
 
   /**
    * 通用的请求方法

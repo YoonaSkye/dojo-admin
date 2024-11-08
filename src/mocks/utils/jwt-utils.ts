@@ -34,8 +34,11 @@ export function verifyAccessToken(
 
     const username = decoded.username;
     const user = MOCK_USERS.find((item) => item.username === username);
-    const { password: _pwd, ...userinfo } = user;
-    return userinfo;
+    if (user) {
+      const { password: _pwd, ...userinfo } = user;
+      return userinfo;
+    }
+    return null;
   } catch {
     return null;
   }

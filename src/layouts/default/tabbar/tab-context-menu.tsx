@@ -152,7 +152,7 @@ export default function TabContextMenu({ children, tab }: Props) {
 
   const menus = createContextMenus(tab?.pathname);
 
-  const handleClick = (menu) => {
+  const handleClick = (menu: any) => {
     if (menu.disabled) {
       return;
     }

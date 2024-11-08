@@ -57,7 +57,6 @@ interface AccessActions {
     setRefreshToken: (token: AccessToken) => void;
   };
 }
-const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 
 export const useAccessStore = create<AccessState & AccessActions>()(
   persist(

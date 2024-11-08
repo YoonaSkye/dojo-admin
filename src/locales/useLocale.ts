@@ -5,8 +5,6 @@ import en_US from 'antd/locale/en_US';
 import zh_CN from 'antd/locale/zh_CN';
 import { useEffect, useState } from 'react';
 
-const change = (lng: any) => lng.replace('_', '-');
-
 type Locale = keyof typeof LocalEnum;
 type Language = {
   locale: Locale;

@@ -29,9 +29,9 @@ export default function HorizontalMenu() {
   }, [permissionRoutes, routeToMenuFn]);
 
   useEffect(() => {
-    const openKeys = matches
-      .filter((match) => match.pathname !== '/')
-      .map((match) => match.pathname);
+    // const openKeys = matches
+    //   .filter((match) => match.pathname !== '/')
+    //   .map((match) => match.pathname);
 
     setSelectedKeys([pathname]);
   }, [pathname, matches]);

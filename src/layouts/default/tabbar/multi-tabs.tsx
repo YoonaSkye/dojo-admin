@@ -24,6 +24,7 @@ export default function MultiTabs() {
       return (
         <div
           style={{
+            // @ts-ignore-next-line
             '--gap': '7px',
           }}
           className={cn('tabs-chrome__item group h-full -mr-3', {

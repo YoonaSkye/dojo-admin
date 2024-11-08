@@ -1,5 +1,5 @@
 import { RouteMeta } from '#/router';
-import { ascend } from 'ramda';
+
 import { RouteObject } from 'react-router-dom';
 
 /**

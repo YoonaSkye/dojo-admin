@@ -7,7 +7,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { KeepAliveTab } from '@/hooks/use-keep-alive';
 import {
   ArrowLeftToLine,
   ArrowRightLeft,
@@ -18,9 +17,7 @@ import {
 } from '@/icons';
 import { Fragment, PropsWithChildren } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useMultiTabsContext } from './multi-tabs-provider';
-
-const contentIsMaximize = false;
+import { KeepAliveTab, useMultiTabsContext } from './multi-tabs-provider';
 
 type Props = PropsWithChildren & {
   tab?: KeepAliveTab;
@@ -157,7 +154,7 @@ export default function TabDropdownMenu({ children, tab }: Props) {
 
   const menus = createContextMenus(tab?.key);
 
-  const handleClick = (menu) => {
+  const handleClick = (menu: any) => {
     if (menu.disabled) {
       return;
     }

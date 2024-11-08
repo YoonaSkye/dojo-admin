@@ -1,4 +1,3 @@
-import type { ItemType } from 'antd/es/menu/hooks/useItems';
 import { Iconify } from '@/components/icon';
 
 import { useTranslation } from 'react-i18next';
@@ -83,7 +82,7 @@ export function useRouteToMenu() {
           menuItem.children = routeToMenuFn(children);
         }
 
-        return menuItem as ItemType;
+        return menuItem;
       });
     },
     [t]

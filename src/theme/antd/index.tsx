@@ -1,10 +1,10 @@
 import { ConfigProvider, theme } from 'antd';
-import {
-  customThemeTokenConfig,
-  themeModeToken,
-  colorPrimarys,
-  customComponentConfig,
-} from './theme';
+// import {
+//   customThemeTokenConfig,
+//   themeModeToken,
+//   colorPrimarys,
+//   customComponentConfig,
+// } from './theme';
 
 import { ThemeMode } from '#/enum';
 import { useEffect, useMemo } from 'react';

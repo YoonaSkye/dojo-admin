@@ -3,10 +3,8 @@ import type { AnalysisOverviewItem, TabOption } from '../typing';
 import AnalysisChartCard from './components/AnalysisChartCard';
 import AnalysisChartsTabs from './components/AnalysisChartsTabs';
 import AnalysisOverview from './components/AnalysisOverview';
-import AnalyticsTrends from './components/AnalyticsTrends';
-import AnalyticsVisits from './components/AnalyticsVisits';
 
-import { dataOption, sourceOption, salesOption } from './config';
+import { dataOption, salesOption, sourceOption } from './config';
 
 const overviewItems: AnalysisOverviewItem[] = [
   {
