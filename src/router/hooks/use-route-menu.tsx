@@ -1,92 +1,86 @@
 import { Iconify } from '@/components/icon';
 
-import { useTranslation } from 'react-i18next';
 import { useCallback } from 'react';
-import { RouteObject } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
+import { AppRouteObject } from '#/router';
+import type { GetProp, MenuProps } from 'antd';
+
+type MenuItem = GetProp<MenuProps, 'items'>[number];
+
+const renderLabel = (
+  label: string,
+  suffix: React.ReactNode,
+  t: (key: string) => string
+) => {
+  // return (
+  //   <div className="flex items-center">
+  //     <div>{t(label)}</div>
+  //     {suffix}
+  //   </div>
+  // );
+  return (
+    <div className="inline-flex w-full items-center justify-between">
+      <div>{t(label)}</div>
+    </div>
+  );
+};
 
 /**
  * 将路由routes信息转换成菜单menus信息
  */
 export function useRouteToMenu() {
   const { t } = useTranslation();
+
   // const routeToMenuFn = useCallback(
-  //   (items: AppRouteObject[]) => {
-  //     return items
-  //       .filter((item) => !item.meta?.hideMenu)
-  //       .map((item) => {
-  //         const menuItem: any = [];
-  //         const { meta, children } = item;
-  //         if (meta) {
-  //           const { key, label, icon, disabled, suffix } = meta;
-  //           menuItem.key = key;
-  //           menuItem.disabled = disabled;
-  //           menuItem.label = (
-  //             <div className="inline-flex w-full items-center justify-between">
-  //               <div>{t(label)}</div>
-  //               {suffix}
-  //             </div>
-  //           );
+  //   (items: RouteObject[]) => {
+  //     return items.map((item) => {
+  //       const menuItem: any = [];
+  //       const { handle, children, path } = item;
+  //       if (handle) {
+  //         const { icon, title } = handle;
+  //         menuItem.key = path;
+  //         menuItem.label = (
+  //           <div className="inline-flex w-full items-center justify-between">
+  //             <div>{t(title)}</div>
+  //           </div>
+  //         );
 
-  //           if (icon) {
-  //             if (typeof icon === 'string') {
-  //               if (icon.startsWith('ic')) {
-  //                 menuItem.icon = (
-  //                   <SvgIcon
-  //                     icon={icon}
-  //                     size={24}
-  //                     className="ant-menu-item-icon"
-  //                   />
-  //                 );
-  //               } else {
-  //                 menuItem.icon = (
-  //                   <Iconify
-  //                     icon={icon}
-  //                     size={24}
-  //                     className="ant-menu-item-icon"
-  //                   />
-  //                 );
-  //               }
-  //             } else {
-  //               menuItem.icon = icon;
-  //             }
-  //           }
+  //         if (icon) {
+  //           menuItem.icon = <Iconify icon={icon} width="1em" height="1em" />;
   //         }
-  //         if (children) {
-  //           menuItem.children = routeToMenuFn(children);
-  //         }
+  //       }
+  //       if (children) {
+  //         menuItem.children = routeToMenuFn(children);
+  //       }
 
-  //         return menuItem as ItemType;
-  //       });
+  //       return menuItem;
+  //     });
   //   },
   //   [t]
   // );
   const routeToMenuFn = useCallback(
-    (items: RouteObject[]) => {
-      return items.map((item) => {
-        const menuItem: any = [];
-        const { handle, children, path } = item;
-        if (handle) {
-          const { icon, title } = handle;
-          menuItem.key = path;
-          menuItem.label = (
-            <div className="inline-flex w-full items-center justify-between">
-              <div>{t(title)}</div>
-            </div>
-          );
+    (items: AppRouteObject[]): MenuItem[] => {
+      return items
+        .filter((item) => !item.meta?.hideMenu)
+        .map((item) => {
+          const { meta, children } = item;
+          if (!meta) return {} as MenuItem;
 
-          if (icon) {
-            menuItem.icon = <Iconify icon={icon} width="1em" height="1em" />;
-          }
-        }
-        if (children) {
-          menuItem.children = routeToMenuFn(children);
-        }
+          const menuItem: Partial<MenuItem> = {
+            key: meta.key,
+            disabled: meta.disabled,
+            label: renderLabel(meta.label, meta.suffix, t),
+            ...(meta.icon && {
+              icon: <Iconify icon={meta.icon} width="1em" height="1em" />,
+            }),
+            ...(children && { children: routeToMenuFn(children) }),
+          };
 
-        return menuItem;
-      });
+          return menuItem as MenuItem;
+        });
     },
     [t]
   );
-
   return routeToMenuFn;
 }

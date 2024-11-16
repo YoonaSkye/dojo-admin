@@ -30,6 +30,16 @@ export const MOCK_USERS: UserInfo[] = [
   },
 ];
 
+export enum PermissionType {
+  CATALOGUE,
+  MENU,
+  BUTTON,
+}
+export enum BasicStatus {
+  DISABLE,
+  ENABLE,
+}
+
 export const MOCK_CODES = [
   // super
   {
@@ -178,109 +188,94 @@ const demosMenus = [
   },
 ];
 
-// const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
-//   const roleWithMenus = {
-//     admin: {
-//       component: '/demos/access/admin-visible',
-//       handle: {
-//         icon: 'mdi:button-cursor',
-//         title: 'page.demos.access.adminVisible',
-//       },
-//       name: 'AccessAdminVisibleDemo',
-//       path: '/demos/access/admin-visible',
-//     },
-//     super: {
-//       component: '/demos/access/super-visible',
-//       handle: {
-//         icon: 'mdi:button-cursor',
-//         title: 'page.demos.access.superVisible',
-//       },
-//       name: 'AccessSuperVisibleDemo',
-//       path: '/demos/access/super-visible',
-//     },
-//     user: {
-//       component: '/demos/access/user-visible',
-//       handle: {
-//         icon: 'mdi:button-cursor',
-//         title: 'page.demos.access.userVisible',
-//       },
-//       name: 'AccessUserVisibleDemo',
-//       path: '/demos/access/user-visible',
-//     },
-//   };
+/**
+ * User permission mock
+ */
+const DASHBOARD_PERMISSION = [
+  {
+    id: '9100714781927703',
+    parentId: '',
+    label: 'page.dashboard.title',
+    name: 'Dashboard',
+    icon: 'lucide:layout-dashboard',
+    type: PermissionType.CATALOGUE,
+    route: 'dashboard',
+    order: 1,
+    children: [
+      {
+        id: '9710971640510357',
+        parentId: '9100714781927703',
+        label: 'page.dashboard.analytics',
+        name: 'Analysis',
+        icon: 'lucide:area-chart',
+        type: PermissionType.MENU,
+        route: 'analytics',
+        component: '/dashboard/analysis/index.tsx',
+      },
+      {
+        id: '8426999229400979',
+        parentId: '9100714781927703',
+        label: 'page.dashboard.workspace',
+        name: 'Workbench',
+        icon: 'carbon:workspace',
+        type: PermissionType.MENU,
+        route: 'workbench',
+        component: '/dashboard/workbench/index.tsx',
+      },
+    ],
+  },
+];
 
-//   return [
-//     {
-//       component: 'BasicLayout',
-//       handle: {
-//         icon: 'ic:baseline-view-in-ar',
-//         keepAlive: true,
-//         order: 1000,
-//         title: 'page.demos.title',
-//       },
-//       name: 'Demos',
-//       path: '/demos',
-//       redirect: '/demos/access',
-//       children: [
-//         {
-//           name: 'AccessDemos',
-//           path: '/demosaccess',
-//           handle: {
-//             icon: 'mdi:cloud-key-outline',
-//             title: 'page.demos.access.backendPermissions',
-//           },
-//           redirect: '/demos/access/page-control',
-//           children: [
-//             {
-//               name: 'AccessPageControlDemo',
-//               path: '/demos/access/page-control',
-//               component: '/demos/access/index',
-//               handle: {
-//                 icon: 'mdi:page-previous-outline',
-//                 title: 'page.demos.access.pageAccess',
-//               },
-//             },
-//             {
-//               name: 'AccessButtonControlDemo',
-//               path: '/demos/access/button-control',
-//               component: '/demos/access/button-control',
-//               handle: {
-//                 icon: 'mdi:button-cursor',
-//                 title: 'page.demos.access.buttonControl',
-//               },
-//             },
-//             {
-//               name: 'AccessMenuVisible403Demo',
-//               path: '/demos/access/menu-visible-403',
-//               component: '/demos/access/menu-visible-403',
-//               handle: {
-//                 authority: ['no-body'],
-//                 icon: 'mdi:button-cursor',
-//                 menuVisibleWithForbidden: true,
-//                 title: 'page.demos.access.menuVisible403',
-//               },
-//             },
-//             roleWithMenus[role],
-//           ],
-//         },
-//       ],
-//     },
-//   ];
-// };
+const MANAGEMENT_PERMISSION = [
+  {
+    id: '0249937641030250',
+    parentId: '0901673425580518',
+    label: 'sys.menu.system.index',
+    name: 'System',
+    type: PermissionType.CATALOGUE,
+    route: 'system',
+    children: [
+      {
+        id: '4359580910369984',
+        parentId: '0249937641030250',
+        label: 'sys.menu.system.permission',
+        name: 'Permission',
+        type: PermissionType.MENU,
+        route: 'permission',
+        component: '/management/permission/index.tsx',
+      },
+      {
+        id: '1689241785490759',
+        parentId: '0249937641030250',
+        label: 'sys.menu.system.role',
+        name: 'Role',
+        type: PermissionType.MENU,
+        route: 'role',
+        component: '/management/role/index.tsx',
+      },
+      {
+        id: '0157880245365433',
+        parentId: '0249937641030250',
+        label: 'sys.menu.system.user',
+        name: 'User',
+        type: PermissionType.MENU,
+        route: 'user',
+        component: '/management/user/index.tsx',
+      },
+    ],
+  },
+];
 
 export const MOCK_MENUS = [
   {
-    // menus: [...dashboardMenus, ...createDemosMenus('super')],
-    menus: [...dashboardMenus, ...demosMenus],
+    menus: [...DASHBOARD_PERMISSION],
     username: 'vben',
   },
   {
-    // menus: [...dashboardMenus, ...createDemosMenus('admin')],
     menus: [...dashboardMenus],
     username: 'admin',
   },
   {
-    // menus: [...dashboardMenus, ...createDemosMenus('user')],
     menus: [...dashboardMenus],
     username: 'jack',
   },

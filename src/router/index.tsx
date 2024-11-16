@@ -1,5 +1,5 @@
 import {
-  createHashRouter,
+  createBrowserRouter,
   Navigate,
   RouteObject,
   RouterProvider,
@@ -11,6 +11,7 @@ import { lazy } from 'react';
 import AuthGuard from './components/AuthGuard';
 import { usePermission } from './hooks/use-permission';
 import { ErrorRoutes } from './routes/error-routes';
+import { AppRouteObject } from '#/router';
 
 const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 
@@ -23,12 +24,12 @@ const Not_Found_Page_Route: RouteObject = {
   path: '*',
   element: <Navigate to="/404" replace />,
 };
-
+// BUG: 对于自动重定向，/dashboard => /dashboard/workbench 页面转换期间会有白屏
 export default function Router() {
   // TODO：完善动态路由功能
   const permissonRoutes = usePermission();
 
-  const asyncRoutes: RouteObject = {
+  const asyncRoutes: AppRouteObject = {
     // TODO: 完善路由守卫功能
     path: '/',
     element: (
@@ -43,14 +44,14 @@ export default function Router() {
   };
 
   // 路由：异步路由 + 同步路由
-  const routes: RouteObject[] = [
+  const routes: AppRouteObject[] = [
     LoginRoute,
     asyncRoutes,
     ErrorRoutes,
     Not_Found_Page_Route,
   ];
 
-  const router = createHashRouter(routes as unknown as RouteObject[]);
+  const router = createBrowserRouter(routes as unknown as RouteObject[]);
 
   return <RouterProvider router={router} />;
 }

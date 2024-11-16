@@ -1,14 +1,8 @@
+import { AppRouteObject } from '#/router';
+import { loginApi } from '@/api/core';
+import { useRequest } from 'ahooks';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { UserInfo } from './types';
-import {
-  getAccessCodesApi,
-  getAllMenusApi,
-  getUserInfoApi,
-  loginApi,
-} from '@/api/core';
-import { useUserActions } from './user';
-import { useNavigate } from 'react-router-dom';
 
 interface LoginAndRegisterParams {
   password: string;
@@ -23,7 +17,7 @@ interface AccessState {
   /**
    * 可访问的菜单列表
    */
-  accessMenus: [];
+  accessMenus: AppRouteObject[];
   /**
    * 可访问的路由列表
    */
@@ -49,7 +43,7 @@ interface AccessState {
 interface AccessActions {
   actions: {
     setAccessCodes: (codes: string[]) => void;
-    setAccessMenus: (menus: []) => void;
+    setAccessMenus: (menus: AppRouteObject[]) => void;
     setAccessRoutes: (routes: []) => void;
     setAccessToken: (token: AccessToken) => void;
     setIsAccessChecked: (isAccessChecked: boolean) => void;
@@ -72,7 +66,7 @@ export const useAccessStore = create<AccessState & AccessActions>()(
         setAccessCodes: (codes: string[]) => {
           set({ accessCodes: codes });
         },
-        setAccessMenus: (menus: []) => {
+        setAccessMenus: (menus: AppRouteObject[]) => {
           set({ accessMenus: menus });
         },
         setAccessRoutes: (routes: []) => {
@@ -125,13 +119,17 @@ export const useAccessToken = () =>
   useAccessStore((store) => store.accessToken);
 export const useAccessRefreshToken = () =>
   useAccessStore((store) => store.refreshToken);
+export const useIsAccessChecked = () =>
+  useAccessStore((store) => store.isAccessChecked);
 export const useAccessActions = () => useAccessStore((store) => store.actions);
 
 export const useSignIn = () => {
-  const { setAccessToken, setRefreshToken, setAccessCodes, setAccessMenus } =
-    useAccessActions();
-  const { setUserInfo } = useUserActions();
-  const navigate = useNavigate();
+  const { setAccessToken, setRefreshToken } = useAccessActions();
+
+  const { loading: loginLoading, runAsync: loginHandle } = useRequest(
+    loginApi,
+    { manual: true }
+  );
 
   /**
    * 异步处理登录操作
@@ -141,36 +139,19 @@ export const useSignIn = () => {
    */
   const signIn = async (params: LoginAndRegisterParams) => {
     // 异步处理用户登录操作并获取 accessToken
-    let userInfo: null | UserInfo = null;
 
     try {
-      const res = await loginApi(params);
+      const res = await loginHandle(params);
       const { accessToken, refreshToken } = res;
       // 如果成功获取到 accessToken
       if (accessToken) {
         setAccessToken(accessToken);
         setRefreshToken(refreshToken);
-
-        // 获取用户信息并存储到 accessStore 中
-        const [fetchUserInfoResult, accessCodes, menus] = await Promise.all([
-          getUserInfoApi(),
-          getAccessCodesApi(),
-          getAllMenusApi(),
-        ]);
-
-        userInfo = fetchUserInfoResult;
-        setUserInfo(userInfo);
-        setAccessCodes(accessCodes);
-        setAccessMenus(menus);
-
-        // BUG: 直接navigate("/dashboard/analytics"), 从login页面跳转到首页，侧边栏menu无法展开
-        // 因为useMatches() 返回的只有['/dashborad/analytics']
-        navigate('/', { replace: true });
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  return signIn;
+  return { signIn, loading: loginLoading };
 };

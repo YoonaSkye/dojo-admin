@@ -20,7 +20,8 @@ export default function IAvatar({
     <div className={cn(className, 'relative flex flex-shrink-0 items-center')}>
       <Avatar className={cn(className, 'size-full')}>
         <AvatarImage alt={alt} src={src} />
-        <AvatarFallback>{alt?.toUpperCase()}</AvatarFallback>
+        {/* BUG: 图片会先显示fallback 文字 */}
+        {/* <AvatarFallback>{alt?.toUpperCase()}</AvatarFallback> */}
       </Avatar>
       {dot && (
         <span

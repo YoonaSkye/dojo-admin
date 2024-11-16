@@ -23,6 +23,7 @@
     "@radix-ui/react-tabs": "^1.1.0",
     "@radix-ui/react-toggle": "^1.1.0",
     "@radix-ui/react-toggle-group": "^1.1.0",
+    "ahooks": "^3.8.1",
     "antd": "^5.15.0",
     "autosuggest-highlight": "^3.3.4",
     "axios": "^1.6.7",

@@ -22,7 +22,6 @@ export default function LayoutMenu({ mode, themeMode }: Props) {
   const collapsed = useCollapsed();
 
   const routeToMenuFn = useRouteToMenu();
-  // const permissionRoutes = usePermissionRoutes();
   const permissionRoutes = usePermission();
   const { pathname } = useLocation();
   const matches = useMatches();

@@ -13,7 +13,7 @@ export default function AnalysisChartCard({
 }: AnalysisChartCardProps) {
   return (
     <Card className={className}>
-      <CardHeader>
+      <CardHeader className="p-5">
         <CardTitle className="text-xl">{title}</CardTitle>
       </CardHeader>
       <CardContent>{children}</CardContent>

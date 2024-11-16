@@ -2,7 +2,6 @@ import { Params, RouteObject } from 'react-router-dom';
 
 // 扩展meta元信息接口
 export interface RouteMeta {
-  title: string;
   /**
    * antd menu selectedKeys
    */
@@ -51,25 +50,8 @@ export interface RouteMeta {
   params?: Params<string>;
 }
 
-export type RouteHandle = {
-  name: string;
-  title: string;
-  icon?: string;
-};
-
 export type AppRouteObject = {
   order?: number;
   meta?: RouteMeta;
   children?: AppRouteObject[];
 } & Omit<RouteObject, 'children'>;
-
-// 扩展meta元信息接口 另一种写法
-// 如何全局暴露出去？
-declare module 'react-router' {
-  interface IndexRouteObject {
-    handle?: RouteObject['handle'] & RouteHandle;
-  }
-  interface NonIndexRouteObject {
-    handle?: RouteObject['handle'] & RouteHandle;
-  }
-}

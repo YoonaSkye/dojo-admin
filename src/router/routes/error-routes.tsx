@@ -16,6 +16,7 @@ export const ErrorRoutes: RouteObject = {
   element: (
     <AuthGuard>
       <div className="flex h-screen w-full flex-col">
+        <h1>错误页面</h1>
         <Suspense fallback={<Spin size="large" />}>
           <Outlet />
         </Suspense>

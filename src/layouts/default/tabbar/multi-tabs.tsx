@@ -42,7 +42,7 @@ export default function MultiTabs() {
         </div>
       );
     },
-    [activeTabRoutePath, tabs.length]
+    [activeTabRoutePath, tabs.length, t]
   );
 
   /**

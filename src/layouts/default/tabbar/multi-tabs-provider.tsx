@@ -166,8 +166,6 @@ export default function MultiTabsProvider({ children }: PropsWithChildren) {
         ...prev,
         {
           title: matchRoute.title,
-          // pathname: getpathname(),
-          // routePath: matchRoute.routePath,
           pathname: matchRoute.pathname,
           children: matchRoute.children,
           icon: matchRoute.icon,

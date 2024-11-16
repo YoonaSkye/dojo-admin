@@ -1,19 +1,13 @@
 import { useAccessToken } from '@/store/access';
-import { useCallback, useEffect } from 'react';
-import { useRouter } from '../hooks/use-router';
+import { Navigate } from 'react-router-dom';
 
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const accessToken = useAccessToken();
-  const router = useRouter();
 
-  const check = useCallback(() => {
-    if (!accessToken) {
-      router.replace('/login');
-    }
-  }, [router, accessToken]);
+  // BUG: 会首先进入dashboard 页面，然后再触发useEffect里的auth检查
 
-  useEffect(() => {
-    check();
-  }, [check]);
+  // access token检查
+  if (!accessToken) return <Navigate to="/login" />;
+
   return children;
 }

@@ -51,7 +51,7 @@ export function useMatchRoute(): MatchRouteType | undefined {
 
     if (matchedRoute) {
       setMatchRoute({
-        title: matchedRoute.title,
+        title: matchedRoute.label,
         pathname: matchedRoute.key,
         children: children,
         icon: matchedRoute.icon,
@@ -59,16 +59,9 @@ export function useMatchRoute(): MatchRouteType | undefined {
       });
     } else {
       // 针对访问 / 路由
+      //TODO: 解决初次登陆路由跳转问题
       navigate(HOMEPAGE);
     }
-
-    // setMatchRoute({
-    //   title: (lastRoute?.handle as any)?.title,
-    //   pathname,
-    //   children,
-    //   // routePath: lastRoute?.pathname || '',
-    //   icon: (lastRoute?.handle as any)?.icon,
-    // });
   }, [pathname]);
 
   return matchRoute;

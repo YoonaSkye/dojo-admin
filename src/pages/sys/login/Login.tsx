@@ -3,8 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
 import LoginForm from './LoginForm';
 
-const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
-
 import logo from '@/assets/images/logo.png';
 import Slogan from './Slogan';
 import './login.css';
@@ -16,7 +14,7 @@ export default function Login() {
   // 判断用户是否有权限
   if (token) {
     // 如果有授权，则跳转到首页
-    return <Navigate to={HOMEPAGE} replace />;
+    return <Navigate to="/" />;
   }
   return (
     <div className="flex min-h-full flex-1 select-none overflow-hidden">

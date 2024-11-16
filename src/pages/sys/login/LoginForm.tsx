@@ -3,21 +3,17 @@ import { IconButton } from '@/components/icon';
 import { MdiGithub, MdiGoogle, MdiQqchat, MdiWechat } from '@/icons';
 import { useSignIn } from '@/store/access';
 import { Button, Checkbox, Col, Form, Input, Row } from 'antd';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export default function LoginForm() {
-  const [loading, setLoading] = useState(false);
-
-  const signIn = useSignIn();
+  const { signIn, loading } = useSignIn();
   const { t } = useTranslation();
 
   const handleFinish = async ({ username, password }: SignInReq) => {
-    setLoading(true);
     try {
       await signIn({ username, password });
-    } finally {
-      setLoading(false);
+    } catch (error) {
+      console.log(error);
     }
   };
   return (
