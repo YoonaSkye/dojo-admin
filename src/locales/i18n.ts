@@ -12,7 +12,7 @@ i18n
     detection: {
       convertDetectedLanguage: (lng) => lng.replace('-', '_'),
     },
-    debug: true,
+    // debug: true,
     fallbackLng: 'en-US',
     interpolation: {
       escapeValue: false, // react already safes from xss

@@ -5,6 +5,12 @@
       "analytics": "Analytics",
       "workspace": "Workspace"
     },
+    "manage": {
+      "title": "System Manage",
+      "user": "User Manage",
+      "role": "Role Manage",
+      "menu": "Menu Manage"
+    },
     "demos": {
       "title": "Demos",
       "access": {

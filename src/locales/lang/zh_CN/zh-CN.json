@@ -5,6 +5,12 @@
       "analytics": "分析页",
       "workspace": "工作台"
     },
+    "manage": {
+      "title": "系统管理",
+      "user": "用户管理",
+      "role": "角色管理",
+      "menu": "菜单管理"
+    },
     "demos": {
       "title": "演示",
       "access": {
