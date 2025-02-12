@@ -4,7 +4,7 @@ import type { TabsProps } from 'antd';
 import { ConfigProvider, Tabs } from 'antd';
 import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import Label from './Label';
+import Label from '../tabs/Label';
 import { KeepAliveTab, useMultiTabsContext } from './multi-tabs-provider';
 import TabContextMenu from './tab-context-menu';
 import './index.scss';
@@ -62,19 +62,7 @@ export default function MultiTabs() {
   /**
    * 自定义 渲染 tabbar
    */
-  // TODO: 可拖拽的Tabbar
-  // 暂时解决overflow 和 sticky冲突，将tabbar直接设置为fixed
-  // 然后增加tab content margin + z-index来解决可见问题
-  // 但是右侧的三个图表变为不可见，待解决
   const renderTabBar: TabsProps['renderTabBar'] = (props, DefaultTabBar) => (
-    // <StickyBox
-    //   offsetTop={50}
-    //   offsetBottom={50}
-    //   style={{
-    //     zIndex: 1,
-    //     background: Color(themeToken.colorBgElevated).alpha(1).toString(),
-    //   }}
-    // >
     <div
       className="bg-background border-border flex transition-all border-b fixed top-[50px] z-10"
       style={{
@@ -102,7 +90,6 @@ export default function MultiTabs() {
         </div>
       </div> */}
     </div>
-    // </StickyBox>
   );
 
   return (

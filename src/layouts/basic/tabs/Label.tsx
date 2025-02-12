@@ -1,12 +1,13 @@
 import { Iconify } from '@/components/icon';
 import { X } from '@/icons';
-import { KeepAliveTab } from './multi-tabs-provider';
+
+import { TabPageItem } from '@/store/tabs';
 import './label.scss';
 
 interface Props {
   children: React.ReactNode;
-  closeTab: (path?: string) => void;
-  tab?: KeepAliveTab;
+  closeTab: (path: string) => void;
+  tab: TabPageItem;
   closable: boolean;
 }
 
@@ -37,7 +38,7 @@ export default function Label({ children, closeTab, tab, closable }: Props) {
           <X
             onClick={(e) => {
               e.stopPropagation();
-              closeTab(tab?.pathname);
+              closeTab(tab.url);
             }}
             className="hover:bg-accent stroke-accent-foreground/80 hover:stroke-accent-foreground text-accent-foreground/80 group-[.is-active]:text-accent-foreground mt-[2px] size-3 cursor-pointer rounded-full transition-all"
           />
@@ -45,10 +46,12 @@ export default function Label({ children, closeTab, tab, closable }: Props) {
       </div>
       {/* main */}
       <div className="tabs-chrome__item-main group-[.is-active]:text-primary dark:group-[.is-active]:text-accent-foreground text-accent-foreground z-[2] mx-[calc(var(--gap)*2)] my-0 flex h-full items-center overflow-hidden rounded-tl-[5px] rounded-tr-[5px] pl-2 pr-4 duration-150">
-        <Iconify
-          icon={tab?.icon}
-          className="mr-1 flex size-4 items-center overflow-hidden"
-        />
+        {tab?.icon && (
+          <Iconify
+            icon={tab?.icon}
+            className="mr-1 flex size-4 items-center overflow-hidden"
+          />
+        )}
         <span className="flex-1 overflow-hidden whitespace-nowrap text-sm">
           {children}
         </span>

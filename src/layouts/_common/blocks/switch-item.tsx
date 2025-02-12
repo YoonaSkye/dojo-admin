@@ -3,21 +3,26 @@ import clsx from 'clsx';
 import { useState } from 'react';
 
 interface Props {
+  defaultChecked?: boolean;
   disabled?: boolean;
   children?: React.ReactNode;
   className?: string;
   shortcut?: string;
   title?: string;
+  callback?: (checked: boolean) => void;
 }
 export default function SwitchItem({
+  defaultChecked = false,
   disabled = false,
   className,
   shortcut,
   title,
+  callback,
 }: Props) {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(defaultChecked);
   const handleClick = () => {
     setChecked(!checked);
+    callback && callback(!checked);
   };
   return (
     <div

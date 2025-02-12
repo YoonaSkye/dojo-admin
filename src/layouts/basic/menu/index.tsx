@@ -1,14 +1,10 @@
-import Logo from '@/components/logo';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { useRouteToMenu } from '@/router/hooks';
-import { usePermission } from '@/router/hooks/use-permission';
-import { menuFilter } from '@/router/utils';
-import { useCollapsed } from '@/store/setting';
+import { useSiderSetting } from '@/store/setting';
 import type { MenuProps } from 'antd';
 import { ConfigProvider, Menu } from 'antd';
 import { useEffect, useState } from 'react';
 import { useLocation, useMatches, useNavigate } from 'react-router-dom';
 import './index.scss';
+import { useAccessMenus } from '@/store/access';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -19,24 +15,16 @@ type Props = {
 };
 
 export default function LayoutMenu({ mode, themeMode }: Props) {
-  const collapsed = useCollapsed();
+  const { collapsed } = useSiderSetting();
+  const menus = useAccessMenus();
 
-  const routeToMenuFn = useRouteToMenu();
-  const permissionRoutes = usePermission();
   const { pathname } = useLocation();
-  const matches = useMatches();
   const navigate = useNavigate();
+  const matches = useMatches();
 
   /** state */
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>(['']);
-  const [menuList, setMenuList] = useState<MenuItem[]>([]);
-
-  useEffect(() => {
-    const menuRoutes = menuFilter(permissionRoutes);
-    const menus = routeToMenuFn(menuRoutes);
-    setMenuList(menus);
-  }, [permissionRoutes, routeToMenuFn]);
 
   useEffect(() => {
     const openKeys = matches
@@ -58,20 +46,25 @@ export default function LayoutMenu({ mode, themeMode }: Props) {
   };
   const onClick: MenuProps['onClick'] = ({ key }) => {
     navigate(key);
-    // props?.closeSideBarDrawer?.();
   };
 
   return (
     <>
-      <div style={{ height: '50px' }}>
+      {/* <div style={{ height: '50px' }}>
         <Logo />
-      </div>
+      </div> */}
 
       {/* Sidebar menu */}
 
-      <ScrollArea
+      {/* <ScrollArea
         style={{
           height: 'calc(100% - 92px)',
+        }}
+      > */}
+      <div
+        style={{
+          flex: '1 1 0%',
+          overflow: 'hidden auto',
         }}
       >
         <ConfigProvider
@@ -98,7 +91,7 @@ export default function LayoutMenu({ mode, themeMode }: Props) {
           <Menu
             mode={mode}
             theme={themeMode}
-            items={menuList}
+            items={menus}
             defaultOpenKeys={openKeys}
             defaultSelectedKeys={selectedKeys}
             selectedKeys={selectedKeys}
@@ -106,9 +99,15 @@ export default function LayoutMenu({ mode, themeMode }: Props) {
             onOpenChange={onOpenChange}
             onClick={onClick}
             inlineCollapsed={collapsed}
+            style={{
+              backgroundColor: 'transparent',
+              border: 'none',
+              width: '100%',
+            }}
           />
         </ConfigProvider>
-      </ScrollArea>
+      </div>
+      {/* </ScrollArea> */}
     </>
   );
 }

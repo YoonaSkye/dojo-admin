@@ -4,10 +4,15 @@ import {
   BuiltinThemePreset,
   BuiltinThemeType,
 } from './config';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Builtin() {
   const [modelValue, setModelValue] = useState<BuiltinThemeType>('default');
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.dataset.theme = modelValue;
+  }, [modelValue]);
 
   function typeView(name: BuiltinThemeType) {
     switch (name) {

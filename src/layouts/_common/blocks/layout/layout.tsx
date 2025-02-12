@@ -32,7 +32,7 @@ const PRESET: PresetItem[] = [
 ];
 
 export default function Layout() {
-  const { setThemeLayout } = useSettingActions();
+  const { setLayoutMode } = useSettingActions();
 
   return (
     <div className="flex w-full justify-center gap-10">
@@ -42,7 +42,7 @@ export default function Layout() {
           <div
             key={preset.name}
             className="flex w-[100px] cursor-pointer flex-col"
-            onClick={() => setThemeLayout(preset.type)}
+            onClick={() => setLayoutMode(preset.type)}
           >
             <div className={clsx('outline-box flex-center')}>
               <Component />

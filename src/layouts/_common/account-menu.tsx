@@ -50,7 +50,7 @@ export default function AccountMenu() {
     } catch (error) {
       console.log(error);
     } finally {
-      replace('/login');
+      replace('/auth/login');
     }
   };
   return (

@@ -33,7 +33,6 @@ export default function TabContextMenu({ children, tab }: Props) {
     closeRight,
   } = useMultiTabsContext();
   const { pathname } = useLocation();
-  // const currentTab = tabs.find((item) => item.key === pathname)?.key;
 
   /**
    * 获取操作是否禁用
