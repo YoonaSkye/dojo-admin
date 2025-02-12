@@ -1,176 +1,33 @@
-import { Permission } from '#/entity';
-import { BasicStatus, PermissionType } from '#/enum';
-import { AppRouteObject } from '#/router';
 import { getAccessCodesApi, getAllMenusApi, getUserInfoApi } from '@/api/core';
-import Loading from '@/components/loading';
+import { accessRoutes } from '@/router/routes';
+import { generateRoutesByFrontend } from '@/router/utils/access';
+import { generateMenus } from '@/router/utils/generate-menus';
+import { generateRoutesByBackend } from '@/router/utils/generate-routes-backend';
 import { useAccessActions } from '@/store/access';
 import { useUserActions } from '@/store/user';
-import { flattenTrees } from '@/utils';
 import { useRequest } from 'ahooks';
-import { isEmpty } from 'ramda';
-import { Suspense, lazy, useEffect, useState } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-const ENTRY_PATH = '/src/pages';
-const PAGES = import.meta.glob('/src/pages/**/*.tsx');
-const loadComponentFromPath = (path: string) => PAGES[`${ENTRY_PATH}${path}`];
-
-/**
- * Build complete route path by traversing from current permission to root
- * @param {Permission} permission - current permission
- * @param {Permission[]} flattenedPermissions - flattened permission array
- * @param {string[]} segments - route segments accumulator
- * @returns {string} normalized complete route path
- */
-function buildCompleteRoute(
-  permission: Permission,
-  flattenedPermissions: Permission[],
-  segments: string[] = []
-): string {
-  // Add current route segment
-  segments.unshift(permission.route);
-
-  // Base case: reached root permission
-  if (!permission.parentId) {
-    return `/${segments.join('/')}`;
-  }
-
-  // Find parent and continue recursion
-  const parent = flattenedPermissions.find((p) => p.id === permission.parentId);
-  if (!parent) {
-    console.warn(`Parent permission not found for ID: ${permission.parentId}`);
-    return `/${segments.join('/')}`;
-  }
-
-  return buildCompleteRoute(parent, flattenedPermissions, segments);
-}
-
-// Components
-// function NewFeatureTag() {
-//   return (
-//     <ProTag color="cyan" icon={<Iconify icon="solar:bell-bing-bold-duotone" size={14} />}>
-//       NEW
-//     </ProTag>
-//   );
-// }
-
-function RouteWrapper({ children }: { children: React.ReactNode }) {
-  return <Suspense fallback={<Loading />}>{children}</Suspense>;
-}
-
-// Route Transformers
-const createBaseRoute = (
-  permission: Permission,
-  completeRoute: string
-): AppRouteObject => {
-  const {
-    route,
-    label,
-    icon,
-    order,
-    hide,
-    hideTab,
-    status,
-    frameSrc,
-    newFeature,
-  } = permission;
-
-  const baseRoute: AppRouteObject = {
-    path: route,
-    meta: {
-      label,
-      key: completeRoute,
-      hideMenu: !!hide,
-      hideTab,
-      disabled: status === BasicStatus.DISABLE,
-    },
-  };
-
-  if (order) baseRoute.order = order;
-  if (icon) baseRoute.meta!.icon = icon;
-  // if (frameSrc) baseRoute.meta!.frameSrc = frameSrc;
-  // if (newFeature) baseRoute.meta!.suffix = <NewFeatureTag />;
-
-  return baseRoute;
-};
-
-const createCatalogueRoute = (
-  permission: Permission,
-  flattenedPermissions: Permission[]
-): AppRouteObject => {
-  const baseRoute = createBaseRoute(
-    permission,
-    buildCompleteRoute(permission, flattenedPermissions)
-  );
-
-  baseRoute.meta!.hideTab = true;
-
-  const { parentId, children = [] } = permission;
-  if (!parentId) {
-    baseRoute.element = (
-      <RouteWrapper>
-        <Outlet />
-      </RouteWrapper>
-    );
-  }
-
-  baseRoute.children = transformPermissionsToRoutes(
-    children,
-    flattenedPermissions
-  );
-
-  if (!isEmpty(children)) {
-    baseRoute.children.unshift({
-      index: true,
-      element: <Navigate to={children[0].route} replace />,
-    });
-  }
-
-  return baseRoute;
-};
-
-const createMenuRoute = (
-  permission: Permission,
-  flattenedPermissions: Permission[]
-): AppRouteObject => {
-  const baseRoute = createBaseRoute(
-    permission,
-    buildCompleteRoute(permission, flattenedPermissions)
-  );
-
-  const Element = lazy(loadComponentFromPath(permission.component!) as any);
-
-  baseRoute.element = permission.frameSrc ? (
-    <Element src={permission.frameSrc} />
-  ) : (
-    <RouteWrapper>
-      <Element />
-    </RouteWrapper>
-  );
-
-  return baseRoute;
-};
-
-// Main Functions
-function transformPermissionsToRoutes(
-  permissions: Permission[],
-  flattenedPermissions: Permission[]
-): AppRouteObject[] {
-  return permissions.map((permission) => {
-    if (permission.type === PermissionType.CATALOGUE) {
-      return createCatalogueRoute(permission, flattenedPermissions);
-    }
-    return createMenuRoute(permission, flattenedPermissions);
-  });
-}
+type AccessModeType = 'backend' | 'frontend';
+const mode = import.meta.env.VITE_ACCESS_MODE as AccessModeType;
 
 export const useUserDetail = () => {
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   const { setUserInfo } = useUserActions();
-  const { setAccessCodes, setAccessMenus } = useAccessActions();
+  const {
+    setAccessCodes,
+    setAccessMenus,
+    setAccessRoutes,
+    setIsAccessChecked,
+  } = useAccessActions();
 
-  const { data: menus, loading: requestLoading } = useRequest(getAllMenusApi);
+  const { runAsync, loading: requestLoading } = useRequest(getAllMenusApi, {
+    manual: true,
+  });
+  // const { data: menus, loading: requestLoading } = useRequest(getAllMenusApi);
 
   const { data: info } = useRequest(getUserInfoApi);
   const { data: codes } = useRequest(getAccessCodesApi);
@@ -182,19 +39,52 @@ export const useUserDetail = () => {
   }, [info, codes]);
 
   useEffect(() => {
-    if (!menus) return;
-    setLoading(true);
-    const flattenedPermissions = flattenTrees(menus);
-    // const asyncRoutes = generateRoutesByBackend(menus);
-    const asyncRoutes = transformPermissionsToRoutes(
-      menus,
-      flattenedPermissions
-    );
-    setAccessMenus([...asyncRoutes]);
+    // TODO: 根据权限模式 mode = 'backend' | 'frontend', 来生成权限路由
+    if (!info) return;
+    // if (isAccessChecked) return;
 
-    setLoading(false);
-    // 构建路由
-  }, [menus]);
+    setLoading(true);
+    switch (mode) {
+      case 'backend': {
+        runAsync().then((data) => {
+          const authRoutes = generateRoutesByBackend(data);
+          const authMenus = generateMenus(data, t);
+
+          setAccessRoutes([...authRoutes]);
+          setAccessMenus(authMenus);
+          setIsAccessChecked(true);
+
+          setLoading(false);
+        });
+
+        break;
+      }
+      case 'frontend': {
+        const authRoutes = generateRoutesByFrontend(accessRoutes, info.roles);
+        const authMenus = generateMenus(authRoutes, t);
+
+        setAccessRoutes(authRoutes);
+        setAccessMenus(authMenus);
+        setIsAccessChecked(true);
+
+        setLoading(false);
+        break;
+      }
+    }
+  }, [info]);
+
+  // useEffect(() => {
+  //   if (!menus) return;
+  //   setLoading(true);
+
+  //   const authRoutes = generateRoutesByBackend(menus);
+  //   const authMenus = generateMenus(authRoutes, t);
+  //   setAccessRoutes([...authRoutes]);
+  //   setAccessMenus(authMenus);
+
+  //   setLoading(false);
+  //   // 构建路由
+  // }, [menus]);
 
   return { loading: requestLoading || loading };
 };
