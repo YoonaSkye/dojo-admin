@@ -186,98 +186,6 @@ const fallbackMenus = [
   },
 ];
 
-// const demosMenus = [
-//   {
-//     // component: 'BasicLayout',
-//     path: '/demos',
-//     redirect: '/demos/access',
-//     handle: {
-//       name: 'Demos',
-//       title: 'page.demos.title',
-//       icon: 'ic:baseline-view-in-ar',
-//       keepAlive: true,
-//       order: 1000,
-//       hideTab: true,
-//     },
-//     children: [
-//       // 权限控制
-//       {
-//         path: '/demos/access',
-//         // redirect: '/demos/access/page-control',
-//         handle: {
-//           name: 'AccessDemos',
-//           title: 'page.demos.access.frontendPermissions',
-//           icon: 'mdi:shield-key-outline',
-//           hideTab: true,
-//         },
-//         children: [
-//           {
-//             path: '/demos/access/page-control',
-//             component: '/demos/access/index.tsx',
-//             handle: {
-//               name: 'AccessPageControlDemo',
-//               title: 'page.demos.access.pageAccess',
-//               icon: 'mdi:page-previous-outline',
-//               hideTab: false,
-//             },
-//           },
-//           {
-//             path: '/demos/access/button-control',
-//             component: '/demos/access/button-control.tsx',
-//             handle: {
-//               name: 'AccessButtonControlDemo',
-//               title: 'page.demos.access.buttonControl',
-//               icon: 'mdi:button-cursor',
-//               hideTab: false,
-//             },
-//           },
-//           {
-//             path: '/demos/access/menu-visible-403',
-//             component: '/demos/access/menu-visible-403.tsx',
-//             handle: {
-//               name: 'AccessMenuVisible403Demo',
-//               title: 'page.demos.access.menuVisible403',
-//               authority: ['no-body'],
-//               icon: 'mdi:button-cursor',
-//               menuVisibleWithForbidden: true,
-//             },
-//           },
-//           {
-//             path: '/demos/access/super-visible',
-//             component: '#/views/demos/access/super-visible.tsx',
-//             handle: {
-//               name: 'AccessSuperVisibleDemo',
-//               title: 'page.demos.access.superVisible',
-//               authority: ['super'],
-//               icon: 'mdi:button-cursor',
-//             },
-//           },
-//           {
-//             path: '/demos/access/admin-visible',
-//             component: '/demos/access/admin-visible.tsx',
-//             handle: {
-//               name: 'AccessAdminVisibleDemo',
-//               title: 'page.demos.access.adminVisible',
-//               authority: ['admin'],
-//               icon: 'mdi:button-cursor',
-//             },
-//           },
-//           {
-//             path: '/demos/access/user-visible',
-//             component: '/demos/access/user-visible.tsx',
-//             handle: {
-//               name: 'AccessUserVisibleDemo',
-//               title: 'page.demos.access.userVisible',
-//               authority: ['user'],
-//               icon: 'mdi:button-cursor',
-//             },
-//           },
-//         ],
-//       },
-//     ],
-//   },
-// ];
-
 const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
   const roleWithMenus = {
     admin: {
@@ -353,18 +261,18 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
                 hideTab: false,
               },
             },
-            {
-              path: '/demos/access/menu-visible-403',
-              component: '/demos/access/menu-visible-403.tsx',
-              handle: {
-                name: 'AccessMenuVisible403Demo',
-                title: 'page.demos.access.menuVisible403',
-                authority: ['no-body'],
-                icon: 'mdi:button-cursor',
-                menuVisibleWithForbidden: true,
-              },
-            },
-            roleWithMenus[role],
+            // {
+            //   path: '/demos/access/menu-visible-403',
+            //   component: '/demos/access/menu-visible-403.tsx',
+            //   handle: {
+            //     name: 'AccessMenuVisible403Demo',
+            //     title: 'page.demos.access.menuVisible403',
+            //     authority: ['no-body'],
+            //     icon: 'mdi:button-cursor',
+            //     menuVisibleWithForbidden: true,
+            //   },
+            // },
+            // roleWithMenus[role],
           ],
         },
       ],
