@@ -1,5 +1,5 @@
 import BaseChart from '@/echarts/BaseChart';
-import AnalysisChartCard from '../analysis/components/AnalysisChartCard';
+import AnalysisChartCard from '../analytics/components/AnalysisChartCard';
 import type {
   WorkbenchProjectItem,
   WorkbenchQuickNavItem,
