@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
-import BasicLayout from '@/layouts/default';
+import BasicLayout from '@/layouts/basic';
 import AuthGuard from './components/AuthGuard';
 import { AppRouteObject } from '#/router';
 import { routes, fallbackNotFoundRoute } from './routes';
