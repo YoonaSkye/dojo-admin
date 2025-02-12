@@ -4,6 +4,10 @@ import { useRequest } from 'ahooks';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+import type { MenuProps } from 'antd';
+
+type MenuItem = Required<MenuProps>['items'][number];
+
 interface LoginAndRegisterParams {
   password: string;
   username: string;
@@ -17,11 +21,11 @@ interface AccessState {
   /**
    * 可访问的菜单列表
    */
-  accessMenus: AppRouteObject[];
+  accessMenus: MenuItem[];
   /**
    * 可访问的路由列表
    */
-  accessRoutes: [];
+  accessRoutes: AppRouteObject[];
   /**
    * 登录 accessToken
    */
@@ -43,8 +47,8 @@ interface AccessState {
 interface AccessActions {
   actions: {
     setAccessCodes: (codes: string[]) => void;
-    setAccessMenus: (menus: AppRouteObject[]) => void;
-    setAccessRoutes: (routes: []) => void;
+    setAccessMenus: (menus: MenuItem[]) => void;
+    setAccessRoutes: (routes: AppRouteObject[]) => void;
     setAccessToken: (token: AccessToken) => void;
     setIsAccessChecked: (isAccessChecked: boolean) => void;
     setLoginExpired: (loginExpired: boolean) => void;
@@ -66,10 +70,10 @@ export const useAccessStore = create<AccessState & AccessActions>()(
         setAccessCodes: (codes: string[]) => {
           set({ accessCodes: codes });
         },
-        setAccessMenus: (menus: AppRouteObject[]) => {
+        setAccessMenus: (menus: MenuItem[]) => {
           set({ accessMenus: menus });
         },
-        setAccessRoutes: (routes: []) => {
+        setAccessRoutes: (routes: AppRouteObject[]) => {
           set({ accessRoutes: routes });
         },
         setAccessToken: (token: AccessToken) => {

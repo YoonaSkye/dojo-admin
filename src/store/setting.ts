@@ -1,89 +1,155 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { ThemeColorPresets, ThemeLayout } from '#/enum';
+import { immer } from 'zustand/middleware/immer';
+import { mergeDeepLeft } from 'ramda';
 
-type SettingStore = {
-  collapsed: boolean;
-  // settings: SettingsType;
-  themeColorPresets: ThemeColorPresets;
-  themeLayout: ThemeLayout;
-  breadCrumb: boolean;
-  multiTab: boolean;
-  // 使用 actions 命名空间来存放所有的 action
+type SettingsState = { settings: App.Theme.ThemeSetting };
+
+type Actions = {
   actions: {
-    clearSettings: () => void;
-    setCollapsed: (collapsed: boolean) => void;
-    setThemeColorPresets: (themeColorPresets: ThemeColorPresets) => void;
-    setThemeLayout: (themeLayout: ThemeLayout) => void;
-    setBreadCrumb: (isEnable: boolean) => void;
-    setMultiTab: (isEnable: boolean) => void;
+    setLayoutMode: (mode: UnionKey.ThemeLayoutMode) => void;
+    setHeader: (header: Partial<App.Theme.ThemeSetting['header']>) => void;
+    setSider: (sider: Partial<App.Theme.ThemeSetting['sider']>) => void;
+    setFooter: (footer: Partial<App.Theme.ThemeSetting['footer']>) => void;
+    setTab: (tab: Partial<App.Theme.ThemeSetting['tab']>) => void;
+    setBreadCrumb: (
+      breadcrumb: Partial<App.Theme.ThemeSetting['breadcrumb']>
+    ) => void;
+    setThemeColor: (color: string) => void;
   };
 };
 
-const initialStates = {
-  collapsed: false,
-  themeColorPresets: ThemeColorPresets.Default,
-  themeLayout: ThemeLayout.Vertical,
-  breadCrumb: true,
-  multiTab: true,
+const initialSettings: App.Theme.ThemeSetting = {
+  layout: {
+    mode: 'vertical',
+  },
+  header: {
+    fixed: true,
+    visible: true,
+    height: 48,
+  },
+  breadcrumb: {
+    showIcon: true,
+    visible: true,
+  },
+  sider: {
+    collapsed: false,
+    collapsedWidth: 80,
+    visible: true,
+    width: 208,
+  },
+  footer: {
+    fixed: true,
+    height: 48,
+    visible: true,
+  },
+  tab: {
+    cache: true,
+    height: 40,
+    visible: true,
+  },
+  themeColor: '',
 };
 
-const useSettingStore = create<SettingStore>()(
+const useSettingStore = create<SettingsState & Actions>()(
   persist(
-    (set) => ({
-      collapsed: false,
-      themeColorPresets: ThemeColorPresets.Default,
-      themeLayout: ThemeLayout.Vertical,
-      breadCrumb: true,
-      multiTab: true,
-
+    immer((set) => ({
+      settings: initialSettings,
       actions: {
-        setCollapsed: (collapsed: boolean) => {
-          set({ collapsed });
+        setLayoutMode: (mode: UnionKey.ThemeLayoutMode) => {
+          set((state) => {
+            state.settings.layout.mode = mode;
+          });
         },
-        setThemeColorPresets: (themeColorPresets: ThemeColorPresets) => {
-          set({ themeColorPresets });
+        setHeader: (header: Partial<App.Theme.ThemeSetting['header']>) => {
+          set((state) => {
+            // state.settings.header = { ...state.settings.header, ...header };
+            Object.assign(state.settings.header, header);
+          });
         },
-        setThemeLayout: (themeLayout: ThemeLayout) => {
-          set({ themeLayout });
+        setBreadCrumb: (
+          breadcrumb: Partial<App.Theme.ThemeSetting['breadcrumb']>
+        ) => {
+          set((state) => {
+            // state.settings.breadcrumb = { ...state.settings.breadcrumb, ...breadcrumb };
+            Object.assign(state.settings.breadcrumb, breadcrumb);
+          });
         },
-        setBreadCrumb: (isEnable: boolean) => {
-          set({ breadCrumb: isEnable });
+        setSider: (sider: Partial<App.Theme.ThemeSetting['sider']>) => {
+          set((state) => {
+            // state.settings.sider = { ...state.settings.sider, ...sider };
+            Object.assign(state.settings.sider, sider);
+          });
         },
-        setMultiTab: (isEnable: boolean) => {
-          set({ multiTab: isEnable });
+        setFooter: (footer: Partial<App.Theme.ThemeSetting['footer']>) => {
+          set((state) => {
+            // state.settings.footer = { ...state.settings.footer, ...footer };
+            Object.assign(state.settings.footer, footer);
+          });
         },
-        clearSettings() {
-          set({ ...initialStates });
+        setTab: (tab: Partial<App.Theme.ThemeSetting['tab']>) => {
+          set((state) => {
+            // state.settings.tab = { ...state.settings.tab, ...tab };
+            Object.assign(state.settings.tab, tab);
+          });
+        },
+        setThemeColor: (color: string) => {
+          set((state) => {
+            state.settings.themeColor = color;
+          });
         },
       },
-    }),
+      // collapsed: false,
+      // themeColorPresets: ThemeColorPresets.Default,
+      // themeLayout: ThemeLayout.Vertical,
+      // breadCrumb: true,
+      // multiTab: true,
+
+      // actions: {
+      //   setCollapsed: (collapsed: boolean) => {
+      //     set({ collapsed });
+      //   },
+      //   setThemeColorPresets: (themeColorPresets: ThemeColorPresets) => {
+      //     set({ themeColorPresets });
+      //   },
+      //   setThemeLayout: (themeLayout: ThemeLayout) => {
+      //     set({ themeLayout });
+      //   },
+      //   setBreadCrumb: (isEnable: boolean) => {
+      //     set({ breadCrumb: isEnable });
+      //   },
+      //   setMultiTab: (isEnable: boolean) => {
+      //     set({ multiTab: isEnable });
+      //   },
+      //   clearSettings() {
+      //     set({ ...initialStates });
+      //   },
+      // },
+    })),
     {
       name: 'settings',
-      partialize: ({
-        collapsed,
-        themeColorPresets,
-        themeLayout,
-        breadCrumb,
-        multiTab,
-      }) => ({
-        collapsed,
-        themeColorPresets,
-        themeLayout,
-        breadCrumb,
-        multiTab,
-      }),
+      getStorage: () => localStorage,
+      merge: (persistedState, currentState) =>
+        mergeDeepLeft(persistedState, currentState),
+      partialize: (state) => state.settings,
     }
   )
 );
 
-export const useCollapsed = () => useSettingStore((state) => state.collapsed);
-export const useThemeColorPresets = () =>
-  useSettingStore((state) => state.themeColorPresets);
-export const useThemeLayout = () =>
-  useSettingStore((state) => state.themeLayout);
-export const useBreadCrumb = () => useSettingStore((state) => state.breadCrumb);
-export const useMultiTab = () => useSettingStore((state) => state.multiTab);
+export const useHeaderSetting = () =>
+  useSettingStore((state) => state.settings.header);
+export const useBreadCrumbSetting = () =>
+  useSettingStore((state) => state.settings.breadcrumb);
+export const useSiderSetting = () =>
+  useSettingStore((state) => state.settings.sider);
+export const useFooterSetting = () =>
+  useSettingStore((state) => state.settings.footer);
+export const useTabSetting = () =>
+  useSettingStore((state) => state.settings.tab);
+export const useThemeColor = () =>
+  useSettingStore((state) => state.settings.themeColor);
+export const useLayoutMode = () =>
+  useSettingStore((state) => state.settings.layout.mode);
 
 export const useSettingActions = () =>
   useSettingStore((state) => state.actions);
