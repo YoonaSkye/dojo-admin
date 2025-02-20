@@ -12,7 +12,7 @@ import {
 import { cn } from '@/lib/utils';
 import { useRouter } from '@/router/hooks';
 import { useAccessActions, useAccessStore } from '@/store/access';
-import { useUserStore } from '@/store/user';
+import { useUserInfo, useUserStore } from '@/store/user';
 
 import { BookOpenTextIcon, LogOutIcon } from 'lucide-react';
 import { AiFillGithub } from 'react-icons/ai';
@@ -38,6 +38,7 @@ const accountMenuItems: {
 ];
 
 export default function AccountMenu() {
+  const userInfo = useUserInfo();
   const { setAccessToken, setRefreshToken } = useAccessActions();
   const { replace } = useRouter();
 
@@ -73,7 +74,7 @@ export default function AccountMenu() {
           />
           <div className="ml-2 w-full">
             <div className="text-foreground mb-1 flex items-center text-sm font-medium">
-              Vben
+              {userInfo?.realName}
               {/* TODO 抽离Bage组件 */}
               {/* <Badge class="ml-2 text-green-400">{{ tagText }}</Badge>
                */}
@@ -87,7 +88,7 @@ export default function AccountMenu() {
               </div>
             </div>
             <div className="text-muted-foreground text-xs font-normal">
-              ann.vben@gmail.com
+              ann.dojo@gmail.com
             </div>
           </div>
         </DropdownMenuLabel>

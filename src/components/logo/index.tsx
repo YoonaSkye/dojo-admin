@@ -16,7 +16,7 @@ export default function Logo() {
         />
         {/* TODO: 是否考虑添加collapsed判断逻辑 */}
         <span className="text-foreground truncate text-nowrap font-semibold">
-          Vben Admin Antd
+          Dojo Admin Antd
         </span>
       </Link>
     </div>

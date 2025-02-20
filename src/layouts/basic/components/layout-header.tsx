@@ -9,36 +9,19 @@ import FullScreenButton from '@/layouts/_common/full-screen';
 import LanguageToggle from '@/layouts/_common/language-toggle';
 import ModeToggle from '@/layouts/_common/mode-toggle';
 import Preference from '@/layouts/_common/preference';
-import {
-  useLayoutMode,
-  useSettingActions,
-  useSiderSetting,
-} from '@/store/setting';
+import { useLayoutMode } from '@/store/setting';
 import { useMemo } from 'react';
 import HorizontalMenu from '../menu/horizontal-menu';
 
 export default function LayoutHeader() {
   const themeLayout = useLayoutMode();
-  const { collapsed } = useSiderSetting();
-  const { setSider } = useSettingActions();
   const isHeaderNav = useMemo(() => {
     return themeLayout === ThemeLayout.Horizontal;
   }, [themeLayout]);
 
   return (
-    <div className="relative flex items-center my-0 mx-4 h-14">
+    <div className="relative flex items-center gap-2 my-0 mx-4 h-14">
       {<Logo />}
-
-      {/* {!isHeaderNav && (
-        <Button
-          variant="icon"
-          size="icon"
-          className="my-0 ml-2 mr-1 rounded-md"
-          onClick={() => setCollapsed(!collapsed)}
-        >
-          <Menu className="size-4" />
-        </Button>
-      )} */}
 
       {/* 面包屑 */}
       <div className="flex-center hidden lg:block">

@@ -61,7 +61,7 @@ export default function CommandMenu({ ...props }: DialogProps) {
   useEffect(() => {
     const result = flattenedRoutes.filter(
       (item) =>
-        t(item.label).toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1 ||
+        t(item.title).toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1 ||
         t(item.key).toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1
     );
     setSearchResult(result);
@@ -97,13 +97,13 @@ export default function CommandMenu({ ...props }: DialogProps) {
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup>
-            {searchResult.map(({ key, label }) => {
-              const partsTitle = parse(t(label), match(t(label), searchQuery));
+            {searchResult.map(({ key, title }) => {
+              const partsTitle = parse(t(title), match(t(title), searchQuery));
               const partsKey = parse(key, match(key, searchQuery));
               return (
                 <CommandItem
                   key={key}
-                  value={t(label)}
+                  value={t(title)}
                   keywords={[key]}
                   onSelect={() => {
                     runCommand(() => navigete(key as string));

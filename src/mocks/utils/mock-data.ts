@@ -10,9 +10,9 @@ export const MOCK_USERS: UserInfo[] = [
   {
     id: 0,
     password: '123456',
-    realName: 'Vben',
+    realName: 'Dojo',
     roles: ['super'],
-    username: 'vben',
+    username: 'dojo',
   },
   {
     id: 1,
@@ -44,7 +44,7 @@ export const MOCK_CODES = [
   // super
   {
     codes: ['AC_100100', 'AC_100110', 'AC_100120', 'AC_100010'],
-    username: 'vben',
+    username: 'dojo',
   },
   {
     // admin
@@ -288,7 +288,7 @@ export const MOCK_MENUS = [
       ...manageMenus,
       ...fallbackMenus,
     ],
-    username: 'vben',
+    username: 'dojo',
   },
   {
     menus: [
