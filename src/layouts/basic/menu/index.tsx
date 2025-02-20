@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useMatches, useNavigate } from 'react-router-dom';
 import './index.scss';
 import { useAccessMenus } from '@/store/access';
+import { useRouteToMenu } from '@/router/hooks';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -16,7 +17,8 @@ type Props = {
 
 export default function LayoutMenu({ mode, themeMode }: Props) {
   const { collapsed } = useSiderSetting();
-  const menus = useAccessMenus();
+  // const menus = useAccessMenus();
+  const menus = useRouteToMenu();
 
   const { pathname } = useLocation();
   const navigate = useNavigate();

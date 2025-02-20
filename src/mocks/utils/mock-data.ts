@@ -148,7 +148,7 @@ const fallbackMenus = [
     redirect: '/demos/fallback/403',
     handle: {
       name: 'FallbackDemos',
-      title: '缺省页',
+      title: 'page.demos.fallback.title',
       icon: 'mdi:lightbulb-error-outline',
     },
     children: [

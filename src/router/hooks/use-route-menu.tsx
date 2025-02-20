@@ -1,24 +1,12 @@
 import { Iconify } from '@/components/icon';
-
-import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { AppRouteObject } from '#/router';
 import type { GetProp, MenuProps } from 'antd';
+import { useAccessRoutes } from '@/store/access';
+import { filterTree, mapTree } from '@/utils';
 
 type MenuItem = GetProp<MenuProps, 'items'>[number];
 
-const renderLabel = (
-  label: string,
-  suffix: React.ReactNode,
-  t: (key: string) => string
-) => {
-  // return (
-  //   <div className="flex items-center">
-  //     <div>{t(label)}</div>
-  //     {suffix}
-  //   </div>
-  // );
+const renderLabel = (label: string, t: (key: string) => string) => {
   return (
     <div className="inline-flex w-full items-center justify-between">
       <div>{t(label)}</div>
@@ -31,56 +19,36 @@ const renderLabel = (
  */
 export function useRouteToMenu() {
   const { t } = useTranslation();
+  const authRoutes = useAccessRoutes();
 
-  // const routeToMenuFn = useCallback(
-  //   (items: RouteObject[]) => {
-  //     return items.map((item) => {
-  //       const menuItem: any = [];
-  //       const { handle, children, path } = item;
-  //       if (handle) {
-  //         const { icon, title } = handle;
-  //         menuItem.key = path;
-  //         menuItem.label = (
-  //           <div className="inline-flex w-full items-center justify-between">
-  //             <div>{t(title)}</div>
-  //           </div>
-  //         );
-
-  //         if (icon) {
-  //           menuItem.icon = <Iconify icon={icon} width="1em" height="1em" />;
-  //         }
-  //       }
-  //       if (children) {
-  //         menuItem.children = routeToMenuFn(children);
-  //       }
-
-  //       return menuItem;
-  //     });
-  //   },
-  //   [t]
-  // );
-  const routeToMenuFn = useCallback(
-    (items: AppRouteObject[]): MenuItem[] => {
-      return items
-        .filter((item) => !item.meta?.hideMenu)
-        .map((item) => {
-          const { meta, children } = item;
-          if (!meta) return {} as MenuItem;
-
-          const menuItem: Partial<MenuItem> = {
-            key: meta.key,
-            disabled: meta.disabled,
-            label: renderLabel(meta.label, meta.suffix, t),
-            ...(meta.icon && {
-              icon: <Iconify icon={meta.icon} width="1em" height="1em" />,
-            }),
-            ...(children && { children: routeToMenuFn(children) }),
-          };
-
-          return menuItem as MenuItem;
-        });
-    },
-    [t]
+  const menus = filterTree(authRoutes, (route) => {
+    if (!route.path) return false;
+    return !route?.handle?.hideInMenu;
+  });
+  const sortedMenus = menus.sort(
+    (a, b) => (a.handle.order || 999) - (b.handle.order || 999)
   );
-  return routeToMenuFn;
+
+  const finalMenus = mapTree(sortedMenus, (route) => {
+    // 转换为菜单结构
+    const { path, handle, redirect, children } = route;
+    const { hideChildrenInMenu = false, icon, link, title = '' } = handle || {};
+
+    // 隐藏子菜单
+    const resultChildren = hideChildrenInMenu ? [] : (children as MenuItem[]);
+
+    // 隐藏子菜单
+    const resultPath = hideChildrenInMenu ? redirect || path : link || path;
+
+    return {
+      key: path,
+      label: renderLabel(title, t),
+      ...(icon && {
+        icon: <Iconify icon={icon} width="1em" height="1em" />,
+      }),
+      ...(resultChildren && { children: resultChildren }),
+    };
+  });
+
+  return finalMenus;
 }

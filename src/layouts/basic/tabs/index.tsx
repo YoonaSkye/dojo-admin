@@ -20,7 +20,7 @@ function Tabs() {
 
   return (
     <div
-      className="fixed top-[56px] z-[100] border-border bg-background flex w-full border-b transition-all"
+      className="fixed top-[56px] border-border bg-background flex w-full border-b transition-all"
       style={{
         height: '38px',
         marginLeft: '0px',

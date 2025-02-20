@@ -105,7 +105,7 @@ export default function AdminLayout(props: AdminLayoutProps) {
           <>
             <header style={hiddenHeaderStyle}></header>
             <header
-              className="fixed left-0 top-0 z-[100] w-full p-0 border-border border-b bg-header/60 backdrop-blur"
+              className="fixed left-0 top-0  w-full p-0 border-border border-b bg-header/60 backdrop-blur"
               style={{
                 height: '56px',
                 lineHeight: '56px',
