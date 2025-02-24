@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Router from './router';
 import AntdConfig from '@/theme/antd';
 import { loadSvgIcons } from '@/icons/svg/load';
+import AppProvider from './components/antd/AppProvider';
 
 function App() {
   useEffect(() => {
@@ -10,7 +11,9 @@ function App() {
 
   return (
     <AntdConfig>
-      <Router />
+      <AppProvider>
+        <Router />
+      </AppProvider>
     </AntdConfig>
   );
 }

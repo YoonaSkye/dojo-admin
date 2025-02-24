@@ -7,6 +7,7 @@ import { Button, Popconfirm, Tag } from 'antd';
 import { useRef, useState } from 'react';
 import request from 'umi-request';
 import RoleOperateDrawer from './UserOperateDrawer';
+import { antdUtils } from '@/utils';
 
 const ATG_MAP = {
   1: 'success',
@@ -36,7 +37,6 @@ export default function RoleManage() {
 
   const [visible, setVisible] = useState(false);
   const [currentRow, setCurrentRow] = useState<RoleItem | null>(null);
-  // console.log('currentRow', currentRow);
 
   const handleClose = (open: boolean) => {
     setVisible(open);
@@ -60,12 +60,10 @@ export default function RoleManage() {
 
     if (currentRow) {
       // 编辑逻辑
-      // message.success('编辑成功');
-      alert('编辑成功');
+      antdUtils.message.success('编辑成功');
     } else {
       // 新增逻辑
-      // message.success('新增成功');
-      alert('新增成功');
+      antdUtils.message.success('新增成功');
     }
     setVisible(false);
     actionRef.current?.reload();

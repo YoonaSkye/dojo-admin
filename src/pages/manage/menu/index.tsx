@@ -9,6 +9,7 @@ import { useRef, useState } from 'react';
 import request from 'umi-request';
 import MenuOperateModal from './MenuOperateModal';
 import { MenuOption } from './shared';
+import { antdUtils } from '@/utils';
 
 const ATG_MAP = {
   1: 'success',
@@ -60,7 +61,6 @@ export default function MenuManage() {
 
   const [visible, setVisible] = useState(false);
   const [currentRow, setCurrentRow] = useState<MenuItem | null>(null);
-  // console.log('currentRow', currentRow);
 
   // const menuList = useMemo(() => flattenMenu(data), [data]);
   const menuList = useRef<MenuOption[]>([]);
@@ -87,12 +87,10 @@ export default function MenuManage() {
 
     if (currentRow) {
       // 编辑逻辑
-      // message.success('编辑成功');
-      alert('编辑成功');
+      antdUtils.message.success('编辑成功');
     } else {
       // 新增逻辑
-      // message.success('新增成功');
-      alert('新增成功');
+      antdUtils.message.success('新增成功');
     }
     setVisible(false);
     actionRef.current?.reload();
