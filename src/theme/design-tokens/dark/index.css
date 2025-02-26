@@ -96,6 +96,7 @@
 
 .dark[data-theme='violet'],
 [data-theme='violet'] .dark {
+  --primary: 245 82% 67%;
   --background: 224 71.4% 4.1%;
   --background-deep: var(--background);
   --foreground: 210 20% 98%;
@@ -122,6 +123,7 @@
 
 .dark[data-theme='pink'],
 [data-theme='pink'] .dark {
+  --primary: 347 77% 60%;
   --background: 20 14.3% 4.1%;
   --background-deep: var(--background);
   --foreground: 0 0% 95%;
@@ -148,6 +150,7 @@
 
 .dark[data-theme='rose'],
 [data-theme='rose'] .dark {
+  --primary: 0 75% 42%;
   --background: 0 0% 3.9%;
   --background-deep: var(--background);
   --foreground: 0 0% 98%;
@@ -174,6 +177,7 @@
 
 .dark[data-theme='sky-blue'],
 [data-theme='sky-blue'] .dark {
+  --primary: 231 98% 65%;
   --background: 222.2 84% 4.9%;
   --background-deep: var(--background);
   --foreground: 210 40% 98%;
@@ -200,6 +204,7 @@
 
 .dark[data-theme='deep-blue'],
 [data-theme='deep-blue'] .dark {
+  --primary: 211 91% 39%;
   --background: 222.2 84% 4.9%;
   --background-deep: var(--background);
   --foreground: 210 40% 98%;
@@ -226,6 +231,7 @@
 
 .dark[data-theme='green'],
 [data-theme='green'] .dark {
+  --primary: 161 90% 43%;
   --background: 20 14.3% 4.1%;
   --background-deep: var(--background);
   --foreground: 0 0% 95%;
@@ -252,6 +258,7 @@
 
 .dark[data-theme='deep-green'],
 [data-theme='deep-green'] .dark {
+  --primary: 181 84% 32%;
   --background: 20 14.3% 4.1%;
   --background-deep: var(--background);
   --foreground: 0 0% 95%;
@@ -278,6 +285,7 @@
 
 .dark[data-theme='orange'],
 [data-theme='orange'] .dark {
+  --primary: 18 89% 40%;
   --background: 20 14.3% 4.1%;
   --background-deep: var(--background);
   --foreground: 60 9.1% 97.8%;
@@ -304,6 +312,7 @@
 
 .dark[data-theme='yellow'],
 [data-theme='yellow'] .dark {
+  --primary: 42 84% 61%;
   --background: 20 14.3% 4.1%;
   --background-deep: var(--background);
   --foreground: 60 9.1% 97.8%;
@@ -330,6 +339,7 @@
 
 .dark[data-theme='zinc'],
 [data-theme='zinc'] .dark {
+  --primary: 0 0% 98%;
   --background: 240 10% 3.9%;
   --background-deep: var(--background);
   --foreground: 0 0% 98%;
@@ -356,6 +366,7 @@
 
 .dark[data-theme='neutral'],
 [data-theme='neutral'] .dark {
+  --primary: 0 0% 98%;
   --background: 0 0% 3.9%;
   --background-deep: var(--background);
   --foreground: 0 0% 98%;
@@ -382,6 +393,7 @@
 
 .dark[data-theme='slate'],
 [data-theme='slate'] .dark {
+  --primary: 0 0% 98%;
   --background: 222.2 84% 4.9%;
   --background-deep: var(--background);
   --foreground: 210 40% 98%;
@@ -408,6 +420,7 @@
 
 .dark[data-theme='gray'],
 [data-theme='gray'] .dark {
+  --primary: 0 0% 98%;
   --background: 224 71.4% 4.1%;
   --background-deep: var(--background);
   --foreground: 210 20% 98%;

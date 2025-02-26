@@ -1,14 +1,10 @@
 import { ConfigProvider, theme } from 'antd';
-// import {
-//   customThemeTokenConfig,
-//   themeModeToken,
-//   colorPrimarys,
-//   customComponentConfig,
-// } from './theme';
+import { useEffect, useMemo } from 'react';
 
 import { ThemeMode } from '#/enum';
-import { useEffect, useMemo } from 'react';
 import { useTheme } from '@/store/theme';
+import { useThemeColor } from '@/store/setting';
+import { BUILT_IN_THEME_PRESETS } from '@/layouts/_common/blocks/theme/config';
 
 export default function AntdConfig({
   children,
@@ -30,7 +26,11 @@ export default function AntdConfig({
     return algorithm;
   }, [Itheme]);
 
-  // const colorPrimary = colorPrimarys[themeColorPresets];
+  const themePrimaryColor = useThemeColor();
+
+  const colorPrimary = BUILT_IN_THEME_PRESETS.find(
+    (theme) => theme.type === themePrimaryColor
+  )?.color;
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -51,18 +51,18 @@ export default function AntdConfig({
     root.classList.add(Itheme);
   }, [Itheme]);
 
+  useEffect(() => {
+    const root = document.documentElement;
+    root.dataset.theme = themePrimaryColor;
+  }, [themePrimaryColor]);
+
   return (
     <ConfigProvider
       theme={{
         token: {
-          // colorPrimary,
-          // ...customThemeTokenConfig,
-          // ...themeModeToken[themeMode].token,
+          colorPrimary: colorPrimary,
         },
-        components: {
-          // ...customComponentConfig,
-          // ...themeModeToken[themeMode].components,
-        },
+        components: {},
         algorithm,
       }}
     >

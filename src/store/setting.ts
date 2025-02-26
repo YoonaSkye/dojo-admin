@@ -48,7 +48,7 @@ const initialSettings: App.Theme.ThemeSetting = {
     height: 40,
     visible: true,
   },
-  themeColor: '',
+  themeColor: 'default',
 };
 
 const useSettingStore = create<SettingsState & Actions>()(
@@ -63,34 +63,32 @@ const useSettingStore = create<SettingsState & Actions>()(
         },
         setHeader: (header: Partial<App.Theme.ThemeSetting['header']>) => {
           set((state) => {
-            // state.settings.header = { ...state.settings.header, ...header };
-            Object.assign(state.settings.header, header);
+            state.settings.header = { ...state.settings.header, ...header };
           });
         },
         setBreadCrumb: (
           breadcrumb: Partial<App.Theme.ThemeSetting['breadcrumb']>
         ) => {
           set((state) => {
-            // state.settings.breadcrumb = { ...state.settings.breadcrumb, ...breadcrumb };
-            Object.assign(state.settings.breadcrumb, breadcrumb);
+            state.settings.breadcrumb = {
+              ...state.settings.breadcrumb,
+              ...breadcrumb,
+            };
           });
         },
         setSider: (sider: Partial<App.Theme.ThemeSetting['sider']>) => {
           set((state) => {
-            // state.settings.sider = { ...state.settings.sider, ...sider };
-            Object.assign(state.settings.sider, sider);
+            state.settings.sider = { ...state.settings.sider, ...sider };
           });
         },
         setFooter: (footer: Partial<App.Theme.ThemeSetting['footer']>) => {
           set((state) => {
-            // state.settings.footer = { ...state.settings.footer, ...footer };
-            Object.assign(state.settings.footer, footer);
+            state.settings.footer = { ...state.settings.footer, ...footer };
           });
         },
         setTab: (tab: Partial<App.Theme.ThemeSetting['tab']>) => {
           set((state) => {
-            // state.settings.tab = { ...state.settings.tab, ...tab };
-            Object.assign(state.settings.tab, tab);
+            state.settings.tab = { ...state.settings.tab, ...tab };
           });
         },
         setThemeColor: (color: string) => {
@@ -99,39 +97,14 @@ const useSettingStore = create<SettingsState & Actions>()(
           });
         },
       },
-      // collapsed: false,
-      // themeColorPresets: ThemeColorPresets.Default,
-      // themeLayout: ThemeLayout.Vertical,
-      // breadCrumb: true,
-      // multiTab: true,
-
-      // actions: {
-      //   setCollapsed: (collapsed: boolean) => {
-      //     set({ collapsed });
-      //   },
-      //   setThemeColorPresets: (themeColorPresets: ThemeColorPresets) => {
-      //     set({ themeColorPresets });
-      //   },
-      //   setThemeLayout: (themeLayout: ThemeLayout) => {
-      //     set({ themeLayout });
-      //   },
-      //   setBreadCrumb: (isEnable: boolean) => {
-      //     set({ breadCrumb: isEnable });
-      //   },
-      //   setMultiTab: (isEnable: boolean) => {
-      //     set({ multiTab: isEnable });
-      //   },
-      //   clearSettings() {
-      //     set({ ...initialStates });
-      //   },
-      // },
     })),
     {
-      name: 'settings',
+      name: 'core-settings',
       getStorage: () => localStorage,
-      merge: (persistedState, currentState) =>
-        mergeDeepLeft(persistedState, currentState),
-      partialize: (state) => state.settings,
+      merge: (persistedState, currentState) => {
+        return mergeDeepLeft(persistedState, currentState);
+      },
+      partialize: (state) => ({ settings: state.settings }),
     }
   )
 );

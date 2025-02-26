@@ -4,15 +4,14 @@ import {
   BuiltinThemePreset,
   BuiltinThemeType,
 } from './config';
-import { useEffect, useState } from 'react';
+import { useRef } from 'react';
+import { useSettingActions, useThemeColor } from '@/store/setting';
 
 export default function Builtin() {
-  const [modelValue, setModelValue] = useState<BuiltinThemeType>('default');
+  const themePrimaryColor = useThemeColor();
+  const { setThemeColor } = useSettingActions();
 
-  useEffect(() => {
-    const root = document.documentElement;
-    root.dataset.theme = modelValue;
-  }, [modelValue]);
+  const modelValue = useRef<BuiltinThemeType>(themePrimaryColor);
 
   function typeView(name: BuiltinThemeType) {
     switch (name) {
@@ -51,7 +50,7 @@ export default function Builtin() {
       }
       case 'orange': {
         // return $t('preferences.theme.builtin.orange');
-        return '';
+        return '橙黄色';
       }
       case 'yellow': {
         // return $t('preferences.theme.builtin.yellow');
@@ -81,7 +80,8 @@ export default function Builtin() {
   }
 
   const handleSelect = (theme: BuiltinThemePreset) => {
-    setModelValue(theme.type);
+    modelValue.current = theme.type;
+    setThemeColor(theme.type);
   };
 
   return (
@@ -94,7 +94,7 @@ export default function Builtin() {
         >
           <div
             className={clsx(
-              theme.type === modelValue && 'outline-box-active',
+              theme.type === modelValue.current && 'outline-box-active',
               'outline-box flex-center group cursor-pointer'
             )}
           >

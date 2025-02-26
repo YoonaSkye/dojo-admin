@@ -105,7 +105,7 @@ export default function AdminLayout(props: AdminLayoutProps) {
           <>
             <header style={hiddenHeaderStyle}></header>
             <header
-              className="fixed left-0 top-0  w-full p-0 border-border border-b bg-header/60 backdrop-blur"
+              className="fixed left-0 top-0  w-full p-0 border-border border-b bg-header backdrop-blur"
               style={{
                 height: '56px',
                 lineHeight: '56px',
@@ -128,7 +128,7 @@ export default function AdminLayout(props: AdminLayoutProps) {
         )}
 
         {/* Main Content */}
-        <main className="flex flex-col w-full h-[calc(-94px+100vh)] bg-transparent p-4 overflow-auto">
+        <main className="flex flex-col w-full h-[calc(-94px+100vh)] bg-background-deep p-4 overflow-auto">
           {/* TODO: 考虑重新封装一个ScrollWrapper,自定义滚动样式 */}
           <KeepLiveArea />
         </main>
