@@ -1,8 +1,9 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TabOption } from '../../typing';
 import { cn } from '@/lib/utils';
-import BaseChart from '@/echarts/BaseChart';
-import { chartTabOptions } from '../config';
+
+import AnalyticsTrends from './AnalyticsTrends';
+import AnalyticsVisits from './AnalyticsVisits';
 
 interface Props {
   tabs: TabOption[];
@@ -22,13 +23,12 @@ export default function AnalysisChartsTabs({ tabs, className }: Props) {
             </TabsTrigger>
           ))}
         </TabsList>
-        {tabs.map((tab) => (
-          <TabsContent value={tab.value} key={tab.label} className="pt-4">
-            <BaseChart
-              options={chartTabOptions[tab.value as 'trends' | 'visits']}
-            />
-          </TabsContent>
-        ))}
+        <TabsContent value="trends">
+          <AnalyticsTrends />
+        </TabsContent>
+        <TabsContent value="visits">
+          <AnalyticsVisits />
+        </TabsContent>
       </Tabs>
     </div>
   );

@@ -1,10 +1,11 @@
-import BaseChart from '@/echarts/BaseChart';
 import type { AnalysisOverviewItem, TabOption } from '../typing';
 import AnalysisChartCard from './components/AnalysisChartCard';
 import AnalysisChartsTabs from './components/AnalysisChartsTabs';
 import AnalysisOverview from './components/AnalysisOverview';
 
-import { dataOption, salesOption, sourceOption } from './config';
+import AnalyticsVisitsData from './components/AnalyticsVisitsData';
+import AnalyticsVisitsSales from './components/AnalyticsVisitsSales';
+import AnalyticsVisitsSource from './components/AnalyticsVisitsSource';
 
 const overviewItems: AnalysisOverviewItem[] = [
   {
@@ -63,16 +64,16 @@ export default function Analysis() {
           className="mt-5 md:mr-4 md:mt-0 md:w-1/3"
           title="访问数量"
         >
-          <BaseChart options={dataOption} />
+          <AnalyticsVisitsData />
         </AnalysisChartCard>
         <AnalysisChartCard
           className="mt-5 md:mr-4 md:mt-0 md:w-1/3"
           title="访问来源"
         >
-          <BaseChart options={sourceOption} />
+          <AnalyticsVisitsSource />
         </AnalysisChartCard>
         <AnalysisChartCard className="mt-5 md:mt-0 md:w-1/3" title="访问来源">
-          <BaseChart options={salesOption} />
+          <AnalyticsVisitsSales />
         </AnalysisChartCard>
       </div>
     </div>
