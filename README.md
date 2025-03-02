@@ -7,28 +7,28 @@
 
 ## 简介
 
-Dojo Admin 是一个现代化的后台管理模板，基于 React 18、Zustand、Vite、Ant Design 和 TypeScript 构建。它旨在帮助开发人员快速搭建功能强大的后台管理系统。
+Dojo Admin 是一个基于 React 18、Shadcn UI、Ant Design、Tailwind CSS、Zustand、Vite 和 TypeScript 的中后台解决方案，目标是为开发中大型项目提供开箱即用的解决方案。包括二次封装组件、utils、hooks、动态菜单、权限校验、多主题配置、按钮级别权限控制等功能。项目会使用前端较新的技术栈，可以作为项目的启动模板，以帮助你快速搭建企业级中后台产品原型。
 
 ## 预览
 
-| ![login.png](/public//demo/login-page.png)           | ![dashboard.png](/public/demo/dashboard.png) |
-| ---------------------------------------------------- | -------------------------------------------- |
-| ![dark-mode.png](/public/demo/dark-mode.png)         | ![setting.png](/public/demo/setting.png)     |
-| ![dark-mode.png](/public/demo/horizontal-layout.png) |
+| ![login-page.png](/public//demo/login.png)       | ![dashboard-page.png](/public/demo/dashboard-page.png)   |
+| ------------------------------------------------ | -------------------------------------------------------- |
+| ![dark-mode.png](/public/demo/dark.png)          | ![settings-drawer.png](/public/demo/settings-drawer.png) |
+| ![user-manage.png](/public/demo/user-manage.png) | ![search.png](/public//demo/search.png)                  |
+| ![multi-theme.png](/public/demo/multi-theme.png) | ![search.png](/public/demo/404-page.png)                 |
 
 ## 特性
 
-- 使用 React18 + TypeScript 开发，整个项目使用高质量 Hooks + TypeScript 代码完成
-- 项目菜单、路由权限使用 动态路由 控制，完全根据后端菜单数据动态生成路由
-- 使用 zustand 作为状态管理工具，集成 zustand-persist 持久化工具
-- 使用 Ant-Design 5 组件库开发，将 Design Token 注入到 CSS 变量中，方便配置项目主题
-- 项目支持多布局：横向布局、经典布局（可开启菜单分割功能）、纵向布局
-- 项目支持多主题：多标签页、面包屑导航
-- 集成权限管理，根据用户角色控制页面访问权限
-- 集成国际化支持，轻松切换多语言
-- 集成常见的后台管理功能，如用户管理、角色管理、权限管理等
-- 基于 MSW 和 Faker.js 的 Mock 方案
-- 支持 token 无感刷新和请求数量限流功能
+- **最新技术栈**：使用 React 18、Tailwindcss、Ant-Design、Shadcn-UI、Zustand、Echarts 等前端前沿技术开发。
+- **国际化**：内置完善的国际化方案，支持多语言切换。
+- **权限验证**：完善的权限验证方案，提供前端访问和后端两种访问控制，按钮级别权限控制。
+- **多主题**：将 Antd 的主题定制和 tailwindcss 的 css 变量结合，内置多种主题配置和黑暗模式，满足个性化需求。
+- **动态菜单**：支持动态菜单，可以根据权限配置显示菜单。
+- **组件丰富**：提供了丰富的组件，可以满足大部分的业务需求。
+- **Antd 结合 Headless 组件**：支持 Ant Design 和 ShadCn UI。
+- **后台管理**：集成常见的后台管理功能，如用户管理、角色管理、菜单管理。
+- **Mock 数据**：基于 MSW 的高性能 Mock 数据方案。
+- **规范**：代码规范，使用 ESLint、Prettier、Stylelint 等工具保证代码质量。
 
 ## 快速开始
 
@@ -65,18 +65,3 @@ npm run build
 ```
 
 构建后的文件将位于 `dist` 目录中。
-
-参考[.commitlint.config.js](./commitlint.config.js)
-
-- `feat` 新功能
-- `fix` 修复 bug
-- `docs` 文档注释
-- `style` 代码格式(不影响代码运行的变动)
-- `refactor` 重构
-- `perf` 性能优化
-- `revert` 回滚 commit
-- `test` 测试相关
-- `chore` 构建过程或辅助工具的变动
-- `ci` 修改 CI 配置、脚本
-- `types` 类型定义文件修改
-- `wip` 开发中
