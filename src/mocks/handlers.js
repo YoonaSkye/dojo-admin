@@ -1,17 +1,16 @@
 import { http, HttpResponse } from 'msw';
-import { USER_LIST } from './assets';
-import { faker } from '@faker-js/faker';
-import {
-  responseError,
-  responseSuccess,
-  unAuthorizedResponse,
-} from './utils/response';
-import { MOCK_USERS, MOCK_MENUS, MOCK_CODES } from './utils/mock-data';
+
 import {
   generateAccessToken,
   generateRefreshToken,
   verifyAccessToken,
 } from './utils/jwt-utils';
+import { MOCK_CODES, MOCK_MENUS, MOCK_USERS } from './utils/mock-data';
+import {
+  responseError,
+  responseSuccess,
+  unAuthorizedResponse,
+} from './utils/response';
 
 export const handlers = [
   // And here's a request handler with MSW
@@ -20,7 +19,7 @@ export const handlers = [
 
   http.post('/auth/login', async ({ request }) => {
     const { username, password } = await request.json();
-    const user = USER_LIST.find((item) => item.username === username);
+    const user = MOCK_USERS.find((item) => item.username === username);
     if (!password || !username) {
       return new HttpResponse(
         responseError(
@@ -84,7 +83,7 @@ export const handlers = [
         status: 401,
       });
     }
-    const user = USER_LIST.find((item) => item.username === userinfo.username);
+    const user = MOCK_USERS.find((item) => item.username === userinfo.username);
 
     const menus =
       MOCK_MENUS.find((item) => item.username === userinfo.username)?.menus ??

@@ -78,7 +78,7 @@ export default function AccountMenu() {
         <DropdownMenuTrigger className="outline-none">
           <div className="hover:bg-accent ml-1 mr-2 cursor-pointer rounded-full p-1.5">
             <div className="hover:text-accent-foreground flex-center">
-              <IAvatar src={avatar} alt="vben" className="size-8" dot />
+              <IAvatar src={avatar} alt="dojo" className="size-8" dot />
             </div>
           </div>
         </DropdownMenuTrigger>
@@ -86,7 +86,7 @@ export default function AccountMenu() {
           <DropdownMenuLabel className="flex items-center p-3">
             <IAvatar
               src={avatar}
-              alt="vben"
+              alt="dojo"
               className="size-12"
               dot
               dotClass="bottom-0 right-1 border-2 size-4 bg-green-500"

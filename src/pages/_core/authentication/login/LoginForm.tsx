@@ -32,7 +32,7 @@ export default function LoginForm() {
           name="username"
           rules={[{ required: true, message: t('authentication.usernameTip') }]}
         >
-          <Input placeholder="vben" />
+          <Input placeholder="dojo" />
         </Form.Item>
         <Form.Item
           name="password"

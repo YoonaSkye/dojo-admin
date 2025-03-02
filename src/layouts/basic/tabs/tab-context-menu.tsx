@@ -7,43 +7,37 @@ import {
 } from '@/components/ui/context-menu';
 import {
   ArrowLeftToLine,
-  ArrowRightLeft,
   ArrowRightToLine,
   FoldHorizontal,
   RotateCw,
   X,
 } from '@/icons';
+import { TabPageItem, useTabPageActions, useTabsStore } from '@/store/tabs';
+import { getKeepaliveIns } from '@/utils/keepaliveIns';
 import { Fragment, PropsWithChildren } from 'react';
 import { useLocation } from 'react-router-dom';
-import { KeepAliveTab, useMultiTabsContext } from './multi-tabs-provider';
 
 type Props = PropsWithChildren & {
-  tab?: KeepAliveTab;
+  tab: TabPageItem;
 };
 
 export default function TabContextMenu({ children, tab }: Props) {
-  const {
-    tabs,
-    activeTabRoutePath,
-    closeTab,
-    refreshTab,
-    closeOthersTab,
-    closeAll,
-    closeLeft,
-    closeRight,
-  } = useMultiTabsContext();
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const activeKey = location.pathname + location.search;
+  const tabs = useTabsStore((state) => state.tabPages);
+  const setTabPages = useTabsStore((state) => state.setTabPages);
+  const { closeTabPage } = useTabPageActions();
 
   /**
    * 获取操作是否禁用
    * @param tab
    */
-  function getTabDisableState(tab = pathname) {
-    const index = tabs.findIndex((item) => item.key === tab);
+  function getTabDisableState(tab = location.pathname) {
+    const index = tabs.findIndex((item) => item.url === tab);
 
     const disabled = tabs.length <= 1;
 
-    const isCurrentTab = activeTabRoutePath === tab;
+    const isCurrentTab = activeKey === tab;
 
     // 当前处于最左侧或者减去固定标签页的数量等于0
     const disabledCloseLeft = index === 0 || !isCurrentTab;
@@ -61,9 +55,8 @@ export default function TabContextMenu({ children, tab }: Props) {
     };
   }
 
-  const createContextMenus = (tabKey: string = pathname) => {
+  const createContextMenus = (tabKey: string = location.pathname) => {
     const {
-      disabledCloseAll,
       disabledCloseCurrent,
       disabledCloseLeft,
       disabledCloseOther,
@@ -75,45 +68,39 @@ export default function TabContextMenu({ children, tab }: Props) {
       {
         disabled: disabledCloseCurrent,
         handler: () => {
-          closeTab(tabKey);
+          // closeTab(tabKey);
+          closeTabPage(tab.url);
         },
         icon: X,
         key: 'close',
         text: '关闭',
       },
 
-      // {
-      //   handler: async () => {
-      //     if (!contentIsMaximize.value) {
-      //       await router.push(tab.fullPath);
-      //     }
-      //     toggleMaximize();
-      //   },
-      //   icon: contentIsMaximize ? Minimize2 : Fullscreen,
-      //   key: contentIsMaximize ? 'restore-maximize' : 'maximize',
-      //   text: contentIsMaximize ? '还原' : '最大化',
-      // },
       {
         disabled: disabledRefresh,
-        handler: () => refreshTab(tabKey),
+        handler: () => {
+          const keepaliveIns = getKeepaliveIns();
+          keepaliveIns?.refresh();
+        },
         icon: RotateCw,
         key: 'reload',
         text: '重新加载',
       },
-      // {
-      //   handler: async () => {
-      //     await openTabInNewWindow(tab);
-      //   },
-      //   icon: ExternalLink,
-      //   key: 'open-in-new-window',
-      //   separator: true,
-      //   text: '新窗口打开',
-      // },
 
       {
         disabled: disabledCloseLeft,
         handler: () => {
-          closeLeft(tabKey);
+          setTabPages((tabPages) => {
+            const currentIndex = tabPages.findIndex(
+              (tab) => tab.url === activeKey
+            );
+            // check if currentIndex is 0
+            if (currentIndex === 0) {
+              return tabPages;
+            } else {
+              return tabPages.slice(currentIndex);
+            }
+          });
         },
         icon: ArrowLeftToLine,
         key: 'close-left',
@@ -122,7 +109,16 @@ export default function TabContextMenu({ children, tab }: Props) {
       {
         disabled: disabledCloseRight,
         handler: () => {
-          closeRight(tabKey);
+          setTabPages((tabPages) => {
+            const currentIndex = tabPages.findIndex(
+              (tab) => tab.url === activeKey
+            );
+            if (currentIndex === tabPages.length - 1) {
+              return tabPages;
+            } else {
+              return tabPages.slice(0, currentIndex + 1);
+            }
+          });
         },
         icon: ArrowRightToLine,
         key: 'close-right',
@@ -132,24 +128,19 @@ export default function TabContextMenu({ children, tab }: Props) {
       {
         disabled: disabledCloseOther,
         handler: () => {
-          closeOthersTab(tabKey);
+          setTabPages((tabPages) => {
+            return tabPages.filter((tab) => tab.url === activeKey);
+          });
         },
         icon: FoldHorizontal,
         key: 'close-other',
         text: '关闭其他标签页',
       },
-      {
-        disabled: disabledCloseAll,
-        handler: () => closeAll(),
-        icon: ArrowRightLeft,
-        key: 'close-all',
-        text: '关闭全部标签页',
-      },
     ];
     return menus;
   };
 
-  const menus = createContextMenus(tab?.pathname);
+  const menus = createContextMenus(tab?.url);
 
   const handleClick = (menu: any) => {
     if (menu.disabled) {

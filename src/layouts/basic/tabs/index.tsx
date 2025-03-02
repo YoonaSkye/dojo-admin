@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 
 // Components
 import Label from './Label';
+import TabContextMenu from './tab-context-menu';
 
 function Tabs() {
   const tabPages = useTabsStore((state) => state.tabPages);
@@ -30,15 +31,17 @@ function Tabs() {
       <div className="flex h-full flex-1 overflow-hidden light">
         <div className="pt-[3px] size-full flex-1 overflow-hidden">
           <div
-            className="vben-tabs-content tabs-chrome !flex h-full w-max overflow-y-hidden pr-6"
+            className="tabs-chrome !flex h-full w-max overflow-y-hidden pr-6"
             ref={scrollContainer}
           >
             {tabPages.map((tab) => (
               <div
                 key={tab.url}
-                style={{
-                  '--gap': '7px',
-                }}
+                style={
+                  {
+                    '--gap': '7px',
+                  } as React.CSSProperties
+                }
                 className={cn('tabs-chrome__item group h-full -mr-3', {
                   'is-active': tab.url === active,
                 })}
@@ -46,15 +49,15 @@ function Tabs() {
                   openTabPage(tab);
                 }}
               >
-                {/* <TabContextMenu tab={tab}> */}
-                <Label
-                  closeTab={closeTabPage}
-                  tab={tab}
-                  closable={tabPages.length > 1}
-                >
-                  {t(tab.title)}
-                </Label>
-                {/* </TabContextMenu> */}
+                <TabContextMenu tab={tab}>
+                  <Label
+                    closeTab={closeTabPage}
+                    tab={tab}
+                    closable={tabPages.length > 1}
+                  >
+                    {t(tab.title)}
+                  </Label>
+                </TabContextMenu>
               </div>
             ))}
           </div>

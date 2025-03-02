@@ -22,8 +22,8 @@ export default function Login() {
       {/* 站点标志 */}
       <div className="absolute left-0 top-0 z-10 flex flex-1">
         <div className="text-foreground lg:text-foreground ml-4 mt-4 flex flex-1 items-center sm:left-6 sm:top-6">
-          <img src={logo} alt="Vben admin" className="mr-2" width={42} />
-          <p className="text-xl font-medium">Vben Admin</p>
+          <img src={logo} alt="Dojo admin" className="mr-2" width={42} />
+          <p className="text-xl font-medium">Dojo Admin</p>
         </div>
       </div>
       {/* left */}

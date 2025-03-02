@@ -11,7 +11,7 @@ export default function Logo() {
       >
         <IAvatar
           src={AppLogo}
-          alt="vben admin Antd"
+          alt="dojo admin Antd"
           className="relative w-8 rounded-none bg-transparent"
         />
         {/* TODO: 是否考虑添加collapsed判断逻辑 */}
