@@ -112,7 +112,7 @@ export interface RouteMeta {
   /**
    * 菜单所携带的参数
    */
-  query?: Recordable;
+  // query?: Recordable;
   /**
    * 标题名称
    */

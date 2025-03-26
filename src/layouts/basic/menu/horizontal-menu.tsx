@@ -5,8 +5,6 @@ import { ConfigProvider, Menu } from 'antd';
 import { useEffect, useState } from 'react';
 import { useLocation, useMatches, useNavigate } from 'react-router-dom';
 
-type MenuItem = Required<MenuProps>['items'][number];
-
 export default function HorizontalMenu() {
   const themeMode = useTheme();
 

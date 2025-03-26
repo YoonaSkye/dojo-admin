@@ -3,11 +3,8 @@ import type { MenuProps } from 'antd';
 import { ConfigProvider, Menu } from 'antd';
 import { useEffect, useState } from 'react';
 import { useLocation, useMatches, useNavigate } from 'react-router-dom';
-import './index.scss';
-import { useAccessMenus } from '@/store/access';
 import { useRouteToMenu } from '@/router/hooks';
-
-type MenuItem = Required<MenuProps>['items'][number];
+import './index.scss';
 
 type Props = {
   closeSideBarDrawer?: () => void;

@@ -31,14 +31,14 @@ function generateMenus(
   );
   const finalMenus = mapTree(sortedMenus, (route) => {
     // 转换为菜单结构
-    const { path, handle, redirect, children } = route;
-    const { hideChildrenInMenu = false, icon, link, title = '' } = handle || {};
+    const { path, handle, children } = route;
+    const { hideChildrenInMenu = false, icon, title = '' } = handle || {};
 
     // 隐藏子菜单
     const resultChildren = hideChildrenInMenu ? [] : (children as MenuItem[]);
 
     // 隐藏子菜单
-    const resultPath = hideChildrenInMenu ? redirect || path : link || path;
+    // const resultPath = hideChildrenInMenu ? redirect || path : link || path;
 
     return {
       key: path,

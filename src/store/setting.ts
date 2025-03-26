@@ -102,6 +102,7 @@ const useSettingStore = create<SettingsState & Actions>()(
       name: 'core-settings',
       getStorage: () => localStorage,
       merge: (persistedState, currentState) => {
+        // @ts-ignore
         return mergeDeepLeft(persistedState, currentState);
       },
       partialize: (state) => ({ settings: state.settings }),

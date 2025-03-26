@@ -3,7 +3,7 @@ import { useTabPageActions } from '@/store/tabs';
 import { setKeepaliveIns } from '@/utils/keepaliveIns';
 import { findRouteByAbsolutePath } from '@/utils/route';
 import KeepAlive, { useKeepAliveRef } from 'keepalive-for-react';
-import { memo, Suspense, useEffect, useMemo } from 'react';
+import { Suspense, useEffect, useMemo } from 'react';
 import { useLocation, useOutlet } from 'react-router-dom';
 
 // TODO: 要memo组件吗

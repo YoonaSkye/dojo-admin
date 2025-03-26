@@ -1,5 +1,4 @@
 import type { AppRouteObject } from '#/router';
-import { mergeRouteModules } from '../utils/merge-route-modules';
 import { coreRoutes, fallbackNotFoundRoute } from './core';
 
 export function getRoutesFromModules() {

@@ -10,14 +10,13 @@ import LanguageToggle from '@/layouts/_common/language-toggle';
 import ModeToggle from '@/layouts/_common/mode-toggle';
 import Preference from '@/layouts/_common/preference';
 import { useLayoutMode } from '@/store/setting';
-import { useMemo } from 'react';
 import HorizontalMenu from '../menu/horizontal-menu';
 
 export default function LayoutHeader() {
   const themeLayout = useLayoutMode();
-  const isHeaderNav = useMemo(() => {
-    return themeLayout === ThemeLayout.Horizontal;
-  }, [themeLayout]);
+  // const isHeaderNav = useMemo(() => {
+  //   return themeLayout === ThemeLayout.Horizontal;
+  // }, [themeLayout]);
 
   return (
     <div className="relative flex items-center gap-2 my-0 mx-4 h-14">

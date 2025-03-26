@@ -1,14 +1,5 @@
 import { ModalForm } from '@ant-design/pro-components';
-import {
-  Button,
-  Col,
-  Form,
-  Input,
-  InputNumber,
-  Radio,
-  Row,
-  Select,
-} from 'antd';
+import { Col, Form, Input, InputNumber, Radio, Row, Select } from 'antd';
 import { Iconify } from '@/components/icon';
 import { createDefaultModel, getPageOptions, layoutOptions } from './shared';
 import type { MenuOption } from './shared';
@@ -66,7 +57,7 @@ export default function MenuOperateModal({
 }: OperateModalProps) {
   const [form] = Form.useForm();
   const { data: allPages } = useRequest(fetchGetAllPages);
-  const { hideInMenu, icon, iconType, menuType, parentId, routeName } =
+  const { hideInMenu, icon, menuType, parentId, routeName } =
     Form.useWatch((item) => Object.assign(createDefaultModel(), item), {
       form,
       preserve: true,

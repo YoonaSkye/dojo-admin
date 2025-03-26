@@ -3,15 +3,6 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from '@/icons';
 import { useNavigate } from 'react-router-dom';
 
-interface Props {
-  description: '';
-  homePath: '/';
-  image: '';
-  showBack: true;
-  status: 'coming-soon';
-  title: '';
-}
-
 const Forbidden = () => {
   const nav = useNavigate();
 

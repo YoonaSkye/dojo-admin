@@ -57,7 +57,7 @@ export type MenuItem = {
 
 export default function MenuManage() {
   const actionRef = useRef<ActionType>();
-  const { scrollConfig, tableWrapperRef } = useTableScroll();
+  const { scrollConfig } = useTableScroll();
 
   const [visible, setVisible] = useState(false);
   const [currentRow, setCurrentRow] = useState<MenuItem | null>(null);
@@ -127,7 +127,7 @@ export default function MenuManage() {
       key: 'menuName',
       minWidth: 120,
       render: (_, record) => {
-        const { i18nKey, menuName } = record;
+        const { menuName } = record;
 
         // const label = i18nKey ? t(i18nKey) : menuName;
         const label = menuName;
@@ -140,7 +140,7 @@ export default function MenuManage() {
       align: 'center',
       key: 'icon',
       render: (_, record) => {
-        const icon = record.iconType === '1' ? record.icon : undefined;
+        // const icon = record.iconType === '1' ? record.icon : undefined;
 
         return (
           <div className="flex-center">
@@ -186,7 +186,7 @@ export default function MenuManage() {
       align: 'center',
       dataIndex: 'hideInMenu',
       key: 'hideInMenu',
-      render: (_, record) => {
+      render: () => {
         // const hide = record.hideInMenu ? 'Y' : 'N';
         const hide = 'N';
 
@@ -214,7 +214,7 @@ export default function MenuManage() {
     {
       align: 'center',
       key: 'operate',
-      render: (_, record, index) => (
+      render: (_, record) => (
         <div className="flex-center justify-end gap-[8px]">
           {/* {record.menuType === '1' && (
             <Button
@@ -252,7 +252,7 @@ export default function MenuManage() {
         columns={columns}
         actionRef={actionRef}
         cardBordered
-        request={async (params, sort, filter) => {
+        request={async (params) => {
           const p = {
             ...params,
             current: params.current,

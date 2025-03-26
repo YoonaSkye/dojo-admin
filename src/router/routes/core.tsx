@@ -1,5 +1,4 @@
 import type { AppRouteObject } from '#/router';
-import AuthPageLayout from '@/layouts/authentication';
 import Login from '@/pages/_core/authentication/login/Login';
 import { lazy } from 'react';
 

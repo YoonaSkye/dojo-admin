@@ -161,7 +161,7 @@ export default function RoleManage() {
         columns={columns}
         actionRef={actionRef}
         cardBordered
-        request={async (params, sort, filter) => {
+        request={async (params) => {
           const p = {
             ...params,
             current: params.current,

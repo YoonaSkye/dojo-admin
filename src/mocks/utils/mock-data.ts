@@ -185,8 +185,9 @@ const fallbackMenus = [
     ],
   },
 ];
-
+//@ts-ignore
 const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
+  //@ts-ignore
   const roleWithMenus = {
     admin: {
       path: '/demos/access/admin-visible',

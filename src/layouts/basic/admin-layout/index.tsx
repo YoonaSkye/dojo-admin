@@ -11,40 +11,40 @@ export const HEADER_HEIGHT = 56;
 
 export default function AdminLayout(props: AdminLayoutProps) {
   const {
-    mode = 'vertical',
+    // mode = 'vertical',
     isMobile,
     Header,
-    headerClass,
-    headerHeight = 56,
+    // headerClass,
+    // headerHeight = 56,
     headerVisible = true,
     Sider,
-    siderClass,
+    // siderClass,
     siderCollapse = false,
-    siderCollapsedWidth = 64,
-    siderWidth = 220,
+    // siderCollapsedWidth = 64,
+    // siderWidth = 220,
     siderVisible = true,
     Footer,
-    Tab,
-    children,
+    // Tab,
+    // children,
   } = props;
 
   // config visible
   const showHeader = Boolean(Header) && headerVisible;
   const showSider = !isMobile && Boolean(Sider) && siderVisible;
-  const showMobileSider = isMobile && Boolean(Sider) && siderVisible;
+  // const showMobileSider = isMobile && Boolean(Sider) && siderVisible;
   const showTab = true;
   const showFooter = false;
 
   // layout direction
-  const isVertical = mode === 'vertical';
-  const isHorizontal = mode === 'horizontal';
+  // const isVertical = mode === 'vertical';
+  // const isHorizontal = mode === 'horizontal';
   //  const fixedHeaderAndTab = fixedTop || (isHorizontal && isWrapperScroll);
 
   // display
-  const headerDisplay = true;
-  const siderDisplay = true;
-  const mobileSider = true;
-  const footerDisplay = true;
+  // const headerDisplay = true;
+  // const siderDisplay = true;
+  // const mobileSider = true;
+  // const footerDisplay = true;
 
   // computed styles
   const hiddenHeaderStyle: CSSProperties = {

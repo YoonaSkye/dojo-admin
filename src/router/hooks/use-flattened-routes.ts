@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { AppRouteObject, RouteMeta } from '#/router';
+import { AppRouteObject } from '#/router';
 import { ascend } from 'ramda';
 import { usePermission } from './use-permission';
 

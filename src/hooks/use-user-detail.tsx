@@ -51,6 +51,7 @@ export const useUserDetail = () => {
         break;
       }
       case 'frontend': {
+        // @ts-ignore
         const authRoutes = generateRoutesByFrontend(accessRoutes, info.roles);
 
         setAccessRoutes(authRoutes);
