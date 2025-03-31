@@ -1,5 +1,5 @@
 import { filterTree, mapTree } from '@/utils';
-import { AppRouteObject } from '#/router';
+import { AppRouteObject } from '@/types';
 import { Iconify } from '@/components/icon';
 
 import type { MenuProps } from 'antd';

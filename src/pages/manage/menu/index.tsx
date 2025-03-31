@@ -111,7 +111,7 @@ export default function MenuManage() {
           return null;
         }
 
-        const tagMap: Record<Api.SystemManage.MenuType, string> = {
+        const tagMap: Record<'1' | '2', string> = {
           1: 'default',
           2: 'processing',
         };

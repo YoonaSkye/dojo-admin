@@ -1,4 +1,4 @@
-import type { AppRouteObject } from '#/router';
+import type { AppRouteObject } from '@/types';
 
 // 定义模块类型
 interface RouteModuleType {

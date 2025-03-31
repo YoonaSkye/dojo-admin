@@ -1,5 +1,5 @@
 import { useAccessStore } from '@/store/access';
-import { merge } from '@/utils';
+import { mergeDeepLeft as merge } from 'ramda';
 import axios, {
   AxiosRequestConfig,
   AxiosResponse,
@@ -26,7 +26,10 @@ class RequestClient {
       timeout: 10_000,
     };
     const { ...axiosConfig } = config;
-    const requestConfig = merge(axiosConfig, defaultConfig);
+    const requestConfig = merge(
+      axiosConfig,
+      defaultConfig
+    ) as CreateAxiosDefaults;
     this.axiosInstance = axios.create(requestConfig);
 
     this.axiosInstance.interceptors.request.use((axiosConfig) =>

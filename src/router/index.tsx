@@ -7,7 +7,7 @@ import {
 
 import BasicLayout from '@/layouts/basic';
 import AuthGuard from './components/AuthGuard';
-import { AppRouteObject } from '#/router';
+import { AppRouteObject } from '@/types';
 import { routes, fallbackNotFoundRoute } from './routes';
 
 import { useAccessRoutes } from '@/store/access';

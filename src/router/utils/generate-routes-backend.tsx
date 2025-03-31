@@ -1,4 +1,4 @@
-import { AppRouteObject } from '#/router';
+import { AppRouteObject } from '@/types';
 import { mapTree } from '@/utils';
 import { Navigate, type RouteObject } from 'react-router-dom';
 
@@ -12,7 +12,8 @@ type RouteRecordStringComponent<T = string> = {
 } & Omit<RouteObject, 'children' | 'component'>;
 
 const ENTRY_PATH = '/src/pages';
-const pagesMap = import.meta.glob('/src/pages/**/*.tsx');
+const pagesMap = import.meta.glob('/src/pages/**/index.tsx');
+// const newPagesMap = import.meta.glob('/src/pages/**/index.tsx');
 
 const loadComponentFromPath = (path: string) =>
   pagesMap[`${ENTRY_PATH}${path}`];

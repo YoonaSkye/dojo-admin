@@ -1,4 +1,4 @@
-import { AppRouteObject } from '#/router';
+import { AppRouteObject } from '@/types';
 import { loginApi } from '@/api/core';
 import { useRequest } from 'ahooks';
 import { create } from 'zustand';

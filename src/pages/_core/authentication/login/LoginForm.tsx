@@ -1,4 +1,4 @@
-import { SignInReq } from '@/api/services/userService';
+import { AuthApi } from '@/api/core/auth';
 import { IconButton } from '@/components/icon';
 import { MdiGithub, MdiGoogle, MdiQqchat, MdiWechat } from '@/icons';
 import { useSignIn } from '@/store/access';
@@ -9,7 +9,7 @@ export default function LoginForm() {
   const { signIn, loading } = useSignIn();
   const { t } = useTranslation();
 
-  const handleFinish = async ({ username, password }: SignInReq) => {
+  const handleFinish = async ({ username, password }: AuthApi.LoginParams) => {
     try {
       await signIn({ username, password });
     } catch (error) {

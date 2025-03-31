@@ -1,4 +1,4 @@
-import { AppRouteObject } from '#/router';
+import { AppRouteObject } from '@/types';
 
 /**
  *

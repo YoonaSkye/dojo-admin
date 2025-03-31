@@ -1,6 +1,6 @@
 import type { Locale as AntdLocal } from 'antd/es/locale';
 import { useTranslation } from 'react-i18next';
-import { LocalEnum } from '#/enum';
+import { LocalEnum } from '@/types';
 import en_US from 'antd/locale/en_US';
 import zh_CN from 'antd/locale/zh_CN';
 import { useEffect, useState } from 'react';

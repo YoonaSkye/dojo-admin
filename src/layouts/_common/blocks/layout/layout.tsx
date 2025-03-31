@@ -1,4 +1,4 @@
-import { ThemeLayout } from '#/enum';
+import { ThemeLayout } from '@/types';
 import { CircleHelp } from '@/icons';
 import { useSettingActions } from '@/store/setting';
 import clsx from 'clsx';

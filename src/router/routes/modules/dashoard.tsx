@@ -1,4 +1,4 @@
-import { AppRouteObject } from '#/router';
+import { AppRouteObject } from '@/types';
 import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 

@@ -1,4 +1,4 @@
-import { ThemeLayout } from '#/enum';
+import { ThemeLayout } from '@/types';
 import Logo from '@/components/logo';
 import { Button } from '@/components/ui/button';
 import { Bell } from '@/icons';

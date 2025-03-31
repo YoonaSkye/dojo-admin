@@ -3,10 +3,12 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import { viteInjectAppLoadingPlugin } from './src/plugins/inject-app-loading';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: './',
+  // 这里一定要用绝对路径
+  base: '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '/src'),
@@ -15,6 +17,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
+    viteInjectAppLoadingPlugin(),
     createSvgIconsPlugin({
       // 指定需要缓存的图标文件夹
       iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
@@ -33,6 +36,5 @@ export default defineConfig({
   server: {
     open: true,
     host: true,
-    port: 3001,
   },
 });

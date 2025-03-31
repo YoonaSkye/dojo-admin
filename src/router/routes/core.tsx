@@ -1,6 +1,7 @@
-import type { AppRouteObject } from '#/router';
-import Login from '@/pages/_core/authentication/login/Login';
+import type { AppRouteObject } from '@/types';
 import { lazy } from 'react';
+
+const Login = lazy(() => import('@/pages/_core/authentication/login'));
 
 /** 全局404页面 */
 const fallbackNotFoundRoute: AppRouteObject = {

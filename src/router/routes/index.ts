@@ -1,4 +1,4 @@
-import type { AppRouteObject } from '#/router';
+import type { AppRouteObject } from '@/types';
 import { coreRoutes, fallbackNotFoundRoute } from './core';
 
 export function getRoutesFromModules() {
