@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
-import { viteInjectAppLoadingPlugin } from './src/plugins/inject-app-loading';
+import { viteInjectAppLoadingPlugin } from './plugins/inject-app-loading';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,7 +12,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '/src'),
-      '#': path.resolve(__dirname, '/types'),
     },
   },
   plugins: [
