@@ -36,10 +36,6 @@ const tabs = [
     label: '快捷键',
     value: 'shortcutKey',
   },
-  {
-    label: '通用',
-    value: 'general',
-  },
 ];
 
 export default function Preference() {
@@ -131,9 +127,6 @@ export default function Preference() {
                 <SwitchItem title="退出登录" shortcut="⌥ Q" />
                 <SwitchItem title="锁定屏幕" shortcut="⌥ L" />
               </Block>
-            </TabsContent>
-            <TabsContent value="general" key="general">
-              Make changes to your account here.
             </TabsContent>
           </Tabs>
         </div>

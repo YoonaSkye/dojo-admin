@@ -1,10 +1,10 @@
-import { ThemeLayout } from '@/types';
 import { CircleHelp } from '@/icons';
-import { useSettingActions } from '@/store/setting';
+import { useLayoutMode, useSettingActions } from '@/store/setting';
+import { ThemeLayout } from '@/types';
 import clsx from 'clsx';
-import { HeaderNav, SidebarNav } from '../../icons';
+import { useRef } from 'react';
+import { HeaderNav, HeaderSidebarNav, SidebarNav } from '../../icons';
 
-// type LayoutType = 'header-nav' | 'sidebar-nav';
 type LayoutType = ThemeLayout;
 
 interface PresetItem {
@@ -16,35 +16,54 @@ interface PresetItem {
 const components: Record<LayoutType, React.FC> = {
   horizontal: HeaderNav,
   vertical: SidebarNav,
+  'header-sidebar-nav': HeaderSidebarNav,
 };
 
 const PRESET: PresetItem[] = [
   {
     name: '垂直',
     tip: '侧边垂直菜单模式',
-    type: ThemeLayout.Vertical,
+    type: 'vertical',
   },
   {
     name: '水平',
     tip: '水平菜单模式，菜单全部显示在顶部',
-    type: ThemeLayout.Horizontal,
+    type: 'horizontal',
+  },
+  {
+    name: '侧边导航',
+    tip: '顶部通栏，侧边导航模式',
+    type: 'header-sidebar-nav',
   },
 ];
 
 export default function Layout() {
+  const layoutMode = useLayoutMode();
   const { setLayoutMode } = useSettingActions();
 
+  const modelValue = useRef<LayoutType>(layoutMode);
+
+  const handleSelect = (type: LayoutType) => {
+    modelValue.current = type;
+    setLayoutMode(type);
+  };
+
   return (
-    <div className="flex w-full justify-center gap-10">
+    <div className="flex w-full justify-center gap-5">
       {PRESET.map((preset) => {
         const Component = components[preset.type];
         return (
           <div
             key={preset.name}
             className="flex w-[100px] cursor-pointer flex-col"
-            onClick={() => setLayoutMode(preset.type)}
+            onClick={() => handleSelect(preset.type)}
           >
-            <div className={clsx('outline-box flex-center')}>
+            <div
+              className={clsx(
+                preset.type === modelValue.current && 'outline-box-active',
+                'outline-box flex-center'
+              )}
+            >
               <Component />
             </div>
             <div className="text-muted-foreground flex-center hover:text-foreground mt-2 text-center text-xs">

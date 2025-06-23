@@ -1,2 +1,2 @@
-export * from './router';
-export * from './enum';
+export type * from './router';
+export type * from './app';

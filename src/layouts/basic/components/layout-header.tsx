@@ -1,4 +1,3 @@
-import { ThemeLayout } from '@/types';
 import Logo from '@/components/logo';
 import { Button } from '@/components/ui/button';
 import { Bell } from '@/icons';
@@ -24,7 +23,7 @@ export default function LayoutHeader() {
 
       {/* 面包屑 */}
       <div className="flex-center hidden lg:block">
-        {themeLayout === ThemeLayout.Vertical && <BreadCrumb />}
+        {themeLayout === 'vertical' && <BreadCrumb />}
       </div>
 
       {/* Mixed Layout Header nav */}
@@ -32,7 +31,7 @@ export default function LayoutHeader() {
 
       {/* Horizontal Layout Header Nav */}
       <div className="flex h-full min-w-0 flex-1 items-center">
-        {themeLayout === ThemeLayout.Horizontal && <HorizontalMenu />}
+        {themeLayout === 'horizontal' && <HorizontalMenu />}
       </div>
 
       {/* Right Setting */}

@@ -1,7 +1,6 @@
 import { ConfigProvider, theme } from 'antd';
 import { useEffect, useMemo } from 'react';
 
-import { ThemeMode } from '@/types';
 import { useTheme } from '@/store/theme';
 import { useThemeColor } from '@/store/setting';
 import { BUILT_IN_THEME_PRESETS } from '@/layouts/_common/blocks/theme/config';
@@ -22,7 +21,7 @@ export default function AntdConfig({
     }
 
     algorithm =
-      Itheme === ThemeMode.Dark ? theme.darkAlgorithm : theme.defaultAlgorithm;
+      Itheme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm;
     return algorithm;
   }, [Itheme]);
 
