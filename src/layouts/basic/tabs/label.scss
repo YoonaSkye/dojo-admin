@@ -1,32 +1,34 @@
-.tabs-chrome__item {
-  @apply cursor-pointer;
+.tabs-chrome {
+  &__item {
+    @apply cursor-pointer;
 
-  &:hover:not(.is-active) {
-    & + .tabs-chrome__item {
+    &:hover:not(.is-active) {
+      & + .tabs-chrome__item {
+        .tabs-chrome__divider {
+          @apply opacity-0;
+        }
+      }
+
       .tabs-chrome__divider {
         @apply opacity-0;
       }
-    }
 
-    .tabs-chrome__divider {
-      @apply opacity-0;
-    }
+      .tabs-chrome__background {
+        @apply pb-[2px];
 
-    .tabs-chrome__background {
-      @apply pb-[2px];
-
-      &-content {
-        @apply bg-accent mx-[2px] rounded-md;
+        &-content {
+          @apply bg-accent mx-[2px] rounded-md;
+        }
       }
     }
-  }
 
-  &.is-active {
-    @apply z-[2];
+    &.is-active {
+      @apply z-[2];
 
-    & + .tabs-chrome__item {
-      .tabs-chrome__divider {
-        @apply opacity-0 !important;
+      & + .tabs-chrome__item {
+        .tabs-chrome__divider {
+          @apply opacity-0 !important;
+        }
       }
     }
   }

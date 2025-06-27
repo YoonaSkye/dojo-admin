@@ -1,13 +1,15 @@
 import type { AdminLayoutProps } from '@/layouts/types';
-import { CSSProperties, useEffect } from 'react';
+import { useLayoutMode } from '@/store/setting';
+import { CSSProperties } from 'react';
 import KeepLiveArea from '../keep-live-area';
 import Tabs from '../tabs';
 
 // constant config
-export const NAV_WIDTH = 256;
-export const NAV_COLLAPSED_WIDTH = 64;
+export const NAV_WIDTH = 224;
+export const NAV_COLLAPSED_WIDTH = 60;
 export const Collapse_Height = 42;
-export const HEADER_HEIGHT = 56;
+export const HEADER_HEIGHT = 50;
+export const TABBAR_HEIGHT = 38;
 
 export default function AdminLayout(props: AdminLayoutProps) {
   const {
@@ -28,43 +30,53 @@ export default function AdminLayout(props: AdminLayoutProps) {
     // children,
   } = props;
 
+  const layoutMode = useLayoutMode();
+
   // config visible
   const showHeader = Boolean(Header) && headerVisible;
-  const showSider = !isMobile && Boolean(Sider) && siderVisible;
+  const showSider =
+    !isMobile && Boolean(Sider) && siderVisible && layoutMode !== 'horizontal';
   // const showMobileSider = isMobile && Boolean(Sider) && siderVisible;
   const showTab = true;
   const showFooter = false;
 
-  // layout direction
-  // const isVertical = mode === 'vertical';
-  // const isHorizontal = mode === 'horizontal';
-  //  const fixedHeaderAndTab = fixedTop || (isHorizontal && isWrapperScroll);
-
-  // display
-  // const headerDisplay = true;
-  // const siderDisplay = true;
-  // const mobileSider = true;
-  // const footerDisplay = true;
-
   // computed styles
-  const hiddenHeaderStyle: CSSProperties = {
+  const marginTop = layoutMode === 'header-sidebar-nav' ? HEADER_HEIGHT : 0;
+
+  const headerStyle: CSSProperties = {
     height: `${HEADER_HEIGHT}px`,
-    lineHeight: `${HEADER_HEIGHT}px`,
-    backgroundColor: 'transparent',
-    // zIndex: 19,
   };
+  const headerWrapperStyle: CSSProperties = {
+    height: `${HEADER_HEIGHT + TABBAR_HEIGHT}px`,
+    left: `${
+      layoutMode !== 'vertical'
+        ? 0
+        : siderCollapse
+        ? NAV_COLLAPSED_WIDTH
+        : NAV_WIDTH
+    }px`,
+    position: 'fixed',
+    top: 0,
+    width: `${
+      layoutMode === 'vertical'
+        ? `calc(100% - ${siderCollapse ? NAV_COLLAPSED_WIDTH : NAV_WIDTH}px)`
+        : '100%'
+    }`,
+    zIndex: 20,
+  };
+
   const hiddenSiderStyle: CSSProperties = {
     ...calcMenuWidthStyle(siderCollapse),
-    overflow: 'hidden',
-    transition: '0.2s',
   };
   const asideStyle: CSSProperties = {
     ...calcMenuWidthStyle(siderCollapse),
+    height: `calc(100% - ${marginTop}px)`,
+    marginTop: `${marginTop}px`,
   };
 
-  const hiddenTabsStyle: CSSProperties = {
-    height: '38px',
-    width: '100%',
+  const mainStyle: CSSProperties = {
+    flex: '1 1 0%',
+    marginTop: `${HEADER_HEIGHT + TABBAR_HEIGHT}px`,
   };
 
   function calcMenuWidthStyle(collapsed: boolean) {
@@ -80,17 +92,18 @@ export default function AdminLayout(props: AdminLayoutProps) {
     };
   }
 
-  useEffect(() => {}, []);
-
   return (
     <div className="relative flex min-h-full w-full overflow-hidden">
       {/* Sider */}
       {showSider && (
         <>
           {/* TODO: 根据theme mode来改变 class='light' / 'dark' */}
-          <div className="dark" style={hiddenSiderStyle}></div>
+          <div
+            className="dark h-full transition-all duration-150"
+            style={hiddenSiderStyle}
+          ></div>
           <aside
-            className="fixed z-100 top-[56px] left-0 h-[calc(100%-56px)] bg-sidebar border-border border-r"
+            className="fixed z-100 top-0 left-0 bg-sidebar border-border border-r"
             style={asideStyle}
           >
             {/* layout-menu */}
@@ -99,36 +112,37 @@ export default function AdminLayout(props: AdminLayoutProps) {
         </>
       )}
 
-      <div className="flex flex-col w-full min-w-0 min-h-0 bg-transparent overflow-hidden">
-        {/* Header */}
-        {showHeader && (
-          <>
-            <header style={hiddenHeaderStyle}></header>
+      <div className="flex flex-1 flex-col overflow-hidden transition-all duration-300 ease-in">
+        <div
+          className="overflow-hidden transition-all duration-200"
+          style={headerWrapperStyle}
+        >
+          {/* Header */}
+          {showHeader && (
             <header
-              className="fixed left-0 top-0  w-full p-0 border-border border-b bg-header backdrop-blur"
-              style={{
-                height: '56px',
-                lineHeight: '56px',
-                transition:
-                  'background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)',
-              }}
+              className="border-border bg-header top-0 flex w-full flex-[0_0_auto] items-center border-b pl-2 transition-[margin-top] duration-200"
+              style={headerStyle}
             >
               {/* header content */}
               {Header}
             </header>
-          </>
-        )}
+          )}
 
-        {/* Tab */}
-        {showTab && (
-          <>
-            <div className="" style={hiddenTabsStyle}></div>
-            <Tabs />
-          </>
-        )}
+          {/* Tab */}
+          {showTab && (
+            <Tabs
+              siderCollapse={siderCollapse}
+              navCollapsedWidth={NAV_COLLAPSED_WIDTH}
+              navWidth={NAV_WIDTH}
+            />
+          )}
+        </div>
 
         {/* Main Content */}
-        <main className="flex flex-col w-full h-[calc(-94px+100vh)] bg-background-deep p-4 overflow-auto">
+        <main
+          className="flex flex-col w-full bg-background-deep p-4 overflow-auto"
+          style={mainStyle}
+        >
           {/* TODO: 考虑重新封装一个ScrollWrapper,自定义滚动样式 */}
           <KeepLiveArea />
         </main>

@@ -2,6 +2,7 @@ import { Iconify } from '@/components/icon';
 import { X } from '@/icons';
 
 import { TabPageItem } from '@/store/tabs';
+import { forwardRef } from 'react';
 import './label.scss';
 
 interface Props {
@@ -9,53 +10,66 @@ interface Props {
   closeTab: (path: string) => void;
   tab: TabPageItem;
   closable: boolean;
+  tabIndex: number;
+  activeTab: string;
 }
 
-export default function Label({ children, closeTab, tab, closable }: Props) {
-  return (
-    <div className="relative size-full h-[34px] px-1">
-      {/* background */}
-      <div className="tabs-chrome__background absolute z-[-1] size-full px-[calc(var(--gap)-1px)] py-0 transition-opacity duration-150">
-        <div className="tabs-chrome__background-content group-[.is-active]:bg-primary/15 dark:group-[.is-active]:bg-accent h-full rounded-tl-[var(--gap)] rounded-tr-[var(--gap)] duration-150"></div>
-        <svg
-          className="tabs-chrome__background-before group-[.is-active]:fill-primary/15 dark:group-[.is-active]:fill-accent absolute bottom-0 left-[-1px] fill-transparent transition-all duration-150"
-          height="7"
-          width="7"
-        >
-          <path data-v-c5fe917d="" d="M 0 7 A 7 7 0 0 0 7 0 L 7 7 Z"></path>
-        </svg>
-        <svg
-          className="tabs-chrome__background-after group-[.is-active]:fill-primary/15 dark:group-[.is-active]:fill-accent absolute bottom-0 right-[-1px] fill-transparent transition-all duration-150"
-          height="7"
-          width="7"
-        >
-          <path data-v-c5fe917d="" d="M 0 0 A 7 7 0 0 0 7 7 L 0 7 Z"></path>
-        </svg>
-      </div>
-      {/* extra */}
-      <div className="tabs-chrome__extra absolute right-[var(--gap)] top-1/2 z-[3] size-4 translate-y-[-50%]">
-        {closable && (
-          <X
-            onClick={(e) => {
-              e.stopPropagation();
-              closeTab(tab.url);
-            }}
-            className="hover:bg-accent stroke-accent-foreground/80 hover:stroke-accent-foreground text-accent-foreground/80 group-[.is-active]:text-accent-foreground mt-[2px] size-3 cursor-pointer rounded-full transition-all"
-          />
+const Label = forwardRef(
+  (
+    { children, closeTab, tab, closable, tabIndex, activeTab, ...props }: Props,
+    forwardRef
+  ) => {
+    return (
+      <div className="relative size-full px-1" {...props}>
+        {/* divider */}
+        {tabIndex !== 0 && tab.url !== activeTab && (
+          <div className="tabs-chrome__divider bg-border absolute left-[var(--gap)] top-1/2 z-0 h-4 w-[1px] translate-y-[-50%] transition-all" />
         )}
+        {/* background */}
+        <div className="tabs-chrome__background absolute size-full px-[calc(var(--gap)-1px)] py-0 transition-opacity duration-150">
+          <div className="tabs-chrome__background-content group-[.is-active]:bg-primary/15 dark:group-[.is-active]:bg-accent h-full rounded-tl-[var(--gap)] rounded-tr-[var(--gap)] duration-150" />
+          <svg
+            className="tabs-chrome__background-before group-[.is-active]:fill-primary/15 dark:group-[.is-active]:fill-accent absolute bottom-0 left-[-1px] fill-transparent transition-all duration-150"
+            height="7"
+            width="7"
+          >
+            <path data-v-c5fe917d="" d="M 0 7 A 7 7 0 0 0 7 0 L 7 7 Z"></path>
+          </svg>
+          <svg
+            className="tabs-chrome__background-after group-[.is-active]:fill-primary/15 dark:group-[.is-active]:fill-accent absolute bottom-0 right-[-1px] fill-transparent transition-all duration-150"
+            height="7"
+            width="7"
+          >
+            <path data-v-c5fe917d="" d="M 0 0 A 7 7 0 0 0 7 7 L 0 7 Z"></path>
+          </svg>
+        </div>
+        {/* extra */}
+        <div className="tabs-chrome__extra absolute right-[var(--gap)] top-1/2 z-[3] size-4 translate-y-[-50%]">
+          {closable && (
+            <X
+              onClick={(e) => {
+                e.stopPropagation();
+                closeTab(tab.url);
+              }}
+              className="hover:bg-accent stroke-accent-foreground/80 hover:stroke-accent-foreground text-accent-foreground/80 group-[.is-active]:text-accent-foreground mt-[2px] size-3 cursor-pointer rounded-full transition-all"
+            />
+          )}
+        </div>
+        {/* main */}
+        <div className="tabs-chrome__item-main relative group-[.is-active]:text-primary dark:group-[.is-active]:text-accent-foreground text-accent-foreground z-[2] mx-[calc(var(--gap)*2)] my-0 flex h-full items-center overflow-hidden rounded-tl-[5px] rounded-tr-[5px] pl-2 pr-4 duration-150">
+          {tab?.icon && (
+            <Iconify
+              icon={tab?.icon}
+              className="mr-1 flex size-4 items-center overflow-hidden"
+            />
+          )}
+          <span className="flex-1 overflow-hidden whitespace-nowrap text-sm">
+            {children}
+          </span>
+        </div>
       </div>
-      {/* main */}
-      <div className="tabs-chrome__item-main group-[.is-active]:text-primary dark:group-[.is-active]:text-accent-foreground text-accent-foreground z-[2] mx-[calc(var(--gap)*2)] my-0 flex h-full items-center overflow-hidden rounded-tl-[5px] rounded-tr-[5px] pl-2 pr-4 duration-150">
-        {tab?.icon && (
-          <Iconify
-            icon={tab?.icon}
-            className="mr-1 flex size-4 items-center overflow-hidden"
-          />
-        )}
-        <span className="flex-1 overflow-hidden whitespace-nowrap text-sm">
-          {children}
-        </span>
-      </div>
-    </div>
-  );
-}
+    );
+  }
+);
+
+export default Label;

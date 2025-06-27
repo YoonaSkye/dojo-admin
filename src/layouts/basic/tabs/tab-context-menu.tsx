@@ -151,7 +151,7 @@ export default function TabContextMenu({ children, tab }: Props) {
 
   return (
     <ContextMenu>
-      <ContextMenuTrigger>{children}</ContextMenuTrigger>
+      <ContextMenuTrigger asChild>{children}</ContextMenuTrigger>
       <ContextMenuContent>
         {menus.map((menu) => (
           <Fragment key={menu.key}>

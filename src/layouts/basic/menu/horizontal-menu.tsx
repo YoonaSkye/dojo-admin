@@ -1,4 +1,4 @@
-import { useAccessMenus } from '@/store/access';
+import { useRouteToMenu } from '@/router/hooks';
 import { useTheme } from '@/store/theme';
 import type { MenuProps } from 'antd';
 import { ConfigProvider, Menu } from 'antd';
@@ -14,7 +14,7 @@ export default function HorizontalMenu() {
 
   /** state */
   const [selectedKeys, setSelectedKeys] = useState<string[]>(['']);
-  const menus = useAccessMenus();
+  const menus = useRouteToMenu();
 
   useEffect(() => {
     setSelectedKeys([pathname]);
@@ -40,13 +40,18 @@ export default function HorizontalMenu() {
             itemSelectedBg: 'hsl(var(--primary) / 15%)',
             itemSelectedColor: 'hsl(var(--primary))',
             subMenuItemBg: 'hsl(var(--menu))',
+            darkPopupBg: 'hsl(var(--menu))',
+            horizontalItemBorderRadius: 10,
+            horizontalLineHeight: '40px',
+            itemPaddingInline: 10,
+            itemMarginInline: 8,
           },
         },
       }}
     >
       <Menu
         mode="horizontal"
-        className="w-full"
+        className="w-full border-none"
         theme={themeMode === 'light' ? 'light' : 'dark'}
         items={menus}
         defaultSelectedKeys={selectedKeys}

@@ -13,21 +13,19 @@ import HorizontalMenu from '../menu/horizontal-menu';
 
 export default function LayoutHeader() {
   const themeLayout = useLayoutMode();
-  // const isHeaderNav = useMemo(() => {
-  //   return themeLayout === ThemeLayout.Horizontal;
-  // }, [themeLayout]);
 
   return (
-    <div className="relative flex items-center gap-2 my-0 mx-4 h-14">
-      {<Logo />}
+    <>
+      {themeLayout !== 'vertical' && (
+        <div style={{ minWidth: '224px' }}>
+          <Logo />
+        </div>
+      )}
 
       {/* 面包屑 */}
       <div className="flex-center hidden lg:block">
-        {themeLayout === 'vertical' && <BreadCrumb />}
+        {themeLayout !== 'horizontal' && <BreadCrumb />}
       </div>
-
-      {/* Mixed Layout Header nav */}
-      {/* <div className="" style={{ flex: '1 1 0%' }}></div> */}
 
       {/* Horizontal Layout Header Nav */}
       <div className="flex h-full min-w-0 flex-1 items-center">
@@ -67,6 +65,6 @@ export default function LayoutHeader() {
         {/* 个人信息按钮 */}
         <AccountMenu />
       </div>
-    </div>
+    </>
   );
 }
