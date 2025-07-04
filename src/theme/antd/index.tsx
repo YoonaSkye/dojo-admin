@@ -1,9 +1,21 @@
+import type { ConfigProviderProps } from 'antd';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect, useMemo } from 'react';
 
-import { useTheme } from '@/store/theme';
-import { useThemeColor } from '@/store/setting';
+import enUS from 'antd/locale/en_US';
+import zhCN from 'antd/locale/zh_CN';
+
 import { BUILT_IN_THEME_PRESETS } from '@/layouts/_common/blocks/theme/config';
+import { useLocale } from '@/locales/useLocale';
+import { useThemeColor } from '@/store/setting';
+import { useTheme } from '@/store/theme';
+
+type Locale = ConfigProviderProps['locale'];
+
+const LANGUAGE_MAP: Record<'zh-CN' | 'en-US', Locale> = {
+  'zh-CN': zhCN,
+  'en-US': enUS,
+};
 
 export default function AntdConfig({
   children,
@@ -11,6 +23,8 @@ export default function AntdConfig({
   children: React.ReactNode;
 }) {
   const Itheme = useTheme();
+  const { locale } = useLocale();
+
   const algorithm = useMemo(() => {
     let algorithm = theme.defaultAlgorithm;
     if (Itheme === 'auto') {
@@ -57,6 +71,7 @@ export default function AntdConfig({
 
   return (
     <ConfigProvider
+      locale={LANGUAGE_MAP[locale]}
       theme={{
         token: {
           colorPrimary: colorPrimary,

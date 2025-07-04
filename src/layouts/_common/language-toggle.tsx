@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,13 +6,11 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
 import { Languages } from '@/icons';
-import useLocale, { LANGUAGE_MAP } from '@/locales/useLocale';
+import { useLocale, LANGUAGE_MAP, type Locale } from '@/locales/useLocale';
 
 export default function LanguageToggle() {
   const { locale, setLocale } = useLocale();
-  const [language, setLanguage] = useState(locale);
 
   const localeList = Object.values(LANGUAGE_MAP).map((item) => {
     return {
@@ -23,23 +21,22 @@ export default function LanguageToggle() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="outline-none">
+      <DropdownMenuTrigger asChild>
         <Button
           variant="icon"
           size="icon"
-          className="rounded-full outline-none flex items-center gap-1"
+          className="rounded-full flex items-center gap-1 focus-visible:ring-0"
         >
           <Languages className="size-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent sideOffset={10}>
-        <DropdownMenuRadioGroup value={language} onValueChange={setLanguage}>
+        <DropdownMenuRadioGroup
+          value={locale}
+          onValueChange={(val) => setLocale(val as Locale)}
+        >
           {localeList.map((item) => (
-            <DropdownMenuRadioItem
-              key={item.key}
-              value={item.key}
-              onClick={() => setLocale(item.key)}
-            >
+            <DropdownMenuRadioItem key={item.key} value={item.key}>
               {item.label}
             </DropdownMenuRadioItem>
           ))}

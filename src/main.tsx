@@ -3,12 +3,12 @@ import { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import 'virtual:svg-icons-register';
 import App from './App.tsx';
+import Loading from '@/components/loading/index.tsx';
 
 // i18n
-import './locales/i18n.ts';
+import { setupI18n } from '@/locales/i18n.ts';
 // 样式文件
 import '@/theme';
-import Loading from './components/loading/index.tsx';
 
 NProgress.configure({
   minimum: 0.3,
@@ -29,7 +29,12 @@ async function enableMocking() {
   // once the Service Worker is up and ready to intercept requests.
   return worker.start({ onUnhandledRequest: 'bypass' });
 }
-enableMocking().then(() => {
+
+async function bootstrap() {
+  await enableMocking();
+  await setupI18n();
+  // TODO：day.js 国际化配置
+
   ReactDOM.createRoot(document.getElementById('root')!).render(
     // <React.StrictMode>
     <Suspense fallback={<Loading />}>
@@ -37,4 +42,6 @@ enableMocking().then(() => {
     </Suspense>
     // </React.StrictMode>
   );
-});
+}
+
+bootstrap();

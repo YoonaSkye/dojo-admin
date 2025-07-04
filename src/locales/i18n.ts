@@ -5,22 +5,26 @@ import { initReactI18next } from 'react-i18next';
 import en_US from './lang/en_US';
 import zh_CN from './lang/zh_CN';
 
-i18n
+export const reactI18nextInstance = i18n
   .use(LanguageDetector)
-  .use(initReactI18next)
-  .init({
-    detection: {
-      convertDetectedLanguage: (lng) => lng.replace('-', '_'),
-    },
-    // debug: true,
+  .use(initReactI18next);
+
+/** Setup plugin i18n */
+export async function setupI18n() {
+  await reactI18nextInstance.init({
     fallbackLng: 'en-US',
     interpolation: {
       escapeValue: false, // react already safes from xss
     },
     resources: {
-      en_US: { translation: en_US },
-      zh_CN: { translation: zh_CN },
+      'en-US': { translation: en_US },
+      'zh-CN': { translation: zh_CN },
     },
   });
+}
 
-export default i18n;
+export const $t = reactI18nextInstance.t;
+
+export function setLocale(locale: string) {
+  i18n.changeLanguage(locale);
+}
