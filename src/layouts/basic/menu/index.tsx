@@ -1,9 +1,15 @@
+import { useRouteToMenu } from '@/router/hooks';
+import { useAccessRoutes } from '@/store/access';
 import { useSiderSetting } from '@/store/setting';
 import type { MenuProps } from 'antd';
 import { ConfigProvider, Menu } from 'antd';
-import { useEffect, useState } from 'react';
-import { useLocation, useMatches, useNavigate } from 'react-router-dom';
-import { useRouteToMenu } from '@/router/hooks';
+import { useEffect, useMemo, useState } from 'react';
+import {
+  matchRoutes,
+  RouteObject,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import './index.scss';
 
 type Props = {
@@ -14,21 +20,24 @@ type Props = {
 
 export default function LayoutMenu({ mode, themeMode }: Props) {
   const { collapsed } = useSiderSetting();
-  // const menus = useAccessMenus();
   const menus = useRouteToMenu();
+  // console.log('menus', menus);
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const matches = useMatches();
+
+  const authRoutes = useAccessRoutes() as RouteObject[];
+  const matches = useMemo(
+    () => matchRoutes(authRoutes, { pathname: pathname }),
+    [pathname, authRoutes]
+  );
 
   /** state */
-  const [openKeys, setOpenKeys] = useState<string[]>([]);
+  const [openKeys, setOpenKeys] = useState<string[] | undefined>([]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>(['']);
 
   useEffect(() => {
-    const openKeys = matches
-      .filter((match) => match.pathname !== '/')
-      .map((match) => match.pathname);
+    const openKeys = matches?.map((match) => match.pathname);
 
     setOpenKeys(openKeys);
     setSelectedKeys([pathname]);
@@ -36,7 +45,7 @@ export default function LayoutMenu({ mode, themeMode }: Props) {
 
   // events
   const onOpenChange: MenuProps['onOpenChange'] = (keys) => {
-    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
+    const latestOpenKey = keys.find((key) => openKeys?.indexOf(key) === -1);
     if (latestOpenKey) {
       setOpenKeys(keys);
     } else {
@@ -48,65 +57,51 @@ export default function LayoutMenu({ mode, themeMode }: Props) {
   };
 
   return (
-    <>
-      {/* <div style={{ height: '50px' }}>
-        <Logo />
-      </div> */}
-
-      {/* Sidebar menu */}
-
-      {/* <ScrollArea
-        style={{
-          height: 'calc(100% - 92px)',
-        }}
-      > */}
-      <div
-        style={{
-          flex: '1 1 0%',
-          overflow: 'hidden auto',
+    <div
+      style={{
+        flex: '1 1 0%',
+        overflow: 'hidden auto',
+      }}
+    >
+      <ConfigProvider
+        theme={{
+          components: {
+            Menu: {
+              darkItemBg: 'hsl(var(--menu))',
+              darkItemColor: 'hsl(var(--foreground) / 80%)',
+              darkItemHoverBg: 'hsl(var(--accent))',
+              darkItemSelectedBg: 'hsl(var(--accent))',
+              darkItemSelectedColor: 'hsl(var(--accent-foreground))',
+              darkSubMenuItemBg: 'hsl(var(--menu))',
+              itemBg: 'hsl(var(--menu))',
+              itemColor: 'hsl(var(--foreground))',
+              itemHoverBg: 'hsl(var(--accent))',
+              itemSelectedBg: 'hsl(var(--primary) / 15%)',
+              itemSelectedColor: 'hsl(var(--primary))',
+              subMenuItemBg: 'hsl(var(--menu))',
+              collapsedWidth: 59,
+            },
+          },
         }}
       >
-        <ConfigProvider
-          theme={{
-            components: {
-              Menu: {
-                darkItemBg: 'hsl(var(--menu))',
-                darkItemColor: 'hsl(var(--foreground) / 80%)',
-                darkItemHoverBg: 'hsl(var(--accent))',
-                darkItemSelectedBg: 'hsl(var(--accent))',
-                darkItemSelectedColor: 'hsl(var(--accent-foreground))',
-                darkSubMenuItemBg: 'hsl(var(--menu))',
-                itemBg: 'hsl(var(--menu))',
-                itemColor: 'hsl(var(--foreground))',
-                itemHoverBg: 'hsl(var(--accent))',
-                itemSelectedBg: 'hsl(var(--primary) / 15%)',
-                itemSelectedColor: 'hsl(var(--primary))',
-                subMenuItemBg: 'hsl(var(--menu))',
-                collapsedWidth: 59,
-              },
-            },
+        <Menu
+          mode={mode}
+          theme={themeMode}
+          items={menus}
+          defaultOpenKeys={openKeys}
+          defaultSelectedKeys={selectedKeys}
+          selectedKeys={selectedKeys}
+          openKeys={openKeys}
+          onOpenChange={onOpenChange}
+          onClick={onClick}
+          inlineCollapsed={collapsed}
+          style={{
+            backgroundColor: 'transparent',
+            border: 'none',
+            width: '100%',
           }}
-        >
-          <Menu
-            mode={mode}
-            theme={themeMode}
-            items={menus}
-            defaultOpenKeys={openKeys}
-            defaultSelectedKeys={selectedKeys}
-            selectedKeys={selectedKeys}
-            openKeys={openKeys}
-            onOpenChange={onOpenChange}
-            onClick={onClick}
-            inlineCollapsed={collapsed}
-            style={{
-              backgroundColor: 'transparent',
-              border: 'none',
-              width: '100%',
-            }}
-          />
-        </ConfigProvider>
-      </div>
-      {/* </ScrollArea> */}
-    </>
+        />
+      </ConfigProvider>
+    </div>
   );
 }

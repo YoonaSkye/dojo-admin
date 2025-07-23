@@ -53,12 +53,13 @@ interface AccessActions {
     setIsAccessChecked: (isAccessChecked: boolean) => void;
     setLoginExpired: (loginExpired: boolean) => void;
     setRefreshToken: (token: AccessToken) => void;
+    reset: () => void;
   };
 }
 
 export const useAccessStore = create<AccessState & AccessActions>()(
   persist(
-    (set) => ({
+    (set, get, store) => ({
       accessCodes: [],
       accessMenus: [],
       accessRoutes: [],
@@ -88,6 +89,9 @@ export const useAccessStore = create<AccessState & AccessActions>()(
         setRefreshToken: (token: AccessToken) => {
           set({ refreshToken: token });
         },
+        reset: () => {
+          set(store.getInitialState());
+        },
       },
     }),
     {
@@ -95,17 +99,17 @@ export const useAccessStore = create<AccessState & AccessActions>()(
       partialize: ({
         accessCodes,
         accessMenus,
-        accessRoutes,
+        // accessRoutes,
         accessToken,
-        isAccessChecked,
+        // isAccessChecked,
         loginExpired,
         refreshToken,
       }) => ({
         accessCodes,
         accessMenus,
-        accessRoutes,
+        // accessRoutes,
         accessToken,
-        isAccessChecked,
+        // isAccessChecked,
         loginExpired,
         refreshToken,
       }),

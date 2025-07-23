@@ -1,12 +1,13 @@
 import type { AppRouteObject } from '@/types';
 import { lazy } from 'react';
 
+// eslint-disable-next-line react-refresh/only-export-components
 const Login = lazy(() => import('@/pages/_core/authentication/login'));
 
 /** 全局404页面 */
 const fallbackNotFoundRoute: AppRouteObject = {
   path: '*',
-  Component: lazy(() => import('@/pages/_core/fallback/not-found.tsx')),
+  Component: lazy(() => import('@/pages/_core/fallback/not-found')),
   handle: {
     name: 'FallbackNotFound',
     hideInBreadcrumb: true,
@@ -25,7 +26,6 @@ const coreRoutes: AppRouteObject[] = [
       title: 'Authentication',
       hideInTab: true,
     },
-    // element: <AuthPageLayout />,
     // redirect: LOGIN_PATH,
     children: [
       {

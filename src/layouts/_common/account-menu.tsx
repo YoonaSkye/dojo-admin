@@ -43,13 +43,13 @@ export default function AccountMenu() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const userInfo = useUserInfo();
-  const { setAccessToken, setRefreshToken } = useAccessActions();
+  const { reset } = useAccessActions();
   const { replace } = useRouter();
 
   const logout = () => {
     try {
-      setAccessToken(null);
-      setRefreshToken(null);
+      // TODO: reset所有zustand store
+      reset();
       useAccessStore.persist.clearStorage();
       useUserStore.persist.clearStorage();
     } catch (error) {

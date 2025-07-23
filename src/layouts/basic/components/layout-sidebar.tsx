@@ -6,7 +6,7 @@ import { useLayoutMode } from '@/store/setting';
 export default function LayoutSidebar() {
   const layoutMode = useLayoutMode();
   return (
-    <div className="relative flex flex-col h-full px-2 py-0 border-border border-r -mr-[1px]">
+    <div className="relative flex flex-col h-full py-0 border-border border-r -mr-[1px]">
       {layoutMode === 'vertical' && (
         <div style={{ height: `${49}px` }}>
           <Logo />

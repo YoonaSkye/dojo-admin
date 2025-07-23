@@ -16,19 +16,19 @@ export default function Router() {
   const permissonRoutes = useAccessRoutes();
 
   const authRoutes: AppRouteObject = {
-    path: '/',
-    element: (
-      <AuthGuard>
-        <BasicLayout />
-      </AuthGuard>
-    ),
+    path: '/*',
+    element: <AuthGuard />,
     children: [
-      { index: true, element: <Navigate to="/dashboard/analytics" replace /> },
-      ...permissonRoutes,
+      { element: <BasicLayout />, children: [...permissonRoutes] },
+      fallbackNotFoundRoute,
     ],
   };
 
-  const newRoutes = [...routes, authRoutes, fallbackNotFoundRoute];
+  const newRoutes = [
+    ...routes,
+    { path: '/', element: <Navigate to="/dashboard/analytics" replace /> },
+    authRoutes,
+  ];
 
   const router = createBrowserRouter(newRoutes as unknown as RouteObject[]);
 

@@ -77,6 +77,9 @@ export const handlers = [
   }),
 
   http.get('/menu/all', async ({ request }) => {
+    await new Promise((resolve) => {
+      setTimeout(resolve, 3000);
+    });
     const userinfo = verifyAccessToken(request);
     if (!userinfo) {
       return HttpResponse.json(unAuthorizedResponse(), {

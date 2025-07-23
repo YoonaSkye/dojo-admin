@@ -1,8 +1,7 @@
 import { AppRouteObject } from '@/types';
 import { mapTree } from '@/utils';
-import { Navigate, type RouteObject } from 'react-router-dom';
-
 import { lazy } from 'react';
+import { Navigate, type RouteObject } from 'react-router-dom';
 
 // 定义递归类型以将 RouteObject 的 component / element 属性更改为 string
 type RouteRecordStringComponent<T = string> = {
@@ -13,7 +12,6 @@ type RouteRecordStringComponent<T = string> = {
 
 const ENTRY_PATH = '/src/pages';
 const pagesMap = import.meta.glob('/src/pages/**/index.tsx');
-// const newPagesMap = import.meta.glob('/src/pages/**/index.tsx');
 
 const loadComponentFromPath = (path: string) =>
   pagesMap[`${ENTRY_PATH}${path}`];
@@ -42,11 +40,6 @@ function convertRoutes(routes: RouteRecordStringComponent[]): AppRouteObject[] {
 
     // layout转换
     if (!component && redirect) {
-      // route.element = (
-      //   <Suspense fallback={<Loading />}>
-      //     <Outlet />
-      //   </Suspense>
-      // );
       if (children && children.length > 0) {
         const indexRoute: AppRouteObject = {
           index: true,
@@ -67,4 +60,4 @@ function convertRoutes(routes: RouteRecordStringComponent[]): AppRouteObject[] {
   });
 }
 
-export { generateRoutesByBackend, convertRoutes };
+export { convertRoutes, generateRoutesByBackend };

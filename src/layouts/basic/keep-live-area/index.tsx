@@ -1,20 +1,24 @@
 import { useAccessRoutes } from '@/store/access';
 import { useTabPageActions } from '@/store/tabs';
 import { setKeepaliveIns } from '@/utils/keepaliveIns';
-import { findRouteByAbsolutePath } from '@/utils/route';
+
 import KeepAlive, { useKeepAliveRef } from 'keepalive-for-react';
 import { Suspense, useEffect, useMemo } from 'react';
-import { useLocation, useOutlet } from 'react-router-dom';
+import {
+  matchRoutes,
+  RouteObject,
+  useLocation,
+  useOutlet,
+} from 'react-router-dom';
 
 // TODO: 要memo组件吗
 function KeepLiveArea() {
   const location = useLocation();
   const outlet = useOutlet();
-  const authRoutes = useAccessRoutes();
+  const authRoutes = useAccessRoutes() as RouteObject[];
 
   const aliveRef = useKeepAliveRef();
   const { openTabPage } = useTabPageActions();
-  //console.log('\x1b[36m%s\x1b[0m', 'location', location);
 
   const activeCacheKey = useMemo(() => {
     return location.pathname + location.search;
@@ -23,16 +27,18 @@ function KeepLiveArea() {
   useEffect(() => {
     setKeepaliveIns(aliveRef.current);
     const absolutePath = location.pathname;
-    //console.log('pathname', absolutePath);
+    const mathes = matchRoutes(authRoutes, { pathname: absolutePath });
+    const route = mathes?.at(-1)?.route;
 
-    const route = findRouteByAbsolutePath(absolutePath, authRoutes);
-    //console.log('keep route', route);
+    if (route?.handle.hideTab) return;
 
     openTabPage({
       url: activeCacheKey,
       title: route?.handle?.title as string,
       icon: route?.handle?.icon,
     });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeCacheKey]);
 
   return (

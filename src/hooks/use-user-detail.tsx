@@ -1,8 +1,10 @@
 import { getAccessCodesApi, getAllMenusApi, getUserInfoApi } from '@/api/core';
-import { accessRoutes } from '@/router/routes';
-import { generateRoutesByFrontend } from '@/router/utils/access';
 import { generateRoutesByBackend } from '@/router/utils/generate-routes-backend';
-import { useAccessActions } from '@/store/access';
+import {
+  useAccessActions,
+  useAccessToken,
+  useIsAccessChecked,
+} from '@/store/access';
 import { useUserActions } from '@/store/user';
 import { useRequest } from 'ahooks';
 import { useEffect, useState } from 'react';
@@ -11,7 +13,10 @@ type AccessModeType = 'backend' | 'frontend';
 const mode = import.meta.env.VITE_ACCESS_MODE as AccessModeType;
 
 export const useUserDetail = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+  const isAccessChecked = useIsAccessChecked();
+  const accessToken = useAccessToken();
 
   const { setUserInfo } = useUserActions();
   const { setAccessCodes, setAccessRoutes, setIsAccessChecked } =
@@ -20,21 +25,32 @@ export const useUserDetail = () => {
   const { runAsync, loading: requestLoading } = useRequest(getAllMenusApi, {
     manual: true,
   });
-  // const { data: menus, loading: requestLoading } = useRequest(getAllMenusApi);
-
-  const { data: info } = useRequest(getUserInfoApi);
-  const { data: codes } = useRequest(getAccessCodesApi);
 
   useEffect(() => {
-    if (info) setUserInfo(info);
+    async function fetchUserInfo() {
+      try {
+        const [info, codes] = await Promise.all([
+          getUserInfoApi(),
+          getAccessCodesApi(),
+        ]);
+        setUserInfo(info);
+        setAccessCodes(codes);
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
-    if (codes) setAccessCodes(codes);
-  }, [info, codes]);
+    if (accessToken) {
+      fetchUserInfo();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accessToken]);
 
   useEffect(() => {
     // TODO: 根据权限模式 mode = 'backend' | 'frontend', 来生成权限路由
-    if (!info) return;
-    // if (isAccessChecked) return;
+    if (!accessToken) return;
+    if (isAccessChecked) return;
 
     setLoading(true);
     switch (mode) {
@@ -51,17 +67,12 @@ export const useUserDetail = () => {
         break;
       }
       case 'frontend': {
-        // @ts-ignore
-        const authRoutes = generateRoutesByFrontend(accessRoutes, info.roles);
-
-        setAccessRoutes(authRoutes);
-        setIsAccessChecked(true);
-
-        setLoading(false);
+        // TODO:待开发
         break;
       }
     }
-  }, [info]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accessToken]);
 
   return { loading: requestLoading || loading };
 };

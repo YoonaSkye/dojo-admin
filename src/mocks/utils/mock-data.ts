@@ -60,7 +60,7 @@ export const MOCK_CODES = [
 
 const dashboardMenus = [
   {
-    path: '/dashboard',
+    path: 'dashboard',
     redirect: '/dashboard/analytics',
     handle: {
       name: 'Dashboard',
@@ -71,7 +71,7 @@ const dashboardMenus = [
     },
     children: [
       {
-        path: '/dashboard/analytics',
+        path: 'analytics',
         component: '/dashboard/analytics/index.tsx',
         handle: {
           name: 'Analytics',
@@ -82,7 +82,7 @@ const dashboardMenus = [
         },
       },
       {
-        path: '/dashboard/workspace',
+        path: 'workspace',
         component: '/dashboard/workspace/index.tsx',
         handle: {
           name: 'Workspace',
@@ -97,7 +97,7 @@ const dashboardMenus = [
 
 const manageMenus = [
   {
-    path: '/manage',
+    path: 'manage',
     redirect: '/manage/user',
     handle: {
       name: 'Manage',
@@ -108,7 +108,7 @@ const manageMenus = [
     },
     children: [
       {
-        path: '/manage/user',
+        path: 'user',
         component: '/manage/user/index.tsx',
         handle: {
           name: 'User',
@@ -119,7 +119,7 @@ const manageMenus = [
         },
       },
       {
-        path: '/manage/role',
+        path: 'role',
         component: '/manage/role/index.tsx',
         handle: {
           name: 'Role',
@@ -129,7 +129,7 @@ const manageMenus = [
         },
       },
       {
-        path: '/manage/menu',
+        path: 'menu',
         component: '/manage/menu/index.tsx',
         handle: {
           name: 'Menu',
@@ -144,41 +144,39 @@ const manageMenus = [
 
 const fallbackMenus = [
   {
-    path: '/demos/fallback',
-    redirect: '/demos/fallback/403',
+    path: 'fallback',
+    redirect: '/fallback/403',
     handle: {
       name: 'FallbackDemos',
       title: 'page.demos.fallback.title',
       icon: 'mdi:lightbulb-error-outline',
+      hideTab: true,
     },
     children: [
       {
-        path: '/demos/fallback/403',
-        component: '/_core/fallback/forbidden.tsx',
+        path: '403',
+        component: '/_core/fallback/forbidden/index.tsx',
         handle: {
           name: 'Fallback403Demo',
           title: '403',
-          // icon: 'mdi:do-not-disturb-alt',
           icon: 'ic:baseline-block',
         },
       },
       {
-        path: '/demos/fallback/404',
-        component: '/_core/fallback/not-found.tsx',
+        path: '404',
+        component: '/_core/fallback/not-found/index.tsx',
         handle: {
           name: 'Fallback404Demo',
           title: '404',
-          // icon: 'mdi:table-off',
           icon: 'ic:baseline-web-asset-off',
         },
       },
       {
-        path: '/demos/fallback/500',
-        component: '/_core/fallback/internal-error.tsx',
+        path: '500',
+        component: '/_core/fallback/internal-error/index.tsx',
         handle: {
           name: 'Fallback500Demo',
           title: '500',
-          // icon: 'mdi:server-network-off',
           icon: 'ic:baseline-wifi-off',
         },
       },
@@ -220,7 +218,7 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
 
   return [
     {
-      path: '/demos',
+      path: 'demos',
       redirect: '/demos/access',
       handle: {
         name: 'Demos',
@@ -233,7 +231,7 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
       children: [
         // 权限控制
         {
-          path: '/demos/access',
+          path: 'access',
           redirect: '/demos/access/page-control',
           handle: {
             name: 'AccessDemos',
@@ -243,8 +241,8 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
           },
           children: [
             {
-              path: '/demos/access/page-control',
-              component: '/demos/access/index.tsx',
+              path: 'page-control',
+              component: '/demos/access/page-control/index.tsx',
               handle: {
                 name: 'AccessPageControlDemo',
                 title: 'page.demos.access.pageAccess',
@@ -253,8 +251,8 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
               },
             },
             {
-              path: '/demos/access/button-control',
-              component: '/demos/access/button-control.tsx',
+              path: 'button-control',
+              component: '/demos/access/button-control/index.tsx',
               handle: {
                 name: 'AccessButtonControlDemo',
                 title: 'page.demos.access.buttonControl',
@@ -262,18 +260,6 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
                 hideTab: false,
               },
             },
-            // {
-            //   path: '/demos/access/menu-visible-403',
-            //   component: '/demos/access/menu-visible-403.tsx',
-            //   handle: {
-            //     name: 'AccessMenuVisible403Demo',
-            //     title: 'page.demos.access.menuVisible403',
-            //     authority: ['no-body'],
-            //     icon: 'mdi:button-cursor',
-            //     menuVisibleWithForbidden: true,
-            //   },
-            // },
-            // roleWithMenus[role],
           ],
         },
       ],

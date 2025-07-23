@@ -6,10 +6,11 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { Fragment, useEffect, useState } from 'react';
+import { useAccessRoutes } from '@/store/access';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { useMatches, useNavigate } from 'react-router-dom';
+import { matchRoutes, RouteObject, useLocation } from 'react-router-dom';
 
 type Crumbs = {
   icon: string;
@@ -20,27 +21,33 @@ type Crumbs = {
 //BUG: 面包屑更新时，太突兀，速度太快
 export default function BreadCrumb() {
   const { t } = useTranslation();
-  const matches = useMatches();
-  const navigate = useNavigate();
-  const [breadCrumbs, setBreadCrumbs] = useState<Crumbs[]>([]);
+
+  const location = useLocation();
+  const authRoutes = useAccessRoutes() as RouteObject[];
+  const matches = useMemo(
+    () => matchRoutes(authRoutes, { pathname: location.pathname }),
+    [location.pathname, authRoutes]
+  );
+
+  const [breadCrumbs, setBreadCrumbs] = useState<Crumbs[] | undefined>([]);
+
+  // console.log('breadcrumbs', breadCrumbs);
 
   useEffect(() => {
-    const crumbs = matches
-      .filter((match) => Boolean(match.handle))
-      .map((match) => {
-        const { icon, title } = match.handle as any;
-        return { icon, title, path: match.pathname };
-      });
+    const crumbs = matches?.map((match) => {
+      const { icon, title } = match.route.handle;
+      return { icon, title, path: match.pathname };
+    });
     setBreadCrumbs(crumbs);
   }, [matches]);
 
   return (
     <Breadcrumb>
       <BreadcrumbList>
-        {breadCrumbs.map((crumb, index) => (
+        {breadCrumbs?.map((crumb, index) => (
           <Fragment key={crumb.path}>
             <BreadcrumbItem>
-              <BreadcrumbLink onClick={() => navigate(crumb.path)}>
+              <BreadcrumbLink>
                 <div className="flex-center">
                   <Iconify icon={crumb.icon} className="mr-1 size-4" />
                   {t(crumb.title)}

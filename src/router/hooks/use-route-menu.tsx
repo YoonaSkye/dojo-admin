@@ -1,10 +1,8 @@
 import { Iconify } from '@/components/icon';
-import { useTranslation } from 'react-i18next';
-import type { GetProp, MenuProps } from 'antd';
 import { useAccessRoutes } from '@/store/access';
+import { ExRouteRecordRaw, MenuRecordRaw } from '@/types';
 import { filterTree, mapTree } from '@/utils';
-
-type MenuItem = GetProp<MenuProps, 'items'>[number];
+import { useTranslation } from 'react-i18next';
 
 const renderLabel = (label: string, t: (key: string) => string) => {
   return (
@@ -29,26 +27,44 @@ export function useRouteToMenu() {
     (a, b) => (a.handle.order || 999) - (b.handle.order || 999)
   );
 
-  const finalMenus = mapTree(sortedMenus, (route) => {
-    // 转换为菜单结构
-    const { path, handle, children } = route;
-    const { hideChildrenInMenu = false, icon, title = '' } = handle || {};
+  const finalMenus = mapTree<ExRouteRecordRaw, MenuRecordRaw>(
+    sortedMenus,
+    (route) => {
+      // 转换为菜单结构
+      const { path, handle, children } = route;
+      const { hideChildrenInMenu = false, icon, title = '' } = handle || {};
 
-    // 隐藏子菜单
-    const resultChildren = hideChildrenInMenu ? [] : (children as MenuItem[]);
+      // 隐藏子菜单
+      const resultChildren = hideChildrenInMenu
+        ? []
+        : (children as MenuRecordRaw[]);
 
-    // 隐藏子菜单
-    // const resultPath = hideChildrenInMenu ? redirect || path : link || path;
+      // 设置子菜单的父子关系
+      if (resultChildren && resultChildren.length > 0) {
+        resultChildren.forEach((child) => {
+          child.parents = [...(route.parents ?? []), path];
+          child.parent = path;
+        });
+      }
 
-    return {
-      key: path,
-      label: renderLabel(title, t),
-      ...(icon && {
-        icon: <Iconify icon={icon} width="1em" height="1em" />,
-      }),
-      ...(resultChildren && { children: resultChildren }),
-    };
-  });
+      // 最终菜单路径
+      let resultPath = null;
+      if (route.parents && route.parents.length > 0) {
+        resultPath = `/${route.parents.join('/')}/${path}`;
+      } else {
+        resultPath = '/' + path;
+      }
+
+      return {
+        key: resultPath,
+        label: renderLabel(title, t),
+        ...(icon && {
+          icon: <Iconify icon={icon} width="1em" height="1em" />,
+        }),
+        ...(resultChildren && { children: resultChildren }),
+      };
+    }
+  );
 
   return finalMenus;
 }
