@@ -1,4 +1,3 @@
-import ClassNames from 'classnames';
 import React from 'react';
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
@@ -12,7 +11,7 @@ const SimpleScrollbar = ({
 }) => {
   return (
     // <div className={ClassNames('h-full flex-1 overflow-hidden', className)}>
-    <SimpleBar className={ClassNames(className)}>{children}</SimpleBar>
+    <SimpleBar className={className}>{children}</SimpleBar>
     // </div>
   );
 };

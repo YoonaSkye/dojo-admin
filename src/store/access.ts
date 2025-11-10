@@ -1,10 +1,15 @@
+import { getAccessCodesApi, getUserInfoApi, loginApi } from '@/api/core';
 import { AppRouteObject } from '@/types';
-import { loginApi } from '@/api/core';
-import { useRequest } from 'ahooks';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+import { useRouter } from '@/router';
 import type { MenuProps } from 'antd';
+import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { useUserStore } from './user';
+
+const HOME_PAGE = import.meta.env.VITE_APP_HOMEPAGE || '/dashboard/analytics';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -96,21 +101,9 @@ export const useAccessStore = create<AccessState & AccessActions>()(
     }),
     {
       name: 'core-access',
-      partialize: ({
+      partialize: ({ accessCodes, accessToken, refreshToken }) => ({
         accessCodes,
-        accessMenus,
-        // accessRoutes,
         accessToken,
-        // isAccessChecked,
-        loginExpired,
-        refreshToken,
-      }) => ({
-        accessCodes,
-        accessMenus,
-        // accessRoutes,
-        accessToken,
-        // isAccessChecked,
-        loginExpired,
         refreshToken,
       }),
     }
@@ -132,12 +125,10 @@ export const useIsAccessChecked = () =>
 export const useAccessActions = () => useAccessStore((store) => store.actions);
 
 export const useSignIn = () => {
-  const { setAccessToken, setRefreshToken } = useAccessActions();
-
-  const { loading: loginLoading, runAsync: loginHandle } = useRequest(
-    loginApi,
-    { manual: true }
-  );
+  const [loading, setLoading] = useState(false);
+  const { replace } = useRouter();
+  const [searchParams] = useSearchParams();
+  const redirectUrl = searchParams.get('redirect');
 
   /**
    * 异步处理登录操作
@@ -149,17 +140,69 @@ export const useSignIn = () => {
     // 异步处理用户登录操作并获取 accessToken
 
     try {
-      const res = await loginHandle(params);
+      setLoading(true);
+
+      const res = await loginApi(params);
       const { accessToken, refreshToken } = res;
       // 如果成功获取到 accessToken
       if (accessToken) {
-        setAccessToken(accessToken);
-        setRefreshToken(refreshToken);
+        useAccessStore.setState({ accessToken, refreshToken });
+
+        // 获取用户信息并存储到 accessStore 中
+        const [fetchUserInfoResult, accessCodes] = await Promise.all([
+          getUserInfoApi(),
+          getAccessCodesApi(),
+        ]);
+
+        useUserStore.setState({ userInfo: fetchUserInfoResult });
+        useAccessStore.setState({ accessCodes });
+
+        if (redirectUrl) {
+          replace(redirectUrl);
+        } else {
+          replace(HOME_PAGE);
+        }
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  return { signIn, loading: loginLoading };
+  return { signIn, loading };
+};
+
+export const useSignOut = () => {
+  const { reset } = useAccessActions();
+  const { replace, resetRoutes } = useRouter();
+  // const currentRoute = useRoute();
+
+  function signOut(redirect: boolean = true) {
+    // reset所有zustand store 和 路由
+    try {
+      // TODO: 调用logout api
+    } catch (error) {
+      // 不做任何处理
+    }
+
+    replace('/auth/login');
+    // 回登录页带上当前路由地址
+    // if (currentRoute?.fullPath) {
+    //   const fullPath = `/auth/login?redirect=${currentRoute.fullPath}`;
+    //   await replace(fullPath);
+    // } else {
+    //   await replace('/auth/login');
+    // }
+
+    resetRoutes();
+    // 重置Access Store
+    reset();
+    // 清除 Access Store 和 User Store 的持久化存储
+    useAccessStore.persist.clearStorage();
+    useUserStore.persist.clearStorage();
+    // useTabsStore.persist.clearStorage();
+  }
+
+  return { signOut };
 };

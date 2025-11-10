@@ -23,7 +23,7 @@ export default function LoginForm() {
         size="large"
         initialValues={{
           remember: true,
-          username: 'dojo',
+          username: 'vben',
           password: '123456',
         }}
         onFinish={handleFinish}

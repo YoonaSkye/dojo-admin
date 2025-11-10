@@ -2,8 +2,6 @@ import { Suspense, lazy } from 'react';
 import { Outlet, RouteObject } from 'react-router-dom';
 import { Spin } from 'antd';
 
-import AuthGuard from '../components/AuthGuard';
-
 const Page403 = lazy(() => import('@/pages/sys/error/Page403'));
 const Page404 = lazy(() => import('@/pages/sys/error/Page404'));
 const Page500 = lazy(() => import('@/pages/sys/error/Page500'));
@@ -14,14 +12,12 @@ const Page500 = lazy(() => import('@/pages/sys/error/Page500'));
  */
 export const ErrorRoutes: RouteObject = {
   element: (
-    <AuthGuard>
-      <div className="flex h-screen w-full flex-col">
-        <h1>错误页面</h1>
-        <Suspense fallback={<Spin size="large" />}>
-          <Outlet />
-        </Suspense>
-      </div>
-    </AuthGuard>
+    <div className="flex h-screen w-full flex-col">
+      <h1>错误页面</h1>
+      <Suspense fallback={<Spin size="large" />}>
+        <Outlet />
+      </Suspense>
+    </div>
   ),
   children: [
     { path: '403', element: <Page403 /> },

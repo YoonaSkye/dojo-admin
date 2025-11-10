@@ -20,7 +20,8 @@ const fallbackNotFoundRoute: AppRouteObject = {
 /** 基本路由，这些路由是必须存在的 */
 const coreRoutes: AppRouteObject[] = [
   {
-    path: '/auth',
+    id: 'auth',
+    path: 'auth',
     handle: {
       name: 'Authentication',
       title: 'Authentication',
@@ -29,10 +30,12 @@ const coreRoutes: AppRouteObject[] = [
     // redirect: LOGIN_PATH,
     children: [
       {
-        path: '/auth/login',
+        id: 'auth-login',
+        path: 'login',
         handle: {
           name: 'Login',
           title: 'page.auth.login',
+          constant: true,
         },
         element: <Login />,
       },

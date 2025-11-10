@@ -1,18 +1,30 @@
-import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
 
-export function useRouter() {
-  const navigate = useNavigate();
-  const router = useMemo(
-    () => ({
-      back: () => navigate(-1),
-      forward: () => navigate(1),
-      reload: () => window.location.reload(),
-      push: (href: string) => navigate(href),
-      replace: (href: string) => navigate(href, { replace: true }),
-    }),
-    [navigate]
-  );
+import type { RouterContextType } from '../router';
+import { RouterContext } from '../components/router-context';
 
-  return router;
+export function useRouter(): RouterContextType {
+  const navigator = useContext(RouterContext);
+
+  if (!navigator) {
+    throw new Error('RouterContext is not provided');
+  }
+
+  return navigator;
 }
+
+// export function useRouter() {
+//   const navigate = useNavigate();
+//   const router = useMemo(
+//     () => ({
+//       back: () => navigate(-1),
+//       forward: () => navigate(1),
+//       reload: () => window.location.reload(),
+//       push: (href: string) => navigate(href),
+//       replace: (href: string) => navigate(href, { replace: true }),
+//     }),
+//     [navigate]
+//   );
+
+//   return router;
+// }

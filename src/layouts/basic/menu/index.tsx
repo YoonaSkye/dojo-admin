@@ -1,5 +1,4 @@
-import { useRouteToMenu } from '@/router/hooks';
-import { useAccessRoutes } from '@/store/access';
+import { useAccessMenus, useAccessRoutes } from '@/store/access';
 import { useSiderSetting } from '@/store/setting';
 import type { MenuProps } from 'antd';
 import { ConfigProvider, Menu } from 'antd';
@@ -20,8 +19,7 @@ type Props = {
 
 export default function LayoutMenu({ mode, themeMode }: Props) {
   const { collapsed } = useSiderSetting();
-  const menus = useRouteToMenu();
-  // console.log('menus', menus);
+  const menus = useAccessMenus();
 
   const { pathname } = useLocation();
   const navigate = useNavigate();

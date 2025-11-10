@@ -11,13 +11,13 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 import { useRouter } from '@/router/hooks';
-import { useAccessActions, useAccessStore } from '@/store/access';
-import { useUserInfo, useUserStore } from '@/store/user';
+import { useSignOut } from '@/store/access';
+import { useUserInfo } from '@/store/user';
 
-import { BookOpenTextIcon, LogOutIcon } from 'lucide-react';
-import { AiFillGithub } from 'react-icons/ai';
 import { Modal } from 'antd';
+import { BookOpenTextIcon, LogOutIcon } from 'lucide-react';
 import { useState } from 'react';
+import { AiFillGithub } from 'react-icons/ai';
 
 const accountMenuItems: {
   label: string;
@@ -41,23 +41,9 @@ const accountMenuItems: {
 
 export default function AccountMenu() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const userInfo = useUserInfo();
-  const { reset } = useAccessActions();
   const { replace } = useRouter();
-
-  const logout = () => {
-    try {
-      // TODO: reset所有zustand store
-      reset();
-      useAccessStore.persist.clearStorage();
-      useUserStore.persist.clearStorage();
-    } catch (error) {
-      console.log(error);
-    } finally {
-      replace('/auth/login');
-    }
-  };
+  const { signOut: logout } = useSignOut();
 
   const showModal = () => {
     setIsModalOpen(true);

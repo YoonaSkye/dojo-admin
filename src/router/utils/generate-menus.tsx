@@ -1,5 +1,5 @@
 import { filterTree, mapTree } from '@/utils';
-import { AppRouteObject } from '@/types';
+import { AppRouteObject, ExRouteRecordRaw, MenuRecordRaw } from '@/types';
 import { Iconify } from '@/components/icon';
 
 import type { MenuProps } from 'antd';
@@ -29,28 +29,47 @@ function generateMenus(
   const sortedMenus = menus.sort(
     (a, b) => (a.handle.order || 999) - (b.handle.order || 999)
   );
-  const finalMenus = mapTree(sortedMenus, (route) => {
-    // 转换为菜单结构
-    const { path, handle, children } = route;
-    const { hideChildrenInMenu = false, icon, title = '' } = handle || {};
 
-    // 隐藏子菜单
-    const resultChildren = hideChildrenInMenu ? [] : (children as MenuItem[]);
+  const finalMenus = mapTree<ExRouteRecordRaw, MenuRecordRaw>(
+    sortedMenus,
+    (route) => {
+      // 转换为菜单结构
+      const { path, handle, children } = route;
+      const { hideChildrenInMenu = false, icon, title = '' } = handle || {};
 
-    // 隐藏子菜单
-    // const resultPath = hideChildrenInMenu ? redirect || path : link || path;
+      // 隐藏子菜单
+      const resultChildren = hideChildrenInMenu
+        ? []
+        : (children as MenuRecordRaw[]);
 
-    return {
-      key: path,
-      label: renderLabel(title, t),
-      ...(icon && {
-        icon: <Iconify icon={icon} width="1em" height="1em" />,
-      }),
-      ...(resultChildren && { children: resultChildren }),
-    };
-  });
+      // 设置子菜单的父子关系
+      if (resultChildren && resultChildren.length > 0) {
+        resultChildren.forEach((child) => {
+          child.parents = [...(route.parents ?? []), path];
+          child.parent = path;
+        });
+      }
 
-  return finalMenus;
+      // 最终菜单路径
+      let resultPath = null;
+      if (route.parents && route.parents.length > 0) {
+        resultPath = `/${route.parents.join('/')}/${path}`;
+      } else {
+        resultPath = '/' + path;
+      }
+
+      return {
+        key: resultPath,
+        label: renderLabel(title, t),
+        ...(icon && {
+          icon: <Iconify icon={icon} width="1em" height="1em" />,
+        }),
+        ...(resultChildren && { children: resultChildren }),
+      };
+    }
+  );
+
+  return finalMenus as unknown as MenuItem[];
 }
 
 export { generateMenus };

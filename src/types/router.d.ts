@@ -1,15 +1,7 @@
-import { RouteObject } from 'react-router-dom';
+import type { RouteObject, UIMatch } from 'react-router-dom';
 
-// 扩展meta元信息接口
+// meta元信息接口
 export interface RouteMeta {
-  /**
-   * 激活图标（菜单）
-   */
-  activeIcon?: string;
-  /**
-   * 当前激活的菜单，有时候不想激活现有菜单，需要激活父级菜单时使用
-   */
-  activePath?: string;
   /**
    * 是否固定标签页
    * @default false
@@ -25,24 +17,6 @@ export interface RouteMeta {
    * @default []
    */
   authority?: string[];
-  /**
-   * 徽标
-   */
-  badge?: string;
-  /**
-   * 徽标类型
-   */
-  badgeType?: 'dot' | 'normal';
-  /**
-   * 徽标颜色
-   */
-  badgeVariants?:
-    | 'default'
-    | 'destructive'
-    | 'primary'
-    | 'success'
-    | 'warning'
-    | string;
   /**
    * 当前路由的子级在菜单中不展现
    * @default false
@@ -89,23 +63,6 @@ export interface RouteMeta {
    */
   loaded?: boolean;
   /**
-   * 标签页最大打开数量
-   * @default false
-   */
-  maxNumOfOpenTab?: number;
-  /**
-   * 菜单可以看到，但是访问会被重定向到403
-   */
-  menuVisibleWithForbidden?: boolean;
-  /**
-   * 当前路由不使用基础布局（仅在顶级生效）
-   */
-  noBasicLayout?: boolean;
-  /**
-   * 在新窗口打开
-   */
-  openInNewWindow?: boolean;
-  /**
    * 用于路由->菜单排序
    */
   order?: number;
@@ -117,17 +74,37 @@ export interface RouteMeta {
    * 标题名称
    */
   title?: string;
-  label?: string;
-  key?: string;
-  hideMenu?: boolean;
-  hideTab?: boolean;
-  disabled?: boolean;
+  /**
+   * 路由名称
+   */
   name?: string;
+  /**
+   * 是否为常驻路由（登录状态下可访问）
+   * @default false
+   */
+  constant?: boolean;
 }
 
 export type AppRouteObject = {
   redirect?: string;
-  meta?: RouteMeta;
   handle?: RouteMeta;
   children?: AppRouteObject[];
 } & Omit<RouteObject, 'children'>;
+
+type Route<
+  T = unknown,
+  Q extends Record<string, string> | null = Record<string, string>,
+  P extends Record<string, string | string[]> = Record<
+    string,
+    string | string[]
+  >
+> = Omit<UIMatch<T, RouteMeta>, 'params'> & {
+  error: Error | null;
+  fullPath: string;
+  hash: string;
+  matched: UIMatch<T, RouteMeta>[];
+  params: P;
+  pathname: string;
+  query: Q;
+  search: string;
+};

@@ -1,6 +1,5 @@
-import { useAccessToken } from '@/store/access';
 import { useTranslation } from 'react-i18next';
-import { Navigate } from 'react-router-dom';
+
 import LoginForm from './LoginForm';
 
 import logo from '@/assets/images/logo.png';
@@ -8,14 +7,8 @@ import Slogan from './Slogan';
 import './login.css';
 
 export default function Login() {
-  const token = useAccessToken();
   const { t } = useTranslation();
 
-  // 判断用户是否有权限
-  if (token) {
-    // 如果有授权，则跳转到首页
-    return <Navigate to="/" />;
-  }
   return (
     <div className="flex min-h-full flex-1 select-none overflow-hidden">
       {/* 工具栏 */}

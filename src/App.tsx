@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import Router from './router';
+import { RouterProvider } from './router';
 import AntdConfig from '@/theme/antd';
 import { loadSvgIcons } from '@/icons/svg/load';
 import AppProvider from './components/antd/AppProvider';
@@ -37,7 +37,7 @@ function App() {
   return (
     <AntdConfig>
       <AppProvider>
-        <Router />
+        <RouterProvider />
       </AppProvider>
     </AntdConfig>
   );
