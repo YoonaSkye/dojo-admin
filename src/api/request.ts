@@ -46,6 +46,7 @@ class RequestClient {
     axiosConfig: InternalAxiosRequestConfig
   ): Promise<any> {
     const { accessToken } = useAccessStore.getState() || {};
+    axiosConfig.headers.apifoxToken = 'NNudrVCph5UsXfUSo6gmg';
     if (accessToken) {
       axiosConfig.headers.Authorization = `Bearer ${accessToken}`;
     }
