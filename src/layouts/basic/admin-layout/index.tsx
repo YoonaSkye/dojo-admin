@@ -75,8 +75,7 @@ export default function AdminLayout(props: AdminLayoutProps) {
   };
 
   const mainStyle: CSSProperties = {
-    flex: '1 1 0%',
-    marginTop: `${HEADER_HEIGHT + TABBAR_HEIGHT}px`,
+    // flex: '1 1 0%',
   };
 
   function calcMenuWidthStyle(collapsed: boolean) {
@@ -93,7 +92,7 @@ export default function AdminLayout(props: AdminLayoutProps) {
   }
 
   return (
-    <div className="relative flex min-h-full w-full overflow-hidden">
+    <div className="relative flex h-full w-full">
       {/* Sider */}
       {showSider && (
         <>
@@ -113,6 +112,11 @@ export default function AdminLayout(props: AdminLayoutProps) {
       )}
 
       <div className="flex flex-1 flex-col overflow-hidden transition-all duration-300 ease-in">
+        <div
+          style={{
+            height: `${HEADER_HEIGHT + TABBAR_HEIGHT}px`,
+          }}
+        />
         <div
           className="overflow-hidden transition-all duration-200"
           style={headerWrapperStyle}
@@ -140,7 +144,7 @@ export default function AdminLayout(props: AdminLayoutProps) {
 
         {/* Main Content */}
         <main
-          className="flex flex-col w-full bg-background-deep p-4 overflow-auto"
+          className="flex flex-col flex-1 w-full bg-background-deep overflow-auto"
           style={mainStyle}
         >
           {/* TODO: 考虑重新封装一个ScrollWrapper,自定义滚动样式 */}

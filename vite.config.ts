@@ -2,7 +2,6 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
-import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { viteInjectAppLoadingPlugin } from './plugins/inject-app-loading';
 
 // https://vitejs.dev/config/
@@ -23,7 +22,6 @@ export default defineConfig({
       // 指定symbolId格式
       symbolId: 'icon-[dir]-[name]',
     }),
-    nodePolyfills(),
   ],
   css: {
     preprocessorOptions: {

@@ -55,7 +55,7 @@ const chartTabs: TabOption[] = [
 
 export default function Analysis() {
   return (
-    <div className="overflow-hidden">
+    <div className="p-4">
       <AnalysisOverview items={overviewItems} />
       <AnalysisChartsTabs tabs={chartTabs} className="mt-5" />
 

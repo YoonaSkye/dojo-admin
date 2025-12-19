@@ -186,7 +186,7 @@ const todoItems: WorkbenchTodoItem[] = [
 
 export default function Workbench() {
   return (
-    <div className="">
+    <div className="p-4">
       <WorkbenchHeader />
 
       <div className="mt-5 flex flex-col lg:flex-row">

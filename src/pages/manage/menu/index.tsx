@@ -246,7 +246,7 @@ export default function MenuManage() {
   ];
 
   return (
-    <div className="h-full min-h-500px flex-col-stretch gap-16px overflow-hidden lt-sm:overflow-auto">
+    <div className="p-4 h-full">
       <ProTable<MenuItem>
         size="small"
         columns={columns}

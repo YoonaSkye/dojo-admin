@@ -195,10 +195,7 @@ export default function UserManage() {
   ];
 
   return (
-    <div
-      ref={tableWrapperRef}
-      className="h-full min-h-500px flex-col items-stretch"
-    >
+    <div ref={tableWrapperRef} className="p-4 h-full">
       <ProTable<UserItem>
         columns={columns}
         actionRef={actionRef}
