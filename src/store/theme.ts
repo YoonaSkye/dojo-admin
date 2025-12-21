@@ -1,26 +1,38 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-export type Theme = 'dark' | 'light' | 'auto';
+export type ThemeModeType = 'dark' | 'light' | 'system';
 
 type ThemeState = {
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
+  themeMode: ThemeModeType;
+  setThemeMode: (theme: ThemeModeType) => void;
+  toggleThemeMode: () => void;
 };
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set) => ({
-      theme: 'auto',
-      setTheme: (theme: Theme) => {
-        set({ theme });
+      themeMode: 'system',
+      setThemeMode: (theme: ThemeModeType) => {
+        set({ themeMode: theme });
+      },
+      toggleThemeMode: () => {
+        set((state) => {
+          const themeModes: ThemeModeType[] = ['light', 'dark', 'system'];
+          const index = themeModes.findIndex(
+            (item) => item === state.themeMode
+          );
+          const nextIndex = index === themeModes.length - 1 ? 0 : index + 1;
+
+          return { themeMode: themeModes[nextIndex] };
+        });
       },
     }),
     {
       name: 'theme-mode',
-      partialize: ({ theme }) => ({ theme }),
     }
   )
 );
 
-export const useTheme = () => useThemeStore((state) => state.theme);
-export const useSetTheme = () => useThemeStore((state) => state.setTheme);
+export const useThemeMode = () => useThemeStore((state) => state.themeMode);
+export const useSetThemeMode = () =>
+  useThemeStore((state) => state.setThemeMode);

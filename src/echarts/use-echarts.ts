@@ -1,7 +1,7 @@
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useRef } from 'react';
 import echarts from './echarts.config';
 import type { EChartsOption } from 'echarts';
-import { useTheme } from '@/store/theme';
+import { useTheme } from '@/features/theme/theme-context';
 
 type UseEchartsParams = {
   options: EChartsOption;
@@ -14,18 +14,10 @@ export const useEcharts = (params: UseEchartsParams) => {
   const chartInstance = useRef<echarts.ECharts | null>(null);
   const { options, events } = params;
 
-  const theme = useTheme();
+  const { darkMode } = useTheme();
 
   // 获取实际主题（处理 auto 模式）
-  const actualTheme = useMemo(() => {
-    if (theme === 'auto') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light';
-    }
-    return theme;
-  }, [theme]);
-
+  const actualTheme = darkMode ? 'dark' : 'default';
   // 初始化图表
   useEffect(() => {
     if (!containerRef.current) return;

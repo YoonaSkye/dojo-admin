@@ -3,6 +3,7 @@ import { RouterProvider } from './router';
 import AntdConfig from '@/theme/antd';
 import { loadSvgIcons } from '@/icons/svg/load';
 import AppProvider from './components/antd/AppProvider';
+import { ThemeProvider } from './features/theme';
 
 function App() {
   useEffect(() => {
@@ -35,11 +36,13 @@ function App() {
   }, []);
 
   return (
-    <AntdConfig>
-      <AppProvider>
-        <RouterProvider />
-      </AppProvider>
-    </AntdConfig>
+    <ThemeProvider>
+      <AntdConfig>
+        <AppProvider>
+          <RouterProvider />
+        </AppProvider>
+      </AntdConfig>
+    </ThemeProvider>
   );
 }
 

@@ -1,33 +1,34 @@
-import { MoonStar, Sun, SunMoon } from '@/icons';
-import { useSetTheme, useTheme, type Theme } from '@/store/theme';
-import clsx from 'clsx';
-import type { LucideProps } from 'lucide-react';
-import { useRef } from 'react';
-import SwitchItem from '../switch-item';
+import {
+  useSetThemeMode,
+  useThemeMode,
+  type ThemeModeType,
+} from '@/store/theme';
 
-type ThemeModeType = Theme;
+import { Iconify } from '@/components/icon';
+import SwitchItem from '@/layouts/_common/blocks/switch-item';
+
+import clsx from 'clsx';
 
 const THEME_PRESET: Array<{
-  icon: React.FC<LucideProps>;
+  icon: string;
   name: ThemeModeType;
 }> = [
   {
-    icon: Sun,
+    icon: 'material-symbols:sunny',
     name: 'light',
   },
   {
-    icon: MoonStar,
+    icon: 'material-symbols:nightlight-rounded',
     name: 'dark',
   },
   {
-    icon: SunMoon,
-    name: 'auto',
+    icon: 'material-symbols:hdr-auto',
+    name: 'system',
   },
 ];
-export default function Theme() {
-  const themeValue = useTheme();
-  const setTheme = useSetTheme();
-  const modelValue = useRef<ThemeModeType>(themeValue);
+export default function ThemeModeSegmented() {
+  const themeValue = useThemeMode();
+  const setTheme = useSetThemeMode();
 
   const nameView = (name: string) => {
     switch (name) {
@@ -39,7 +40,7 @@ export default function Theme() {
         // return t('preferences.theme.dark');
         return '深色';
       }
-      case 'auto': {
+      case 'system': {
         // return t('preferences.followSystem');
         return '跟随系统';
       }
@@ -53,18 +54,16 @@ export default function Theme() {
           className="flex cursor-pointer flex-col"
           key={theme.name}
           onClick={() => {
-            // setModelValue(theme.name);
-            modelValue.current = theme.name;
             setTheme(theme.name);
           }}
         >
           <div
             className={clsx(
-              theme.name === modelValue.current && 'outline-box-active',
+              theme.name === themeValue && 'outline-box-active',
               'outline-box flex-center py-4'
             )}
           >
-            <theme.icon className="mx-9 size-5" />
+            <Iconify icon={theme.icon} className="mx-9 size-5" />
           </div>
           <div className="text-muted-foreground mt-2 text-center text-xs">
             {nameView(theme.name)}
@@ -72,7 +71,7 @@ export default function Theme() {
         </div>
       ))}
       <SwitchItem className="mt-6" title="深色侧边栏" />
-      {/* <SwitchItem title="深色顶栏" /> */}
+      <SwitchItem title="深色顶栏" />
     </div>
   );
 }

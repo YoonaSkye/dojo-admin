@@ -6,7 +6,7 @@ import AccountMenu from '@/layouts/_common/account-menu';
 import BreadCrumb from '@/layouts/_common/breadcrumb';
 import FullScreenButton from '@/layouts/_common/full-screen';
 import LanguageToggle from '@/layouts/_common/language-toggle';
-import ModeToggle from '@/layouts/_common/mode-toggle';
+import { ThemeModeSwitch } from '@/features/theme';
 import Preference from '@/layouts/_common/preference';
 import { useLayoutMode } from '@/store/setting';
 import HorizontalMenu from '../menu/horizontal-menu';
@@ -46,7 +46,7 @@ export default function LayoutHeader() {
 
         {/* 亮暗模式切换按钮 */}
         <div className="mr-1 mt-[2px]">
-          <ModeToggle />
+          <ThemeModeSwitch />
         </div>
 
         {/* 国际化按钮 */}

@@ -1,6 +1,6 @@
 import type { ConfigProviderProps } from 'antd';
 import { ConfigProvider, theme } from 'antd';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 
 import enUS from 'antd/locale/en_US';
 import zhCN from 'antd/locale/zh_CN';
@@ -8,7 +8,7 @@ import zhCN from 'antd/locale/zh_CN';
 import { BUILT_IN_THEME_PRESETS } from '@/layouts/_common/blocks/theme/config';
 import { useLocale } from '@/locales/useLocale';
 import { useThemeColor } from '@/store/setting';
-import { useTheme } from '@/store/theme';
+import { useTheme } from '@/features/theme/theme-context';
 
 type Locale = ConfigProviderProps['locale'];
 
@@ -22,47 +22,16 @@ export default function AntdConfig({
 }: {
   children: React.ReactNode;
 }) {
-  const Itheme = useTheme();
+  const { darkMode } = useTheme();
   const { locale } = useLocale();
 
-  const algorithm = useMemo(() => {
-    let algorithm = theme.defaultAlgorithm;
-    if (Itheme === 'auto') {
-      algorithm = window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? theme.darkAlgorithm
-        : theme.defaultAlgorithm;
-      return algorithm;
-    }
-
-    algorithm =
-      Itheme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm;
-    return algorithm;
-  }, [Itheme]);
+  const algorithm = darkMode ? theme.darkAlgorithm : theme.defaultAlgorithm;
 
   const themePrimaryColor = useThemeColor();
 
   const colorPrimary = BUILT_IN_THEME_PRESETS.find(
     (theme) => theme.type === themePrimaryColor
   )?.color;
-
-  useEffect(() => {
-    const root = window.document.documentElement;
-
-    root.classList.remove('light', 'dark');
-
-    if (Itheme === 'auto') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
-        .matches
-        ? 'dark'
-        : 'light';
-
-      root.classList.add(systemTheme);
-
-      return;
-    }
-
-    root.classList.add(Itheme);
-  }, [Itheme]);
 
   useEffect(() => {
     const root = document.documentElement;

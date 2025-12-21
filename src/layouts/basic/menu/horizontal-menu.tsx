@@ -1,12 +1,12 @@
 import { useRouteToMenu } from '@/router/hooks';
-import { useTheme } from '@/store/theme';
+import { useThemeMode } from '@/store/theme';
 import type { MenuProps } from 'antd';
 import { ConfigProvider, Menu } from 'antd';
 import { useEffect, useState } from 'react';
 import { useLocation, useMatches, useNavigate } from 'react-router-dom';
 
 export default function HorizontalMenu() {
-  const themeMode = useTheme();
+  const themeMode = useThemeMode();
 
   const { pathname } = useLocation();
   const matches = useMatches();
