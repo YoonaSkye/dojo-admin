@@ -19,6 +19,7 @@ type Props = {
 
 export default function LayoutMenu({ mode, themeMode }: Props) {
   const { collapsed } = useSiderSetting();
+  // BUG: fix i8n问题
   const menus = useAccessMenus();
 
   const { pathname } = useLocation();

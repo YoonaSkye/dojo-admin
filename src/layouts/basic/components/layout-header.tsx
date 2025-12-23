@@ -5,11 +5,11 @@ import CommandMenu from '@/layouts//_common/command-menu';
 import AccountMenu from '@/layouts/_common/account-menu';
 import BreadCrumb from '@/layouts/_common/breadcrumb';
 import FullScreenButton from '@/layouts/_common/full-screen';
-import LanguageToggle from '@/layouts/_common/language-toggle';
-import { ThemeModeSwitch } from '@/features/theme';
 import Preference from '@/layouts/_common/preference';
 import { useLayoutMode } from '@/store/setting';
 import HorizontalMenu from '../menu/horizontal-menu';
+import { ThemeModeSwitch } from '@/features/theme';
+import { LangSwitch } from '@/features/lang';
 
 export default function LayoutHeader() {
   const themeLayout = useLayoutMode();
@@ -51,7 +51,7 @@ export default function LayoutHeader() {
 
         {/* 国际化按钮 */}
         <div className="mr-1">
-          <LanguageToggle />
+          <LangSwitch />
         </div>
 
         {/* 全屏按钮 */}

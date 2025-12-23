@@ -7,9 +7,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Languages } from '@/icons';
-import { useLocale, LANGUAGE_MAP, type Locale } from '@/locales/useLocale';
+import { useLocale, LANGUAGE_MAP, type Locale } from '@/features/lang';
 
-export default function LanguageToggle() {
+export default function LangSwitch() {
   const { locale, setLocale } = useLocale();
 
   const localeList = Object.values(LANGUAGE_MAP).map((item) => {

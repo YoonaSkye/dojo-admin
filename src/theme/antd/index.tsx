@@ -6,9 +6,9 @@ import enUS from 'antd/locale/en_US';
 import zhCN from 'antd/locale/zh_CN';
 
 import { BUILT_IN_THEME_PRESETS } from '@/layouts/_common/blocks/theme/config';
-import { useLocale } from '@/locales/useLocale';
+import { useLocale } from '@/features/lang';
 import { useThemeColor } from '@/store/setting';
-import { useTheme } from '@/features/theme/theme-context';
+import { useTheme } from '@/features/theme';
 
 type Locale = ConfigProviderProps['locale'];
 
