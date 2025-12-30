@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { RouterProvider } from './router';
-import AntdConfig from '@/theme/antd';
+
 import { loadSvgIcons } from '@/icons/svg/load';
-import AppProvider from './components/antd/AppProvider';
+
+import { AntdProvider, AppProvider } from './features/antdConfig';
 import { ThemeProvider } from './features/theme';
 
 function App() {
@@ -37,11 +38,11 @@ function App() {
 
   return (
     <ThemeProvider>
-      <AntdConfig>
+      <AntdProvider>
         <AppProvider>
           <RouterProvider />
         </AppProvider>
-      </AntdConfig>
+      </AntdProvider>
     </ThemeProvider>
   );
 }
