@@ -1,16 +1,16 @@
-import { useBreadCrumbSetting, useSettingActions } from '@/store/setting';
+import { useBreadCrumbSetting, useSettingActions } from '@/store/preferences';
 import SwitchItem from '../switch-item';
 
-export default function BreadCrumb() {
+export function BreadCrumb() {
   const { setBreadCrumb } = useSettingActions();
-  const { visible, showIcon } = useBreadCrumbSetting();
+  const { enable, showIcon } = useBreadCrumbSetting();
   return (
     <>
       <SwitchItem
         disabled={true}
         title="开启面包屑导航"
-        defaultChecked={visible}
-        callback={(checked) => setBreadCrumb({ visible: checked })}
+        defaultChecked={enable}
+        callback={(checked) => setBreadCrumb({ enable: checked })}
       ></SwitchItem>
       <SwitchItem
         disabled={true}

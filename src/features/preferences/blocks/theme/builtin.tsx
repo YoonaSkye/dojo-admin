@@ -1,17 +1,15 @@
+import { useSettingActions, useThemeColor } from '@/store/preferences';
 import clsx from 'clsx';
 import {
   BUILT_IN_THEME_PRESETS,
   BuiltinThemePreset,
   BuiltinThemeType,
-} from './config';
-import { useRef } from 'react';
-import { useSettingActions, useThemeColor } from '@/store/setting';
+} from '../../constants';
 
-export default function Builtin() {
+export function Builtin() {
   const themePrimaryColor = useThemeColor();
-  const { setThemeColor } = useSettingActions();
-
-  const modelValue = useRef<BuiltinThemeType>(themePrimaryColor);
+  const { setTheme } = useSettingActions();
+  const isDark = false; // TODO: 通过 store 获取当前主题模式
 
   function typeView(name: BuiltinThemeType) {
     switch (name) {
@@ -80,8 +78,14 @@ export default function Builtin() {
   }
 
   const handleSelect = (theme: BuiltinThemePreset) => {
-    modelValue.current = theme.type;
-    setThemeColor(theme.type);
+    const primaryColor = isDark
+      ? theme.darkPrimaryColor || theme.primaryColor
+      : theme.primaryColor;
+
+    setTheme({
+      builtinType: theme.type,
+      colorPrimary: primaryColor || theme.color,
+    });
   };
 
   return (
@@ -94,7 +98,7 @@ export default function Builtin() {
         >
           <div
             className={clsx(
-              theme.type === modelValue.current && 'outline-box-active',
+              theme.type === themePrimaryColor && 'outline-box-active',
               'outline-box flex-center group cursor-pointer'
             )}
           >

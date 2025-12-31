@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
+import { useState } from 'react';
 
 const items = [
   { label: '0', value: '0' },
@@ -9,7 +9,7 @@ const items = [
   { label: '1', value: '1' },
 ];
 
-export default function Radius() {
+export function Radius() {
   const [modelValue, setModelValue] = useState<string | undefined>('0.5');
   return (
     <ToggleGroup

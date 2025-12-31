@@ -1,22 +1,4 @@
-export type BuiltinThemeType =
-  | 'custom'
-  | 'deep-blue'
-  | 'deep-green'
-  | 'default'
-  | 'gray'
-  | 'green'
-  | 'neutral'
-  | 'orange'
-  | 'pink'
-  | 'red'
-  | 'rose'
-  | 'sky-blue'
-  | 'slate'
-  | 'stone'
-  | 'violet'
-  | 'yellow'
-  | 'zinc'
-  | (Record<never, never> & string);
+import type { BuiltinThemeType } from '@/types';
 
 interface BuiltinThemePreset {
   color: string;
@@ -103,4 +85,4 @@ export const COLOR_PRESETS = [...BUILT_IN_THEME_PRESETS].slice(0, 7);
 
 export { BUILT_IN_THEME_PRESETS };
 
-export type { BuiltinThemePreset };
+export type { BuiltinThemePreset, BuiltinThemeType };

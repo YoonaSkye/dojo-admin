@@ -1,11 +1,9 @@
 import { CircleHelp } from '@/icons';
-import { useLayoutMode, useSettingActions } from '@/store/setting';
-import { ThemeLayout } from '@/types';
+import { useLayoutMode, useSettingActions } from '@/store/preferences';
+import type { LayoutType } from '@/types';
 import clsx from 'clsx';
 import { useRef } from 'react';
 import { HeaderNav, HeaderSidebarNav, SidebarNav } from '../../icons';
-
-type LayoutType = ThemeLayout;
 
 interface PresetItem {
   name: string;
@@ -37,7 +35,7 @@ const PRESET: PresetItem[] = [
   },
 ];
 
-export default function Layout() {
+export function Layout() {
   const layoutMode = useLayoutMode();
   const { setLayoutMode } = useSettingActions();
 

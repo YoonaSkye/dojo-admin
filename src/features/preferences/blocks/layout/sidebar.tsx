@@ -1,15 +1,15 @@
-import { useSettingActions, useSiderSetting } from '@/store/setting';
+import { useSettingActions, useSiderSetting } from '@/store/preferences';
 import SwitchItem from '../switch-item';
 
-export default function Sidebar() {
+export function Sidebar() {
   const { setSider } = useSettingActions();
-  const { collapsed, visible } = useSiderSetting();
+  const { collapsed, enable } = useSiderSetting();
   return (
     <>
       <SwitchItem
         title="显示侧边栏"
-        defaultChecked={visible}
-        callback={(checked) => setSider({ visible: checked })}
+        defaultChecked={enable}
+        callback={(checked) => setSider({ enable: checked })}
       ></SwitchItem>
       <SwitchItem
         title="折叠菜单"

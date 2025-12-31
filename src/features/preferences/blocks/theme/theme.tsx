@@ -5,7 +5,7 @@ import {
 } from '@/store/theme';
 
 import { Iconify } from '@/components/icon';
-import SwitchItem from '@/layouts/_common/blocks/switch-item';
+import SwitchItem from '@/features/preferences/blocks/switch-item';
 
 import clsx from 'clsx';
 
@@ -26,7 +26,7 @@ const THEME_PRESET: Array<{
     name: 'system',
   },
 ];
-export default function ThemeModeSegmented() {
+export function Theme() {
   const themeValue = useThemeMode();
   const setTheme = useSetThemeMode();
 

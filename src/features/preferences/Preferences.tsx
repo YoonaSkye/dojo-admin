@@ -10,18 +10,22 @@ import {
 } from '@/components/ui/sheet';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-import { ThemeModeSegmented } from '@/features/theme';
 import { Copy, RotateCw, Settings, X } from '@/icons';
+
+import {
+  Block,
+  BreadCrumb,
+  Builtin,
+  Footer,
+  Header,
+  Layout,
+  Radius,
+  Sidebar,
+  SwitchItem,
+  Theme,
+} from './blocks';
+
 import { CSSProperties } from 'react';
-import Block from './blocks/block';
-import BreadCrumb from './blocks/layout/breadcrumb';
-import Footer from './blocks/layout/footer';
-import Header from './blocks/layout/header';
-import Layout from './blocks/layout/layout';
-import Sidebar from './blocks/layout/sidebar';
-import SwitchItem from './blocks/switch-item';
-import Builtin from './blocks/theme/builtin';
-import Radius from './blocks/theme/radius';
 
 const tabs = [
   {
@@ -38,7 +42,7 @@ const tabs = [
   },
 ];
 
-export default function Preference() {
+export default function Preferences() {
   const tabsStyle: CSSProperties = {
     gridTemplateColumns: `repeat(${tabs.length}, minmax(0, 1fr))`,
   };
@@ -90,7 +94,7 @@ export default function Preference() {
 
             <TabsContent value="appearance" key="appearance">
               <Block title="主题">
-                <ThemeModeSegmented />
+                <Theme />
               </Block>
               <Block title="内置主题">
                 <Builtin />
