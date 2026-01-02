@@ -1,5 +1,5 @@
 import type { AdminLayoutProps } from '@/layouts/types';
-import { useLayoutMode } from '@/store/setting';
+import { useLayoutMode } from '@/store/preferences';
 import { CSSProperties } from 'react';
 import KeepLiveArea from '../keep-live-area';
 import Tabs from '../tabs';

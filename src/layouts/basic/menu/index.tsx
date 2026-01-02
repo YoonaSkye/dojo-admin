@@ -1,5 +1,5 @@
 import { useAccessMenus, useAccessRoutes } from '@/store/access';
-import { useSiderSetting } from '@/store/setting';
+import { useSiderSetting } from '@/store/preferences';
 import type { MenuProps } from 'antd';
 import { ConfigProvider, Menu } from 'antd';
 import { useEffect, useMemo, useState } from 'react';
@@ -19,7 +19,6 @@ type Props = {
 
 export default function LayoutMenu({ mode, themeMode }: Props) {
   const { collapsed } = useSiderSetting();
-  // BUG: fix i8n问题
   const menus = useAccessMenus();
 
   const { pathname } = useLocation();

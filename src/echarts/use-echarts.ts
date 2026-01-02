@@ -14,10 +14,10 @@ export const useEcharts = (params: UseEchartsParams) => {
   const chartInstance = useRef<echarts.ECharts | null>(null);
   const { options, events } = params;
 
-  const { darkMode } = useTheme();
+  const { isDark } = useTheme();
 
   // 获取实际主题（处理 auto 模式）
-  const actualTheme = darkMode ? 'dark' : 'default';
+  const actualTheme = isDark ? 'dark' : 'default';
   // 初始化图表
   useEffect(() => {
     if (!containerRef.current) return;

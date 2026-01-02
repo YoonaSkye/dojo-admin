@@ -1,14 +1,25 @@
-import { useThemeStore } from '@/store/theme';
 import { type MouseEvent } from 'react';
 
 import { Iconify } from '@/components/icon';
 import { Button } from '@/components/ui/button';
+import { useSettingActions, useThemeMode } from '@/store/preferences';
 import { icons, useTheme } from './theme-context';
 
+type ThemeModeType = 'dark' | 'light' | 'system';
+const ThemeModes: ThemeModeType[] = ['light', 'dark', 'system'];
+
 const ThemeModeSwitch = () => {
-  const themeMode = useThemeStore((state) => state.themeMode);
-  const toggleThemeMode = useThemeStore((state) => state.toggleThemeMode);
-  const { darkMode } = useTheme();
+  const themeMode = useThemeMode();
+  const { setTheme } = useSettingActions();
+  const { isDark } = useTheme();
+
+  function toggleThemeMode() {
+    const index = ThemeModes.findIndex((item) => item === themeMode);
+    const nextIndex = index === ThemeModes.length - 1 ? 0 : index + 1;
+    console.log('theme mode', ThemeModes[nextIndex]);
+
+    setTheme({ mode: ThemeModes[nextIndex] });
+  }
 
   const toggleDark = (event: MouseEvent<HTMLButtonElement>) => {
     const isAppearanceTransition = !window.matchMedia(
@@ -40,12 +51,12 @@ const ThemeModeSwitch = () => {
       ];
       document.documentElement.animate(
         {
-          clipPath: darkMode ? [...clipPath].reverse() : clipPath,
+          clipPath: isDark ? [...clipPath].reverse() : clipPath,
         },
         {
           duration: 500,
           easing: 'ease-in-out',
-          pseudoElement: darkMode
+          pseudoElement: isDark
             ? '::view-transition-old(root)'
             : '::view-transition-new(root)',
         }

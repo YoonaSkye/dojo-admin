@@ -4,11 +4,11 @@ import LayoutHeader from './components/layout-header';
 import LayoutSidebar from './components/layout-sidebar';
 
 // zustand data
-import { useHeaderSetting, useSiderSetting } from '@/store/setting';
+import { useHeaderSetting, useSiderSetting } from '@/store/preferences';
 
 export default function BasicLayout() {
-  const { collapsed: siderCollapse, visible: siderVisible } = useSiderSetting();
-  const { visible: headerVisible } = useHeaderSetting();
+  const { collapsed: siderCollapse, enable: siderVisible } = useSiderSetting();
+  const { enable: headerVisible } = useHeaderSetting();
 
   return (
     <AdminLayout

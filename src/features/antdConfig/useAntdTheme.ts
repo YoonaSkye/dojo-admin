@@ -7,8 +7,8 @@ import { useMemo } from 'react';
  * 用于适配Ant Design框架的设计系统
  */
 export function useAntdTheme() {
-  const { builtinType } = useSettingStore((state) => state.theme);
-  const { darkMode } = useTheme();
+  const { builtinType, colorPrimary } = useSettingStore((state) => state.theme);
+  const { isDark } = useTheme();
   const root = document.documentElement;
 
   // 封装获取 CSS 变量值的函数
@@ -26,31 +26,31 @@ export function useAntdTheme() {
       colorError: getCssVariableValue('--destructive'),
       colorWarning: getCssVariableValue('--warning'),
       colorSuccess: getCssVariableValue('--success'),
-      // colorTextBase: getCssVariableValue('--foreground'),
-      // colorBorder: getCssVariableValue('--border'),
-      // colorBorderSecondary: getCssVariableValue('--border'),
-      // colorBgElevated: getCssVariableValue('--popover'),
-      // colorBgContainer: getCssVariableValue('--card'),
-      // colorBgBase: getCssVariableValue('--background'),
-      // colorBgLayout: getCssVariableValue('--background-deep'),
-      // colorBgMask: getCssVariableValue('--overlay'),
+      colorTextBase: getCssVariableValue('--foreground'),
+      colorBorder: getCssVariableValue('--border'),
+      colorBorderSecondary: getCssVariableValue('--border'),
+      colorBgElevated: getCssVariableValue('--popover'),
+      colorBgContainer: getCssVariableValue('--card'),
+      colorBgBase: getCssVariableValue('--background'),
+      colorBgLayout: getCssVariableValue('--background-deep'),
+      colorBgMask: getCssVariableValue('--overlay'),
       // 处理 borderRadius 数值转换
-      // borderRadius:
-      //    umber.parseFloat(getCssVariableValue('--radius', false)) * 16,
+      borderRadius:
+        Number.parseFloat(getCssVariableValue('--radius', false)) * 16,
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [builtinType]);
+  }, [builtinType, isDark, colorPrimary]);
 
   const themeConfig: ConfigProviderProps['theme'] = useMemo(() => {
     return {
       algorithm: [
-        darkMode ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
+        isDark ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
       ],
       components: {},
       cssVar: true,
       token: tokens,
     };
-  }, [darkMode, tokens]);
+  }, [isDark, tokens]);
 
   return {
     themeConfig,

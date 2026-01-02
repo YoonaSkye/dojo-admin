@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 // Components
 import Label from './Label';
 import TabContextMenu from './tab-context-menu';
-import { useLayoutMode } from '@/store/setting';
+import { useLayoutMode } from '@/store/preferences';
 
 type TabsProps = {
   siderCollapse?: boolean;

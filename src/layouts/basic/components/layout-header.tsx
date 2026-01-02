@@ -1,15 +1,15 @@
 import Logo from '@/components/logo';
 import { Button } from '@/components/ui/button';
+import { LangSwitch } from '@/features/lang';
+import { Preferences } from '@/features/preferences';
+import { ThemeModeSwitch } from '@/features/theme';
 import { Bell } from '@/icons';
 import CommandMenu from '@/layouts//_common/command-menu';
 import AccountMenu from '@/layouts/_common/account-menu';
 import BreadCrumb from '@/layouts/_common/breadcrumb';
 import FullScreenButton from '@/layouts/_common/full-screen';
-import Preference from '@/layouts/_common/preference';
-import { useLayoutMode } from '@/store/setting';
-import HorizontalMenu from '../menu/horizontal-menu';
-import { ThemeModeSwitch } from '@/features/theme';
-import { LangSwitch } from '@/features/lang';
+import { useLayoutMode } from '@/store/preferences';
+// import HorizontalMenu from '../menu/horizontal-menu';
 
 export default function LayoutHeader() {
   const themeLayout = useLayoutMode();
@@ -29,7 +29,7 @@ export default function LayoutHeader() {
 
       {/* Horizontal Layout Header Nav */}
       <div className="flex h-full min-w-0 flex-1 items-center">
-        {themeLayout === 'horizontal' && <HorizontalMenu />}
+        {/* {themeLayout === 'horizontal' && <HorizontalMenu />} */}
       </div>
 
       {/* Right Setting */}
@@ -41,7 +41,7 @@ export default function LayoutHeader() {
 
         {/* theme设置按钮 */}
         <div className="mr-1">
-          <Preference />
+          <Preferences />
         </div>
 
         {/* 亮暗模式切换按钮 */}

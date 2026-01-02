@@ -11,11 +11,11 @@ export type ThemeModeType = `${ThemeMode}`;
 export type ThemeType = 'light' | 'dark';
 
 export type ThemeContextType = {
-  darkMode: boolean;
+  isDark: boolean;
 };
 
 export const ThemeContext = createContext<ThemeContextType>({
-  darkMode: false,
+  isDark: false,
 });
 
 export const icons: Record<ThemeModeType, string> = {
@@ -23,21 +23,6 @@ export const icons: Record<ThemeModeType, string> = {
   light: 'material-symbols:sunny',
   system: 'material-symbols:hdr-auto',
 };
-
-/**
- * Toggle css dark mode
- *
- * @param darkMode Is dark mode
- */
-export function toggleCssDarkMode(darkMode = false) {
-  const htmlElementClassList = document.documentElement.classList;
-
-  if (darkMode) {
-    htmlElementClassList.add('dark');
-  } else {
-    htmlElementClassList.remove('dark');
-  }
-}
 
 export function useTheme() {
   const theme = useContext(ThemeContext);

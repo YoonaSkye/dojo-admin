@@ -14,14 +14,15 @@ function updateCSSVariables(preferences: ThemePreferences) {
   }
 
   const theme = preferences ?? {};
+  // console.log('theme', theme);
 
   const { builtinType, mode, radius } = theme;
 
   // html 设置 dark 类
-  // if (Reflect.has(theme, 'mode')) {
-  //   const dark = isDarkTheme(mode);
-  //   root.classList.toggle('dark', dark);
-  // }
+  if (Reflect.has(theme, 'mode')) {
+    const dark = isDarkTheme(mode);
+    root.classList.toggle('dark', dark);
+  }
 
   // html 设置 data-theme=[builtinType]
   if (Reflect.has(theme, 'builtinType')) {
@@ -90,7 +91,7 @@ function updateMainColorVariables(preference: ThemePreferences) {
     '--red-500': '--destructive',
     '--yellow-500': '--warning',
   };
-  console.log('colorVariables', colorVariables);
+  // console.log('colorVariables', colorVariables);
 
   // 统一处理颜色变量的更新
   Object.entries(colorMappings).forEach(([sourceVar, targetVar]) => {

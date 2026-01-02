@@ -1,17 +1,11 @@
-import {
-  useSetThemeMode,
-  useThemeMode,
-  type ThemeModeType,
-} from '@/store/theme';
-
 import { Iconify } from '@/components/icon';
-import SwitchItem from '@/features/preferences/blocks/switch-item';
-
+import { useSettingActions, useThemeMode } from '@/store/preferences';
 import clsx from 'clsx';
+import SwitchItem from '../switch-item';
 
 const THEME_PRESET: Array<{
   icon: string;
-  name: ThemeModeType;
+  name: 'light' | 'dark' | 'system';
 }> = [
   {
     icon: 'material-symbols:sunny',
@@ -27,8 +21,8 @@ const THEME_PRESET: Array<{
   },
 ];
 export function Theme() {
-  const themeValue = useThemeMode();
-  const setTheme = useSetThemeMode();
+  const themeMode = useThemeMode();
+  const { setTheme } = useSettingActions();
 
   const nameView = (name: string) => {
     switch (name) {
@@ -54,12 +48,12 @@ export function Theme() {
           className="flex cursor-pointer flex-col"
           key={theme.name}
           onClick={() => {
-            setTheme(theme.name);
+            setTheme({ mode: theme.name });
           }}
         >
           <div
             className={clsx(
-              theme.name === themeValue && 'outline-box-active',
+              theme.name === themeMode && 'outline-box-active',
               'outline-box flex-center py-4'
             )}
           >
