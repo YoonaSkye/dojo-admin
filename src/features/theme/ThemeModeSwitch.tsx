@@ -16,7 +16,6 @@ const ThemeModeSwitch = () => {
   function toggleThemeMode() {
     const index = ThemeModes.findIndex((item) => item === themeMode);
     const nextIndex = index === ThemeModes.length - 1 ? 0 : index + 1;
-    console.log('theme mode', ThemeModes[nextIndex]);
 
     setTheme({ mode: ThemeModes[nextIndex] });
   }

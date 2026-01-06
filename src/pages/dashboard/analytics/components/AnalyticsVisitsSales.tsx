@@ -1,5 +1,7 @@
-import { useEcharts } from '@/echarts/use-echarts';
+import { useEcharts } from '@/features/echarts';
+import { useMount } from 'ahooks';
 import type { EChartsOption } from 'echarts';
+import { useRef } from 'react';
 
 const salesOption: EChartsOption = {
   series: [
@@ -32,7 +34,19 @@ const salesOption: EChartsOption = {
 };
 
 function AnalyticsVisitsSales() {
-  const { containerRef } = useEcharts({ options: salesOption });
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const { renderEcharts } = useEcharts(containerRef);
+
+  useMount(() => {
+    async function mockData() {
+      await new Promise((resolve) => {
+        setTimeout(resolve, 1000);
+      });
+      renderEcharts(salesOption);
+    }
+
+    mockData();
+  });
 
   return (
     <div
@@ -40,8 +54,6 @@ function AnalyticsVisitsSales() {
       style={{
         width: '100%',
         height: 300,
-        // 如果需要容器响应式
-        minHeight: 300,
       }}
     />
   );

@@ -161,7 +161,6 @@ export const useSettingStore = create<Preferences & Actions>()(
     {
       name: 'core-preferences',
       merge: (persistedState, currentState) => {
-        console.log('merge');
         const mergedSettings = mergeDeepLeft(
           persistedState as Preferences,
           currentState
@@ -170,16 +169,11 @@ export const useSettingStore = create<Preferences & Actions>()(
         return mergedSettings as Preferences & Actions;
       },
       onRehydrateStorage: () => {
-        console.log('onRehydrateStorage starts');
-
         return (state) => {
-          console.log('state', state);
-
           const themeUpdates = state?.theme || {};
           if (themeUpdates && Object.keys(themeUpdates).length > 0) {
             updateCSSVariables(state?.theme as ThemePreferences);
           }
-          console.log('onRehydrateStorage end');
         };
       },
       partialize: (state) => ({ ...omit(['actions'], state) }),

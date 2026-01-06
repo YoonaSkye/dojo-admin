@@ -31,8 +31,6 @@ export default function BreadCrumb() {
 
   const [breadCrumbs, setBreadCrumbs] = useState<Crumbs[] | undefined>([]);
 
-  // console.log('breadcrumbs', breadCrumbs);
-
   useEffect(() => {
     const crumbs = matches?.map((match) => {
       const { icon, title } = match.route.handle;

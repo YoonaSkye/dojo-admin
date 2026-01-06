@@ -23,8 +23,6 @@ function createRouteGuard(to: Route, previousRoute: Route | null) {
   const isNotFoundRoute = to.id === notFoundRoute;
 
   if (!isLogin) {
-    console.log('consant', to);
-
     // if the user is not logged in and the route is a constant route but not the "not-found" route, then it is allowed to access.
     if (to.handle?.constant && !isNotFoundRoute) {
       return null;

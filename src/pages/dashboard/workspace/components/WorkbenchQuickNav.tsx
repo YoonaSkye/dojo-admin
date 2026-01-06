@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import type { WorkbenchQuickNavItem } from '../../typing';
-import { cn } from '@/lib/utils';
 import { Iconify } from '@/components/icon';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
+import type { WorkbenchQuickNavItem } from '../../typing';
 
 interface Props {
   items: WorkbenchQuickNavItem[];
@@ -20,10 +20,12 @@ export default function WorkbenchQuickNav({ items, title, className }: Props) {
           <div
             key={item.title}
             className={cn(
+              'flex-col-center border-border group w-1/3 cursor-pointer border-r border-t py-8 hover:shadow-xl',
               { 'border-r-0': index % 3 === 2 },
-              { 'pb-4': index > 2 },
               { 'border-b-0': index < 3 },
-              'flex-col-center border-border group w-1/3 cursor-pointer border-b border-r border-t py-8 hover:shadow-xl'
+              { 'pb-4': index > 2 },
+              { 'rounded-bl-xl': index === items.length - 3 },
+              { 'rounded-br-xl': index === items.length - 1 }
             )}
           >
             <Iconify

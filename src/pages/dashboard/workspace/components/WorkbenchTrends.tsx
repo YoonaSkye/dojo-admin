@@ -1,6 +1,6 @@
+import { Iconify } from '@/components/icon';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { WorkbenchTrendItem } from '../../typing';
-import { Iconify } from '@/components/icon';
 
 interface Props {
   items: WorkbenchTrendItem[];

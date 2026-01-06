@@ -14,7 +14,6 @@ function updateCSSVariables(preferences: ThemePreferences) {
   }
 
   const theme = preferences ?? {};
-  // console.log('theme', theme);
 
   const { builtinType, mode, radius } = theme;
 
@@ -91,7 +90,6 @@ function updateMainColorVariables(preference: ThemePreferences) {
     '--red-500': '--destructive',
     '--yellow-500': '--warning',
   };
-  // console.log('colorVariables', colorVariables);
 
   // 统一处理颜色变量的更新
   Object.entries(colorMappings).forEach(([sourceVar, targetVar]) => {

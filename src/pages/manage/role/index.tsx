@@ -56,8 +56,6 @@ export default function RoleManage() {
   };
 
   const handleSubmit = async (values: any) => {
-    console.log('values', values, 'current', currentRow);
-
     if (currentRow) {
       // 编辑逻辑
       antdUtils.message.success('编辑成功');

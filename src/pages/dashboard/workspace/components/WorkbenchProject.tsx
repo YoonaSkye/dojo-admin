@@ -19,10 +19,10 @@ export default function WorkbenchProject({ items, title }: Props) {
           <div
             key={item.title}
             className={cn(
+              'border-border group w-full cursor-pointer border-r border-t p-4 transition-all hover:shadow-xl md:w-1/2 lg:w-1/3',
               { 'border-r-0': index % 3 === 2 },
               { 'border-b-0': index < 3 },
-              { 'pb-4': index > 2 },
-              'border-border group w-full cursor-pointer border-b border-r border-t p-4 transition-all hover:shadow-xl md:w-1/2 lg:w-1/3'
+              { 'pb-4': index > 2 }
             )}
           >
             <div className="flex items-center">
