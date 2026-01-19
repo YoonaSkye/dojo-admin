@@ -91,14 +91,14 @@ export type AppRouteObject = {
   children?: AppRouteObject[];
 } & Omit<RouteObject, 'children'>;
 
-type Route<
+export interface Route<
   T = unknown,
   Q extends Record<string, string> | null = Record<string, string>,
   P extends Record<string, string | string[]> = Record<
     string,
     string | string[]
   >
-> = Omit<UIMatch<T, RouteMeta>, 'params'> & {
+> extends Omit<UIMatch<T, RouteMeta>, 'params'> {
   error: Error | null;
   fullPath: string;
   hash: string;
@@ -107,4 +107,4 @@ type Route<
   pathname: string;
   query: Q;
   search: string;
-};
+}

@@ -51,6 +51,7 @@ function createRouteGuard(to: Route, previousRoute: Route | null) {
 
 const RootLayout = () => {
   const route = useRoute();
+  console.log('route', route);
 
   const previousRoute = usePrevious(route);
 
