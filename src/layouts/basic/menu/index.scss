@@ -1,5 +1,6 @@
 $menu-item-color: hsl(var(--foreground) / 80%);
 
+/* antd Menu icon hover 样式 */
 .ant-menu-submenu-title {
   &:hover {
     .ant-menu-item-icon {
@@ -20,4 +21,25 @@ $menu-item-color: hsl(var(--foreground) / 80%);
   fill: $menu-item-color;
   width: 16px;
   height: 16px;
+}
+
+/* antd Menu collapsed 选中样式 */
+.ant-menu-inline-collapsed
+  .ant-menu-submenu-selected
+  > .ant-menu-submenu-title {
+  background-color: hsl(var(--primary) / 15%);
+}
+
+/* 移除水平菜单的下划线样式 */
+.ant-menu-horizontal > .ant-menu-submenu-selected::after {
+  border-bottom: none !important;
+}
+
+.ant-menu-horizontal > .ant-menu-submenu::after {
+  border-bottom: none !important;
+}
+
+/* 水平菜单的菜单项增加2px margin-right */
+.ant-menu-horizontal > .ant-menu-submenu {
+  margin-right: 2px;
 }

@@ -1,16 +1,22 @@
 import { filterTree, mapTree } from '@/utils';
 import { AppRouteObject, ExRouteRecordRaw, MenuRecordRaw } from '@/types';
 import { Iconify } from '@/components/icon';
+import { useTranslation } from 'react-i18next';
 
 import type { MenuProps } from 'antd';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
-const renderLabel = (label: string, t: (key: string) => string) => {
+/**
+ * 菜单标签组件，支持动态翻译响应语言变化
+ */
+const MenuLabel = ({ label }: { label: string }) => {
+  const { t } = useTranslation();
   return (
-    <div className="inline-flex w-full items-center justify-between">
-      <div>{t(label)}</div>
-    </div>
+    // <div className="inline-flex w-full items-center justify-between">
+    //   <div>{t(label)}</div>
+    // </div>
+    <>{t(label)}</>
   );
 };
 
@@ -18,11 +24,9 @@ const renderLabel = (label: string, t: (key: string) => string) => {
  * 根据 routes 生成菜单列表
  * @param routes
  */
-function generateMenus(
-  routes: AppRouteObject[],
-  t: (key: string) => string
-): MenuItem[] {
+function generateMenus(routes: AppRouteObject[]): MenuItem[] {
   const menus = filterTree(routes, (route) => {
+    // BUG：这里会修改原始路由数据，导致后续路由匹配失败，尤其是index路由
     if (!route.path) return false;
     return !route?.handle?.hideInMenu;
   });
@@ -60,7 +64,7 @@ function generateMenus(
 
       return {
         key: resultPath,
-        label: renderLabel(title, t),
+        label: <MenuLabel label={title} />,
         ...(icon && {
           icon: <Iconify icon={icon} width="1em" height="1em" />,
         }),

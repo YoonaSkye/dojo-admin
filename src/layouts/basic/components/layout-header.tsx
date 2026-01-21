@@ -2,17 +2,18 @@ import Logo from '@/components/logo';
 import { Button } from '@/components/ui/button';
 import { LangSwitch } from '@/features/lang';
 import { Preferences } from '@/features/preferences';
-import { ThemeModeSwitch } from '@/features/theme';
+import { ThemeModeSwitch, useTheme } from '@/features/theme';
 import { Bell } from '@/icons';
-import CommandMenu from '@/layouts//_common/command-menu';
 import AccountMenu from '@/layouts/_common/account-menu';
 import BreadCrumb from '@/layouts/_common/breadcrumb';
+import CommandMenu from '@/layouts/_common/command-menu';
 import FullScreenButton from '@/layouts/_common/full-screen';
 import { useLayoutMode } from '@/store/preferences';
-// import HorizontalMenu from '../menu/horizontal-menu';
+import { HorizontalMenu } from '../menu';
 
 export default function LayoutHeader() {
   const themeLayout = useLayoutMode();
+  const { isDark } = useTheme();
 
   return (
     <>
@@ -27,9 +28,14 @@ export default function LayoutHeader() {
         {themeLayout !== 'horizontal' && <BreadCrumb />}
       </div>
 
-      {/* Horizontal Layout Header Nav */}
+      {/* 水平布局 Header Nav */}
       <div className="flex h-full min-w-0 flex-1 items-center">
-        {/* {themeLayout === 'horizontal' && <HorizontalMenu />} */}
+        {themeLayout === 'horizontal' && (
+          <HorizontalMenu
+            mode="horizontal"
+            themeMode={isDark ? 'dark' : 'light'}
+          />
+        )}
       </div>
 
       {/* Right Setting */}

@@ -6,11 +6,11 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { useAccessRoutes } from '@/store/access';
-import { Fragment, useEffect, useMemo, useState } from 'react';
+import { useRoute } from '@/router';
 
+import { AnimatePresence, motion as m } from 'motion/react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { matchRoutes, RouteObject, useLocation } from 'react-router-dom';
 
 type Crumbs = {
   icon: string;
@@ -18,43 +18,67 @@ type Crumbs = {
   path: string;
 };
 
-//BUG: 面包屑更新时，太突兀，速度太快
 export default function BreadCrumb() {
   const { t } = useTranslation();
-
-  const location = useLocation();
-  const authRoutes = useAccessRoutes() as RouteObject[];
-  const matches = useMemo(
-    () => matchRoutes(authRoutes, { pathname: location.pathname }),
-    [location.pathname, authRoutes]
-  );
+  const route = useRoute();
 
   const [breadCrumbs, setBreadCrumbs] = useState<Crumbs[] | undefined>([]);
 
   useEffect(() => {
-    const crumbs = matches?.map((match) => {
-      const { icon, title } = match.route.handle;
-      return { icon, title, path: match.pathname };
-    });
+    // FIX: 防止添加目录路由，如/dashboard
+    if (!route.handle || route.handle.hideInTab) return;
+
+    const crumbs = route.matched
+      ?.map((match) => {
+        if (!match.handle) return null;
+        const { icon, title } = match.handle;
+        return { icon, title, path: match.pathname } as Crumbs;
+      })
+      .filter(Boolean) as Crumbs[];
+
     setBreadCrumbs(crumbs);
-  }, [matches]);
+  }, [route.matched]);
 
   return (
+    // 面包屑更新时，添加Framer Motion动画
     <Breadcrumb>
-      <BreadcrumbList>
-        {breadCrumbs?.map((crumb, index) => (
-          <Fragment key={crumb.path}>
-            <BreadcrumbItem>
-              <BreadcrumbLink>
-                <div className="flex-center">
-                  <Iconify icon={crumb.icon} className="mr-1 size-4" />
-                  {t(crumb.title)}
-                </div>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            {index === breadCrumbs.length - 1 ? null : <BreadcrumbSeparator />}
-          </Fragment>
-        ))}
+      <BreadcrumbList className="bg-muted px-4 py-2 rounded-md">
+        <AnimatePresence mode="popLayout">
+          {breadCrumbs?.map((crumb, index) => (
+            <m.div
+              key={crumb.path}
+              className="flex items-center"
+              initial={{
+                opacity: 0,
+                x: 30,
+                skewX: -30,
+              }}
+              animate={{
+                opacity: 1,
+                x: 0,
+                skewX: 0,
+                transition: {
+                  duration: 0.4,
+                  ease: [0.76, 0, 0.24, 1],
+                },
+              }}
+              exit={{
+                opacity: 0,
+                display: 'none',
+              }}
+            >
+              <BreadcrumbItem>
+                <BreadcrumbLink>
+                  <div className="flex-center">
+                    <Iconify icon={crumb.icon} className="mr-1 size-4" />
+                    {t(crumb.title)}
+                  </div>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              {index !== breadCrumbs.length - 1 && <BreadcrumbSeparator />}
+            </m.div>
+          ))}
+        </AnimatePresence>
       </BreadcrumbList>
     </Breadcrumb>
   );

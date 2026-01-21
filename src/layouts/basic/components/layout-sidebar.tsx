@@ -1,5 +1,5 @@
 import Logo from '@/components/logo';
-import LayoutMenu from '../menu';
+import { VerticalMenu } from '../menu';
 import SidebarCollapseButton from '../widgets/sidebar-collapse-button';
 import { useLayoutMode } from '@/store/preferences';
 import { useTheme } from '@/features/theme';
@@ -14,7 +14,7 @@ export default function LayoutSidebar() {
           <Logo />
         </div>
       )}
-      <LayoutMenu mode="inline" themeMode={isDark ? 'dark' : 'light'} />
+      <VerticalMenu mode="inline" themeMode={isDark ? 'dark' : 'light'} />
       <SidebarCollapseButton />
     </div>
   );
