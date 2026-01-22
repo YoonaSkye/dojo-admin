@@ -1,8 +1,8 @@
-import { useFooterSetting, useSettingActions } from '@/store/preferences';
+import { useFooterSetting, usePreferencesStore } from '@/store/preferences';
 import SwitchItem from '../switch-item';
 
 export function Footer() {
-  const { setFooter } = useSettingActions();
+  const setFooter = usePreferencesStore((state) => state.setFooter);
   const { enable } = useFooterSetting();
   return (
     <>

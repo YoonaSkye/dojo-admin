@@ -1,4 +1,4 @@
-import { useSettingActions, useBuiltinType } from '@/store/preferences';
+import { usePreferencesStore, useBuiltinType } from '@/store/preferences';
 import clsx from 'clsx';
 import {
   BUILT_IN_THEME_PRESETS,
@@ -8,7 +8,7 @@ import {
 
 export function Builtin() {
   const builtinType = useBuiltinType();
-  const { setTheme } = useSettingActions();
+  const setTheme = usePreferencesStore((state) => state.setTheme);
 
   function typeView(name: BuiltinThemeType) {
     switch (name) {
@@ -91,7 +91,7 @@ export function Builtin() {
           <div
             className={clsx(
               theme.type === builtinType && 'outline-box-active',
-              'outline-box flex-center group cursor-pointer'
+              'outline-box flex-center group cursor-pointer',
             )}
           >
             <div

@@ -1,8 +1,8 @@
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
-import { immer } from 'zustand/middleware/immer';
-import type { Route, TabDefinition } from '@/types';
 import type { RouterContextType as Router } from '@/router';
+import type { Route, TabDefinition } from '@/types';
+import { createJSONStorage, persist } from 'zustand/middleware';
+import { immer } from 'zustand/middleware/immer';
+import { create } from './utils';
 
 interface TabbarState {
   /**
@@ -119,13 +119,14 @@ interface TabbarActions {
    */
   updateCacheTabs: () => void;
   getAffixTabs: () => TabDefinition[];
+  reset: () => void;
 }
 
 type TabbarStore = TabbarState & TabbarActions;
 
 export const useTabbarStore = create<TabbarStore>()(
   persist(
-    immer((set, get) => ({
+    immer((set, get, store) => ({
       // Initial state
       cachedTabs: new Set(),
       excludeCachedTabs: new Set(),
@@ -147,7 +148,7 @@ export const useTabbarStore = create<TabbarStore>()(
         const keySet = new Set(keys);
         set((state) => {
           state.tabs = state.tabs.filter(
-            (item) => !keySet.has(getTabKeyFromTab(item))
+            (item) => !keySet.has(getTabKeyFromTab(item)),
           );
         });
         get().updateCacheTabs();
@@ -205,7 +206,7 @@ export const useTabbarStore = create<TabbarStore>()(
           set((state) => {
             if (maxCount > 0 && state.tabs.length >= maxCount) {
               const index = state.tabs.findIndex(
-                (item) => !item.handle.affixTab
+                (item) => !item.handle.affixTab,
               );
               if (index !== -1) {
                 state.tabs.splice(index, 1);
@@ -270,7 +271,7 @@ export const useTabbarStore = create<TabbarStore>()(
         for (const key of closeKeys) {
           if (key !== getTabKeyFromTab(tab)) {
             const closeTab = state.tabs.find(
-              (item) => getTabKeyFromTab(item) === key
+              (item) => getTabKeyFromTab(item) === key,
             );
             if (closeTab && !isAffixTab(closeTab)) {
               keys.push(closeTab.key as string);
@@ -304,7 +305,7 @@ export const useTabbarStore = create<TabbarStore>()(
           return;
         }
         const index = state.tabs.findIndex(
-          (item) => getTabKeyFromTab(item) === getTabKey(currentRoute)
+          (item) => getTabKeyFromTab(item) === getTabKey(currentRoute),
         );
         const before = state.tabs[index - 1];
         const after = state.tabs[index + 1];
@@ -324,7 +325,7 @@ export const useTabbarStore = create<TabbarStore>()(
         const originKey = key;
         const state = get();
         const index = state.tabs.findIndex(
-          (item) => getTabKeyFromTab(item) === originKey
+          (item) => getTabKeyFromTab(item) === originKey,
         );
         if (index === -1) {
           return;
@@ -338,7 +339,7 @@ export const useTabbarStore = create<TabbarStore>()(
       getTabByKey: (key: string) => {
         const state = get();
         return state.tabs.find(
-          (item) => getTabKeyFromTab(item) === key
+          (item) => getTabKeyFromTab(item) === key,
         ) as TabDefinition;
       },
 
@@ -437,13 +438,17 @@ export const useTabbarStore = create<TabbarStore>()(
         const state = get();
         return state.tabs.filter((tab) => isAffixTab(tab));
       },
+
+      reset: () => {
+        set(store.getInitialState());
+      },
     })),
     {
       name: 'core-tabbar',
       storage: createJSONStorage(() => sessionStorage),
       partialize: (state) => ({ tabs: state.tabs }),
-    }
-  )
+    },
+  ),
 );
 
 // Helper functions
@@ -483,7 +488,7 @@ function getTabKey(tab: any) {
   if (pageKey) {
     rawKey = pageKey;
   } else {
-    rawKey = fullPathKey === false ? pathname : fullPath ?? pathname;
+    rawKey = fullPathKey === false ? pathname : (fullPath ?? pathname);
   }
   try {
     return decodeURIComponent(rawKey);

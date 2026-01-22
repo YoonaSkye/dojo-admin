@@ -1,5 +1,5 @@
 import { useTheme } from '@/features/theme';
-import { useSettingStore } from '@/store/preferences';
+import { usePreferencesStore } from '@/store/preferences';
 import { theme as antdTheme, ConfigProviderProps } from 'antd';
 import { useMemo } from 'react';
 
@@ -7,7 +7,9 @@ import { useMemo } from 'react';
  * 用于适配Ant Design框架的设计系统
  */
 export function useAntdTheme() {
-  const { builtinType, colorPrimary } = useSettingStore((state) => state.theme);
+  const { builtinType, colorPrimary } = usePreferencesStore(
+    (state) => state.theme,
+  );
   const { isDark } = useTheme();
   const root = document.documentElement;
 

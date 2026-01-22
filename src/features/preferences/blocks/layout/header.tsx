@@ -1,8 +1,8 @@
-import { useHeaderSetting, useSettingActions } from '@/store/preferences';
+import { useHeaderSetting, usePreferencesStore } from '@/store/preferences';
 import SwitchItem from '../switch-item';
 
 export function Header() {
-  const { setHeader } = useSettingActions();
+  const setHeader = usePreferencesStore((state) => state.setHeader);
   const { enable } = useHeaderSetting();
 
   return (

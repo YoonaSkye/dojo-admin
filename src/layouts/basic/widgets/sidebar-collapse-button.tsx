@@ -1,8 +1,8 @@
 import { ChevronsLeft, ChevronsRight } from '@/icons';
-import { useSettingActions, useSiderSetting } from '@/store/preferences';
+import { usePreferencesStore, useSiderSetting } from '@/store/preferences';
 
 export default function SidebarCollapseButton() {
-  const { setSider } = useSettingActions();
+  const setSider = usePreferencesStore((state) => state.setSider);
   const { collapsed } = useSiderSetting();
 
   return (

@@ -1,5 +1,5 @@
 import { CircleHelp } from '@/icons';
-import { useLayoutMode, useSettingActions } from '@/store/preferences';
+import { useLayoutMode, usePreferencesStore } from '@/store/preferences';
 import type { LayoutType } from '@/types';
 import clsx from 'clsx';
 import { useRef } from 'react';
@@ -37,7 +37,7 @@ const PRESET: PresetItem[] = [
 
 export function Layout() {
   const layoutMode = useLayoutMode();
-  const { setLayoutMode } = useSettingActions();
+  const setLayoutMode = usePreferencesStore((state) => state.setLayoutMode);
 
   const modelValue = useRef<LayoutType>(layoutMode);
 
@@ -59,7 +59,7 @@ export function Layout() {
             <div
               className={clsx(
                 preset.type === modelValue.current && 'outline-box-active',
-                'outline-box flex-center'
+                'outline-box flex-center',
               )}
             >
               <Component />

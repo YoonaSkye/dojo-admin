@@ -1,13 +1,12 @@
 import { getAccessCodesApi, getUserInfoApi, loginApi } from '@/api/core';
-import { AppRouteObject } from '@/types';
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-
 import { useRouter } from '@/router';
+import { AppRouteObject } from '@/types';
 import type { MenuProps } from 'antd';
-import { useState } from 'react';
+import { startTransition, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { persist } from 'zustand/middleware';
 import { useUserStore } from './user';
+import { create, resetAllStores } from './utils';
 
 const HOME_PAGE = import.meta.env.VITE_APP_HOMEPAGE || '/dashboard/analytics';
 
@@ -50,21 +49,19 @@ interface AccessState {
 }
 
 interface AccessActions {
-  actions: {
-    setAccessCodes: (codes: string[]) => void;
-    setAccessMenus: (menus: MenuItem[]) => void;
-    setAccessRoutes: (routes: AppRouteObject[]) => void;
-    setAccessToken: (token: AccessToken) => void;
-    setIsAccessChecked: (isAccessChecked: boolean) => void;
-    setLoginExpired: (loginExpired: boolean) => void;
-    setRefreshToken: (token: AccessToken) => void;
-    reset: () => void;
-  };
+  setAccessCodes: (codes: string[]) => void;
+  setAccessMenus: (menus: MenuItem[]) => void;
+  setAccessRoutes: (routes: AppRouteObject[]) => void;
+  setAccessToken: (token: AccessToken) => void;
+  setIsAccessChecked: (isAccessChecked: boolean) => void;
+  setLoginExpired: (loginExpired: boolean) => void;
+  setRefreshToken: (token: AccessToken) => void;
+  reset: () => void;
 }
 
 export const useAccessStore = create<AccessState & AccessActions>()(
   persist(
-    (set, get, store) => ({
+    (set, _, store) => ({
       accessCodes: [],
       accessMenus: [],
       accessRoutes: [],
@@ -72,31 +69,29 @@ export const useAccessStore = create<AccessState & AccessActions>()(
       isAccessChecked: false,
       loginExpired: false,
       refreshToken: null,
-      actions: {
-        setAccessCodes: (codes: string[]) => {
-          set({ accessCodes: codes });
-        },
-        setAccessMenus: (menus: MenuItem[]) => {
-          set({ accessMenus: menus });
-        },
-        setAccessRoutes: (routes: AppRouteObject[]) => {
-          set({ accessRoutes: routes });
-        },
-        setAccessToken: (token: AccessToken) => {
-          set({ accessToken: token });
-        },
-        setIsAccessChecked: (isAccessChecked: boolean) => {
-          set({ isAccessChecked });
-        },
-        setLoginExpired: (loginExpired: boolean) => {
-          set({ loginExpired });
-        },
-        setRefreshToken: (token: AccessToken) => {
-          set({ refreshToken: token });
-        },
-        reset: () => {
-          set(store.getInitialState());
-        },
+      setAccessCodes: (codes: string[]) => {
+        set({ accessCodes: codes });
+      },
+      setAccessMenus: (menus: MenuItem[]) => {
+        set({ accessMenus: menus });
+      },
+      setAccessRoutes: (routes: AppRouteObject[]) => {
+        set({ accessRoutes: routes });
+      },
+      setAccessToken: (token: AccessToken) => {
+        set({ accessToken: token });
+      },
+      setIsAccessChecked: (isAccessChecked: boolean) => {
+        set({ isAccessChecked });
+      },
+      setLoginExpired: (loginExpired: boolean) => {
+        set({ loginExpired });
+      },
+      setRefreshToken: (token: AccessToken) => {
+        set({ refreshToken: token });
+      },
+      reset: () => {
+        set(store.getInitialState());
       },
     }),
     {
@@ -106,8 +101,8 @@ export const useAccessStore = create<AccessState & AccessActions>()(
         accessToken,
         refreshToken,
       }),
-    }
-  )
+    },
+  ),
 );
 
 export const useAccessCodes = () =>
@@ -122,7 +117,6 @@ export const useAccessRefreshToken = () =>
   useAccessStore((store) => store.refreshToken);
 export const useIsAccessChecked = () =>
   useAccessStore((store) => store.isAccessChecked);
-export const useAccessActions = () => useAccessStore((store) => store.actions);
 
 export const useSignIn = () => {
   const [loading, setLoading] = useState(false);
@@ -174,11 +168,9 @@ export const useSignIn = () => {
 };
 
 export const useSignOut = () => {
-  const { reset } = useAccessActions();
   const { replace, resetRoutes } = useRouter();
-  // const currentRoute = useRoute();
 
-  function signOut(redirect: boolean = true) {
+  function signOut() {
     // reset所有zustand store 和 路由
     try {
       // TODO: 调用logout api
@@ -186,22 +178,24 @@ export const useSignOut = () => {
       // 不做任何处理
     }
 
-    replace('/auth/login');
-    // 回登录页带上当前路由地址
-    // if (currentRoute?.fullPath) {
-    //   const fullPath = `/auth/login?redirect=${currentRoute.fullPath}`;
-    //   await replace(fullPath);
-    // } else {
-    //   await replace('/auth/login');
-    // }
+    // 从同步事件处理器中直接触发的 suspend，React 不知道如何处理
+    // 同步事件处理器中的路由变更会导致suspend信号无法被处理
+    // startTransition + Suspense 才是完整方案
+    startTransition(() => {
+      // 1. 先清除持久化缓存，防止 store 重新初始化时读到旧数据
+      useAccessStore.persist.clearStorage();
+      useUserStore.persist.clearStorage();
+      // preferences 不清除持久化
 
-    resetRoutes();
-    // 重置Access Store
-    reset();
-    // 清除 Access Store 和 User Store 的持久化存储
-    useAccessStore.persist.clearStorage();
-    useUserStore.persist.clearStorage();
-    // useTabsStore.persist.clearStorage();
+      // 2. 重置内存中的 store 状态
+      resetAllStores();
+
+      // 3. 重置路由配置（移除受保护的路由）
+      resetRoutes();
+
+      // 4. 最后跳转到登录页
+      replace('/auth/login');
+    });
   }
 
   return { signOut };

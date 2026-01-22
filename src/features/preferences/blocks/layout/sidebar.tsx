@@ -1,8 +1,8 @@
-import { useSettingActions, useSiderSetting } from '@/store/preferences';
+import { usePreferencesStore, useSiderSetting } from '@/store/preferences';
 import SwitchItem from '../switch-item';
 
 export function Sidebar() {
-  const { setSider } = useSettingActions();
+  const setSider = usePreferencesStore((state) => state.setSider);
   const { collapsed, enable } = useSiderSetting();
   return (
     <>

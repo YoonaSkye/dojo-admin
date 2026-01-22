@@ -1,8 +1,8 @@
-import { useBreadCrumbSetting, useSettingActions } from '@/store/preferences';
+import { useBreadCrumbSetting, usePreferencesStore } from '@/store/preferences';
 import SwitchItem from '../switch-item';
 
 export function BreadCrumb() {
-  const { setBreadCrumb } = useSettingActions();
+  const setBreadCrumb = usePreferencesStore((state) => state.setBreadCrumb);
   const { enable, showIcon } = useBreadCrumbSetting();
   return (
     <>

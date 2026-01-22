@@ -2,7 +2,7 @@ import { type MouseEvent } from 'react';
 
 import { Iconify } from '@/components/icon';
 import { Button } from '@/components/ui/button';
-import { useSettingActions, useThemeMode } from '@/store/preferences';
+import { usePreferencesStore, useThemeMode } from '@/store/preferences';
 import { icons, useTheme } from './theme-context';
 
 type ThemeModeType = 'dark' | 'light' | 'system';
@@ -10,7 +10,7 @@ const ThemeModes: ThemeModeType[] = ['light', 'dark', 'system'];
 
 const ThemeModeSwitch = () => {
   const themeMode = useThemeMode();
-  const { setTheme } = useSettingActions();
+  const setTheme = usePreferencesStore((state) => state.setTheme);
   const { isDark } = useTheme();
 
   function toggleThemeMode() {
@@ -22,7 +22,7 @@ const ThemeModeSwitch = () => {
 
   const toggleDark = (event: MouseEvent<HTMLButtonElement>) => {
     const isAppearanceTransition = !window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
+      '(prefers-reduced-motion: reduce)',
     ).matches;
 
     if (!isAppearanceTransition) {
@@ -40,7 +40,7 @@ const ThemeModeSwitch = () => {
     const y = event.clientY;
     const endRadius = Math.hypot(
       Math.max(x, innerWidth - x),
-      Math.max(y, innerHeight - y)
+      Math.max(y, innerHeight - y),
     );
 
     transition.ready.then(() => {
@@ -58,7 +58,7 @@ const ThemeModeSwitch = () => {
           pseudoElement: isDark
             ? '::view-transition-old(root)'
             : '::view-transition-new(root)',
-        }
+        },
       );
     });
   };

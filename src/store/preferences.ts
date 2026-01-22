@@ -1,3 +1,8 @@
+import {
+  BUILT_IN_THEME_PRESETS,
+  isDarkTheme,
+  updateCSSVariables,
+} from '@/features/preferences';
 import type {
   BreadcrumbPreferences,
   FooterPreferences,
@@ -8,27 +13,21 @@ import type {
   TabbarPreferences,
   ThemePreferences,
 } from '@/types';
-import { mergeDeepLeft, omit } from 'ramda';
+import { mergeDeepLeft } from 'ramda';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import { useShallow } from 'zustand/react/shallow';
-import {
-  BUILT_IN_THEME_PRESETS,
-  isDarkTheme,
-  updateCSSVariables,
-} from '@/features/preferences';
 
 type Actions = {
-  actions: {
-    setLayoutMode: (mode: LayoutType) => void;
-    setHeader: (header: Partial<HeaderPreferences>) => void;
-    setSider: (sider: Partial<SidebarPreferences>) => void;
-    setFooter: (footer: Partial<FooterPreferences>) => void;
-    setTab: (tab: Partial<TabbarPreferences>) => void;
-    setBreadCrumb: (breadcrumb: Partial<BreadcrumbPreferences>) => void;
-    setTheme: (theme: Partial<ThemePreferences>) => void;
-  };
+  setLayoutMode: (mode: LayoutType) => void;
+  setHeader: (header: Partial<HeaderPreferences>) => void;
+  setSider: (sider: Partial<SidebarPreferences>) => void;
+  setFooter: (footer: Partial<FooterPreferences>) => void;
+  setTab: (tab: Partial<TabbarPreferences>) => void;
+  setBreadCrumb: (breadcrumb: Partial<BreadcrumbPreferences>) => void;
+  setTheme: (theme: Partial<ThemePreferences>) => void;
+  reset: () => void;
 };
 
 const defaultPreferences: Preferences = {
@@ -84,78 +83,80 @@ const defaultPreferences: Preferences = {
   },
 };
 
-export const useSettingStore = create<Preferences & Actions>()(
+export const usePreferencesStore = create<Preferences & Actions>()(
   persist(
-    immer((set) => ({
+    immer((set, _, store) => ({
       ...defaultPreferences,
-      actions: {
-        setLayoutMode: (mode: LayoutType) => {
-          set((state) => {
-            state.app.layout = mode;
-          });
-        },
-        setHeader: (header) => {
-          set((state) => {
-            state.header = { ...state.header, ...header };
-          });
-        },
-        setBreadCrumb: (breadcrumb) => {
-          set((state) => {
-            state.breadcrumb = {
-              ...state.breadcrumb,
-              ...breadcrumb,
+
+      setLayoutMode: (mode: LayoutType) => {
+        set((state) => {
+          state.app.layout = mode;
+        });
+      },
+      setHeader: (header) => {
+        set((state) => {
+          state.header = { ...state.header, ...header };
+        });
+      },
+      setBreadCrumb: (breadcrumb) => {
+        set((state) => {
+          state.breadcrumb = {
+            ...state.breadcrumb,
+            ...breadcrumb,
+          };
+        });
+      },
+      setSider: (sider) => {
+        set((state) => {
+          state.sider = { ...state.sider, ...sider };
+        });
+      },
+      setFooter: (footer) => {
+        set((state) => {
+          state.footer = { ...state.footer, ...footer };
+        });
+      },
+      setTab: (tabbar) => {
+        set((state) => {
+          state.tabbar = { ...state.tabbar, ...tabbar };
+        });
+      },
+      setTheme: (theme) => {
+        set((state) => {
+          let colorPrimary = {};
+          let isDark = null;
+          let builtinTheme = null;
+          // 只修改 mode 情况
+          if (Reflect.has(theme, 'mode')) {
+            builtinTheme = BUILT_IN_THEME_PRESETS.find(
+              (item) => item.type === state.theme.builtinType,
+            );
+            isDark = isDarkTheme(theme.mode!);
+          }
+          // 只修改 builtinType 情况
+          if (Reflect.has(theme, 'builtinType')) {
+            builtinTheme = BUILT_IN_THEME_PRESETS.find(
+              (item) => item.type === theme.builtinType,
+            );
+            isDark = isDarkTheme(state.theme.mode!);
+          }
+          if (builtinTheme) {
+            const primaryColor = isDark
+              ? builtinTheme.darkPrimaryColor || builtinTheme.primaryColor
+              : builtinTheme.primaryColor;
+
+            colorPrimary = {
+              colorPrimary: primaryColor || builtinTheme.color,
             };
-          });
-        },
-        setSider: (sider) => {
-          set((state) => {
-            state.sider = { ...state.sider, ...sider };
-          });
-        },
-        setFooter: (footer) => {
-          set((state) => {
-            state.footer = { ...state.footer, ...footer };
-          });
-        },
-        setTab: (tabbar) => {
-          set((state) => {
-            state.tabbar = { ...state.tabbar, ...tabbar };
-          });
-        },
-        setTheme: (theme) => {
-          set((state) => {
-            let colorPrimary = {};
-            let isDark = null;
-            let builtinTheme = null;
-            // 只修改 mode 情况
-            if (Reflect.has(theme, 'mode')) {
-              builtinTheme = BUILT_IN_THEME_PRESETS.find(
-                (item) => item.type === state.theme.builtinType
-              );
-              isDark = isDarkTheme(theme.mode!);
-            }
-            // 只修改 builtinType 情况
-            if (Reflect.has(theme, 'builtinType')) {
-              builtinTheme = BUILT_IN_THEME_PRESETS.find(
-                (item) => item.type === theme.builtinType
-              );
-              isDark = isDarkTheme(state.theme.mode!);
-            }
-            if (builtinTheme) {
-              const primaryColor = isDark
-                ? builtinTheme.darkPrimaryColor || builtinTheme.primaryColor
-                : builtinTheme.primaryColor;
+          }
 
-              colorPrimary = {
-                colorPrimary: primaryColor || builtinTheme.color,
-              };
-            }
+          state.theme = { ...state.theme, ...theme, ...colorPrimary };
 
-            state.theme = { ...state.theme, ...theme, ...colorPrimary };
-
-            updateCSSVariables(state.theme as ThemePreferences);
-          });
-        },
+          updateCSSVariables(state.theme as ThemePreferences);
+        });
+      },
+      reset: () => {
+        set(store.getInitialState());
       },
     })),
     {
@@ -163,7 +164,7 @@ export const useSettingStore = create<Preferences & Actions>()(
       merge: (persistedState, currentState) => {
         const mergedSettings = mergeDeepLeft(
           persistedState as Preferences,
-          currentState
+          currentState,
         );
 
         return mergedSettings as Preferences & Actions;
@@ -176,43 +177,39 @@ export const useSettingStore = create<Preferences & Actions>()(
           }
         };
       },
-      partialize: (state) => ({ ...omit(['actions'], state) }),
-    }
-  )
+    },
+  ),
 );
 
 const useHeaderSetting = () =>
-  useSettingStore(useShallow((state) => state.header));
+  usePreferencesStore(useShallow((state) => state.header));
 
 const useBreadCrumbSetting = () =>
-  useSettingStore(useShallow((state) => state.breadcrumb));
+  usePreferencesStore(useShallow((state) => state.breadcrumb));
 
 const useSiderSetting = () =>
-  useSettingStore(useShallow((state) => state.sider));
+  usePreferencesStore(useShallow((state) => state.sider));
 
 const useFooterSetting = () =>
-  useSettingStore(useShallow((state) => state.footer));
+  usePreferencesStore(useShallow((state) => state.footer));
 
 const useTabSetting = () =>
-  useSettingStore(useShallow((state) => state.tabbar));
+  usePreferencesStore(useShallow((state) => state.tabbar));
 
 const useBuiltinType = () =>
-  useSettingStore((state) => state.theme.builtinType);
+  usePreferencesStore((state) => state.theme.builtinType);
 
-const useThemeMode = () => useSettingStore((state) => state.theme.mode);
+const useThemeMode = () => usePreferencesStore((state) => state.theme.mode);
 
-const useLayoutMode = () => useSettingStore((state) => state.app.layout);
-
-const useSettingActions = () => useSettingStore((state) => state.actions);
+const useLayoutMode = () => usePreferencesStore((state) => state.app.layout);
 
 export {
-  useHeaderSetting,
   useBreadCrumbSetting,
-  useSiderSetting,
-  useFooterSetting,
-  useTabSetting,
   useBuiltinType,
-  useThemeMode,
+  useFooterSetting,
+  useHeaderSetting,
   useLayoutMode,
-  useSettingActions,
+  useSiderSetting,
+  useTabSetting,
+  useThemeMode,
 };

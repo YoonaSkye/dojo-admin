@@ -1,5 +1,5 @@
 import { Iconify } from '@/components/icon';
-import { useSettingActions, useThemeMode } from '@/store/preferences';
+import { usePreferencesStore, useThemeMode } from '@/store/preferences';
 import clsx from 'clsx';
 import SwitchItem from '../switch-item';
 
@@ -22,7 +22,7 @@ const THEME_PRESET: Array<{
 ];
 export function Theme() {
   const themeMode = useThemeMode();
-  const { setTheme } = useSettingActions();
+  const setTheme = usePreferencesStore((state) => state.setTheme);
 
   const nameView = (name: string) => {
     switch (name) {
@@ -54,7 +54,7 @@ export function Theme() {
           <div
             className={clsx(
               theme.name === themeMode && 'outline-box-active',
-              'outline-box flex-center py-4'
+              'outline-box flex-center py-4',
             )}
           >
             <Iconify icon={theme.icon} className="mx-9 size-5" />

@@ -1,6 +1,6 @@
-import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { BasicUserInfo } from './types';
+import { create } from './utils';
 
 interface UserState {
   /**
@@ -14,28 +14,28 @@ interface UserState {
 }
 
 interface Actions {
-  actions: {
-    setUserInfo: (userInfo: BasicUserInfo | null) => void;
-    setUserRoles: (roles: string[]) => void;
-  };
+  setUserInfo: (userInfo: BasicUserInfo | null) => void;
+  setUserRoles: (roles: string[]) => void;
+  reset: () => void;
 }
 
 export const useUserStore = create<UserState & Actions>()(
   persist(
-    (set) => ({
+    (set, _, store) => ({
       userInfo: null,
       userRoles: [],
-      actions: {
-        setUserInfo: (userInfo: BasicUserInfo | null) => {
-          // 设置用户信息
-          set({ userInfo });
-          // 设置角色信息
-          const roles = userInfo?.roles ?? [];
-          set({ userRoles: roles });
-        },
-        setUserRoles: (roles: string[]) => {
-          set({ userRoles: roles });
-        },
+      setUserInfo: (userInfo: BasicUserInfo | null) => {
+        // 设置用户信息
+        set({ userInfo });
+        // 设置角色信息
+        const roles = userInfo?.roles ?? [];
+        set({ userRoles: roles });
+      },
+      setUserRoles: (roles: string[]) => {
+        set({ userRoles: roles });
+      },
+      reset: () => {
+        set(store.getInitialState());
       },
     }),
     {
@@ -44,10 +44,9 @@ export const useUserStore = create<UserState & Actions>()(
         userInfo: store.userInfo,
         userRoles: store.userRoles,
       }),
-    }
-  )
+    },
+  ),
 );
 
 export const useUserInfo = () => useUserStore((store) => store.userInfo);
 export const useUserRoles = () => useUserStore((store) => store.userRoles);
-export const useUserActions = () => useUserStore((store) => store.actions);
