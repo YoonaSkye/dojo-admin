@@ -1,16 +1,9 @@
 import { useEffect } from 'react';
-import { RouterProvider } from './router';
-
-import { loadSvgIcons } from '@/icons/svg/load';
-
 import { AntdProvider, AppProvider } from './features/antdConfig';
 import { ThemeProvider } from './features/theme';
+import { RouterProvider } from './router';
 
 function App() {
-  useEffect(() => {
-    loadSvgIcons();
-  }, []);
-
   // 针对首屏渲染的白屏，添加全局loading给用户视觉效果
   useEffect(() => {
     const loadingElement = document.querySelector('#__app-loading__');
@@ -21,7 +14,7 @@ function App() {
 
       // 查找所有需要移除的注入 loading 元素
       const injectLoadingElements = document.querySelectorAll(
-        '[data-app-loading^="inject"]'
+        '[data-app-loading^="inject"]',
       );
 
       // 当过渡动画结束时，移除 loading 元素和所有注入的 loading 元素
@@ -31,7 +24,7 @@ function App() {
           loadingElement.remove(); // 移除 loading 元素
           injectLoadingElements.forEach((el) => el.remove()); // 移除所有注入的 loading 元素
         },
-        { once: true }
+        { once: true },
       ); // 确保事件只触发一次
     }
   }, []);

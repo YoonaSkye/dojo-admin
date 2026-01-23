@@ -50,7 +50,7 @@ export default function VerticalMenu({ mode, themeMode }: Props) {
   const menus = useAccessMenus();
   const levelKeys = useMemo(
     () => getLevelKeys(menus as LevelKeysProps[]),
-    [menus]
+    [menus],
   );
 
   const route = useRoute();
@@ -61,7 +61,6 @@ export default function VerticalMenu({ mode, themeMode }: Props) {
   const selectedKeys = useMemo(() => {
     return [route.pathname];
   }, [route]);
-  console.log('openKeys', openKeys, 'selectedKeys', selectedKeys);
 
   useEffect(() => {
     if (collapsed) return;
@@ -88,7 +87,7 @@ export default function VerticalMenu({ mode, themeMode }: Props) {
           // remove repeat key
           .filter((_, index) => index !== repeatIndex)
           // remove current level all child
-          .filter((key) => levelKeys[key] <= levelKeys[currentOpenKey])
+          .filter((key) => levelKeys[key] <= levelKeys[currentOpenKey]),
       );
     } else {
       // // close

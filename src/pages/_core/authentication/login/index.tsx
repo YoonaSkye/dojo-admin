@@ -1,9 +1,8 @@
-import { useTranslation } from 'react-i18next';
-
-import LoginForm from './LoginForm';
-
 import logo from '@/assets/images/logo.png';
+import { useTranslation } from 'react-i18next';
+import LoginForm from './LoginForm';
 import Slogan from './Slogan';
+import AuthenticationToolbar from './toolbar';
 import './login.css';
 
 export default function Login() {
@@ -12,6 +11,7 @@ export default function Login() {
   return (
     <div className="flex min-h-full flex-1 select-none overflow-hidden">
       {/* 工具栏 */}
+      <AuthenticationToolbar />
       {/* 站点标志 */}
       <div className="absolute left-0 top-0 z-10 flex flex-1">
         <div className="text-foreground lg:text-foreground ml-4 mt-4 flex flex-1 items-center sm:left-6 sm:top-6">

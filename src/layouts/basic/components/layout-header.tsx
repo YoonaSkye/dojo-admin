@@ -1,13 +1,14 @@
 import Logo from '@/components/logo';
-import { Button } from '@/components/ui/button';
 import { LangSwitch } from '@/features/lang';
 import { Preferences } from '@/features/preferences';
 import { ThemeModeSwitch, useTheme } from '@/features/theme';
-import { Bell } from '@/icons';
-import AccountMenu from '@/layouts/_common/account-menu';
-import BreadCrumb from '@/layouts/_common/breadcrumb';
-import CommandMenu from '@/layouts/_common/command-menu';
-import FullScreenButton from '@/layouts/_common/full-screen';
+import {
+  AccountMenu,
+  BreadCrumb,
+  CommandMenu,
+  FullScreenButton,
+  Notification,
+} from '@/layouts/widgets';
 import { useLayoutMode } from '@/store/preferences';
 import { HorizontalMenu } from '../menu';
 
@@ -64,9 +65,7 @@ export default function LayoutHeader() {
         <FullScreenButton className="mr-1" />
 
         {/* 消息通知 */}
-        <Button variant="icon" size="icon" className="rounded-full mr-1">
-          <Bell className="size-4" />
-        </Button>
+        <Notification />
 
         {/* 个人信息按钮 */}
         <AccountMenu />

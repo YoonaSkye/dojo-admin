@@ -9,7 +9,6 @@ import AnalyticsVisitsSource from './components/AnalyticsVisitsSource';
 
 const overviewItems: AnalysisOverviewItem[] = [
   {
-    // icon: SvgCardIcon,
     icon: 'svg:card',
     title: '用户量',
     totalTitle: '总用户量',
@@ -17,7 +16,6 @@ const overviewItems: AnalysisOverviewItem[] = [
     value: 2000,
   },
   {
-    // icon: SvgCakeIcon,
     icon: 'svg:cake',
     title: '访问量',
     totalTitle: '总访问量',
@@ -25,7 +23,6 @@ const overviewItems: AnalysisOverviewItem[] = [
     value: 20_000,
   },
   {
-    // icon: SvgDownloadIcon,
     icon: 'svg:download',
     title: '下载量',
     totalTitle: '总下载量',
@@ -33,7 +30,6 @@ const overviewItems: AnalysisOverviewItem[] = [
     value: 8000,
   },
   {
-    // icon: SvgBellIcon,
     icon: 'svg:bell',
     title: '使用量',
     totalTitle: '总使用量',

@@ -1,6 +1,11 @@
 import { AuthApi } from '@/api/core/auth';
 import { IconButton } from '@/components/icon';
-import { MdiGithub, MdiGoogle, MdiQqchat, MdiWechat } from '@/icons';
+import {
+  SvgGithubIcon,
+  SvgGoogleIcon,
+  SvgQQChatIcon,
+  SvgWeChatIcon,
+} from '@/icons';
 import { useSignIn } from '@/store/access';
 import { Button, Checkbox, Col, Form, Input, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
@@ -89,16 +94,16 @@ export default function LoginForm() {
           </div>
           <div className="mt-4 flex flex-wrap justify-center">
             <IconButton>
-              <MdiWechat />
+              <SvgWeChatIcon />
             </IconButton>
             <IconButton>
-              <MdiQqchat />
+              <SvgQQChatIcon />
             </IconButton>
             <IconButton>
-              <MdiGithub />
+              <SvgGithubIcon />
             </IconButton>
             <IconButton>
-              <MdiGoogle />
+              <SvgGoogleIcon />
             </IconButton>
           </div>
         </div>

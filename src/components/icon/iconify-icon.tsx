@@ -1,6 +1,5 @@
-import { Icon } from '@iconify/react';
-
 import type { IconProps } from '@iconify/react';
+import { Icon } from '@iconify/react';
 
 interface Props extends IconProps {
   size?: IconProps['width'];

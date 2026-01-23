@@ -1,3 +1,4 @@
+import { IconButton } from '@/components/icon';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -9,9 +10,8 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
 import { Copy, RotateCw, Settings, X } from '@/icons';
-
+import { CSSProperties } from 'react';
 import {
   Block,
   BreadCrumb,
@@ -24,8 +24,6 @@ import {
   SwitchItem,
   Theme,
 } from './blocks';
-
-import { CSSProperties } from 'react';
 
 const tabs = [
   {
@@ -49,9 +47,9 @@ export default function Preferences() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="icon" size="icon" className="rounded-full">
+        <IconButton>
           <Settings className="size-4" />
-        </Button>
+        </IconButton>
       </SheetTrigger>
       <SheetContent className="z-[1000] flex flex-col w-[520px] sm:max-w-sm">
         <SheetHeader className="!flex flex-row items-center justify-between border-b px-4 py-3">
@@ -65,18 +63,14 @@ export default function Preferences() {
           </div>
           <div className="flex-center ">
             <div className="flex items-center">
-              <Button
-                variant="icon"
-                size="icon"
-                className="rounded-full relative"
-              >
+              <IconButton className="relative">
                 <span className="bg-primary absolute right-0.5 top-0.5 h-2 w-2 rounded"></span>
                 <RotateCw className="size-4" />
-              </Button>
+              </IconButton>
             </div>
-            <Button variant="icon" size="icon" className="rounded-full">
+            <IconButton>
               <X className="size-4" />
-            </Button>
+            </IconButton>
           </div>
         </SheetHeader>
         <div className="relative flex-1 overflow-y-auto p-3">

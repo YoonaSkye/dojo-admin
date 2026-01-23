@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { IconButton } from '@/components/icon';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,8 +6,8 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { LANGUAGE_MAP, useLocale, type Locale } from '@/features/lang';
 import { Languages } from '@/icons';
-import { useLocale, LANGUAGE_MAP, type Locale } from '@/features/lang';
 
 export default function LangSwitch() {
   const { locale, setLocale } = useLocale();
@@ -22,13 +22,9 @@ export default function LangSwitch() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="icon"
-          size="icon"
-          className="rounded-full flex items-center gap-1 focus-visible:ring-0"
-        >
+        <IconButton className="focus-visible:ring-0">
           <Languages className="size-4" />
-        </Button>
+        </IconButton>
       </DropdownMenuTrigger>
       <DropdownMenuContent sideOffset={10}>
         <DropdownMenuRadioGroup

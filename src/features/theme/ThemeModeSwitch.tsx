@@ -1,8 +1,7 @@
-import { type MouseEvent } from 'react';
-
 import { Iconify } from '@/components/icon';
 import { Button } from '@/components/ui/button';
 import { usePreferencesStore, useThemeMode } from '@/store/preferences';
+import { type MouseEvent } from 'react';
 import { icons, useTheme } from './theme-context';
 
 type ThemeModeType = 'dark' | 'light' | 'system';
@@ -67,7 +66,7 @@ const ThemeModeSwitch = () => {
     <Button
       variant="icon"
       size="icon"
-      className="is-dark theme-toggle cursor-pointer border-none bg-none rounded-full"
+      className="rounded-full"
       onClick={toggleDark}
     >
       <Iconify icon={icons[themeMode]} />
