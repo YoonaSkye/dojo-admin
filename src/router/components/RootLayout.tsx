@@ -1,8 +1,10 @@
 import { useAccessStore } from '@/store/access';
-import { useRef } from 'react';
+import type { Route } from '@/types';
+import { startProgress, stopProgress } from '@/utils';
+import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Navigate, Outlet } from 'react-router-dom';
 import { usePrevious, useRoute } from '../hooks/use-route';
-import type { Route } from '@/types';
 
 function handleRouteSwitch(to: Route, from: Route | null) {
   // route with href
@@ -54,13 +56,29 @@ const RootLayout = () => {
 
   const previousRoute = usePrevious(route);
 
-  const { id } = route;
+  const { id, handle, pathname } = route;
+
+  const { title } = handle;
 
   const routeId = useRef<string | null>(null);
 
   const location = useRef<string | { path: string; replace: boolean } | null>(
-    null
+    null,
   );
+
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    document.title = title ? t(title) : 'Vite';
+  }, [title, t]);
+
+  useEffect(() => {
+    stopProgress();
+
+    return () => {
+      startProgress();
+    };
+  }, [pathname]);
 
   if (routeId.current !== id) {
     routeId.current = id;
