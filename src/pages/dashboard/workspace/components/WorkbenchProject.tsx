@@ -19,10 +19,10 @@ export default function WorkbenchProject({ items, title }: Props) {
           <div
             key={item.title}
             className={cn(
-              'border-border group w-full cursor-pointer border-r border-t p-4 transition-all hover:shadow-xl md:w-1/2 lg:w-1/3',
+              'group w-full cursor-pointer border-r border-t border-border p-4 transition-all hover:shadow-xl md:w-1/2 lg:w-1/3',
               { 'border-r-0': index % 3 === 2 },
               { 'border-b-0': index < 3 },
-              { 'pb-4': index > 2 }
+              { 'pb-4': index > 2 },
             )}
           >
             <div className="flex items-center">
@@ -33,10 +33,10 @@ export default function WorkbenchProject({ items, title }: Props) {
               />
               <span className="ml-4 text-lg font-medium">{item.title}</span>
             </div>
-            <div className="text-foreground/80 mt-4 flex h-10">
+            <div className="mt-4 flex h-10 text-foreground/80">
               {item.content}
             </div>
-            <div className="text-foreground/80 flex justify-between">
+            <div className="flex justify-between text-foreground/80">
               <span>{item.group}</span>
               <span>{item.date}</span>
             </div>

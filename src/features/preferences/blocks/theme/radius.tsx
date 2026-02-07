@@ -24,7 +24,7 @@ export function Radius() {
         <ToggleGroupItem
           value={item.value}
           key={item.value}
-          className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground h-7 w-16 rounded-sm"
+          className="h-7 w-16 rounded-sm data-[state=on]:bg-primary data-[state=on]:text-primary-foreground"
         >
           {item.label}
         </ToggleGroupItem>

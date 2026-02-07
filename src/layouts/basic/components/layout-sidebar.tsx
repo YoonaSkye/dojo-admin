@@ -8,7 +8,7 @@ export default function LayoutSidebar() {
   const layoutMode = useLayoutMode();
   const { isDark } = useTheme();
   return (
-    <div className="relative flex flex-col h-full py-0 border-border border-r -mr-[1px]">
+    <div className="relative -mr-[1px] flex h-full flex-col border-r border-border py-0">
       {layoutMode === 'vertical' && (
         <div style={{ height: `${49}px` }}>
           <Logo />

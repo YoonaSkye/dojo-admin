@@ -99,7 +99,7 @@ export function Builtin() {
               className="mx-10 my-2 size-5 rounded-md"
             ></div>
           </div>
-          <div className="text-muted-foreground my-2 text-center text-xs">
+          <div className="my-2 text-center text-xs text-muted-foreground">
             {typeView(theme.type)}
           </div>
         </div>

@@ -39,7 +39,7 @@ function Tabs({ siderCollapse, navCollapsedWidth, navWidth }: TabsProps) {
 
   return (
     <div
-      className="border-border bg-background flex w-full border-b transition-all"
+      className="flex w-full border-b border-border bg-background transition-all"
       style={tabbarStyle}
     >
       <TabsView

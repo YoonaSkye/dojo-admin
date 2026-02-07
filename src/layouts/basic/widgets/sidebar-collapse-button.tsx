@@ -7,8 +7,7 @@ export default function SidebarCollapseButton() {
 
   return (
     <div
-      // className="absolute top-[18px] right-[-13px] z-[101] flex-center hover:text-foreground text-foreground/60 hover:bg-accent-hover bg-accent cursor-pointer rounded-full p-1"
-      className="flex-center hover:text-foreground text-foreground/60 hover:bg-accent-hover bg-accent absolute bottom-2 left-3 z-10 cursor-pointer rounded-sm p-1"
+      className="flex-center absolute bottom-2 left-3 z-10 cursor-pointer rounded-sm bg-accent p-1 text-foreground/60 hover:bg-accent-hover hover:text-foreground"
       onClick={() => setSider({ collapsed: !collapsed })}
     >
       {collapsed ? (

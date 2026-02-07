@@ -59,7 +59,7 @@ export function Theme() {
           >
             <Iconify icon={theme.icon} className="mx-9 size-5" />
           </div>
-          <div className="text-muted-foreground mt-2 text-center text-xs">
+          <div className="mt-2 text-center text-xs text-muted-foreground">
             {nameView(theme.name)}
           </div>
         </div>

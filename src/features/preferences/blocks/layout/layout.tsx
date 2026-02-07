@@ -64,7 +64,7 @@ export function Layout() {
             >
               <Component />
             </div>
-            <div className="text-muted-foreground flex-center hover:text-foreground mt-2 text-center text-xs">
+            <div className="flex-center mt-2 text-center text-xs text-muted-foreground hover:text-foreground">
               {preset.name}
               <CircleHelp className="ml-1 size-3 cursor-help" />
             </div>

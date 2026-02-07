@@ -15,7 +15,7 @@ interface AnalysisOverviewProps {
 }
 export default function AnalysisOverview({ items }: AnalysisOverviewProps) {
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-col-2 lg:grid-cols-4">
+    <div className="md:grid-col-2 grid grid-cols-1 gap-4 lg:grid-cols-4">
       {items.map((item) => (
         <Card className="w-full" key={item.title}>
           <CardHeader>

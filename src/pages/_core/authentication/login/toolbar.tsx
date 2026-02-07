@@ -13,7 +13,7 @@ function AuthenticationToolbar() {
   return (
     <div
       className={cn(
-        { 'bg-accent rounded-3xl px-3 py-1': toolbarList.length > 1 },
+        { 'rounded-3xl bg-accent px-3 py-1': toolbarList.length > 1 },
         'flex-center absolute right-2 top-4 z-10',
       )}
     >

@@ -20,12 +20,12 @@ export default function WorkbenchQuickNav({ items, title, className }: Props) {
           <div
             key={item.title}
             className={cn(
-              'flex-col-center border-border group w-1/3 cursor-pointer border-r border-t py-8 hover:shadow-xl',
+              'flex-col-center group w-1/3 cursor-pointer border-r border-t border-border py-8 hover:shadow-xl',
               { 'border-r-0': index % 3 === 2 },
               { 'border-b-0': index < 3 },
               { 'pb-4': index > 2 },
               { 'rounded-bl-xl': index === items.length - 3 },
-              { 'rounded-br-xl': index === items.length - 1 }
+              { 'rounded-br-xl': index === items.length - 1 },
             )}
           >
             <Iconify

@@ -41,9 +41,9 @@ export function useRoute<T = unknown>() {
         // query,
         redirect: null,
         search,
-      } as Route<T>),
+      }) as Route<T>,
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [fullPath]
+    [fullPath],
   );
 }
 

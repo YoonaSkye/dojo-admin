@@ -28,8 +28,8 @@ export default function SwitchItem({
     <div
       className={clsx(
         disabled && 'pointer-events-none opacity-50',
-        'hover:bg-accent my-1 flex w-full items-center justify-between rounded-md px-2 py-2.5',
-        className
+        'my-1 flex w-full items-center justify-between rounded-md px-2 py-2.5 hover:bg-accent',
+        className,
       )}
       onClick={() => handleClick()}
     >

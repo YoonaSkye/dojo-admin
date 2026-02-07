@@ -26,8 +26,8 @@ function TabsView(props: Props) {
     });
   }, [tabs]);
   return (
-    <div className="flex h-full flex-1 light">
-      <div className="pt-[3px] size-full flex-1 overflow-hidden">
+    <div className="light flex h-full flex-1">
+      <div className="size-full flex-1 overflow-hidden pt-[3px]">
         <div
           className="tabs-chrome !flex h-full w-max pr-6"
           style={
@@ -40,10 +40,10 @@ function TabsView(props: Props) {
             <div
               key={tab.key}
               className={cn(
-                'tabs-chrome__item group relative flex items-center h-full -mr-3 select-none',
+                'tabs-chrome__item group relative -mr-3 flex h-full select-none items-center',
                 {
                   'is-active': tab.key === active,
-                }
+                },
               )}
               onClick={() => {
                 onActiveChange?.(tab.key);

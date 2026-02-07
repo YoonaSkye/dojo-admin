@@ -62,7 +62,7 @@ export default function CommandMenu({ ...props }: DialogProps) {
     const result = flattenedRoutes.filter(
       (item) =>
         t(item.title).toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1 ||
-        t(item.key).toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1
+        t(item.key).toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1,
     );
     setSearchResult(result);
   }, [searchQuery, flattenedRoutes, t]);
@@ -77,7 +77,7 @@ export default function CommandMenu({ ...props }: DialogProps) {
       <Button
         variant="outline"
         className={cn(
-          'relative h-8 w-full justify-start rounded-[0.5rem] bg-muted/50 text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64'
+          'relative h-8 w-full justify-start rounded-[0.5rem] bg-muted/50 text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64',
         )}
         onClick={() => setOpen(true)}
         {...props}
@@ -153,7 +153,7 @@ export default function CommandMenu({ ...props }: DialogProps) {
 
 function CommandMenuFooter() {
   return (
-    <div className="flex sm:flex-row sm:justify-end sm:gap-x-2 flex-row items-center justify-end border-t p-2">
+    <div className="flex flex-row items-center justify-end border-t p-2 sm:flex-row sm:justify-end sm:gap-x-2">
       <div className="flex w-full justify-start text-xs text-muted-foreground">
         <div className="mr-2 flex items-center">
           <CornerDownLeft className="mr-1 size-3" />

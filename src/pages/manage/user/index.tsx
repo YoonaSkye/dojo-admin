@@ -193,7 +193,7 @@ export default function UserManage() {
   ];
 
   return (
-    <div ref={tableWrapperRef} className="p-4 h-full">
+    <div ref={tableWrapperRef} className="h-full p-4">
       <ProTable<UserItem>
         columns={columns}
         actionRef={actionRef}
@@ -213,7 +213,7 @@ export default function UserManage() {
                   apifoxToken: 'XL299LiMEDZ0H5h3A29PxwQXdMJqWyY2',
                   ...p,
                 },
-              }
+              },
             )
             .then((res) => {
               const data = res.data;

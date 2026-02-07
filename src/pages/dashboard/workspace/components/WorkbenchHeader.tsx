@@ -10,7 +10,7 @@ export default function WorkbenchHeader() {
         <h1 className="text-md font-semibold md:text-xl">
           早安, UserInfo, 开始您一天的工作吧！
         </h1>
-        <span className="text-foreground/80 mt-1"> 今日晴，20℃ - 32℃！ </span>
+        <span className="mt-1 text-foreground/80"> 今日晴，20℃ - 32℃！ </span>
       </div>
 
       <div className="mt-4 flex flex-1 justify-end md:mt-0">

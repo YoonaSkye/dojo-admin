@@ -24,9 +24,9 @@ export default function FullScreenButton({ className }: Props) {
       onClick={toggleFullScreen}
     >
       {isFullscreen ? (
-        <Minimize className="text-foreground size-4" />
+        <Minimize className="size-4 text-foreground" />
       ) : (
-        <Maximize className="text-foreground size-4" />
+        <Maximize className="size-4 text-foreground" />
       )}
     </Button>
   );

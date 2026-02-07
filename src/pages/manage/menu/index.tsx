@@ -244,7 +244,7 @@ export default function MenuManage() {
   ];
 
   return (
-    <div className="p-4 h-full">
+    <div className="h-full p-4">
       <ProTable<MenuItem>
         size="small"
         columns={columns}
@@ -265,7 +265,7 @@ export default function MenuManage() {
                   apifoxToken: 'XL299LiMEDZ0H5h3A29PxwQXdMJqWyY2',
                   ...p,
                 },
-              }
+              },
             )
             .then((res) => {
               const data = res.data;

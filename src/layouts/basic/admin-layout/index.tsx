@@ -52,8 +52,8 @@ export default function AdminLayout(props: AdminLayoutProps) {
       layoutMode !== 'vertical'
         ? 0
         : siderCollapse
-        ? NAV_COLLAPSED_WIDTH
-        : NAV_WIDTH
+          ? NAV_COLLAPSED_WIDTH
+          : NAV_WIDTH
     }px`,
     position: 'fixed',
     top: 0,
@@ -102,7 +102,7 @@ export default function AdminLayout(props: AdminLayoutProps) {
             style={hiddenSiderStyle}
           ></div>
           <aside
-            className="fixed z-100 top-0 left-0 bg-sidebar border-border border-r"
+            className="z-100 fixed left-0 top-0 border-r border-border bg-sidebar"
             style={asideStyle}
           >
             {/* layout-menu */}
@@ -124,7 +124,7 @@ export default function AdminLayout(props: AdminLayoutProps) {
           {/* Header */}
           {showHeader && (
             <header
-              className="border-border bg-header top-0 flex w-full flex-[0_0_auto] items-center border-b pl-2 transition-[margin-top] duration-200"
+              className="top-0 flex w-full flex-[0_0_auto] items-center border-b border-border bg-header pl-2 transition-[margin-top] duration-200"
               style={headerStyle}
             >
               {/* header content */}
@@ -144,7 +144,7 @@ export default function AdminLayout(props: AdminLayoutProps) {
 
         {/* Main Content */}
         <main
-          className="flex flex-col flex-1 w-full bg-background-deep overflow-auto"
+          className="flex w-full flex-1 flex-col overflow-auto bg-background-deep"
           style={mainStyle}
         >
           {/* TODO: 考虑重新封装一个ScrollWrapper,自定义滚动样式 */}

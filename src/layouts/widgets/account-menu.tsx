@@ -62,8 +62,8 @@ export default function AccountMenu() {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger className="outline-none">
-          <div className="hover:bg-accent ml-1 mr-2 cursor-pointer rounded-full p-1.5">
-            <div className="hover:text-accent-foreground flex-center">
+          <div className="ml-1 mr-2 cursor-pointer rounded-full p-1.5 hover:bg-accent">
+            <div className="flex-center hover:text-accent-foreground">
               <IAvatar src={avatar} alt="dojo" className="size-8" dot />
             </div>
           </div>
@@ -78,21 +78,21 @@ export default function AccountMenu() {
               dotClass="bottom-0 right-1 border-2 size-4 bg-green-500"
             />
             <div className="ml-2 w-full">
-              <div className="text-foreground mb-1 flex items-center text-sm font-medium">
+              <div className="mb-1 flex items-center text-sm font-medium text-foreground">
                 {userInfo?.realName}
                 {/* TODO 抽离Bage组件 */}
                 {/* <Badge class="ml-2 text-green-400">{{ tagText }}</Badge>
                  */}
                 <div
                   className={cn(
-                    'inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-accent hover:bg-accent shadow ml-2 text-green-400',
-                    'ml-2 text-green-400'
+                    'ml-2 inline-flex items-center rounded-md border border-transparent bg-accent px-2.5 py-0.5 text-xs font-semibold text-green-400 shadow transition-colors hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+                    'ml-2 text-green-400',
                   )}
                 >
                   Pro
                 </div>
               </div>
-              <div className="text-muted-foreground text-xs font-normal">
+              <div className="text-xs font-normal text-muted-foreground">
                 ann.dojo@gmail.com
               </div>
             </div>

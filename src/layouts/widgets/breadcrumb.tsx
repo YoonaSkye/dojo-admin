@@ -42,7 +42,7 @@ export default function BreadCrumb() {
   return (
     // 面包屑更新时，添加Framer Motion动画
     <Breadcrumb>
-      <BreadcrumbList className="bg-muted px-4 py-2 rounded-md">
+      <BreadcrumbList className="rounded-md bg-muted px-4 py-2">
         <AnimatePresence mode="popLayout">
           {breadCrumbs?.map((crumb, index) => (
             <m.div

@@ -47,7 +47,7 @@ function AuthenticationColorToggle() {
       </div>
 
       <Button size="icon" variant="icon">
-        <Palette className="text-primary size-4" />
+        <Palette className="size-4 text-primary" />
       </Button>
     </div>
   );

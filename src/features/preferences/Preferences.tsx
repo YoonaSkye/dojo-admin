@@ -51,7 +51,7 @@ export default function Preferences() {
           <Settings className="size-4" />
         </IconButton>
       </SheetTrigger>
-      <SheetContent className="z-[1000] flex flex-col w-[520px] sm:max-w-sm">
+      <SheetContent className="z-[1000] flex w-[520px] flex-col sm:max-w-sm">
         <SheetHeader className="!flex flex-row items-center justify-between border-b px-4 py-3">
           <div>
             <SheetTitle className="text-left text-base font-medium">
@@ -61,10 +61,10 @@ export default function Preferences() {
               自定义偏好设置 & 实时预览
             </SheetDescription>
           </div>
-          <div className="flex-center ">
+          <div className="flex-center">
             <div className="flex items-center">
               <IconButton className="relative">
-                <span className="bg-primary absolute right-0.5 top-0.5 h-2 w-2 rounded"></span>
+                <span className="absolute right-0.5 top-0.5 h-2 w-2 rounded bg-primary"></span>
                 <RotateCw className="size-4" />
               </IconButton>
             </div>
@@ -77,7 +77,7 @@ export default function Preferences() {
           <Tabs defaultValue="appearance" className="">
             <TabsList
               style={tabsStyle}
-              className="bg-accent relative grid w-full"
+              className="relative grid w-full bg-accent"
             >
               {tabs.map((tab) => (
                 <TabsTrigger value={tab.value} key={tab.label}>

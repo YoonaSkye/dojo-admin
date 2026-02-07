@@ -86,11 +86,11 @@ export default function LoginForm() {
 
         <div className="w-full sm:mx-auto md:max-w-md">
           <div className="mt-4 flex items-center justify-between">
-            <span className="border-input w-[35%] border-b dark:border-gray-600"></span>
-            <span className="text-muted-foreground text-center text-xs uppercase">
+            <span className="w-[35%] border-b border-input dark:border-gray-600"></span>
+            <span className="text-center text-xs uppercase text-muted-foreground">
               {t('authentication.thirdPartyLogin')}
             </span>
-            <span className="border-input w-[35%] border-b dark:border-gray-600"></span>
+            <span className="w-[35%] border-b border-input dark:border-gray-600"></span>
           </div>
           <div className="mt-4 flex flex-wrap justify-center">
             <IconButton>
@@ -109,7 +109,7 @@ export default function LoginForm() {
         </div>
         <div className="mt-3 text-center text-sm">
           {t('authentication.accountTip')}
-          <span className="text-primary hover:text-primary-hover active:text-primary-active cursor-pointer text-sm font-normal">
+          <span className="cursor-pointer text-sm font-normal text-primary hover:text-primary-hover active:text-primary-active">
             {t('authentication.createAccount')}
           </span>
         </div>

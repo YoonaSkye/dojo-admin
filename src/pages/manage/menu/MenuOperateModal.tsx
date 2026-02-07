@@ -42,7 +42,7 @@ const fetchGetAllPages = async () => {
         params: {
           apifoxToken: 'XL299LiMEDZ0H5h3A29PxwQXdMJqWyY2',
         },
-      }
+      },
     )
     .then((res) => res.data);
 };
