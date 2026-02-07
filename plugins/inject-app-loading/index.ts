@@ -119,6 +119,20 @@ function viteInjectAppLoadingPlugin(): PluginOption | undefined {
   <div class="title">Dojo Admin</div>
 </div>
   `;
+  const regex = /"mode":(".*?"|true|false|\d+(\.\d+)?)/g;
+
+  // 获取缓存的主题
+  // 保证黑暗主题下，刷新页面时，loading也是黑暗主题
+  // 匹配'mode: '片段
+  const injectScript = `
+  <script data-app-loading="inject-js">
+  var regex = ${regex};
+  var cacheName = localStorage.getItem('core-preferences');
+  var match = regex.exec(cacheName);
+  var theme = match[0];
+  document.documentElement.classList.toggle('dark', /dark/.test(theme));
+</script>
+`;
 
   return {
     enforce: 'pre',
@@ -126,7 +140,7 @@ function viteInjectAppLoadingPlugin(): PluginOption | undefined {
     transformIndexHtml: {
       handler(html) {
         const re = /<body\s*>/;
-        html = html.replace(re, `<body>${loadingHtml}`);
+        html = html.replace(re, `<body>${injectScript}${loadingHtml}`);
         return html;
       },
       order: 'pre',
