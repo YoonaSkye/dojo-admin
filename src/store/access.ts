@@ -3,7 +3,6 @@ import { useRouter } from '@/router';
 import { AppRouteObject } from '@/types';
 import type { MenuProps } from 'antd';
 import { startTransition, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { persist } from 'zustand/middleware';
 import { useUserStore } from './user';
 import { create, resetAllStores } from './utils';
@@ -121,8 +120,6 @@ export const useIsAccessChecked = () =>
 export const useSignIn = () => {
   const [loading, setLoading] = useState(false);
   const { replace } = useRouter();
-  const [searchParams] = useSearchParams();
-  const redirectUrl = searchParams.get('redirect');
 
   /**
    * 异步处理登录操作
@@ -151,11 +148,7 @@ export const useSignIn = () => {
         useUserStore.setState({ userInfo: fetchUserInfoResult });
         useAccessStore.setState({ accessCodes });
 
-        if (redirectUrl) {
-          replace(redirectUrl);
-        } else {
-          replace(HOME_PAGE);
-        }
+        replace(HOME_PAGE);
       }
     } catch (error) {
       console.log(error);

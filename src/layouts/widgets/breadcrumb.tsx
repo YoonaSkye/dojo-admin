@@ -30,7 +30,7 @@ export default function BreadCrumb() {
 
     const crumbs = route.matched
       ?.map((match) => {
-        if (!match.handle) return null;
+        if (!match.handle || match.handle.hideInBreadcrumb) return null;
         const { icon, title } = match.handle;
         return { icon, title, path: match.pathname } as Crumbs;
       })

@@ -48,6 +48,7 @@ export default function VerticalMenu({ mode, themeMode }: Props) {
   const { collapsed } = useSiderSetting();
   // 参考Tabs实现，封装一个use-menus hook来处理相关逻辑，
   const menus = useAccessMenus();
+
   const levelKeys = useMemo(
     () => getLevelKeys(menus as LevelKeysProps[]),
     [menus],
@@ -90,7 +91,6 @@ export default function VerticalMenu({ mode, themeMode }: Props) {
           .filter((key) => levelKeys[key] <= levelKeys[currentOpenKey]),
       );
     } else {
-      // // close
       setOpenKeys(keys);
     }
   };

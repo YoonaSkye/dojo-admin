@@ -79,6 +79,12 @@
       "level": "层级模式",
       "levelDetail": "层级模式详情",
       "lateralDetail": "平级模式详情"
+    },
+    "vben": {
+      "title": "项目",
+      "about": "关于",
+      "document": "文档",
+      "antd": "Ant Design 版本"
     }
   },
   "examples": {

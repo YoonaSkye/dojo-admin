@@ -78,18 +78,24 @@ export interface RouteMeta {
    * 路由名称
    */
   name?: string;
-  /**
-   * 是否为常驻路由（登录状态下可访问）
-   * @default false
-   */
-  constant?: boolean;
 }
 
+// 定义递归类型以将 RouteObject 的 component / element 属性更改为 string
+export type RouteRecordStringComponent<T = string> = {
+  name: string;
+  redirect?: string;
+  handle: RouteMeta;
+  children?: RouteRecordStringComponent<T>[];
+  component: T;
+} & Omit<RouteObject, 'children' | 'Component' | 'element' | 'handle'>;
+
+// 扩展 RouteObject 以包含 handle 等信息
 export type AppRouteObject = {
+  name?: string;
   redirect?: string;
   handle?: RouteMeta;
   children?: AppRouteObject[];
-} & Omit<RouteObject, 'children'>;
+} & Omit<RouteObject, 'children' | 'handle'>;
 
 export interface Route<
   T = unknown,
@@ -97,12 +103,13 @@ export interface Route<
   P extends Record<string, string | string[]> = Record<
     string,
     string | string[]
-  >
+  >,
 > extends Omit<UIMatch<T, RouteMeta>, 'params'> {
   error: Error | null;
   fullPath: string;
   hash: string;
   matched: UIMatch<T, RouteMeta>[];
+  name?: string;
   params: P;
   pathname: string;
   query: Q;

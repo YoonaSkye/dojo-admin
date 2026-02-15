@@ -1,42 +1,24 @@
-import type { RouteObject, NavigateOptions, To } from 'react-router-dom';
-import { createBrowserRouter, matchRoutes, Navigate } from 'react-router-dom';
+import type { NavigateOptions, To } from 'react-router-dom';
+import { createBrowserRouter, matchRoutes } from 'react-router-dom';
 
-import BasicLayout from '@/layouts/basic';
 import { useAccessStore } from '@/store/access';
-import RootLayout from './components/RootLayout';
-import { fallbackNotFoundRoute, routes } from './routes';
+
+import { routes } from './routes';
 import { initAuthRoutes } from './utils/initRoutes';
-
-const HOME_PAGE = import.meta.env.VITE_APP_HOMEPAGE || '/analytics';
-
-const newRoutes: RouteObject[] = [
-  {
-    path: '/',
-    id: 'root',
-    element: <RootLayout />,
-    // HydrateFallback: Loading,
-    children: [
-      { index: true, element: <Navigate to={HOME_PAGE} replace /> },
-      {
-        id: 'basic',
-        element: <BasicLayout />,
-        children: [],
-      },
-      ...(routes as unknown as RouteObject[]),
-      fallbackNotFoundRoute as unknown as RouteObject,
-    ],
-  },
-];
+import { checkIsAccessChecked, checkIsAuthenticated } from './utils/shared';
 
 function getIsNeedPatch(path: string) {
-  if (!useAccessStore.getState().accessToken) return false;
+  const isLogin = checkIsAuthenticated();
+  const isAccessChecked = checkIsAccessChecked();
 
-  if (useAccessStore.getState().isAccessChecked) return false;
+  if (!isLogin) return false;
+
+  if (isAccessChecked) return false;
 
   const matchRoute = matchRoutes(
-    newRoutes,
+    routes,
     { pathname: path },
-    import.meta.env.VITE_BASE_URL
+    import.meta.env.VITE_BASE_URL,
   );
 
   if (!matchRoute) return true;
@@ -49,7 +31,7 @@ function getIsNeedPatch(path: string) {
 }
 
 function initRouter() {
-  const reactRouter = createBrowserRouter(newRoutes, {
+  const reactRouter = createBrowserRouter(routes, {
     patchRoutesOnNavigation: async ({ patch, path }) => {
       // Dynamically import and patch routes if needed
       const isNeed = getIsNeedPatch(path);
@@ -62,8 +44,7 @@ function initRouter() {
   });
 
   function resetRoutes() {
-    // useAccessStore.setState({ isAccessChecked: false });
-    reactRouter._internalSetRoutes(newRoutes);
+    reactRouter._internalSetRoutes(routes);
   }
 
   return { reactRouter, resetRoutes };
@@ -96,40 +77,11 @@ function navigator() {
     reactRouter.navigate(0);
   }
 
-  function navigateUp() {
-    reactRouter.navigate('..');
-  }
-
-  function goHome() {
-    reactRouter.navigate(HOME_PAGE);
-  }
-
-  // eslint-disable-next-line max-params
-  // function push(
-  //   path: string,
-  //   query?: LocationQueryRaw,
-  //   state?: any,
-  //   _replace?: boolean
-  // ) {
-  //   let _path = path;
-
-  //   if (query) {
-  //     const search = stringifyQuery(query);
-
-  //     _path = `${path}?${search}`;
-  //   }
-
-  //   reactRouter.navigate(_path, { replace: _replace, state });
-  // }
-
   return {
     back,
     forward,
     go,
-    goHome,
     navigate,
-    navigateUp,
-    // push,
     reactRouter,
     reload,
     replace,

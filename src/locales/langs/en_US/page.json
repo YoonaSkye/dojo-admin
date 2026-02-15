@@ -79,6 +79,12 @@
       "lateralDetail": "Lateral Mode Detail",
       "level": "Level Mode",
       "levelDetail": "Level Mode Detail"
+    },
+    "vben": {
+      "title": "Project",
+      "about": "About",
+      "document": "Document",
+      "antd": "Ant Design Version"
     }
   },
   "examples": {

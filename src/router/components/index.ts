@@ -1,2 +1,2 @@
 export * from './RouterProvider';
-export * from './RootLayout';
+export * from './AuthGuard';
