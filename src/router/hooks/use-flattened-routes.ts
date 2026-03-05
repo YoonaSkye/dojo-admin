@@ -1,7 +1,9 @@
-import { useCallback, useMemo } from 'react';
-import { AppRouteObject } from '@/types';
 import { ascend } from 'ramda';
+import { useCallback, useMemo } from 'react';
+
 import { usePermission } from './use-permission';
+
+import { AppRouteObject } from '@/types';
 
 type SeachItemType = {
   title: string;
@@ -16,13 +18,13 @@ const menuFilter = (items: AppRouteObject[]) => {
     .filter((item) => {
       if (item.index) return false;
 
-      const show = item.handle.title;
+      const show = item.handle?.title;
       if (show && item.children) {
         item.children = menuFilter(item.children);
       }
       return show;
     })
-    .sort(ascend((item) => item.handle.order || Infinity));
+    .sort(ascend((item) => item.handle?.order || Infinity));
 };
 
 /**
@@ -31,7 +33,7 @@ const menuFilter = (items: AppRouteObject[]) => {
 function flattenMenuRoutes(routes: AppRouteObject[]) {
   return routes.reduce<SeachItemType[]>((prev, item) => {
     const { path, handle, children } = item;
-    if (handle) prev.push({ title: handle.title, key: path! });
+    if (handle?.title) prev.push({ title: handle.title, key: path! });
     if (children) prev.push(...flattenMenuRoutes(children));
     return prev;
   }, []);

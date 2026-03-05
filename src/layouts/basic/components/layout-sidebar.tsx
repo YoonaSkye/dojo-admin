@@ -1,8 +1,9 @@
-import Logo from '@/components/logo';
 import { VerticalMenu } from '../menu';
 import SidebarCollapseButton from '../widgets/sidebar-collapse-button';
-import { useLayoutMode } from '@/store/preferences';
+
+import Logo from '@/components/logo';
 import { useTheme } from '@/features/theme';
+import { useLayoutMode } from '@/store/preferences';
 
 export default function LayoutSidebar() {
   const layoutMode = useLayoutMode();

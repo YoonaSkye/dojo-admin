@@ -1,11 +1,14 @@
+import { startTransition, useState } from 'react';
+import { persist } from 'zustand/middleware';
+
+import { useUserStore } from './user';
+import { create, resetAllStores } from './utils';
+
+import type { MenuProps } from 'antd';
+
 import { getAccessCodesApi, getUserInfoApi, loginApi } from '@/api/core';
 import { useRouter } from '@/router';
 import { AppRouteObject } from '@/types';
-import type { MenuProps } from 'antd';
-import { startTransition, useState } from 'react';
-import { persist } from 'zustand/middleware';
-import { useUserStore } from './user';
-import { create, resetAllStores } from './utils';
 
 const HOME_PAGE = import.meta.env.VITE_APP_HOMEPAGE || '/dashboard/analytics';
 

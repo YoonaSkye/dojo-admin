@@ -1,3 +1,9 @@
+import { useEffect, useMemo } from 'react';
+
+import { useTabs } from './use-tabs';
+
+import type { IContextMenuItem, TabDefinition } from '@/types';
+
 import { useLocale } from '@/features/lang';
 import {
   ArrowLeftToLine,
@@ -11,11 +17,8 @@ import {
 } from '@/icons';
 import { $t } from '@/locales/i18n';
 import { useRoute, useRouter } from '@/router';
-
 import { getTabKey, useTabbarStore } from '@/store/tabs';
-import type { IContextMenuItem, TabDefinition } from '@/types';
-import { useEffect, useMemo } from 'react';
-import { useTabs } from './use-tabs';
+
 
 export function useTabbar() {
   const router = useRouter();
@@ -49,6 +52,7 @@ export function useTabbar() {
 
   const currentTabs = useMemo(() => {
     return tabs.map((item) => wrapperTabLocale(item));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tabs, updateTime, locale]);
 
   // 点击tab,跳转路由

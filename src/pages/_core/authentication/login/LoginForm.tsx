@@ -1,3 +1,6 @@
+import { Button, Checkbox, Col, Form, Input, Row } from 'antd';
+import { useTranslation } from 'react-i18next';
+
 import { AuthApi } from '@/api/core/auth';
 import { IconButton } from '@/components/icon';
 import {
@@ -7,8 +10,6 @@ import {
   SvgWeChatIcon,
 } from '@/icons';
 import { useSignIn } from '@/store/access';
-import { Button, Checkbox, Col, Form, Input, Row } from 'antd';
-import { useTranslation } from 'react-i18next';
 
 export default function LoginForm() {
   const { signIn, loading } = useSignIn();

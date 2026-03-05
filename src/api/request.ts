@@ -1,11 +1,12 @@
-import { useAccessStore } from '@/store/access';
-import { mergeDeepLeft as merge } from 'ramda';
 import axios, {
   AxiosRequestConfig,
   AxiosResponse,
   CreateAxiosDefaults,
   InternalAxiosRequestConfig,
 } from 'axios';
+import { mergeDeepLeft as merge } from 'ramda';
+
+import { useAccessStore } from '@/store/access';
 
 export type Response<T> = Promise<[T, AxiosResponse<T>]>;
 

@@ -1,8 +1,10 @@
-import type { RouterContextType as Router } from '@/router';
-import type { Route, TabDefinition } from '@/types';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
+
 import { create } from './utils';
+
+import type { RouterContextType as Router } from '@/router';
+import type { Route, TabDefinition } from '@/types';
 
 interface TabbarState {
   /**

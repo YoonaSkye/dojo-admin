@@ -1,7 +1,8 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { WorkbenchProjectItem } from '../../typing';
-import { cn } from '@/lib/utils';
+
 import { Iconify } from '@/components/icon';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 interface Props {
   items: WorkbenchProjectItem[];

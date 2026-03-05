@@ -1,5 +1,6 @@
-import type { FallbackProps } from 'react-error-boundary';
 import { Button } from './ui/button';
+
+import type { FallbackProps } from 'react-error-boundary';
 
 const FallbackRender = ({ error, resetErrorBoundary }: FallbackProps) => {
   // 可以在这里根据不同的业务逻辑处理错误或者上报给日志服务

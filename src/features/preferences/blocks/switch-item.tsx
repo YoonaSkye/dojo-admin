@@ -1,6 +1,7 @@
-import { Switch } from '@/components/ui/switch';
 import clsx from 'clsx';
 import { useState } from 'react';
+
+import { Switch } from '@/components/ui/switch';
 
 interface Props {
   defaultChecked?: boolean;

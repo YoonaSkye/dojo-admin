@@ -66,6 +66,7 @@ const CountToAnimator: React.FC<Props> = ({
         cancelAnimationFrame(animationRef.current);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [end, start, duration]); // 当这些依赖变化时重新运行动画
 
   return <span className={className}>{formatter(value)}</span>;

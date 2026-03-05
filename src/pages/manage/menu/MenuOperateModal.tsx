@@ -1,13 +1,16 @@
 import { ModalForm } from '@ant-design/pro-components';
-import { Col, Form, Input, InputNumber, Radio, Row, Select } from 'antd';
-import { Iconify } from '@/components/icon';
-import { createDefaultModel, getPageOptions, layoutOptions } from './shared';
-import type { MenuOption } from './shared';
-import type { MenuItem } from '.';
 import { useRequest } from 'ahooks';
-import request from 'umi-request';
-import SimpleScrollbar from '@/components/simple-srcollbar';
+import { Col, Form, Input, InputNumber, Radio, Row, Select } from 'antd';
 import { useEffect } from 'react';
+import request from 'umi-request';
+
+import { createDefaultModel, getPageOptions, layoutOptions } from './shared';
+
+import type { MenuItem } from '.';
+import type { MenuOption } from './shared';
+
+import { Iconify } from '@/components/icon';
+import SimpleScrollbar from '@/components/simple-srcollbar';
 
 interface OperateModalProps {
   title: string;
@@ -76,6 +79,7 @@ export default function MenuOperateModal({
     } else {
       form.resetFields();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentRow]);
 
   return (

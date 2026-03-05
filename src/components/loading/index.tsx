@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import NProgress from 'nprogress';
 import { Spin } from 'antd';
+import NProgress from 'nprogress';
+import { useEffect } from 'react';
 
 import 'nprogress/nprogress.css';
 

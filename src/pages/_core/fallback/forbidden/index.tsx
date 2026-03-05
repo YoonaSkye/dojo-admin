@@ -1,7 +1,8 @@
+import { useNavigate } from 'react-router-dom';
+
 import { Iconify } from '@/components/icon';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from '@/icons';
-import { useNavigate } from 'react-router-dom';
 
 const Forbidden = () => {
   const nav = useNavigate();

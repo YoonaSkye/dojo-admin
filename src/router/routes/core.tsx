@@ -1,9 +1,12 @@
 import { lazy } from 'react';
 import { Navigate, RouteObject } from 'react-router-dom';
+
+import ErrorPage from '../components/ErrorPage';
+
 import type { AppRouteObject } from '@/types';
+
 import { traverseTreeValues } from '@/utils';
 
-// eslint-disable-next-line react-refresh/only-export-components
 const Login = lazy(() => import('@/pages/_core/authentication/login'));
 const BasicLayout = lazy(() => import('@/layouts/basic'));
 const AuthGuard = lazy(() => import('../components/AuthGuard'));
@@ -74,6 +77,7 @@ const routes: RouteObject[] = [
     path: '/',
     id: 'root',
     element: <AuthGuard />,
+    errorElement: <ErrorPage />,
     children: [
       {
         id: 'root-index',
@@ -90,4 +94,4 @@ const routes: RouteObject[] = [
 /** 基本路由列表，这些路由不需要进入权限拦截 */
 const coreRouteNames = traverseTreeValues(coreRoutes, (route) => route.id);
 
-export { coreRoutes, fallbackNotFoundRoute, routes, coreRouteNames };
+export { coreRouteNames, coreRoutes, fallbackNotFoundRoute, routes };

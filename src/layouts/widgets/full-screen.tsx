@@ -1,8 +1,9 @@
+import { useState } from 'react';
+import screenfull from 'screenfull';
+
 import { Button } from '@/components/ui/button';
 import { Maximize, Minimize } from '@/icons';
 import { cn } from '@/lib/utils';
-import { useState } from 'react';
-import screenfull from 'screenfull';
 
 interface Props {
   className?: string;

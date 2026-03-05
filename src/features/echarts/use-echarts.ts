@@ -1,11 +1,13 @@
-import { useTheme } from '@/features/theme';
-import { useResizeObserver } from '@/hooks/useResizeObserver';
 import { useDebounceFn } from 'ahooks';
 import { useCallback, useMemo, useRef } from 'react';
 import { useUnmount, useUpdateEffect, useWindowSize } from 'react-use';
 
-import type { EChartsOption } from 'echarts';
 import echarts from './echarts.config';
+
+import type { EChartsOption } from 'echarts';
+
+import { useTheme } from '@/features/theme';
+import { useResizeObserver } from '@/hooks/useResizeObserver';
 
 type EchartsThemeType = 'dark' | 'light' | null;
 

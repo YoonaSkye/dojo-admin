@@ -128,9 +128,13 @@ function viteInjectAppLoadingPlugin(): PluginOption | undefined {
   <script data-app-loading="inject-js">
   var regex = ${regex};
   var cacheName = localStorage.getItem('core-preferences');
-  var match = regex.exec(cacheName);
-  var theme = match[0];
-  document.documentElement.classList.toggle('dark', /dark/.test(theme));
+  if (cacheName) {
+    var match = regex.exec(cacheName);
+    if (match) {
+      var theme = match[0];
+      document.documentElement.classList.toggle('dark', /dark/.test(theme));
+    }
+  }
 </script>
 `;
 

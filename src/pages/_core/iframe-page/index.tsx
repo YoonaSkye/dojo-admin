@@ -1,6 +1,7 @@
-import { useRoute } from '@/router';
 import { useBoolean } from 'ahooks';
 import { Skeleton } from 'antd';
+
+import { useRoute } from '@/router';
 
 const IframePage = () => {
   const [loading, { setFalse: endLoading }] = useBoolean(true);

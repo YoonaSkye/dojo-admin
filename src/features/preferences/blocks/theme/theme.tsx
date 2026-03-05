@@ -1,7 +1,9 @@
+import clsx from 'clsx';
+
+import SwitchItem from '../switch-item';
+
 import { Iconify } from '@/components/icon';
 import { usePreferencesStore, useThemeMode } from '@/store/preferences';
-import clsx from 'clsx';
-import SwitchItem from '../switch-item';
 
 const THEME_PRESET: Array<{
   icon: string;

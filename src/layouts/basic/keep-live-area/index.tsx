@@ -1,10 +1,11 @@
-import { useRoute } from '@/router';
-import { useTabbarStore } from '@/store/tabs';
 
 import { useUpdateEffect } from 'ahooks';
 import KeepAlive, { useKeepAliveRef } from 'keepalive-for-react';
 import { Suspense } from 'react';
 import { useOutlet } from 'react-router-dom';
+
+import { useRoute } from '@/router';
+import { useTabbarStore } from '@/store/tabs';
 
 function KeepLiveArea() {
   const route = useRoute();

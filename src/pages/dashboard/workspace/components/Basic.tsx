@@ -1,6 +1,7 @@
+import { Progress } from 'antd';
+
 import { Iconify } from '@/components/icon';
 import { useThemeToken } from '@/theme/hooks';
-import { Progress } from 'antd';
 
 type Props = {
   percent: number;

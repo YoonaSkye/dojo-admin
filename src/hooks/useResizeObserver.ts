@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 
+import { useIsMounted } from './useIsMounted';
+
 import type { RefObject } from 'react';
 
-import { useIsMounted } from './useIsMounted';
 
 /** The size of the observed element. */
 type Size = {
@@ -126,6 +127,6 @@ function extractSize(
 
   return Array.isArray(entry[box])
     ? entry[box][0][sizeType]
-    : // @ts-ignore Support Firefox's non-standard behavior
+    : // @ts-expect-error Support Firefox's non-standard behavior
       (entry[box][sizeType] as number);
 }

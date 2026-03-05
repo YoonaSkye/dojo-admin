@@ -1,7 +1,8 @@
 import { DrawerForm } from '@ant-design/pro-components';
 import { Form, Input, Radio } from 'antd';
-import type { RoleItem } from '.';
 import { useEffect } from 'react';
+
+import type { RoleItem } from '.';
 
 const enableStatusOptions = [
   { label: '启用', value: '1' },
@@ -31,6 +32,7 @@ export default function RoleOperateDrawer({
     } else {
       form.resetFields();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentRow]);
 
   return (
@@ -40,9 +42,7 @@ export default function RoleOperateDrawer({
       }}
       form={form}
       resize={{
-        onResize() {
-          console.log('resize!');
-        },
+        onResize() {},
         // maxWidth: window.innerWidth * 0.8,
         maxWidth: 300,
         minWidth: 300,

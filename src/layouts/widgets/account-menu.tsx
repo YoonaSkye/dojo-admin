@@ -1,3 +1,8 @@
+import { Modal } from 'antd';
+import { BookOpenTextIcon, LogOutIcon } from 'lucide-react';
+import { useState } from 'react';
+import { AiFillGithub } from 'react-icons/ai';
+
 import avatar from '@/assets/images/avatar-v1.webp';
 import IAvatar from '@/components/avatar';
 import {
@@ -14,10 +19,6 @@ import { useRouter } from '@/router/hooks';
 import { useSignOut } from '@/store/access';
 import { useUserInfo } from '@/store/user';
 
-import { Modal } from 'antd';
-import { BookOpenTextIcon, LogOutIcon } from 'lucide-react';
-import { useState } from 'react';
-import { AiFillGithub } from 'react-icons/ai';
 
 const accountMenuItems: {
   label: string;

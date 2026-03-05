@@ -1,3 +1,18 @@
+import { CSSProperties } from 'react';
+
+import {
+  Block,
+  BreadCrumb,
+  Builtin,
+  Footer,
+  Header,
+  Layout,
+  Radius,
+  Sidebar,
+  SwitchItem,
+  Theme,
+} from './blocks';
+
 import { IconButton } from '@/components/icon';
 import { Button } from '@/components/ui/button';
 import {
@@ -11,19 +26,6 @@ import {
 } from '@/components/ui/sheet';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Copy, RotateCw, Settings, X } from '@/icons';
-import { CSSProperties } from 'react';
-import {
-  Block,
-  BreadCrumb,
-  Builtin,
-  Footer,
-  Header,
-  Layout,
-  Radius,
-  Sidebar,
-  SwitchItem,
-  Theme,
-} from './blocks';
 
 const tabs = [
   {

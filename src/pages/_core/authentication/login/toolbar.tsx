@@ -1,7 +1,8 @@
+import AuthenticationColorToggle from '../color-toggle';
+
 import { LangSwitch } from '@/features/lang';
 import { ThemeModeSwitch } from '@/features/theme';
 import { cn } from '@/lib/utils';
-import AuthenticationColorToggle from '../color-toggle';
 
 const toolbarList = ['color', 'language', 'layout', 'theme'];
 const preferences = { widget: { languageToggle: true, themeToggle: true } };

@@ -1,11 +1,12 @@
-import type { ConfigProviderProps } from 'antd';
 import { ConfigProvider } from 'antd';
-
-import { useLocale } from '@/features/lang';
-import { useAntdTheme } from './useAntdTheme';
-
 import enUS from 'antd/locale/en_US';
 import zhCN from 'antd/locale/zh_CN';
+
+import { useAntdTheme } from './useAntdTheme';
+
+import type { ConfigProviderProps } from 'antd';
+
+import { useLocale } from '@/features/lang';
 
 type Locale = ConfigProviderProps['locale'];
 

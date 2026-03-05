@@ -1,5 +1,6 @@
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useState } from 'react';
+
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 
 const items = [
   { label: '0', value: '0' },

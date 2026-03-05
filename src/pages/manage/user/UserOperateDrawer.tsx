@@ -1,9 +1,10 @@
 import { DrawerForm } from '@ant-design/pro-components';
 import { useRequest, useUpdateEffect } from 'ahooks';
 import { Form, Input, Radio, Select } from 'antd';
-import request from 'umi-request';
-import type { UserItem } from '.';
 import { useEffect } from 'react';
+import request from 'umi-request';
+
+import type { UserItem } from '.';
 
 interface OptionsProps {
   label: string;
@@ -78,6 +79,7 @@ export default function UserOperateDrawer({
     } else {
       form.resetFields();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentRow]);
 
   const roleOptions: OptionsProps[] = data ? data.map(getOptions) : [];
@@ -88,9 +90,7 @@ export default function UserOperateDrawer({
       }}
       form={form}
       resize={{
-        onResize() {
-          console.log('resize!');
-        },
+        onResize() {},
         // maxWidth: window.innerWidth * 0.8,
         maxWidth: 300,
         minWidth: 300,

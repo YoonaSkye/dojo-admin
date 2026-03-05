@@ -1,8 +1,10 @@
-import logo from '@/assets/images/logo.png';
 import { useTranslation } from 'react-i18next';
+
 import LoginForm from './LoginForm';
 import Slogan from './Slogan';
 import AuthenticationToolbar from './toolbar';
+
+import logo from '@/assets/images/logo.png';
 import './login.css';
 
 export default function Login() {

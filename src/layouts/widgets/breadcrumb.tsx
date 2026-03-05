@@ -1,3 +1,7 @@
+import { AnimatePresence, motion as m } from 'motion/react';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { Iconify } from '@/components/icon';
 import {
   Breadcrumb,
@@ -8,9 +12,6 @@ import {
 } from '@/components/ui/breadcrumb';
 import { useRoute } from '@/router';
 
-import { AnimatePresence, motion as m } from 'motion/react';
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 type Crumbs = {
   icon: string;
@@ -37,6 +38,7 @@ export default function BreadCrumb() {
       .filter(Boolean) as Crumbs[];
 
     setBreadCrumbs(crumbs);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [route.matched]);
 
   return (

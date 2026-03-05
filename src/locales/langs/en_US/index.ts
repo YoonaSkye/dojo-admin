@@ -1,5 +1,5 @@
-import common from './common.json';
 import authentication from './authentication.json';
+import common from './common.json';
 import page from './page.json';
 import preferences from './preferences.json';
 

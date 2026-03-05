@@ -1,16 +1,18 @@
 import AnalysisChartCard from '../analytics/components/AnalysisChartCard';
 import AnalyticsVisitsSource from '../analytics/components/AnalyticsVisitsSource';
+
+import WorkbenchHeader from './components/WorkbenchHeader';
+import WorkbenchProject from './components/WorkbenchProject';
+import WorkbenchQuickNav from './components/WorkbenchQuickNav';
+import WorkbenchTodo from './components/WorkbenchTodo';
+import WorkbenchTrends from './components/WorkbenchTrends';
+
 import type {
   WorkbenchProjectItem,
   WorkbenchQuickNavItem,
   WorkbenchTodoItem,
   WorkbenchTrendItem,
 } from '../typing';
-import WorkbenchHeader from './components/WorkbenchHeader';
-import WorkbenchProject from './components/WorkbenchProject';
-import WorkbenchQuickNav from './components/WorkbenchQuickNav';
-import WorkbenchTodo from './components/WorkbenchTodo';
-import WorkbenchTrends from './components/WorkbenchTrends';
 
 const projectItems: WorkbenchProjectItem[] = [
   {

@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 
-import type { RouterContextType } from '../router';
 import { RouterContext } from '../components/router-context';
+
+import type { RouterContextType } from '../router';
 
 export function useRouter(): RouterContextType {
   const navigator = useContext(RouterContext);

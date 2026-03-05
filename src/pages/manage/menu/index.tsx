@@ -1,14 +1,17 @@
-import { Iconify } from '@/components/icon';
-import { useTableScroll } from '@/hooks/use-tab-srcoll';
-import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
+import EllipsisOutlined from '@ant-design/icons/EllipsisOutlined';
+import PlusOutlined from '@ant-design/icons/PlusOutlined';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Dropdown, Popconfirm, Tag } from 'antd';
-
 import { useRef, useState } from 'react';
 import request from 'umi-request';
+
 import MenuOperateModal from './MenuOperateModal';
 import { MenuOption } from './shared';
+
+import type { ActionType, ProColumns } from '@ant-design/pro-components';
+
+import { Iconify } from '@/components/icon';
+import { useTableScroll } from '@/hooks/use-tab-srcoll';
 import { antdUtils } from '@/utils';
 
 const ATG_MAP = {

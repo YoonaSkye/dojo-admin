@@ -1,13 +1,13 @@
-import { useTableScroll } from '@/hooks/use-tab-srcoll';
-import { antdUtils } from '@/utils';
-import { PlusOutlined } from '@ant-design/icons';
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
+import PlusOutlined from '@ant-design/icons/PlusOutlined';
 import { ProTable } from '@ant-design/pro-components';
-
 import { Button, Popconfirm, Tag } from 'antd';
-
 import { lazy, Suspense, useRef, useState } from 'react';
 import request from 'umi-request';
+
+import type { ActionType, ProColumns } from '@ant-design/pro-components';
+
+import { useTableScroll } from '@/hooks/use-tab-srcoll';
+import { antdUtils } from '@/utils';
 
 const UserOperateDrawer = lazy(() => import('./UserOperateDrawer'));
 

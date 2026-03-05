@@ -1,7 +1,11 @@
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { useCallback, useEffect, useState } from 'react';
 import { type DialogProps } from '@radix-ui/react-dialog';
+import match from 'autosuggest-highlight/match';
+import parse from 'autosuggest-highlight/parse';
+import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+
+import { Button } from '@/components/ui/button';
 import {
   CommandDialog,
   CommandEmpty,
@@ -12,12 +16,9 @@ import {
   CommandSeparator,
 } from '@/components/ui/command';
 import { ArrowUp, ArrowDown, CornerDownLeft, MdiKeyboardEsc } from '@/icons';
-import { useTranslation } from 'react-i18next';
+import { cn } from '@/lib/utils';
 import { useFlattenedRoutes } from '@/router/hooks';
 import { useThemeToken } from '@/theme/hooks';
-import parse from 'autosuggest-highlight/parse';
-import match from 'autosuggest-highlight/match';
-import { useNavigate } from 'react-router-dom';
 
 // TODO
 /**

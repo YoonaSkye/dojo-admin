@@ -1,7 +1,9 @@
-import { useEcharts } from '@/features/echarts';
 import { useMount } from 'ahooks';
-import type { EChartsOption } from 'echarts';
 import { useRef } from 'react';
+
+import type { EChartsOption } from 'echarts';
+
+import { useEcharts } from '@/features/echarts';
 
 const salesOption: EChartsOption = {
   series: [

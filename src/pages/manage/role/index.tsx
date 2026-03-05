@@ -1,12 +1,14 @@
-import { useTableScroll } from '@/hooks/use-tab-srcoll';
-import { PlusOutlined } from '@ant-design/icons';
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
+import PlusOutlined from '@ant-design/icons/PlusOutlined';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Popconfirm, Tag } from 'antd';
-
 import { useRef, useState } from 'react';
 import request from 'umi-request';
+
 import RoleOperateDrawer from './UserOperateDrawer';
+
+import type { ActionType, ProColumns } from '@ant-design/pro-components';
+
+import { useTableScroll } from '@/hooks/use-tab-srcoll';
 import { antdUtils } from '@/utils';
 
 const ATG_MAP = {

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState, type PropsWithChildren } from 'react';
+
 import { ThemeContext, ThemeMode, ThemeType } from './theme-context';
 
 import { useThemeMode } from '@/store/preferences';
@@ -23,6 +24,7 @@ const useCurrentTheme = () => {
     return () => {
       matchMedia?.removeEventListener('change', onThemeChange);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return theme;
@@ -39,7 +41,7 @@ const ThemeProvider = ({ children }: PropsWithChildren) => {
     () => ({
       isDark: darkMode,
     }),
-    [darkMode]
+    [darkMode],
   );
   return (
     <ThemeContext.Provider value={themeContext}>

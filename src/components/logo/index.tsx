@@ -1,6 +1,8 @@
-import AppLogo from '@/assets/images/logo.png';
 import { Link } from 'react-router-dom';
+
 import IAvatar from '../avatar';
+
+import AppLogo from '@/assets/images/logo.png';
 
 export default function Logo() {
   return (

@@ -1,7 +1,8 @@
+import { forwardRef } from 'react';
+
 import { Iconify } from '@/components/icon';
 import { Pin, X } from '@/icons';
 import { TabConfig } from '@/types';
-import { forwardRef } from 'react';
 import './label.scss';
 
 interface Props {

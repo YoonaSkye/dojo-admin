@@ -1,3 +1,5 @@
+import { Fragment, PropsWithChildren } from 'react';
+
 import {
   ContextMenu,
   ContextMenuContent,
@@ -5,9 +7,7 @@ import {
   ContextMenuSeparator,
   ContextMenuTrigger,
 } from '@/components/ui/context-menu';
-
 import { IContextMenuItem } from '@/types';
-import { Fragment, PropsWithChildren } from 'react';
 
 type Props = PropsWithChildren & {
   menu: Record<string, any>;

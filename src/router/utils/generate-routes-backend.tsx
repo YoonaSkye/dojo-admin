@@ -1,13 +1,14 @@
-import { mapTree } from '@/utils';
 import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
+
 import type { AppRouteObject, RouteRecordStringComponent } from '@/types';
+
+import { mapTree } from '@/utils';
 
 const ENTRY_PATH = '/src/pages';
 const pagesMap: Record<string, () => Promise<any>> = import.meta.glob(
   '/src/pages/**/index.tsx',
 );
-console.log('pagesMap', pagesMap);
 
 const loadComponentFromPath = (path: string) =>
   lazy(pagesMap[`${ENTRY_PATH}${path}`]);

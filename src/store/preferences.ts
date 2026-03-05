@@ -1,8 +1,9 @@
-import {
-  BUILT_IN_THEME_PRESETS,
-  isDarkTheme,
-  updateCSSVariables,
-} from '@/features/preferences';
+import { mergeDeepLeft } from 'ramda';
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import { immer } from 'zustand/middleware/immer';
+import { useShallow } from 'zustand/react/shallow';
+
 import type {
   BreadcrumbPreferences,
   FooterPreferences,
@@ -13,11 +14,12 @@ import type {
   TabbarPreferences,
   ThemePreferences,
 } from '@/types';
-import { mergeDeepLeft } from 'ramda';
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { immer } from 'zustand/middleware/immer';
-import { useShallow } from 'zustand/react/shallow';
+
+import {
+  BUILT_IN_THEME_PRESETS,
+  isDarkTheme,
+  updateCSSVariables,
+} from '@/features/preferences';
 
 type Actions = {
   setLayoutMode: (mode: LayoutType) => void;

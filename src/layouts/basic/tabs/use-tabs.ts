@@ -1,6 +1,7 @@
+import type { TabDefinition } from '@/types';
+
 import { useRoute, useRouter } from '@/router';
 import { useTabbarStore } from '@/store/tabs';
-import type { TabDefinition } from '@/types';
 
 export function useTabs() {
   const router = useRouter();

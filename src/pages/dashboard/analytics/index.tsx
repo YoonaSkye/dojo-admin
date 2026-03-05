@@ -1,11 +1,11 @@
-import type { AnalysisOverviewItem, TabOption } from '../typing';
 import AnalysisChartCard from './components/AnalysisChartCard';
 import AnalysisChartsTabs from './components/AnalysisChartsTabs';
 import AnalysisOverview from './components/AnalysisOverview';
-
 import AnalyticsVisitsData from './components/AnalyticsVisitsData';
 import AnalyticsVisitsSales from './components/AnalyticsVisitsSales';
 import AnalyticsVisitsSource from './components/AnalyticsVisitsSource';
+
+import type { AnalysisOverviewItem, TabOption } from '../typing';
 
 const overviewItems: AnalysisOverviewItem[] = [
   {

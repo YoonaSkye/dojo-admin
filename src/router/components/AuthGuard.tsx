@@ -1,5 +1,3 @@
-import type { Route } from '@/types';
-import { startProgress, stopProgress } from '@/utils';
 
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +6,10 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { usePrevious, useRoute } from '../hooks/use-route';
 import { coreRouteNames } from '../routes';
 import { checkIsAuthenticated, checkIsLoginRoute } from '../utils/shared';
+
+import type { Route } from '@/types';
+
+import { startProgress, stopProgress } from '@/utils';
 
 /**
  * 处理外链跳转
@@ -93,7 +95,6 @@ const AuthGuard = () => {
     location.current = createRouteGuard(route, previousRoute);
   }
 
-  // eslint-disable-next-line no-nested-ternary
   return location.current ? (
     typeof location.current === 'string' ? (
       <Navigate to={location.current} />

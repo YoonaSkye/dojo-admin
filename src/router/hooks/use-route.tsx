@@ -1,5 +1,10 @@
-import { useLocation, useMatches, useOutletContext } from 'react-router-dom';
 import { useEffect, useMemo, useRef } from 'react';
+import {
+  useLocation,
+  useMatches,
+  useOutletContext,
+  useRouteError,
+} from 'react-router-dom';
 
 import type { Route } from '@/types';
 
@@ -23,10 +28,13 @@ export function useRoute<T = unknown>() {
   const routes = matches.at(-1) as Route<T>;
   const fullPath = pathname + search + hash;
 
+  const error = useRouteError() as Error | null;
+
   return useMemo(
     () =>
       ({
         ...routes,
+        error,
         fullPath,
         hash,
         matched: matches.slice(1) as Route<T>[],
