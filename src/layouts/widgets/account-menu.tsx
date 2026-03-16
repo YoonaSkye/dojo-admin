@@ -14,11 +14,10 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { useSignOut } from '@/features/access';
 import { cn } from '@/lib/utils';
 import { useRouter } from '@/router/hooks';
-import { useSignOut } from '@/store/access';
 import { useUserInfo } from '@/store/user';
-
 
 const accountMenuItems: {
   label: string;
@@ -44,7 +43,7 @@ export default function AccountMenu() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const userInfo = useUserInfo();
   const { replace } = useRouter();
-  const { signOut: logout } = useSignOut();
+  const { logout } = useSignOut();
 
   const showModal = () => {
     setIsModalOpen(true);

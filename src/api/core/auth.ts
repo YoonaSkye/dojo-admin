@@ -1,17 +1,15 @@
 import requestClient, { baseRequestClient } from '../request';
 
-// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace AuthApi {
   /** 登录接口参数 */
   export interface LoginParams {
-    password: string;
-    username: string;
+    password?: string;
+    username?: string;
   }
 
   /** 登录接口返回值 */
   export interface LoginResult {
     accessToken: string;
-    refreshToken: string;
   }
 
   export interface RefreshTokenResult {

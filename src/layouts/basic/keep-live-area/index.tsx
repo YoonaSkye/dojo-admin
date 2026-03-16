@@ -1,4 +1,3 @@
-
 import { useUpdateEffect } from 'ahooks';
 import KeepAlive, { useKeepAliveRef } from 'keepalive-for-react';
 import { Suspense } from 'react';
@@ -29,7 +28,7 @@ function KeepLiveArea() {
       max={18}
       // include={cacheRoutes}
     >
-      <Suspense fallback={<div>loading</div>}>{!reload && outlet}</Suspense>
+      <Suspense>{!reload && outlet}</Suspense>
     </KeepAlive>
   );
 }

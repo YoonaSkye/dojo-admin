@@ -3,21 +3,21 @@ import { useTranslation } from 'react-i18next';
 
 import { AuthApi } from '@/api/core/auth';
 import { IconButton } from '@/components/icon';
+import { useAuthLogin } from '@/features/access';
 import {
   SvgGithubIcon,
   SvgGoogleIcon,
   SvgQQChatIcon,
   SvgWeChatIcon,
 } from '@/icons';
-import { useSignIn } from '@/store/access';
 
 export default function LoginForm() {
-  const { signIn, loading } = useSignIn();
+  const { authLogin, loading } = useAuthLogin();
   const { t } = useTranslation();
 
   const handleFinish = async ({ username, password }: AuthApi.LoginParams) => {
     try {
-      await signIn({ username, password });
+      await authLogin({ username, password });
     } catch (error) {
       console.log(error);
     }
