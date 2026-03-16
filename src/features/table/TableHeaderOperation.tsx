@@ -1,12 +1,13 @@
 import { Button, Popconfirm, Popover, Space } from 'antd';
 import React from 'react';
 
+import { Iconify } from '@/components/icon';
+import { TableColumnCheck } from '@/types';
+
 import DragContent from './DragContent';
 
 import type { FC } from 'react';
 
-import { Iconify } from '@/components/icon';
-import { TableColumnCheck } from '@/types';
 
 
 

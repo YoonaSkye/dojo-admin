@@ -4,6 +4,11 @@ import { persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import { useShallow } from 'zustand/react/shallow';
 
+import {
+  BUILT_IN_THEME_PRESETS,
+  isDarkTheme,
+  updateCSSVariables,
+} from '@/features/preferences';
 import type {
   BreadcrumbPreferences,
   FooterPreferences,
@@ -15,11 +20,6 @@ import type {
   ThemePreferences,
 } from '@/types';
 
-import {
-  BUILT_IN_THEME_PRESETS,
-  isDarkTheme,
-  updateCSSVariables,
-} from '@/features/preferences';
 
 type Actions = {
   setLayoutMode: (mode: LayoutType) => void;

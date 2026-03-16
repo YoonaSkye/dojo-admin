@@ -1,12 +1,13 @@
 import clsx from 'clsx';
 
+import { usePreferencesStore, useBuiltinType } from '@/store/preferences';
+
 import {
   BUILT_IN_THEME_PRESETS,
   BuiltinThemePreset,
   BuiltinThemeType,
 } from '../../constants';
 
-import { usePreferencesStore, useBuiltinType } from '@/store/preferences';
 
 export function Builtin() {
   const builtinType = useBuiltinType();

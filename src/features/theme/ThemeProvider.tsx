@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState, type PropsWithChildren } from 'react';
 
+import { useThemeMode } from '@/store/preferences';
+
 import { ThemeContext, ThemeMode, ThemeType } from './theme-context';
 
-import { useThemeMode } from '@/store/preferences';
 
 const useCurrentTheme = () => {
   const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');

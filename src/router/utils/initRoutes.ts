@@ -1,10 +1,11 @@
 import { RouteObject } from 'react-router-dom';
 
+import { getAllMenusApi } from '@/api/core';
+import { useAccessStore } from '@/store/access';
+
 import { generateMenus } from './generate-menus';
 import { generateRoutesByBackend } from './generate-routes-backend';
 
-import { getAllMenusApi } from '@/api/core';
-import { useAccessStore } from '@/store/access';
 
 
 export async function initAuthRoutes(

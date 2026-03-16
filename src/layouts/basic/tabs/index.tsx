@@ -1,10 +1,11 @@
+import { useLayoutMode } from '@/store/preferences';
+
 import TabsView from './tabs-view';
 import { useTabbar } from './use-tabbar';
 
 import type { CSSProperties } from 'react';
 
 // Components
-import { useLayoutMode } from '@/store/preferences';
 
 type TabsProps = {
   siderCollapse?: boolean;

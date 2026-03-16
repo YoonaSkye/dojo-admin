@@ -1,12 +1,13 @@
 import ReactDOM from 'react-dom/client';
 import { ErrorBoundary } from 'react-error-boundary';
 
+import { setupI18n } from '@/locales/i18n.ts';
+import { setupSvgIcons } from '@/utils';
+
 import App from './App.tsx';
 import FallbackRender from './components/fallback-render.tsx';
 
 // setup
-import { setupI18n } from '@/locales/i18n.ts';
-import { setupSvgIcons } from '@/utils';
 // 样式文件
 import '@/theme';
 

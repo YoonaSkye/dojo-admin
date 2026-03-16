@@ -1,10 +1,11 @@
 import { type MouseEvent } from 'react';
 
-import { icons, useTheme } from './theme-context';
 
 import { Iconify } from '@/components/icon';
 import { Button } from '@/components/ui/button';
 import { usePreferencesStore, useThemeMode } from '@/store/preferences';
+
+import { icons, useTheme } from './theme-context';
 
 type ThemeModeType = 'dark' | 'light' | 'system';
 const ThemeModes: ThemeModeType[] = ['light', 'dark', 'system'];

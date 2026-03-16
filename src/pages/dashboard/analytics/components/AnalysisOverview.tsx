@@ -1,4 +1,3 @@
-import { AnalysisOverviewItem } from '../../typing';
 
 import CountToAnimator from '@/components/count-to-animator/CountToAnimator';
 import { Iconify } from '@/components/icon';
@@ -10,6 +9,8 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { formatNumber } from '@/utils';
+
+import { AnalysisOverviewItem } from '../../typing';
 
 interface AnalysisOverviewProps {
   items: AnalysisOverviewItem[];

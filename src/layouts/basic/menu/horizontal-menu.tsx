@@ -1,10 +1,11 @@
 import { ConfigProvider, Menu } from 'antd';
 import { useMemo } from 'react';
 
-import type { MenuProps } from 'antd';
 
 import { useRoute, useRouter } from '@/router';
 import { useAccessMenus } from '@/store/access';
+
+import type { MenuProps } from 'antd';
 import './index.scss';
 
 type Props = {

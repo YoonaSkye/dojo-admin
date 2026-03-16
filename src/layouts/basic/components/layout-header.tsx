@@ -1,4 +1,3 @@
-import { HorizontalMenu } from '../menu';
 
 import Logo from '@/components/logo';
 import { LangSwitch } from '@/features/lang';
@@ -12,6 +11,8 @@ import {
   Notification,
 } from '@/layouts/widgets';
 import { useLayoutMode } from '@/store/preferences';
+
+import { HorizontalMenu } from '../menu';
 
 export default function LayoutHeader() {
   const themeLayout = useLayoutMode();

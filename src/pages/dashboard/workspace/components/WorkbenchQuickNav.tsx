@@ -1,8 +1,9 @@
-import type { WorkbenchQuickNavItem } from '../../typing';
 
 import { Iconify } from '@/components/icon';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
+
+import type { WorkbenchQuickNavItem } from '../../typing';
 
 interface Props {
   items: WorkbenchQuickNavItem[];

@@ -10,12 +10,13 @@ import {
 import axios from 'axios';
 import { lazy, Suspense } from 'react';
 
-import UserSearch from './UserSearch';
 
 import { TableHeaderOperation } from '@/features/table';
 import { useTable } from '@/hooks/use-table';
 import { useTableOperate } from '@/hooks/use-table-operate';
 import { useTableScroll } from '@/hooks/use-table-srcoll';
+
+import UserSearch from './UserSearch';
 
 const UserOperateDrawer = lazy(() => import('./UserOperateDrawer'));
 

@@ -1,7 +1,6 @@
 import process from 'node:process';
 import { URL, fileURLToPath } from 'node:url';
 
-
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig, loadEnv } from 'vite';

@@ -1,10 +1,11 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { cn } from '@/lib/utils';
+
 import { TabOption } from '../../typing';
 
 import AnalyticsTrends from './AnalyticsTrends';
 import AnalyticsVisits from './AnalyticsVisits';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { cn } from '@/lib/utils';
 
 interface Props {
   tabs: TabOption[];

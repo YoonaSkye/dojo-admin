@@ -1,7 +1,8 @@
-import { BUILT_IN_THEME_PRESETS } from './constants';
 
 import { generatorColorVariables } from '@/features/color';
 import { ThemePreferences } from '@/types';
+
+import { BUILT_IN_THEME_PRESETS } from './constants';
 
 /**
  * 更新主题的 CSS 变量以及其他 CSS 变量

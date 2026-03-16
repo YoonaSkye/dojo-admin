@@ -1,11 +1,11 @@
 import { lazy } from 'react';
 import { Navigate, RouteObject } from 'react-router-dom';
 
-import ErrorPage from '../components/ErrorPage';
 
 import type { AppRouteObject } from '@/types';
-
 import { traverseTreeValues } from '@/utils';
+
+import ErrorPage from '../components/ErrorPage';
 
 const Login = lazy(() => import('@/pages/_core/authentication/login'));
 const BasicLayout = lazy(() => import('@/layouts/basic'));

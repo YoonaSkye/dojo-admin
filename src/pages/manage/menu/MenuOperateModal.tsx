@@ -5,13 +5,14 @@ import axios from 'axios';
 import { useEffect } from 'react';
 
 
+import { Iconify } from '@/components/icon';
+import SimpleScrollbar from '@/components/simple-srcollbar';
+
 import { createDefaultModel, getPageOptions, layoutOptions } from './shared';
 
 import type { MenuItem } from '.';
 import type { MenuOption } from './shared';
 
-import { Iconify } from '@/components/icon';
-import SimpleScrollbar from '@/components/simple-srcollbar';
 
 
 interface OperateModalProps {

@@ -1,10 +1,11 @@
 import { persist } from 'zustand/middleware';
 
+import { AppRouteObject } from '@/types';
+
 import { create } from './utils';
 
 import type { MenuProps } from 'antd';
 
-import { AppRouteObject } from '@/types';
 
 type MenuItem = Required<MenuProps>['items'][number];
 

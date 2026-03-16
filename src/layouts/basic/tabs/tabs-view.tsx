@@ -1,11 +1,12 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { cn } from '@/lib/utils';
+import { TabConfig, TabsProps } from '@/types';
+
 import Label from './Label';
 import TabContextMenu from './tab-context-menu';
 
-import { cn } from '@/lib/utils';
-import { TabConfig, TabsProps } from '@/types';
 
 interface Props extends TabsProps {}
 

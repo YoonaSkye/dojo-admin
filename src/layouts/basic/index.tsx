@@ -1,10 +1,11 @@
 // components
+import { useHeaderSetting, useSiderSetting } from '@/store/preferences';
+
 import AdminLayout from './admin-layout';
 import LayoutHeader from './components/layout-header';
 import LayoutSidebar from './components/layout-sidebar';
 
 // zustand data
-import { useHeaderSetting, useSiderSetting } from '@/store/preferences';
 
 export default function BasicLayout() {
   const { collapsed: siderCollapse, enable: siderVisible } = useSiderSetting();

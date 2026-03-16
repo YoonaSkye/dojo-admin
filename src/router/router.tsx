@@ -1,13 +1,14 @@
 import { createBrowserRouter, matchRoutes } from 'react-router-dom';
 
 
+import { useAccessStore } from '@/store/access';
+
 import { routes } from './routes';
 import { initAuthRoutes } from './utils/initRoutes';
 import { checkIsAccessChecked, checkIsAuthenticated } from './utils/shared';
 
 import type { NavigateOptions, To } from 'react-router-dom';
 
-import { useAccessStore } from '@/store/access';
 
 function getIsNeedPatch(path: string) {
   const isLogin = checkIsAuthenticated();

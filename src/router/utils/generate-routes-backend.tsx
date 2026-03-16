@@ -2,7 +2,6 @@ import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import type { AppRouteObject, RouteRecordStringComponent } from '@/types';
-
 import { mapTree } from '@/utils';
 
 const ENTRY_PATH = '/src/pages';

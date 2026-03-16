@@ -1,6 +1,7 @@
+import type { RouteRecordStringComponent } from '@/types';
+
 import requestClient from '../request';
 
-import type { RouteRecordStringComponent } from '@/types';
 
 /**
  * 获取用户所有菜单

@@ -1,8 +1,6 @@
 import { useEffect, useMemo } from 'react';
 
-import { useTabs } from './use-tabs';
 
-import type { IContextMenuItem, TabDefinition } from '@/types';
 
 import { useLocale } from '@/features/lang';
 import {
@@ -18,6 +16,9 @@ import {
 import { $t } from '@/locales/i18n';
 import { useRoute, useRouter } from '@/router';
 import { getTabKey, useTabbarStore } from '@/store/tabs';
+import type { IContextMenuItem, TabDefinition } from '@/types';
+
+import { useTabs } from './use-tabs';
 
 
 export function useTabbar() {

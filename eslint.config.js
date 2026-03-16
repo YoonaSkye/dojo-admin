@@ -56,6 +56,16 @@ export default [
       '@typescript-eslint/no-unused-vars': 'off',
       '@typescript-eslint/no-unused-expressions': 'off',
       '@typescript-eslint/no-empty-object-type': 'off',
+      '@typescript-eslint/no-namespace': 'off',
+      '@typescript-eslint/ban-ts-comment': [
+        'error',
+        {
+          'ts-ignore': 'allow-with-description',
+          'ts-expect-error': 'allow-with-description',
+          'ts-nocheck': false,
+          'ts-check': false,
+        },
+      ],
       // import-x custom rules - simplified without resolver-dependent rules
       'import-x/order': [
         'error',
@@ -75,7 +85,9 @@ export default [
             order: 'asc',
             caseInsensitive: true,
           },
-          distinctGroup: false,
+          // distinctGroup: false,
+          pathGroups: [{ group: 'internal', pattern: '{{@,~}/,#}**' }],
+          pathGroupsExcludedImportTypes: ['builtin'],
         },
       ],
     },

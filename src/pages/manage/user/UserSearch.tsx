@@ -1,9 +1,10 @@
 import { Button, Col, Flex, Form, Input, Row, Select } from 'antd';
 import { memo } from 'react';
 
+import { Iconify } from '@/components/icon';
+
 import type { FormInstance } from 'antd/es/form';
 
-import { Iconify } from '@/components/icon';
 
 
 

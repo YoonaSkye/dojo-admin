@@ -1,6 +1,7 @@
+import { useBreadCrumbSetting, usePreferencesStore } from '@/store/preferences';
+
 import SwitchItem from '../switch-item';
 
-import { useBreadCrumbSetting, usePreferencesStore } from '@/store/preferences';
 
 export function BreadCrumb() {
   const setBreadCrumb = usePreferencesStore((state) => state.setBreadCrumb);

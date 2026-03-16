@@ -1,9 +1,10 @@
 import { ascend } from 'ramda';
 import { useCallback, useMemo } from 'react';
 
+import { AppRouteObject } from '@/types';
+
 import { usePermission } from './use-permission';
 
-import { AppRouteObject } from '@/types';
 
 type SeachItemType = {
   title: string;

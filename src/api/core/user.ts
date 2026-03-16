@@ -1,6 +1,7 @@
+import { UserInfo } from '@/types';
+
 import requestClient from '../request';
 
-import { UserInfo } from '@/types';
 
 /**
  * 获取用户信息

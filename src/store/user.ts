@@ -1,8 +1,9 @@
 import { persist } from 'zustand/middleware';
 
+import type { BasicUserInfo } from '@/types';
+
 import { create } from './utils';
 
-import type { BasicUserInfo } from '@/types';
 
 interface UserState {
   /**

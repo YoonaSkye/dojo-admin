@@ -4,11 +4,12 @@ import { Button, Popconfirm, Tag } from 'antd';
 import axios from 'axios';
 import { useRef, useState } from 'react';
 
+import { antdUtils } from '@/utils';
+
 import RoleOperateDrawer from './UserOperateDrawer';
 
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 
-import { antdUtils } from '@/utils';
 
 const ATG_MAP = {
   1: 'success',

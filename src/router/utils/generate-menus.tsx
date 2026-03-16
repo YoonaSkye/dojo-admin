@@ -1,11 +1,12 @@
 import { useTranslation } from 'react-i18next';
 
 
+import { Iconify } from '@/components/icon';
 import type { RouteRecordStringComponent } from '@/types';
+import { filterTree, mapTree } from '@/utils';
+
 import type { MenuProps } from 'antd';
 
-import { Iconify } from '@/components/icon';
-import { filterTree, mapTree } from '@/utils';
 
 type MenuItem = Required<MenuProps>['items'][number];
 

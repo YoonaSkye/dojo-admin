@@ -9,11 +9,12 @@ import { CSS } from '@dnd-kit/utilities';
 import { Checkbox } from 'antd';
 import React from 'react';
 
+import { Iconify } from '@/components/icon';
+import { TableColumnCheck } from '@/types';
+
 import type { DragEndEvent } from '@dnd-kit/core';
 import type { FC } from 'react';
 
-import { Iconify } from '@/components/icon';
-import { TableColumnCheck } from '@/types';
 
 
 

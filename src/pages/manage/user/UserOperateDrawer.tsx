@@ -2,9 +2,10 @@ import { useRequest, useUpdateEffect } from 'ahooks';
 import { Button, Drawer, Flex, Form, Input, Radio, Select } from 'antd';
 import axios from 'axios';
 
+import { TableOperateType } from '@/types';
+
 import type { FormInstance } from 'antd';
 
-import { TableOperateType } from '@/types';
 
 
 

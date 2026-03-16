@@ -1,12 +1,13 @@
 import clsx from 'clsx';
 import { useRef } from 'react';
 
-import { HeaderNav, HeaderSidebarNav, SidebarNav } from '../../icons';
 
-import type { LayoutType } from '@/types';
 
 import { CircleHelp } from '@/icons';
 import { useLayoutMode, usePreferencesStore } from '@/store/preferences';
+import type { LayoutType } from '@/types';
+
+import { HeaderNav, HeaderSidebarNav, SidebarNav } from '../../icons';
 
 interface PresetItem {
   name: string;
