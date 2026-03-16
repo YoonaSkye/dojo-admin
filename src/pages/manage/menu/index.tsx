@@ -1,9 +1,8 @@
-import EllipsisOutlined from '@ant-design/icons/EllipsisOutlined';
 import PlusOutlined from '@ant-design/icons/PlusOutlined';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Dropdown, Popconfirm, Tag } from 'antd';
+import { Button, Popconfirm, Tag } from 'antd';
+import axios from 'axios';
 import { useRef, useState } from 'react';
-import request from 'umi-request';
 
 import MenuOperateModal from './MenuOperateModal';
 import { MenuOption } from './shared';
@@ -11,7 +10,6 @@ import { MenuOption } from './shared';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 
 import { Iconify } from '@/components/icon';
-import { useTableScroll } from '@/hooks/use-tab-srcoll';
 import { antdUtils } from '@/utils';
 
 const ATG_MAP = {
@@ -58,14 +56,33 @@ export type MenuItem = {
   iconType: '1' | '2';
 };
 
+const fetchGetMenuList = (params: any) => {
+  const Iparams = {
+    apifoxToken: 'XL299LiMEDZ0H5h3A29PxwQXdMJqWyY2',
+    ...params,
+  };
+  const url = `https://apifoxmock.com/m1/3109515-0-default/systemManage/getMenuList/v2`;
+
+  return axios({
+    method: 'get',
+    params: Iparams,
+    url: url,
+  }).then((res) => {
+    const resData = res.data.data;
+    return {
+      data: resData.records,
+      total: resData.total,
+      success: true,
+    };
+  });
+};
+
 export default function MenuManage() {
   const actionRef = useRef<ActionType>();
-  const { scrollConfig } = useTableScroll();
 
   const [visible, setVisible] = useState(false);
   const [currentRow, setCurrentRow] = useState<MenuItem | null>(null);
 
-  // const menuList = useMemo(() => flattenMenu(data), [data]);
   const menuList = useRef<MenuOption[]>([]);
 
   const handleClose = (open: boolean) => {
@@ -260,26 +277,10 @@ export default function MenuManage() {
             pageSize: params.pageSize,
           };
 
-          return request
-            .get(
-              'https://apifoxmock.com/m1/3109515-0-default/systemManage/getMenuList/v2',
-              {
-                params: {
-                  apifoxToken: 'XL299LiMEDZ0H5h3A29PxwQXdMJqWyY2',
-                  ...p,
-                },
-              },
-            )
-            .then((res) => {
-              const data = res.data;
-              menuList.current = [];
+          const response = await fetchGetMenuList(p);
+          menuList.current = [];
 
-              return {
-                data: data.records,
-                total: data.total,
-                success: true,
-              };
-            });
+          return response;
         }}
         rowKey="id"
         search={false}
@@ -300,7 +301,7 @@ export default function MenuManage() {
             // hideOnSinglePage: true,
           }
         }
-        scroll={scrollConfig}
+        scroll={{ y: 500 }}
         dateFormatter="string"
         headerTitle="角色列表"
         toolBarRender={() => [
@@ -312,29 +313,6 @@ export default function MenuManage() {
           >
             新建
           </Button>,
-          <Dropdown
-            key="menu"
-            menu={{
-              items: [
-                {
-                  label: '1st item',
-                  key: '1',
-                },
-                {
-                  label: '2nd item',
-                  key: '2',
-                },
-                {
-                  label: '3rd item',
-                  key: '3',
-                },
-              ],
-            }}
-          >
-            <Button>
-              <EllipsisOutlined />
-            </Button>
-          </Dropdown>,
         ]}
       />
       <MenuOperateModal

@@ -2,11 +2,13 @@ import { ConfigProvider } from 'antd';
 import enUS from 'antd/locale/en_US';
 import zhCN from 'antd/locale/zh_CN';
 
+
 import { useAntdTheme } from './useAntdTheme';
 
 import type { ConfigProviderProps } from 'antd';
 
 import { useLocale } from '@/features/lang';
+
 
 type Locale = ConfigProviderProps['locale'];
 
@@ -24,7 +26,15 @@ export default function AntdConfig({
   const { themeConfig } = useAntdTheme();
 
   return (
-    <ConfigProvider locale={LANGUAGE_MAP[locale]} theme={themeConfig}>
+    <ConfigProvider
+      locale={LANGUAGE_MAP[locale]}
+      card={{
+        styles: {
+          body: { flex: 1, overflow: 'hidden', padding: '12px 16px ' },
+        },
+      }}
+      theme={themeConfig}
+    >
       {/* https://ant.design/docs/react/compatible-style-cn#styleprovider */}
       {/* 不提升antd css选择器权重 */}
       {/* <StyleProvider hashPriority="high">{children}</StyleProvider> */}

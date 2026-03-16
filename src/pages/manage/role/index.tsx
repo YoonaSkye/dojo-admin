@@ -1,14 +1,13 @@
 import PlusOutlined from '@ant-design/icons/PlusOutlined';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Popconfirm, Tag } from 'antd';
+import axios from 'axios';
 import { useRef, useState } from 'react';
-import request from 'umi-request';
 
 import RoleOperateDrawer from './UserOperateDrawer';
 
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 
-import { useTableScroll } from '@/hooks/use-tab-srcoll';
 import { antdUtils } from '@/utils';
 
 const ATG_MAP = {
@@ -33,9 +32,29 @@ export type RoleItem = {
   roleDesc: string;
 };
 
+const fetchGetRoleList = (params: any) => {
+  const Iparams = {
+    apifoxToken: 'XL299LiMEDZ0H5h3A29PxwQXdMJqWyY2',
+    ...params,
+  };
+  const url = `https://apifoxmock.com/m1/3109515-0-default/systemManage/getRoleList`;
+
+  return axios({
+    method: 'get',
+    params: Iparams,
+    url: url,
+  }).then((res) => {
+    const resData = res.data.data;
+    return {
+      data: resData.records,
+      total: resData.total,
+      success: true,
+    };
+  });
+};
+
 export default function RoleManage() {
   const actionRef = useRef<ActionType>();
-  const { scrollConfig, tableWrapperRef } = useTableScroll();
 
   const [visible, setVisible] = useState(false);
   const [currentRow, setCurrentRow] = useState<RoleItem | null>(null);
@@ -153,7 +172,7 @@ export default function RoleManage() {
   ];
 
   return (
-    <div ref={tableWrapperRef} className="h-full p-4">
+    <div className="h-full p-4">
       <ProTable<RoleItem>
         columns={columns}
         actionRef={actionRef}
@@ -165,25 +184,7 @@ export default function RoleManage() {
             pageSize: params.pageSize,
           };
 
-          return request
-            .get(
-              'https://apifoxmock.com/m1/3109515-0-default/systemManage/getRoleList',
-              {
-                params: {
-                  apifoxToken: 'XL299LiMEDZ0H5h3A29PxwQXdMJqWyY2',
-                  ...p,
-                },
-              },
-            )
-            .then((res) => {
-              const data = res.data;
-
-              return {
-                data: data.records,
-                total: data.total,
-                success: true,
-              };
-            });
+          return fetchGetRoleList(p);
         }}
         editable={{
           type: 'multiple',
@@ -203,7 +204,7 @@ export default function RoleManage() {
             // pageSize: 20,
           }
         }
-        scroll={scrollConfig}
+        scroll={{ y: 350 }}
         dateFormatter="string"
         headerTitle="角色列表"
         toolBarRender={() => [

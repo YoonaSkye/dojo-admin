@@ -1,8 +1,9 @@
 import { ModalForm } from '@ant-design/pro-components';
 import { useRequest } from 'ahooks';
 import { Col, Form, Input, InputNumber, Radio, Row, Select } from 'antd';
+import axios from 'axios';
 import { useEffect } from 'react';
-import request from 'umi-request';
+
 
 import { createDefaultModel, getPageOptions, layoutOptions } from './shared';
 
@@ -11,6 +12,7 @@ import type { MenuOption } from './shared';
 
 import { Iconify } from '@/components/icon';
 import SimpleScrollbar from '@/components/simple-srcollbar';
+
 
 interface OperateModalProps {
   title: string;
@@ -38,16 +40,20 @@ const enableStatusOptions = [
 ];
 
 const fetchGetAllPages = async () => {
-  return request
-    .get(
-      'https://apifoxmock.com/m1/3109515-0-default/systemManage/getAllPages',
-      {
-        params: {
-          apifoxToken: 'XL299LiMEDZ0H5h3A29PxwQXdMJqWyY2',
-        },
-      },
-    )
-    .then((res) => res.data);
+  const Iparams = {
+    apifoxToken: 'XL299LiMEDZ0H5h3A29PxwQXdMJqWyY2',
+  };
+  const url = `https://apifoxmock.com/m1/3109515-0-default/systemManage/getAllPages`;
+
+  return axios({
+    method: 'get',
+    params: Iparams,
+    url: url,
+  }).then((res) => {
+    const resData = res.data.data;
+
+    return resData;
+  });
 };
 
 export default function MenuOperateModal({

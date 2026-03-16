@@ -1,13 +1,21 @@
-import PlusOutlined from '@ant-design/icons/PlusOutlined';
-import { ProTable } from '@ant-design/pro-components';
-import { Button, Popconfirm, Tag } from 'antd';
-import { lazy, Suspense, useRef, useState } from 'react';
-import request from 'umi-request';
+import {
+  Button,
+  Card,
+  Collapse,
+  Popconfirm,
+  Table,
+  TableColumnsType,
+  Tag,
+} from 'antd';
+import axios from 'axios';
+import { lazy, Suspense } from 'react';
 
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
+import UserSearch from './UserSearch';
 
-import { useTableScroll } from '@/hooks/use-tab-srcoll';
-import { antdUtils } from '@/utils';
+import { TableHeaderOperation } from '@/features/table';
+import { useTable } from '@/hooks/use-table';
+import { useTableOperate } from '@/hooks/use-table-operate';
+import { useTableScroll } from '@/hooks/use-table-srcoll';
 
 const UserOperateDrawer = lazy(() => import('./UserOperateDrawer'));
 
@@ -39,233 +47,234 @@ export type UserItem = {
   userEmail: string;
   userRoles: string[];
 };
+type PaginatingQueryRecord<T = any> = {
+  /** 当前页码 */
+  current: number;
+  /** 每页条数 */
+  size: number;
+  /** 总条数 */
+  total: number;
+  /** 数据列表 */
+  records: T[];
+};
 
-export default function UserManage() {
-  const actionRef = useRef<ActionType>();
+const fetchGetUserList = (
+  params: any,
+): Promise<PaginatingQueryRecord<UserItem>> => {
+  const Iparams = {
+    apifoxToken: 'XL299LiMEDZ0H5h3A29PxwQXdMJqWyY2',
+    ...params,
+  };
+  const url = `https://apifoxmock.com/m1/3109515-0-default/systemManage/getUserList`;
+
+  return axios({
+    method: 'get',
+    params: Iparams,
+    url: url,
+  }).then((res) => {
+    // console.log('res', res.data);
+    const resData = res.data.data;
+
+    return resData;
+  });
+};
+
+export default function UserMange() {
   const { scrollConfig, tableWrapperRef } = useTableScroll();
-  const [visible, setVisible] = useState(false);
-  const [currentRow, setCurrentRow] = useState<UserItem | null>(null);
+  const { columnChecks, data, run, searchProps, setColumnChecks, tableProps } =
+    useTable({
+      apiFn: fetchGetUserList,
+      apiParams: {
+        current: 1,
+        nickName: null,
+        size: 10,
+        // if you want to use the searchParams in Form, you need to define the following properties, and the value is null
+        // the value can not be undefined, otherwise the property in Form will not be reactive
+        status: null,
+        userEmail: null,
+        userGender: null,
+        userName: null,
+        userPhone: null,
+      },
+      columns: (): TableColumnsType<UserItem> => [
+        {
+          dataIndex: 'index',
+          key: 'index',
+          title: '序号',
+          width: 64,
+        },
+        {
+          align: 'center',
+          dataIndex: 'userName',
+          key: 'userName',
+          minWidth: 100,
+          title: '用户名',
+        },
+        {
+          align: 'center',
+          dataIndex: 'userGender',
+          key: 'userGender',
+          render: (_, record) => {
+            if (record?.userGender === null) {
+              return null;
+            }
 
-  const handleClose = (open: boolean) => {
-    setVisible(open);
-    if (!open) {
-      setCurrentRow(null);
-    }
-  };
+            const label = record.userGender === '1' ? '男' : '女';
 
-  const handleEdit = (record: any) => {
-    setCurrentRow(record);
-    setVisible(true);
-  };
+            return (
+              <Tag color={tagUserGenderMap[record.userGender]}>{label}</Tag>
+            );
+          },
+          title: '性别',
+          width: 100,
+        },
+        {
+          align: 'center',
+          dataIndex: 'nickName',
+          key: 'nickName',
+          minWidth: 100,
+          title: '昵称',
+        },
+        {
+          align: 'center',
+          dataIndex: 'userPhone',
+          key: 'userPhone',
+          title: '电话',
+          width: 120,
+        },
+        {
+          align: 'center',
+          dataIndex: 'userEmail',
+          key: 'userEmail',
+          minWidth: 200,
+          title: '邮箱',
+        },
+        {
+          align: 'center',
+          dataIndex: 'status',
+          key: 'status',
+          render: (_, record) => {
+            if (record.status === null) {
+              return null;
+            }
+            const label = enableStatusRecord[record.status];
+            return <Tag color={ATG_MAP[record.status]}>{label}</Tag>;
+          },
+          title: '用户状态',
+          width: 100,
+        },
+        {
+          align: 'center',
+          key: 'operate',
+          render: (_, record) => (
+            <div className="flex-center gap-[8px]">
+              <Button
+                ghost
+                size="small"
+                type="primary"
+                onClick={() => {
+                  handleEdit(record);
+                }}
+              >
+                编辑
+              </Button>
 
-  const handleAdd = () => {
-    setCurrentRow(null);
-    setVisible(true);
-  };
+              <Popconfirm
+                title="确定要删除吗？"
+                onConfirm={() => handleDelete(record.id)}
+              >
+                <Button danger size="small">
+                  删除
+                </Button>
+              </Popconfirm>
+            </div>
+          ),
+          title: '操作',
+          width: 195,
+        },
+      ],
+      pagination: {
+        showQuickJumper: true,
+      },
+    });
 
-  const handleSubmit = async (values: any) => {
-    if (currentRow) {
-      // 编辑逻辑
-      antdUtils.message.success('编辑成功');
+  const {
+    checkedRowKeys,
+    generalPopupOperation,
+    handleAdd,
+    handleEdit,
+    onBatchDeleted,
+    onDeleted,
+    rowSelection,
+  } = useTableOperate(data, run, async (res: any, type: any) => {
+    if (type === 'add') {
+      // add request 调用新增的接口
+      console.log(res);
     } else {
-      // 新增逻辑
-      antdUtils.message.success('新增成功');
+      // edit request 调用编辑的接口
+      console.log(res);
     }
-    setVisible(false);
-    actionRef.current?.reload();
-  };
+  });
 
-  const columns: ProColumns<UserItem>[] = [
-    {
-      align: 'center',
-      dataIndex: 'id',
-      // key: 'index',
-      title: '序号',
-      width: 64,
-      search: false,
-    },
-    {
-      align: 'center',
-      dataIndex: 'userName',
-      key: 'userName',
-      minWidth: 100,
-      title: '用户名',
-    },
-    {
-      align: 'center',
-      dataIndex: 'userGender',
-      key: 'userGender',
-      valueType: 'select',
-      valueEnum: {
-        '1': {
-          text: '男',
-        },
-        '2': {
-          text: '女',
-        },
-      },
-      render: (_, record) => {
-        if (record?.userGender === null) {
-          return null;
-        }
+  async function handleBatchDelete() {
+    // request
+    console.log(checkedRowKeys);
+    onBatchDeleted();
+  }
 
-        const label = record.userGender === '1' ? '男' : '女';
+  function handleDelete(id: number) {
+    // request
+    console.log(id);
 
-        return <Tag color={tagUserGenderMap[record.userGender]}>{label}</Tag>;
-      },
-      title: '性别',
-      width: 100,
-    },
-    {
-      align: 'center',
-      dataIndex: 'nickName',
-      key: 'nickName',
-      minWidth: 100,
-      title: '昵称',
-    },
-    {
-      align: 'center',
-      dataIndex: 'userPhone',
-      key: 'userPhone',
-      title: '电话',
-      width: 120,
-    },
-    {
-      align: 'center',
-      dataIndex: 'userEmail',
-      key: 'userEmail',
-      minWidth: 200,
-      title: '邮箱',
-    },
-    {
-      align: 'center',
-      dataIndex: 'status',
-      key: 'status',
-      valueType: 'select',
-      valueEnum: {
-        '1': {
-          text: '启用',
-        },
-        '2': {
-          text: '禁用',
-        },
-      },
-      render: (_, record) => {
-        if (record.status === null) {
-          return null;
-        }
-        const label = enableStatusRecord[record.status];
-        return <Tag color={ATG_MAP[record.status]}>{label}</Tag>;
-      },
-      title: '用户状态',
-      width: 100,
-    },
-    {
-      align: 'center',
-      key: 'operate',
-      search: false,
-      render: (_, record) => (
-        <div className="flex-center gap-[8px]">
-          <Button
-            ghost
-            size="small"
-            type="primary"
-            onClick={() => {
-              handleEdit(record);
-            }}
-          >
-            编辑
-          </Button>
+    onDeleted();
+  }
 
-          <Popconfirm
-            title="确定要删除吗？"
-            // onConfirm={() => handleDelete(record.id)}
-          >
-            <Button danger size="small">
-              删除
-            </Button>
-          </Popconfirm>
-        </div>
-      ),
-      title: '操作',
-      width: 195,
-    },
-  ];
+  function edit(id: number) {
+    handleEdit(id);
+  }
 
   return (
-    <div ref={tableWrapperRef} className="h-full p-4">
-      <ProTable<UserItem>
-        columns={columns}
-        actionRef={actionRef}
-        cardBordered
-        request={async (params) => {
-          const p = {
-            ...params,
-            current: params.current,
-            pageSize: params.pageSize,
-          };
-
-          return request
-            .get(
-              'https://apifoxmock.com/m1/3109515-0-default/systemManage/getUserList',
-              {
-                params: {
-                  apifoxToken: 'XL299LiMEDZ0H5h3A29PxwQXdMJqWyY2',
-                  ...p,
-                },
-              },
-            )
-            .then((res) => {
-              const data = res.data;
-
-              return {
-                data: data.records,
-                total: data.total,
-                success: true,
-              };
-            });
-        }}
-        editable={{
-          type: 'multiple',
-        }}
-        rowKey="id"
-        search={{
-          labelWidth: 'auto',
-        }}
-        options={{
-          fullScreen: true,
-          setting: {
-            listsHeight: 400,
-          },
-        }}
-        pagination={
+    <div className="flex h-full flex-col gap-4 overflow-hidden p-4">
+      <Collapse
+        bordered={false}
+        className="rounded-[8px] bg-header shadow-sm"
+        defaultActiveKey={['1']}
+        items={[
           {
-            // pageSize: 20,
-          }
-        }
-        scroll={scrollConfig}
-        dateFormatter="string"
-        headerTitle="用户列表"
-        toolBarRender={() => [
-          <Button
-            key="button"
-            icon={<PlusOutlined />}
-            onClick={handleAdd}
-            type="primary"
-          >
-            新建
-          </Button>,
+            children: <UserSearch {...searchProps} />,
+            key: '1',
+            label: '搜索',
+          },
         ]}
       />
-      <Suspense>
-        <UserOperateDrawer
-          title={currentRow ? '编辑用户' : '新增用户'}
-          currentRow={currentRow}
-          open={visible}
-          onOpenChange={handleClose}
-          handleSubmit={handleSubmit}
+      <Card
+        className="flex-col rounded-[8px] shadow-sm sm:flex-1 sm:overflow-hidden"
+        ref={tableWrapperRef}
+        title="用户列表"
+        variant="borderless"
+        extra={
+          <TableHeaderOperation
+            add={handleAdd}
+            columns={columnChecks}
+            disabledDelete={checkedRowKeys.length === 0}
+            loading={tableProps.loading}
+            refresh={run}
+            setColumnChecks={setColumnChecks}
+            onDelete={handleBatchDelete}
+          />
+        }
+      >
+        <Table
+          rowSelection={rowSelection}
+          scroll={scrollConfig}
+          size="small"
+          {...tableProps}
         />
-      </Suspense>
+        <Suspense>
+          {/* @ts-ignore 暂时忽略类型错误 */}
+          <UserOperateDrawer {...generalPopupOperation} />
+        </Suspense>
+      </Card>
     </div>
   );
 }
