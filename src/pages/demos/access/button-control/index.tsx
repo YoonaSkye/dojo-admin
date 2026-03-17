@@ -1,4 +1,4 @@
-import { Card, Button } from 'antd';
+import { Button, Card } from 'antd';
 
 import Page from '@/components/page';
 import { AccessControl, useAccess } from '@/features/access';

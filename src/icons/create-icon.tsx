@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
 
 function createIconifyIcon(icon: string) {
-  return () => <Icon icon={icon} />;
+  return (props: any) => <Icon icon={icon} {...props} />;
 }
 
 export { createIconifyIcon };
