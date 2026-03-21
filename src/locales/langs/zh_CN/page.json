@@ -71,7 +71,9 @@
       "fullScreen": {
         "title": "全屏"
       },
-      "clipboard": "剪贴板"
+      "clipboard": "剪贴板",
+      "fileDownload": "文件下载",
+      "requestParamsSerializer": "参数序列化"
     },
     "breadcrumb": {
       "navigation": "面包屑导航",

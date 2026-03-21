@@ -71,7 +71,9 @@
       "fullScreen": {
         "title": "FullScreen"
       },
-      "clipboard": "Clipboard"
+      "clipboard": "Clipboard",
+      "fileDownload": "File Download",
+      "requestParamsSerializer": "Request Params Serializer"
     },
     "breadcrumb": {
       "navigation": "Breadcrumb Navigation",
