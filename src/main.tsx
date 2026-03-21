@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { setupI18n } from '@/locales/i18n.ts';
+import { setupI18n } from '@/locales';
 import { setupSvgIcons } from '@/utils';
 
 import App from './App.tsx';
