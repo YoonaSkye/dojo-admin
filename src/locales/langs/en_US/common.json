@@ -8,5 +8,12 @@
   "confirm": "Comfirm",
   "noData": "No Data",
   "refresh": "Refresh",
-  "loadingMenu": "Loading Menu"
+  "loadingMenu": "Loading Menu",
+  "query": "Search",
+  "search": "Search",
+  "enabled": "Enabled",
+  "disabled": "Disabled",
+  "edit": "Edit",
+  "delete": "Delete",
+  "create": "Create"
 }

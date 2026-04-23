@@ -26,7 +26,7 @@
   }
 
   .outline-box {
-    @apply outline-border relative cursor-pointer rounded-md p-1 outline outline-1;
+    @apply relative cursor-pointer rounded-md p-1 outline outline-1 outline-border;
   }
 
   .outline-box::after {
@@ -34,7 +34,7 @@
   }
 
   .outline-box.outline-box-active {
-    @apply outline-primary outline outline-2;
+    @apply outline outline-2 outline-primary;
   }
 
   .outline-box.outline-box-active::after {
@@ -42,11 +42,11 @@
   }
 
   .outline-box:not(.outline-box-active):hover::after {
-    @apply outline-primary left-0 top-0 h-full w-full p-1 opacity-100;
+    @apply left-0 top-0 h-full w-full p-1 opacity-100 outline-primary;
   }
 
   .card-box {
-    @apply bg-card text-card-foreground border-border rounded-xl border;
+    @apply rounded-xl border border-border bg-card text-card-foreground;
   }
 }
 
@@ -105,4 +105,8 @@ body {
 
 .cache-component.inactive {
   animation: fadeOut 0.3s ease-in-out;
+}
+
+.vben-link {
+  @apply cursor-pointer text-primary hover:text-primary-hover active:text-primary-active;
 }

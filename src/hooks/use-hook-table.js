@@ -56,7 +56,7 @@ export default function useHookTable(config) {
 
       const response = await apiFn(formattedParams);
 
-      const transformed = transformer(response);
+      const transformed = transformer(response, formattedParams);
 
       setData(transformed);
 

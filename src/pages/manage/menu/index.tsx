@@ -1,17 +1,16 @@
 import PlusOutlined from '@ant-design/icons/PlusOutlined';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Popconfirm, Tag } from 'antd';
-import axios from 'axios';
 import { useRef, useState } from 'react';
 
-import { Iconify } from '@/components/icon';
+import { getMenuList, SystemMenuApi } from '@/api/system';
+import { $t } from '@/locales';
 import { antdUtils } from '@/utils';
 
 import MenuOperateModal from './MenuOperateModal';
 import { MenuOption } from './shared';
 
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
-
 
 const ATG_MAP = {
   1: 'success',
@@ -24,8 +23,9 @@ const enableStatusRecord = {
 };
 
 const menuTypeRecord = {
-  '1': '目录',
-  '2': '菜单',
+  catalog: '目录',
+  menu: '菜单',
+  button: '按钮',
 };
 
 const yesOrNoRecord = {
@@ -38,44 +38,13 @@ const YesOrNo_Map = {
   Y: 'error',
 };
 
-export type MenuItem = {
-  id: number;
-  createBy: string;
-  createTime: string;
-  updateBy: string;
-  updateTime: string;
-  status: '1' | '2';
-  parentId: number;
-  menuType: '1' | '2';
-  menuName: string;
-  routeName: string;
-  routePath: string;
-  component: string;
-  order: number;
-  i18nKey: string;
-  icon: string;
-  iconType: '1' | '2';
-};
+interface MenuItem extends SystemMenuApi.SystemMenu {}
 
-const fetchGetMenuList = (params: any) => {
-  const Iparams = {
-    apifoxToken: 'XL299LiMEDZ0H5h3A29PxwQXdMJqWyY2',
-    ...params,
-  };
-  const url = `https://apifoxmock.com/m1/3109515-0-default/systemManage/getMenuList/v2`;
-
-  return axios({
-    method: 'get',
-    params: Iparams,
-    url: url,
-  }).then((res) => {
-    const resData = res.data.data;
-    return {
-      data: resData.records,
-      total: resData.total,
-      success: true,
-    };
-  });
+const apiFetch = (params?: any) => {
+  return getMenuList().then((resData) => ({
+    data: resData,
+    success: true,
+  }));
 };
 
 export default function MenuManage() {
@@ -116,74 +85,66 @@ export default function MenuManage() {
   };
 
   const columns: ProColumns<MenuItem>[] = [
+    // {
+    //   align: 'center',
+    //   dataIndex: 'id',
+    //   key: 'id',
+    //   title: 'ID',
+    // },
     {
       align: 'center',
-      dataIndex: 'id',
-      key: 'id',
-      title: 'ID',
+      key: 'title',
+      dataIndex: ['handle', 'title'],
+      minWidth: 120,
+      render: (title) => {
+        const label = $t(title as string);
+
+        return <span>{label}</span>;
+      },
+      title: '标题',
     },
     {
       align: 'center',
-      key: 'menuType',
+      key: 'type',
       render: (_, record) => {
         if (record.status === null) {
           return null;
         }
 
-        const tagMap: Record<'1' | '2', string> = {
-          1: 'default',
-          2: 'processing',
+        const tagMap: Record<SystemMenuApi.SystemMenu['type'], string> = {
+          catalog: 'default',
+          menu: 'processing',
+          button: 'orange',
+          embedded: 'default',
+          link: 'default',
         };
 
-        const label = menuTypeRecord[record.menuType];
-        return <Tag color={tagMap[record.menuType]}>{label}</Tag>;
+        const label = record.type;
+        return <Tag color={tagMap[record.type]}>{label}</Tag>;
       },
       title: '菜单类型',
       width: 80,
     },
     {
       align: 'center',
-      key: 'menuName',
+      dataIndex: 'authCode',
+      key: 'authCode',
       minWidth: 120,
-      render: (_, record) => {
-        const { menuName } = record;
-
-        // const label = i18nKey ? t(i18nKey) : menuName;
-        const label = menuName;
-
-        return <span>{label}</span>;
-      },
-      title: '菜单名称',
+      title: '权限标识',
     },
     {
       align: 'center',
-      key: 'icon',
-      render: (_, record) => {
-        // const icon = record.iconType === '1' ? record.icon : undefined;
-
-        return (
-          <div className="flex-center">
-            {/* <SvgIcon className="text-icon" icon={icon} localIcon={localIcon} /> */}
-            <Iconify icon={record.icon} width="1em" height="1em" />
-          </div>
-        );
-      },
-      title: '图标',
-      width: 60,
+      dataIndex: 'path',
+      key: 'path',
+      minWidth: 120,
+      title: '路由地址',
     },
     {
       align: 'center',
-      dataIndex: 'routeName',
-      key: 'routeName',
+      dataIndex: 'component',
+      key: 'component',
       minWidth: 120,
-      title: '路由名称',
-    },
-    {
-      align: 'center',
-      dataIndex: 'routePath',
-      key: 'routePath',
-      minWidth: 120,
-      title: '路由路径',
+      title: '页面组件',
     },
     {
       align: 'center',
@@ -194,41 +155,14 @@ export default function MenuManage() {
           return null;
         }
 
-        const label = enableStatusRecord[record.status];
+        const status = record.status as '1' | '2';
 
-        return <Tag color={ATG_MAP[record.status]}>{label}</Tag>;
+        const label = enableStatusRecord[status];
+
+        return <Tag color={ATG_MAP[status]}>{label}</Tag>;
       },
       title: '菜单状态',
       width: 80,
-    },
-    {
-      align: 'center',
-      dataIndex: 'hideInMenu',
-      key: 'hideInMenu',
-      render: () => {
-        // const hide = record.hideInMenu ? 'Y' : 'N';
-        const hide = 'N';
-
-        const label = yesOrNoRecord[hide];
-
-        return <Tag color={YesOrNo_Map[hide]}>{label}</Tag>;
-      },
-      title: '隐藏菜单',
-      width: 80,
-    },
-    {
-      align: 'center',
-      dataIndex: 'parentId',
-      key: 'parentId',
-      title: '父级菜单ID',
-      width: 90,
-    },
-    {
-      align: 'center',
-      dataIndex: 'order',
-      key: 'order',
-      title: '排序',
-      width: 60,
     },
     {
       align: 'center',
@@ -272,13 +206,15 @@ export default function MenuManage() {
         actionRef={actionRef}
         cardBordered
         request={async (params) => {
-          const p = {
-            ...params,
-            current: params.current,
-            pageSize: params.pageSize,
-          };
+          // const p = {
+          //   ...params,
+          //   current: params.current,
+          //   pageSize: params.pageSize,
+          // };
 
-          const response = await fetchGetMenuList(p);
+          // const response = await fetchGetMenuList(p);
+          const response = await apiFetch();
+
           menuList.current = [];
 
           return response;

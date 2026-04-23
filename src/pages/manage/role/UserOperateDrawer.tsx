@@ -5,8 +5,8 @@ import { useEffect } from 'react';
 import type { RoleItem } from '.';
 
 const enableStatusOptions = [
-  { label: '启用', value: '1' },
-  { label: '禁用', value: '2' },
+  { label: '启用', value: 1 },
+  { label: '禁用', value: 2 },
 ];
 
 interface OperateDrawerProps {
@@ -28,6 +28,8 @@ export default function RoleOperateDrawer({
 
   useEffect(() => {
     if (currentRow) {
+      console.log('currentRow', currentRow);
+
       form.setFieldsValue(currentRow);
     } else {
       form.resetFields();
@@ -61,7 +63,7 @@ export default function RoleOperateDrawer({
     >
       <Form.Item
         label="角色名称"
-        name="roleName"
+        name="name"
         rules={[
           {
             required: true,
@@ -70,19 +72,6 @@ export default function RoleOperateDrawer({
         ]}
       >
         <Input placeholder="请输入角色名称" />
-      </Form.Item>
-
-      <Form.Item
-        label="角色代码"
-        name="roleCode"
-        rules={[
-          {
-            required: true,
-            message: '角色代码不能为空',
-          },
-        ]}
-      >
-        <Input placeholder="请输入角色代码" />
       </Form.Item>
 
       <Form.Item
@@ -104,8 +93,8 @@ export default function RoleOperateDrawer({
         </Radio.Group>
       </Form.Item>
 
-      <Form.Item label="角色描述" name="roleDesc">
-        <Input placeholder="请输入角色描述" />
+      <Form.Item label="备注" name="remark">
+        <Input.TextArea placeholder="请输入角色备注" />
       </Form.Item>
     </DrawerForm>
   );

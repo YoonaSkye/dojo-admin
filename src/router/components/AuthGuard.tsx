@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navigate, Outlet } from 'react-router-dom';
@@ -9,8 +8,6 @@ import { startProgress, stopProgress } from '@/utils';
 import { usePrevious, useRoute } from '../hooks/use-route';
 import { coreRouteNames } from '../routes';
 import { checkIsAuthenticated, checkIsLoginRoute } from '../utils/shared';
-
-
 
 /**
  * 处理外链跳转
@@ -79,7 +76,7 @@ const AuthGuard = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = title ? t(title) : 'Dojo Vite';
+    document.title = `${t(title ?? '')} - Dojo Vite`;
   }, [title, t]);
 
   useEffect(() => {

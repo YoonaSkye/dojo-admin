@@ -2,5 +2,9 @@
   "iconPicker": {
     "search": "Search icons",
     "placeholder": "Select icon"
+  },
+  "formRules": {
+    "required": "{0} is required",
+    "selectRequired": "Please select {0}"
   }
 }

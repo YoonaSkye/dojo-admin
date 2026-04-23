@@ -8,3 +8,6 @@ export * from './number';
 export * from './tree';
 export * from './unmount-global-loading';
 export * from './window';
+export * from './date';
+export * from './dom';
+export { default as cloneDeep } from 'lodash.clonedeep';

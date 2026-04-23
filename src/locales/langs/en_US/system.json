@@ -1,0 +1,12 @@
+{
+  "title": "System Management",
+  "dept": {
+    "title": "Department Management"
+  },
+  "menu": {
+    "title": "Menu Management"
+  },
+  "role": {
+    "title": "Role Management"
+  }
+}

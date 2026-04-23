@@ -1,4 +1,3 @@
-
 import Logo from '@/components/logo';
 import { LangSwitch } from '@/features/lang';
 import { Preferences } from '@/features/preferences';
@@ -9,6 +8,7 @@ import {
   CommandMenu,
   FullScreenButton,
   Notification,
+  RefreshButton,
 } from '@/layouts/widgets';
 import { useLayoutMode } from '@/store/preferences';
 
@@ -25,6 +25,9 @@ export default function LayoutHeader() {
           <Logo />
         </div>
       )}
+
+      {/* 刷新页面按钮 */}
+      <RefreshButton />
 
       {/* 面包屑 */}
       <div className="flex-center hidden lg:block">
@@ -44,9 +47,7 @@ export default function LayoutHeader() {
       {/* Right Setting */}
       <div className="flex h-full min-w-0 flex-shrink-0 items-center">
         {/* 搜索按钮 */}
-        <div className="mr-1 sm:mr-4">
-          <CommandMenu />
-        </div>
+        <div className="mr-1 sm:mr-4">{/* <CommandMenu /> */}</div>
 
         {/* theme设置按钮 */}
         <div className="mr-1">

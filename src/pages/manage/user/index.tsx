@@ -7,10 +7,9 @@ import {
   TableColumnsType,
   Tag,
 } from 'antd';
-import axios from 'axios';
 import { lazy, Suspense } from 'react';
 
-
+import { getUserList } from '@/api/system';
 import { TableHeaderOperation } from '@/features/table';
 import { useTable } from '@/hooks/use-table';
 import { useTableOperate } from '@/hooks/use-table-operate';
@@ -48,43 +47,23 @@ export type UserItem = {
   userEmail: string;
   userRoles: string[];
 };
-type PaginatingQueryRecord<T = any> = {
-  /** 当前页码 */
-  current: number;
-  /** 每页条数 */
-  size: number;
-  /** 总条数 */
-  total: number;
-  /** 数据列表 */
-  records: T[];
-};
 
-const fetchGetUserList = (
-  params: any,
-): Promise<PaginatingQueryRecord<UserItem>> => {
-  const Iparams = {
-    apifoxToken: 'XL299LiMEDZ0H5h3A29PxwQXdMJqWyY2',
-    ...params,
-  };
-  const url = `https://apifoxmock.com/m1/3109515-0-default/systemManage/getUserList`;
+const apiFetch = (params: any) => {
+  console.log('params', params);
 
-  return axios({
-    method: 'get',
-    params: Iparams,
-    url: url,
-  }).then((res) => {
-    // console.log('res', res.data);
-    const resData = res.data.data;
-
-    return resData;
-  });
+  return getUserList({ page: params.current, pageSize: params.size }).then(
+    (resData: any) => ({
+      records: resData.items,
+      total: resData.total,
+    }),
+  );
 };
 
 export default function UserMange() {
   const { scrollConfig, tableWrapperRef } = useTableScroll();
   const { columnChecks, data, run, searchProps, setColumnChecks, tableProps } =
     useTable({
-      apiFn: fetchGetUserList,
+      apiFn: apiFetch,
       apiParams: {
         current: 1,
         nickName: null,
@@ -108,7 +87,7 @@ export default function UserMange() {
           align: 'center',
           dataIndex: 'userName',
           key: 'userName',
-          minWidth: 100,
+          width: 120,
           title: '用户名',
         },
         {
@@ -133,7 +112,7 @@ export default function UserMange() {
           align: 'center',
           dataIndex: 'nickName',
           key: 'nickName',
-          minWidth: 100,
+          minWidth: 50,
           title: '昵称',
         },
         {
@@ -141,7 +120,7 @@ export default function UserMange() {
           dataIndex: 'userPhone',
           key: 'userPhone',
           title: '电话',
-          width: 120,
+          minWidth: 120,
         },
         {
           align: 'center',

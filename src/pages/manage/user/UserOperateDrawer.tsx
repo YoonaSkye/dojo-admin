@@ -6,9 +6,6 @@ import { TableOperateType } from '@/types';
 
 import type { FormInstance } from 'antd';
 
-
-
-
 interface OptionsProps {
   label: string;
   value: string;
@@ -125,7 +122,7 @@ export default function UserOperateDrawer({
           <Input placeholder="请输入手机号" />
         </Form.Item>
 
-        <Form.Item label="邮箱" name="email">
+        <Form.Item label="邮箱" name="userEmail">
           <Input placeholder="请输入邮箱" />
         </Form.Item>
 

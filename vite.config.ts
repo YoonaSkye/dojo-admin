@@ -61,7 +61,8 @@ export default defineConfig((config) => {
       host: true,
       proxy: {
         '/api': {
-          target: 'https://m1.apifoxmock.com/m1/5897771-5584603-default',
+          // target: 'https://m1.apifoxmock.com/m1/5897771-5584603-default',
+          target: 'http://localhost:5320/api',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
         },

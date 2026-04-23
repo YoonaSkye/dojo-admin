@@ -2,5 +2,9 @@
   "iconPicker": {
     "search": "搜索图标",
     "placeholder": "请选择图标"
+  },
+  "formRules": {
+    "required": "{0}不能为空",
+    "selectRequired": "请选择{0}"
   }
 }

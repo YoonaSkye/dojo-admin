@@ -3,9 +3,9 @@
  */
 import { AxiosResponseHeaders } from 'axios';
 import JSONBigInt from 'json-bigint';
-import cloneDeep from 'lodash.cloneDeep';
 
 import { useAccessStore } from '@/store/access';
+import { cloneDeep } from '@/utils';
 
 import {
   defaultResponseInterceptor,

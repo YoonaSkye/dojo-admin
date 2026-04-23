@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import { CSSProperties, useMemo } from 'react';
 
 import type { AdminLayoutProps } from '@/layouts/types';
 import { useLayoutMode } from '@/store/preferences';
@@ -6,14 +6,22 @@ import { useLayoutMode } from '@/store/preferences';
 import KeepLiveArea from '../keep-live-area';
 import Tabs from '../tabs';
 
-
-
 // constant config
 export const NAV_WIDTH = 224;
 export const NAV_COLLAPSED_WIDTH = 60;
 export const Collapse_Height = 42;
 export const HEADER_HEIGHT = 50;
 export const TABBAR_HEIGHT = 38;
+
+function calcMenuWidth(collapsed: boolean): CSSProperties {
+  const widthValue = collapsed ? `${NAV_COLLAPSED_WIDTH}px` : `${NAV_WIDTH}px`;
+  return {
+    flex: `0 0 ${widthValue}`,
+    maxWidth: widthValue,
+    minWidth: widthValue,
+    width: widthValue,
+  };
+}
 
 export default function AdminLayout(props: AdminLayoutProps) {
   const {
@@ -40,60 +48,48 @@ export default function AdminLayout(props: AdminLayoutProps) {
   const showHeader = Boolean(Header) && headerVisible;
   const showSider =
     !isMobile && Boolean(Sider) && siderVisible && layoutMode !== 'horizontal';
-  // const showMobileSider = isMobile && Boolean(Sider) && siderVisible;
   const showTab = true;
   const showFooter = false;
 
   // computed styles
   const marginTop = layoutMode === 'header-sidebar-nav' ? HEADER_HEIGHT : 0;
 
-  const headerStyle: CSSProperties = {
-    height: `${HEADER_HEIGHT}px`,
-  };
-  const headerWrapperStyle: CSSProperties = {
-    height: `${HEADER_HEIGHT + TABBAR_HEIGHT}px`,
-    left: `${
+  const menuWidthStyle = useMemo(() => calcMenuWidth(siderCollapse), [siderCollapse]);
+
+  const headerStyle: CSSProperties = useMemo(() => ({ height: `${HEADER_HEIGHT}px` }), []);
+
+  const headerWrapperStyle: CSSProperties = useMemo(() => {
+    const leftOffset =
       layoutMode !== 'vertical'
         ? 0
         : siderCollapse
           ? NAV_COLLAPSED_WIDTH
-          : NAV_WIDTH
-    }px`,
-    position: 'fixed',
-    top: 0,
-    width: `${
+          : NAV_WIDTH;
+    const widthValue =
       layoutMode === 'vertical'
         ? `calc(100% - ${siderCollapse ? NAV_COLLAPSED_WIDTH : NAV_WIDTH}px)`
-        : '100%'
-    }`,
-    zIndex: 20,
-  };
-
-  const hiddenSiderStyle: CSSProperties = {
-    ...calcMenuWidthStyle(siderCollapse),
-  };
-  const asideStyle: CSSProperties = {
-    ...calcMenuWidthStyle(siderCollapse),
-    height: `calc(100% - ${marginTop}px)`,
-    marginTop: `${marginTop}px`,
-  };
-
-  const mainStyle: CSSProperties = {
-    // flex: '1 1 0%',
-  };
-
-  function calcMenuWidthStyle(collapsed: boolean) {
-    const widthValue = collapsed
-      ? `${NAV_COLLAPSED_WIDTH}px`
-      : `${NAV_WIDTH}px`;
+        : '100%';
 
     return {
-      flex: `0 0 ${widthValue}`,
-      maxWidth: widthValue,
-      minWidth: widthValue,
+      height: `${HEADER_HEIGHT + TABBAR_HEIGHT}px`,
+      left: `${leftOffset}px`,
+      position: 'fixed',
+      top: 0,
       width: widthValue,
+      zIndex: 20,
     };
-  }
+  }, [layoutMode, siderCollapse]);
+
+  const asideStyle: CSSProperties = useMemo(
+    () => ({
+      ...menuWidthStyle,
+      height: `calc(100% - ${marginTop}px)`,
+      marginTop: `${marginTop}px`,
+    }),
+    [menuWidthStyle, marginTop]
+  );
+
+  const mainStyle: CSSProperties = useMemo(() => ({}), []);
 
   return (
     <div className="relative flex h-full w-full">
@@ -103,7 +99,7 @@ export default function AdminLayout(props: AdminLayoutProps) {
           {/* TODO: 根据theme mode来改变 class='light' / 'dark' */}
           <div
             className="dark h-full transition-all duration-150"
-            style={hiddenSiderStyle}
+            style={menuWidthStyle}
           ></div>
           <aside
             className="z-100 fixed left-0 top-0 border-r border-border bg-sidebar"

@@ -1,24 +1,23 @@
 import PlusOutlined from '@ant-design/icons/PlusOutlined';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Popconfirm, Tag } from 'antd';
-import axios from 'axios';
 import { useRef, useState } from 'react';
 
+import { getRoleList } from '@/api/system';
 import { antdUtils } from '@/utils';
 
 import RoleOperateDrawer from './UserOperateDrawer';
 
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 
-
 const ATG_MAP = {
   1: 'success',
-  2: 'warning',
+  0: 'warning',
 };
 
 const enableStatusRecord = {
   '1': '启用',
-  '2': '禁用',
+  '0': '禁用',
 };
 
 export type RoleItem = {
@@ -27,31 +26,20 @@ export type RoleItem = {
   createTime: string;
   updateBy: string;
   updateTime: string;
-  status: '1' | '2';
+  status: '1' | '0';
   roleName: string;
   roleCode: string;
   roleDesc: string;
 };
 
-const fetchGetRoleList = (params: any) => {
-  const Iparams = {
-    apifoxToken: 'XL299LiMEDZ0H5h3A29PxwQXdMJqWyY2',
-    ...params,
-  };
-  const url = `https://apifoxmock.com/m1/3109515-0-default/systemManage/getRoleList`;
-
-  return axios({
-    method: 'get',
-    params: Iparams,
-    url: url,
-  }).then((res) => {
-    const resData = res.data.data;
-    return {
-      data: resData.records,
+const apiFetch = (params: any) => {
+  return getRoleList({ page: params.current, pageSize: params.pageSize }).then(
+    (resData: any) => ({
+      data: resData.items,
       total: resData.total,
       success: true,
-    };
-  });
+    }),
+  );
 };
 
 export default function RoleManage() {
@@ -92,32 +80,19 @@ export default function RoleManage() {
   const columns: ProColumns<RoleItem>[] = [
     {
       align: 'center',
-      dataIndex: 'id',
-      key: 'index',
-      title: '序号',
-      width: 64,
-      search: false,
-    },
-    {
-      align: 'center',
-      dataIndex: 'roleName',
-      key: 'roleName',
-      minWidth: 120,
+      dataIndex: 'name',
+      key: 'name',
+      // minWidth: 200,
+      width: 200,
       title: '角色名称',
     },
     {
       align: 'center',
-      dataIndex: 'roleCode',
-      key: 'roleCode',
-      minWidth: 120,
-      title: '角色编码',
-    },
-    {
-      dataIndex: 'roleDesc',
-      key: 'roleDesc',
-      minWidth: 120,
-      title: '角色描述',
-      search: false,
+      dataIndex: 'id',
+      key: 'index',
+      title: '角色ID',
+      width: 200,
+      // search: false,
     },
     {
       align: 'center',
@@ -128,7 +103,7 @@ export default function RoleManage() {
         '1': {
           text: '启用',
         },
-        '2': {
+        '0': {
           text: '禁用',
         },
       },
@@ -141,6 +116,20 @@ export default function RoleManage() {
       },
       title: '用户状态',
       width: 100,
+    },
+    {
+      dataIndex: 'remark',
+      key: 'remark',
+      minWidth: 100,
+      title: '备注',
+      // search: false,
+    },
+    {
+      dataIndex: 'createTime',
+      key: 'createTime',
+      minWidth: 100,
+      title: '创建时间',
+      // search: false,
     },
     {
       align: 'center',
@@ -168,7 +157,7 @@ export default function RoleManage() {
         </div>
       ),
       title: '操作',
-      width: 195,
+      width: 130,
     },
   ];
 
@@ -185,7 +174,8 @@ export default function RoleManage() {
             pageSize: params.pageSize,
           };
 
-          return fetchGetRoleList(p);
+          // return fetchGetRoleList(p);
+          return apiFetch(p);
         }}
         editable={{
           type: 'multiple',

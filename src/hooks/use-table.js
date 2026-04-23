@@ -89,20 +89,16 @@ export function useTable(config) {
     },
     immediate,
     isChangeURL,
-    transformer: (res) => {
+    transformer: (res, { current = 1, size = 10 }) => {
       const {
-        current = 1,
         records = [],
-        size = 10,
         total: totalNum = 0,
       } = res || {};
 
-      const recordsWithIndex = records.map((item, index) => {
-        return {
-          ...item,
-          index: (current - 1) * size + index + 1,
-        };
-      });
+      const recordsWithIndex = records.map((item, index) => ({
+        ...item,
+        index: (current - 1) * size + index + 1,
+      }));
 
       return {
         data: recordsWithIndex,

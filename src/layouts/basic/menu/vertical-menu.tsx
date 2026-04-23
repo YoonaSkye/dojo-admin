@@ -1,7 +1,6 @@
 import { ConfigProvider, Menu } from 'antd';
 import { useEffect, useMemo, useState } from 'react';
 
-
 import { useRoute, useRouter } from '@/router';
 import { useAccessMenus } from '@/store/access';
 import { useSiderSetting } from '@/store/preferences';
@@ -99,6 +98,7 @@ export default function VerticalMenu({ mode, themeMode }: Props) {
   };
   const onClick: MenuProps['onClick'] = ({ key }) => {
     router.navigate(key);
+    console.log('key', key);
   };
 
   return (
