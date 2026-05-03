@@ -64,8 +64,8 @@ All stores use `zustand/middleware/persist` for localStorage persistence. When l
 
 The theme system combines Ant Design theme customization with Tailwind CSS variables:
 
-- Theme preferences stored in [src/features/preferences/theme/](src/features/preferences/theme/)
-- Built-in themes defined in `BUILT_IN_THEME_PRESETS`
+- Theme preferences stored in [src/features/preferences/blocks/theme/](src/features/preferences/blocks/theme/)
+- Built-in themes defined in `BUILT_IN_THEME_PRESETS` in [src/features/preferences/blocks/theme/builtin.tsx](src/features/preferences/blocks/theme/builtin.tsx)
 - CSS variables updated via `updateCSSVariables()`
 - Supports light/dark mode switching
 - Multiple layout modes: vertical, horizontal, etc.
@@ -73,7 +73,8 @@ The theme system combines Ant Design theme customization with Tailwind CSS varia
 ### Layout Structure
 
 - Main layout: [src/layouts/basic/](src/layouts/basic/)
-- Layout includes: sidebar menu, header, tabbar, breadcrumb, footer
+- Layout components in [src/layouts/basic/components/](src/layouts/basic/components/): admin-layout, menu, tabs, widgets
+- Layout also includes: keep-live-area, sidebar menu, header, tabbar, breadcrumb
 - Layout components are wrapped in providers (Theme, Antd, App)
 
 ### API Layer
@@ -85,11 +86,11 @@ The theme system combines Ant Design theme customization with Tailwind CSS varia
 
 ## Important Conventions
 
-1. **Route Changes**: When adding routes, check if they need auth protection. Constant routes (login, 404) are defined in [src/router/routes/core.tsx](src/router/routes/core.tsx).
+1. **Route Changes**: Routes are modular — core routes in [src/router/routes/core.tsx](src/router/routes/core.tsx) and additional modules in [src/router/routes/modules/](src/router/routes/modules/). Constant routes (login, 404) are defined in core.tsx. Check if new routes need auth protection.
 
 2. **Permission Checks**: Use `useAccessStore` for auth state and access codes. For button-level permissions, check against `accessCodes` array.
 
-3. **Logout Flow**: Must use `startTransition()` when logging out to properly handle React's Suspense. Sequence: clear storage → reset stores → reset routes → navigate to login.
+3. **Logout Flow**: Must use `startTransition()` when logging out to properly handle React's Suspense. Sequence: clear storage → reset stores via `resetAllStores()` from [src/store/utils.ts](src/store/utils.ts) → reset routes → navigate to login.
 
 4. **Component Libraries**:
    - Use Ant Design for complex components (tables, forms)
