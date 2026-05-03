@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 
 import { Iconify } from '@/components/icon';
-import type { RouteRecordStringComponent } from '@/types';
+import type { AppRouteObject, RouteRecordStringComponent } from '@/types';
 import { filterTree, mapTree } from '@/utils';
 
 import type { MenuProps } from 'antd';
@@ -23,13 +23,15 @@ const MenuLabel = ({ label }: { label: string }) => {
  * 根据 routes 生成菜单列表
  * @param routes
  */
-function generateMenus(routes: RouteRecordStringComponent[]): MenuItem[] {
+function generateMenus(
+  routes: (RouteRecordStringComponent | AppRouteObject)[],
+): MenuItem[] {
   const menus = filterTree(routes, (route) => {
     if (!route.path) return false;
     return !route?.handle?.hideInMenu;
   });
   const sortedMenus = menus.sort(
-    (a, b) => (a.handle.order || 999) - (b.handle.order || 999),
+    (a, b) => (a.handle?.order || 999) - (b.handle?.order || 999),
   );
 
   const finalMenus = mapTree(sortedMenus, (route) => {

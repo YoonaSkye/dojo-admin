@@ -54,9 +54,15 @@ export default function AdminLayout(props: AdminLayoutProps) {
   // computed styles
   const marginTop = layoutMode === 'header-sidebar-nav' ? HEADER_HEIGHT : 0;
 
-  const menuWidthStyle = useMemo(() => calcMenuWidth(siderCollapse), [siderCollapse]);
+  const menuWidthStyle = useMemo(
+    () => calcMenuWidth(siderCollapse),
+    [siderCollapse],
+  );
 
-  const headerStyle: CSSProperties = useMemo(() => ({ height: `${HEADER_HEIGHT}px` }), []);
+  const headerStyle: CSSProperties = useMemo(
+    () => ({ height: `${HEADER_HEIGHT}px` }),
+    [],
+  );
 
   const headerWrapperStyle: CSSProperties = useMemo(() => {
     const leftOffset =
@@ -86,7 +92,7 @@ export default function AdminLayout(props: AdminLayoutProps) {
       height: `calc(100% - ${marginTop}px)`,
       marginTop: `${marginTop}px`,
     }),
-    [menuWidthStyle, marginTop]
+    [menuWidthStyle, marginTop],
   );
 
   const mainStyle: CSSProperties = useMemo(() => ({}), []);

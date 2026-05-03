@@ -78,6 +78,12 @@ export interface RouteMeta {
    * 路由名称
    */
   name?: string;
+  /**
+   * 菜单可见但访问会重定向到403
+   * 用于前端权限控制模式，显示菜单但无权限访问时显示403
+   * @default false
+   */
+  menuVisibleWithForbidden?: boolean;
 }
 
 // 定义递归类型以将 RouteObject 的 component / element 属性更改为 string
