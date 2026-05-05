@@ -59,6 +59,39 @@ const demosRoutes = [
               menuVisibleWithForbidden: true,
             },
           },
+          {
+            name: 'AccessSuperVisibleDemo',
+            path: '/demos/access/super-visible',
+            component: '/demos/access/super-visible/index.tsx',
+            handle: {
+              title: 'demos.access.superVisible',
+              icon: 'mdi:button-cursor',
+              hideInTab: false,
+              authority: ['super'],
+            },
+          },
+          {
+            name: 'AccessAdminVisibleDemo',
+            path: '/demos/access/admin-visible',
+            component: '/demos/access/admin-visible/index.tsx',
+            handle: {
+              title: 'demos.access.adminVisible',
+              icon: 'mdi:button-cursor',
+              hideInTab: false,
+              authority: ['admin'],
+            },
+          },
+          {
+            name: 'AccessUserVisibleDemo',
+            path: '/demos/access/user-visible',
+            component: '/demos/access/user-visible/index.tsx',
+            handle: {
+              title: 'demos.access.userVisible',
+              icon: 'mdi:button-cursor',
+              hideInTab: false,
+              authority: ['user'],
+            },
+          },
         ],
       },
       {

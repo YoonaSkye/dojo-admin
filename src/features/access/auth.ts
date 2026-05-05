@@ -1,7 +1,12 @@
 import { startTransition, useState } from 'react';
 
-import { getAccessCodesApi, getUserInfoApi, loginApi } from '@/api/core';
-import { useRouter } from '@/router';
+import {
+  getAccessCodesApi,
+  getUserInfoApi,
+  loginApi,
+  logoutApi,
+} from '@/api/core';
+import { router, useRouter } from '@/router';
 import { useAccessStore } from '@/store/access';
 import { useUserStore } from '@/store/user';
 import { resetAllStores } from '@/store/utils';
@@ -14,7 +19,7 @@ const HOME_PAGE = import.meta.env.VITE_APP_HOMEPAGE || '/dashboard/analytics';
 const useAuthLogin = () => {
   const setUserInfo = useUserStore((store) => store.setUserInfo);
   const [loading, setLoading] = useState(false);
-  const { replace } = useRouter();
+  const { replace, resetRoutes } = useRouter();
 
   /**
    * 异步处理登录操作
@@ -49,9 +54,11 @@ const useAuthLogin = () => {
         setUserInfo(userInfo);
         useAccessStore.setState({ accessCodes });
 
-        onSuccess
-          ? await onSuccess?.()
-          : replace(userInfo.homePath || HOME_PAGE);
+        if (onSuccess) {
+          await onSuccess();
+        } else {
+          replace(userInfo.homePath || HOME_PAGE);
+        }
 
         if (userInfo?.realName) {
           antdUtils.notification.success({
@@ -71,12 +78,30 @@ const useAuthLogin = () => {
   return { authLogin, loading };
 };
 
+/**
+ * 清除认证状态的软切换（不调用服务端 logout）
+ * 清除持久化缓存、重置 store 状态、重置路由
+ */
+const cleanAuthState = () => {
+  startTransition(() => {
+    // 1. 清除持久化缓存，防止 store 重新初始化时读到旧数据
+    useAccessStore.persist.clearStorage();
+    useUserStore.persist.clearStorage();
+
+    // 2. 重置内存中的 store 状态
+    resetAllStores();
+
+    // 3. 重置路由配置（移除受保护的路由）
+    router.resetRoutes();
+  });
+};
+
 const useSignOut = () => {
   const { replace, resetRoutes } = useRouter();
 
-  function logout() {
+  async function logout() {
     try {
-      // await logoutApi();
+      await logoutApi();
     } catch (error) {
       // 不做任何处理
     }
@@ -104,4 +129,4 @@ const useSignOut = () => {
   return { logout };
 };
 
-export { useAuthLogin, useSignOut };
+export { useAuthLogin, useSignOut, cleanAuthState };
