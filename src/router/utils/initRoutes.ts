@@ -2,6 +2,7 @@ import { RouteObject } from 'react-router-dom';
 
 import { getAllMenusApi } from '@/api/core';
 import { useAccessStore } from '@/store/access';
+import { useTabbarStore } from '@/store/tabs';
 import { useUserStore } from '@/store/user';
 import type { RouteRecordStringComponent } from '@/types';
 
@@ -18,25 +19,23 @@ export async function initAuthRoutes(
 ) {
   const userRoles = useUserStore.getState().userRoles;
 
-  let authRoutes: ReturnType<typeof generateRoutesByBackend>['routes'] = [];
-  let menus: ReturnType<typeof generateMenus> = [];
+  let result: ReturnType<typeof generateRoutesByBackend>;
 
   if (ACCESS_MODE === 'frontend') {
     // 前端静态路由模式：根据用户角色过滤路由后生成菜单
-    const result = generateRoutesByFrontend(
+    result = generateRoutesByFrontend(
       frontendRoutes as RouteRecordStringComponent[],
       userRoles,
     );
-    authRoutes = result.routes;
-    menus = generateMenus(authRoutes);
   } else {
     // 后端动态路由模式
     const data = await getAllMenusApi();
-    const result = generateRoutesByBackend(data);
-    authRoutes = result.routes;
-    // 统一使用转换后的路由生成菜单
-    menus = generateMenus(authRoutes);
+    result = generateRoutesByBackend(data);
   }
+
+  const authRoutes = result.routes;
+  const menus = generateMenus(authRoutes);
+  useTabbarStore.setState({ cachedTabs: new Set(result.cacheRoutes) });
 
   useAccessStore.setState({
     isAccessChecked: true,

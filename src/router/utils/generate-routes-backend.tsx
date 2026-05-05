@@ -66,9 +66,9 @@ function convertRoutes(
       }
 
       // 如果路由配置了 keepAlive，则将其路径添加到 cacheRoutes 中
-      // 目前只针对了页面级路由，且路径必须存在
-      // TODO
-      // if (handle?.keepAlive) cacheRoutes.push(route.path || '');
+      if (handle?.keepAlive && route.path) {
+        cacheRoutes.push(route.path);
+      }
     }
 
     return route;

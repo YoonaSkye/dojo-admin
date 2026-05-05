@@ -1,7 +1,6 @@
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 
-
 import type { RouterContextType as Router } from '@/router';
 import type { Route, TabDefinition } from '@/types';
 
@@ -12,10 +11,6 @@ interface TabbarState {
    * @zh_CN 当前打开的标签页列表缓存
    */
   cachedTabs: Set<string>;
-  /**
-   * @zh_CN 需要排除缓存的标签页
-   */
-  excludeCachedTabs: Set<string>;
   /**
    * @zh_CN 标签右键菜单列表
    */
@@ -91,11 +86,7 @@ interface TabbarActions {
   /**
    * 刷新标签页
    */
-  refresh: (key?: string) => void;
-  /**
-   * 根据路由名称刷新指定标签页
-   */
-  // refreshByName: (name: string) => Promise<void>;
+  refresh: () => void;
   /**
    * @zh_CN 更新菜单列表
    */
@@ -117,10 +108,6 @@ interface TabbarActions {
    * @param tab
    */
   unpinTab: (tab: TabDefinition) => void;
-  /**
-   * 根据当前打开的选项卡更新缓存
-   */
-  updateCacheTabs: () => void;
   getAffixTabs: () => TabDefinition[];
   reset: () => void;
 }
@@ -132,7 +119,6 @@ export const useTabbarStore = create<TabbarStore>()(
     immer((set, get, store) => ({
       // Initial state
       cachedTabs: new Set(),
-      excludeCachedTabs: new Set(),
       menuList: [
         'close',
         'affix',
@@ -154,7 +140,6 @@ export const useTabbarStore = create<TabbarStore>()(
             (item) => !keySet.has(getTabKeyFromTab(item)),
           );
         });
-        get().updateCacheTabs();
       },
 
       _close: (tab: TabDefinition) => {
@@ -230,9 +215,6 @@ export const useTabbarStore = create<TabbarStore>()(
               if (curMeta.affixTab !== undefined) {
                 mergedTab.handle.affixTab = curMeta.affixTab;
               }
-              // if (curMeta.newTabTitle !== undefined) {
-              //   mergedTab.handle.newTabTitle = curMeta.newTabTitle;
-              // }
             }
             state.tabs.splice(tabIndex, 1, mergedTab);
             tab = mergedTab;
@@ -248,7 +230,6 @@ export const useTabbarStore = create<TabbarStore>()(
           state.tabs = newTabs.length > 0 ? newTabs : state.tabs.slice(0, 1);
         });
         get()._goToDefaultTab(router);
-        get().updateCacheTabs();
       },
 
       closeLeftTabs: (tab: TabDefinition) => {
@@ -304,7 +285,6 @@ export const useTabbarStore = create<TabbarStore>()(
 
         if (getTabKey(currentRoute) !== getTabKeyFromTab(tab)) {
           get()._close(tab);
-          get().updateCacheTabs();
           return;
         }
         const index = state.tabs.findIndex(
@@ -324,7 +304,6 @@ export const useTabbarStore = create<TabbarStore>()(
       },
 
       closeTabByKey: (key: string, router: Router, route: Route) => {
-        // const originKey = decodeURIComponent(key);
         const originKey = key;
         const state = get();
         const index = state.tabs.findIndex(
@@ -369,15 +348,9 @@ export const useTabbarStore = create<TabbarStore>()(
       },
 
       refresh: async () => {
-        set((state) => {
-          state.renderRouteView = true;
-        });
-
+        get().renderRouteView = true;
         await new Promise((resolve) => setTimeout(resolve, 200));
-
-        set((state) => {
-          state.renderRouteView = false;
-        });
+        get().renderRouteView = false;
       },
 
       setMenuList: (list: string[]) => {
@@ -421,7 +394,6 @@ export const useTabbarStore = create<TabbarStore>()(
           const oldTab = state.tabs[index];
           tab.handle.affixTab = false;
           tab.handle.title = oldTab?.handle?.title as string;
-          // this.addTab(tab);
           state.tabs.splice(index, 1, tab);
         });
 
@@ -431,10 +403,6 @@ export const useTabbarStore = create<TabbarStore>()(
         const newIndex = affixTabs.length;
         // 交换位置重新排序
         get().sortTabs(index, newIndex);
-      },
-
-      updateCacheTabs: () => {
-        // TODO: 待完成
       },
 
       getAffixTabs: () => {

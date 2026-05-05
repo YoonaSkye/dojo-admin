@@ -11,11 +11,10 @@ function KeepLiveArea() {
   const outlet = useOutlet();
   const aliveRef = useKeepAliveRef();
   const reload = useTabbarStore((state) => state.renderRouteView);
-  // 把cacheRoutes 放到 useTabbarStore
+  const cachedTabs = useTabbarStore((state) => state.cachedTabs);
 
   const activeCacheKey = route.fullPath;
 
-  // TODO: 处理Keeplive 白名单 和 缓存名单移除，tabs数量上限问题？
   useUpdateEffect(() => {
     aliveRef.current?.refresh();
   }, [reload]);
@@ -26,7 +25,7 @@ function KeepLiveArea() {
       aliveRef={aliveRef}
       activeCacheKey={activeCacheKey}
       max={18}
-      // include={cacheRoutes}
+      include={Array.from(cachedTabs)}
     >
       <Suspense>{!reload && outlet}</Suspense>
     </KeepAlive>
