@@ -1,6 +1,5 @@
 import { useEffect, useMemo } from 'react';
-
-
+import { useShallow } from 'zustand/react/shallow';
 
 import { useLocale } from '@/features/lang';
 import {
@@ -15,17 +14,16 @@ import {
 } from '@/icons';
 import { $t } from '@/locales/i18n';
 import { useRoute, useRouter } from '@/router';
-import { getTabKey, useTabbarStore } from '@/store/tabs';
+import { getTabKey, getTabsSelector, useTabbarStore } from '@/store/tabs';
 import type { IContextMenuItem, TabDefinition } from '@/types';
 
 import { useTabs } from './use-tabs';
-
 
 export function useTabbar() {
   const router = useRouter();
   const route = useRoute();
 
-  const tabs = useTabbarStore((state) => state.tabs);
+  const tabs = useTabbarStore(useShallow(getTabsSelector));
   const updateTime = useTabbarStore((state) => state.updateTime);
   const menuList = useTabbarStore((state) => state.menuList);
   const { addTab, getTabByKey } = useTabbarStore();

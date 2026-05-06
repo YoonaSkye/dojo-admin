@@ -1,12 +1,19 @@
+import { useShallow } from 'zustand/react/shallow';
 
 import { useRoute, useRouter } from '@/router';
-import { useTabbarStore } from '@/store/tabs';
+import {
+  getAffixTabsSelector,
+  getTabsSelector,
+  useTabbarStore,
+} from '@/store/tabs';
 import type { TabDefinition } from '@/types';
 
 export function useTabs() {
   const router = useRouter();
   const route = useRoute();
-  const tabs = useTabbarStore((state) => state.tabs);
+  // const tabs = useTabbarStore((state) => state.tabs);
+  const tabs = useTabbarStore(useShallow(getTabsSelector));
+  const affixTabs = useTabbarStore(useShallow(getAffixTabsSelector));
 
   const {
     closeAllTabs,
@@ -16,9 +23,19 @@ export function useTabs() {
     closeTab,
     closeTabByKey,
     toggleTabPin,
-    getAffixTabs,
     refresh,
-  } = useTabbarStore();
+  } = useTabbarStore(
+    useShallow((state) => ({
+      closeAllTabs: state.closeAllTabs,
+      closeLeftTabs: state.closeLeftTabs,
+      closeOtherTabs: state.closeOtherTabs,
+      closeRightTabs: state.closeRightTabs,
+      closeTab: state.closeTab,
+      closeTabByKey: state.closeTabByKey,
+      toggleTabPin: state.toggleTabPin,
+      refresh: state.refresh,
+    })),
+  );
 
   function closeCurrentTab(tab?: TabDefinition) {
     closeTab(tab || route, router, route);
@@ -30,7 +47,6 @@ export function useTabs() {
    */
   function getTabDisableState(tab: TabDefinition = route) {
     const index = tabs.findIndex((item) => item.pathname === tab.pathname);
-    const affixTabs = getAffixTabs();
 
     const disabled = tabs.length <= 1;
 

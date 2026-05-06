@@ -1,4 +1,4 @@
-import { createJSONStorage, persist } from 'zustand/middleware';
+import { createJSONStorage, persist, devtools } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 
 import type { RouterContextType as Router } from '@/router';
@@ -108,319 +108,356 @@ interface TabbarActions {
    * @param tab
    */
   unpinTab: (tab: TabDefinition) => void;
-  getAffixTabs: () => TabDefinition[];
+  // getAffixTabs: () => TabDefinition[];
+  // getTabs: () => TabDefinition[];
   reset: () => void;
 }
 
 type TabbarStore = TabbarState & TabbarActions;
 
 export const useTabbarStore = create<TabbarStore>()(
-  persist(
-    immer((set, get, store) => ({
-      // Initial state
-      cachedTabs: new Set(),
-      menuList: [
-        'close',
-        'affix',
-        'reload',
-        'close-left',
-        'close-right',
-        'close-other',
-        'close-all',
-      ],
-      renderRouteView: false,
-      tabs: [],
-      updateTime: Date.now(),
+  devtools(
+    persist(
+      immer((set, get, store) => ({
+        // Initial state
+        cachedTabs: new Set(),
+        menuList: [
+          'close',
+          'affix',
+          'reload',
+          'close-left',
+          'close-right',
+          'close-other',
+          'close-all',
+        ],
+        renderRouteView: false,
+        tabs: [],
+        updateTime: Date.now(),
 
-      // Actions
-      _bulkCloseByKeys: (keys: string[]) => {
-        const keySet = new Set(keys);
-        set((state) => {
-          state.tabs = state.tabs.filter(
-            (item) => !keySet.has(getTabKeyFromTab(item)),
-          );
-        });
-      },
-
-      _close: (tab: TabDefinition) => {
-        if (isAffixTab(tab)) {
-          return;
-        }
-        set((state) => {
-          const index = state.tabs.findIndex((item) => equalTab(item, tab));
-          if (index !== -1) {
-            state.tabs.splice(index, 1);
-          }
-        });
-      },
-
-      _goToDefaultTab: (router: Router) => {
-        const state = get();
-        if (state.tabs.length <= 0) {
-          return;
-        }
-        const firstTab = state.tabs[0];
-        if (firstTab) {
-          get()._goToTab(firstTab, router);
-        }
-      },
-
-      _goToTab: (tab: TabDefinition, router: Router) => {
-        const { params, pathname, query } = tab;
-        const toParams = {
-          pathname: pathname,
-          search: new URLSearchParams(query).toString(),
-          state: params,
-        };
-        router.navigate(toParams);
-      },
-
-      addTab: (routeTab: TabDefinition) => {
-        let tab = cloneTab(routeTab);
-        if (!tab.key) {
-          tab.key = getTabKey(routeTab);
-        }
-        if (!isTabShown(tab)) {
-          return tab;
-        }
-
-        const state = get();
-        const tabIndex = state.tabs.findIndex((item) => equalTab(item, tab));
-
-        if (tabIndex === -1) {
-          // const maxCount = preferences.tabbar.maxCount;
-          const maxCount = 0;
-
+        // Actions
+        _bulkCloseByKeys: (keys: string[]) => {
+          const keySet = new Set(keys);
           set((state) => {
-            if (maxCount > 0 && state.tabs.length >= maxCount) {
-              const index = state.tabs.findIndex(
-                (item) => !item.handle.affixTab,
-              );
-              if (index !== -1) {
-                state.tabs.splice(index, 1);
-              }
-            }
-            state.tabs.push(tab);
-          });
-        } else {
-          set((state) => {
-            const currentTab = state.tabs[tabIndex];
-            const mergedTab = {
-              ...currentTab,
-              ...tab,
-              handle: { ...currentTab?.handle, ...tab.handle },
-            };
-            if (currentTab) {
-              const curMeta = currentTab.handle;
-              if (curMeta.affixTab !== undefined) {
-                mergedTab.handle.affixTab = curMeta.affixTab;
-              }
-            }
-            state.tabs.splice(tabIndex, 1, mergedTab);
-            tab = mergedTab;
-          });
-        }
-
-        return tab;
-      },
-
-      closeAllTabs: (router: Router) => {
-        set((state) => {
-          const newTabs = state.tabs.filter((tab) => isAffixTab(tab));
-          state.tabs = newTabs.length > 0 ? newTabs : state.tabs.slice(0, 1);
-        });
-        get()._goToDefaultTab(router);
-      },
-
-      closeLeftTabs: (tab: TabDefinition) => {
-        const state = get();
-        const index = state.tabs.findIndex((item) => equalTab(item, tab));
-        if (index < 1) {
-          return;
-        }
-        const leftTabs = state.tabs.slice(0, index);
-        const keys: string[] = [];
-        for (const item of leftTabs) {
-          if (!isAffixTab(item)) {
-            keys.push(item.key as string);
-          }
-        }
-        get()._bulkCloseByKeys(keys);
-      },
-
-      closeOtherTabs: (tab: TabDefinition) => {
-        const state = get();
-        const closeKeys = state.tabs.map((item) => getTabKeyFromTab(item));
-        const keys: string[] = [];
-        for (const key of closeKeys) {
-          if (key !== getTabKeyFromTab(tab)) {
-            const closeTab = state.tabs.find(
-              (item) => getTabKeyFromTab(item) === key,
+            state.tabs = state.tabs.filter(
+              (item) => !keySet.has(getTabKeyFromTab(item)),
             );
-            if (closeTab && !isAffixTab(closeTab)) {
-              keys.push(closeTab.key as string);
-            }
-          }
-        }
-        get()._bulkCloseByKeys(keys);
-      },
+          });
+        },
 
-      closeRightTabs: (tab: TabDefinition) => {
-        const state = get();
-        const index = state.tabs.findIndex((item) => equalTab(item, tab));
-        if (index !== -1 && index < state.tabs.length - 1) {
-          const rightTabs = state.tabs.slice(index + 1);
+        _close: (tab: TabDefinition) => {
+          if (isAffixTab(tab)) {
+            return;
+          }
+          set((state) => {
+            const index = state.tabs.findIndex((item) => equalTab(item, tab));
+            if (index !== -1) {
+              state.tabs.splice(index, 1);
+            }
+          });
+        },
+
+        _goToDefaultTab: (router: Router) => {
+          const state = get();
+          if (state.tabs.length <= 0) {
+            return;
+          }
+          const firstTab = state.tabs[0];
+          if (firstTab) {
+            get()._goToTab(firstTab, router);
+          }
+        },
+
+        _goToTab: (tab: TabDefinition, router: Router) => {
+          const { params, pathname, query } = tab;
+          const toParams = {
+            pathname: pathname,
+            search: new URLSearchParams(query).toString(),
+            state: params,
+          };
+          router.navigate(toParams);
+        },
+
+        addTab: (routeTab: TabDefinition) => {
+          let tab = cloneTab(routeTab);
+          if (!tab.key) {
+            tab.key = getTabKey(routeTab);
+          }
+          if (!isTabShown(tab)) {
+            return tab;
+          }
+
+          const state = get();
+          const tabIndex = state.tabs.findIndex((item) => equalTab(item, tab));
+
+          if (tabIndex === -1) {
+            // const maxCount = preferences.tabbar.maxCount;
+            const maxCount = 0;
+
+            set((state) => {
+              if (maxCount > 0 && state.tabs.length >= maxCount) {
+                const index = state.tabs.findIndex(
+                  (item) => !item.handle.affixTab,
+                );
+                if (index !== -1) {
+                  state.tabs.splice(index, 1);
+                }
+              }
+              state.tabs.push(tab);
+            });
+          } else {
+            set((state) => {
+              const currentTab = state.tabs[tabIndex];
+              const mergedTab = {
+                ...currentTab,
+                ...tab,
+                handle: { ...currentTab?.handle, ...tab.handle },
+              };
+              if (currentTab) {
+                const curMeta = currentTab.handle;
+                if (curMeta.affixTab !== undefined) {
+                  mergedTab.handle.affixTab = curMeta.affixTab;
+                }
+              }
+              state.tabs.splice(tabIndex, 1, mergedTab);
+              tab = mergedTab;
+            });
+          }
+
+          return tab;
+        },
+
+        closeAllTabs: (router: Router) => {
+          set((state) => {
+            const newTabs = state.tabs.filter((tab) => isAffixTab(tab));
+            state.tabs = newTabs.length > 0 ? newTabs : state.tabs.slice(0, 1);
+          });
+          get()._goToDefaultTab(router);
+        },
+
+        closeLeftTabs: (tab: TabDefinition) => {
+          const state = get();
+          const index = state.tabs.findIndex((item) => equalTab(item, tab));
+          if (index < 1) {
+            return;
+          }
+          const leftTabs = state.tabs.slice(0, index);
           const keys: string[] = [];
-          for (const item of rightTabs) {
+          for (const item of leftTabs) {
             if (!isAffixTab(item)) {
               keys.push(item.key as string);
             }
           }
           get()._bulkCloseByKeys(keys);
-        }
+        },
+
+        closeOtherTabs: (tab: TabDefinition) => {
+          const state = get();
+          const closeKeys = state.tabs.map((item) => getTabKeyFromTab(item));
+          const keys: string[] = [];
+          for (const key of closeKeys) {
+            if (key !== getTabKeyFromTab(tab)) {
+              const closeTab = state.tabs.find(
+                (item) => getTabKeyFromTab(item) === key,
+              );
+              if (closeTab && !isAffixTab(closeTab)) {
+                keys.push(closeTab.key as string);
+              }
+            }
+          }
+          get()._bulkCloseByKeys(keys);
+        },
+
+        closeRightTabs: (tab: TabDefinition) => {
+          const state = get();
+          const index = state.tabs.findIndex((item) => equalTab(item, tab));
+          if (index !== -1 && index < state.tabs.length - 1) {
+            const rightTabs = state.tabs.slice(index + 1);
+            const keys: string[] = [];
+            for (const item of rightTabs) {
+              if (!isAffixTab(item)) {
+                keys.push(item.key as string);
+              }
+            }
+            get()._bulkCloseByKeys(keys);
+          }
+        },
+
+        closeTab: (tab: TabDefinition, router: Router, currentRoute: Route) => {
+          const state = get();
+
+          if (getTabKey(currentRoute) !== getTabKeyFromTab(tab)) {
+            get()._close(tab);
+            return;
+          }
+          const index = state.tabs.findIndex(
+            (item) => getTabKeyFromTab(item) === getTabKey(currentRoute),
+          );
+          const before = state.tabs[index - 1];
+          const after = state.tabs[index + 1];
+          if (after) {
+            get()._close(tab);
+            get()._goToTab(after, router);
+          } else if (before) {
+            get()._close(tab);
+            get()._goToTab(before, router);
+          } else {
+            console.error(
+              'Failed to close the tab; only one tab remains open.',
+            );
+          }
+        },
+
+        closeTabByKey: (key: string, router: Router, route: Route) => {
+          const originKey = key;
+          const state = get();
+          const index = state.tabs.findIndex(
+            (item) => getTabKeyFromTab(item) === originKey,
+          );
+          if (index === -1) {
+            return;
+          }
+          const tab = state.tabs[index];
+          if (tab) {
+            get().closeTab(tab, router, route);
+          }
+        },
+
+        getTabByKey: (key: string) => {
+          const state = get();
+          return state.tabs.find(
+            (item) => getTabKeyFromTab(item) === key,
+          ) as TabDefinition;
+        },
+
+        pinTab: (tab: TabDefinition) => {
+          const state = get();
+          const index = state.tabs.findIndex((item) => equalTab(item, tab));
+          if (index === -1) {
+            return;
+          }
+
+          set((state) => {
+            const oldTab = state.tabs[index];
+            tab.handle.affixTab = true;
+            tab.handle.title = oldTab?.handle?.title as string;
+            state.tabs.splice(index, 1, tab);
+          });
+
+          // 过滤固定tabs，后面更改affixTabOrder的值的话可能会有问题，目前行464排序affixTabs没有设置值
+          const affixTabs = get().tabs.filter((tab) => isAffixTab(tab));
+          // 获得固定tabs的index
+          const newIndex = affixTabs.findIndex((item) => equalTab(item, tab));
+          // 交换位置重新排序
+          get().sortTabs(index, newIndex);
+        },
+
+        refresh: async () => {
+          get().renderRouteView = true;
+          await new Promise((resolve) => setTimeout(resolve, 200));
+          get().renderRouteView = false;
+        },
+
+        setMenuList: (list: string[]) => {
+          set((state) => {
+            state.menuList = list;
+          });
+        },
+
+        setUpdateTime: () => {
+          set((state) => {
+            state.updateTime = Date.now();
+          });
+        },
+
+        sortTabs: (oldIndex: number, newIndex: number) => {
+          const state = get();
+          const currentTab = state.tabs[oldIndex];
+          if (!currentTab) {
+            return;
+          }
+          set((state) => {
+            state.tabs.splice(oldIndex, 1);
+            state.tabs.splice(newIndex, 0, currentTab);
+          });
+        },
+
+        toggleTabPin: (tab: TabDefinition) => {
+          const affixTab = tab?.handle?.affixTab ?? false;
+
+          affixTab ? get().unpinTab(tab) : get().pinTab(tab);
+        },
+
+        unpinTab: (tab: TabDefinition) => {
+          const state = get();
+          const index = state.tabs.findIndex((item) => equalTab(item, tab));
+          if (index === -1) {
+            return;
+          }
+
+          set((state) => {
+            const oldTab = state.tabs[index];
+            tab.handle.affixTab = false;
+            tab.handle.title = oldTab?.handle?.title as string;
+            state.tabs.splice(index, 1, tab);
+          });
+
+          // 过滤固定tabs，后面更改affixTabOrder的值的话可能会有问题，目前行464排序affixTabs没有设置值
+          const affixTabs = get().tabs.filter((tab) => isAffixTab(tab));
+          // 获得固定tabs的index,使用固定tabs的下一个位置也就是活动tabs的第一个位置
+          const newIndex = affixTabs.length;
+          // 交换位置重新排序
+          get().sortTabs(index, newIndex);
+        },
+
+        // getAffixTabs: () => {
+        //   const state = get();
+        //   const affixTabs = state.tabs.filter((tab) => isAffixTab(tab));
+
+        //   return affixTabs.toSorted((a, b) => {
+        //     const orderA = (a.handle?.affixTabOrder ?? 0) as number;
+        //     const orderB = (b.handle?.affixTabOrder ?? 0) as number;
+        //     return orderA - orderB;
+        //   });
+        // },
+
+        // getTabs: () => {
+        //   const state = get();
+        //   const normalTabs = state.tabs.filter((tab) => !isAffixTab(tab));
+        //   const affixTabs = get().getAffixTabs();
+
+        //   return [...affixTabs, ...normalTabs];
+        // },
+
+        reset: () => {
+          set(store.getInitialState());
+        },
+      })),
+      {
+        name: 'core-tabbar',
+        storage: createJSONStorage(() => sessionStorage),
+        partialize: (state) => ({ tabs: state.tabs }),
       },
-
-      closeTab: (tab: TabDefinition, router: Router, currentRoute: Route) => {
-        const state = get();
-
-        if (getTabKey(currentRoute) !== getTabKeyFromTab(tab)) {
-          get()._close(tab);
-          return;
-        }
-        const index = state.tabs.findIndex(
-          (item) => getTabKeyFromTab(item) === getTabKey(currentRoute),
-        );
-        const before = state.tabs[index - 1];
-        const after = state.tabs[index + 1];
-        if (after) {
-          get()._close(tab);
-          get()._goToTab(after, router);
-        } else if (before) {
-          get()._close(tab);
-          get()._goToTab(before, router);
-        } else {
-          console.error('Failed to close the tab; only one tab remains open.');
-        }
-      },
-
-      closeTabByKey: (key: string, router: Router, route: Route) => {
-        const originKey = key;
-        const state = get();
-        const index = state.tabs.findIndex(
-          (item) => getTabKeyFromTab(item) === originKey,
-        );
-        if (index === -1) {
-          return;
-        }
-        const tab = state.tabs[index];
-        if (tab) {
-          get().closeTab(tab, router, route);
-        }
-      },
-
-      getTabByKey: (key: string) => {
-        const state = get();
-        return state.tabs.find(
-          (item) => getTabKeyFromTab(item) === key,
-        ) as TabDefinition;
-      },
-
-      pinTab: (tab: TabDefinition) => {
-        const state = get();
-        const index = state.tabs.findIndex((item) => equalTab(item, tab));
-        if (index === -1) {
-          return;
-        }
-
-        set((state) => {
-          const oldTab = state.tabs[index];
-          tab.handle.affixTab = true;
-          tab.handle.title = oldTab?.handle?.title as string;
-          state.tabs.splice(index, 1, tab);
-        });
-
-        // 过滤固定tabs，后面更改affixTabOrder的值的话可能会有问题，目前行464排序affixTabs没有设置值
-        const affixTabs = get().tabs.filter((tab) => isAffixTab(tab));
-        // 获得固定tabs的index
-        const newIndex = affixTabs.findIndex((item) => equalTab(item, tab));
-        // 交换位置重新排序
-        get().sortTabs(index, newIndex);
-      },
-
-      refresh: async () => {
-        get().renderRouteView = true;
-        await new Promise((resolve) => setTimeout(resolve, 200));
-        get().renderRouteView = false;
-      },
-
-      setMenuList: (list: string[]) => {
-        set((state) => {
-          state.menuList = list;
-        });
-      },
-
-      setUpdateTime: () => {
-        set((state) => {
-          state.updateTime = Date.now();
-        });
-      },
-
-      sortTabs: (oldIndex: number, newIndex: number) => {
-        const state = get();
-        const currentTab = state.tabs[oldIndex];
-        if (!currentTab) {
-          return;
-        }
-        set((state) => {
-          state.tabs.splice(oldIndex, 1);
-          state.tabs.splice(newIndex, 0, currentTab);
-        });
-      },
-
-      toggleTabPin: (tab: TabDefinition) => {
-        const affixTab = tab?.handle?.affixTab ?? false;
-
-        affixTab ? get().unpinTab(tab) : get().pinTab(tab);
-      },
-
-      unpinTab: (tab: TabDefinition) => {
-        const state = get();
-        const index = state.tabs.findIndex((item) => equalTab(item, tab));
-        if (index === -1) {
-          return;
-        }
-
-        set((state) => {
-          const oldTab = state.tabs[index];
-          tab.handle.affixTab = false;
-          tab.handle.title = oldTab?.handle?.title as string;
-          state.tabs.splice(index, 1, tab);
-        });
-
-        // 过滤固定tabs，后面更改affixTabOrder的值的话可能会有问题，目前行464排序affixTabs没有设置值
-        const affixTabs = get().tabs.filter((tab) => isAffixTab(tab));
-        // 获得固定tabs的index,使用固定tabs的下一个位置也就是活动tabs的第一个位置
-        const newIndex = affixTabs.length;
-        // 交换位置重新排序
-        get().sortTabs(index, newIndex);
-      },
-
-      getAffixTabs: () => {
-        const state = get();
-        return state.tabs.filter((tab) => isAffixTab(tab));
-      },
-
-      reset: () => {
-        set(store.getInitialState());
-      },
-    })),
-    {
-      name: 'core-tabbar',
-      storage: createJSONStorage(() => sessionStorage),
-      partialize: (state) => ({ tabs: state.tabs }),
-    },
+    ),
   ),
 );
+
+// Selectors
+function getAffixTabsSelector(state: TabbarStore) {
+  const affixTabs = state.tabs.filter((tab) => isAffixTab(tab));
+
+  return affixTabs.toSorted((a, b) => {
+    const orderA = (a.handle?.affixTabOrder ?? 0) as number;
+    const orderB = (b.handle?.affixTabOrder ?? 0) as number;
+    return orderA - orderB;
+  });
+}
+
+function getTabsSelector(state: TabbarStore) {
+  const normalTabs = state.tabs.filter((tab) => !isAffixTab(tab));
+  const affixTabs = getAffixTabsSelector(state);
+
+  return [...affixTabs, ...normalTabs];
+}
 
 // Helper functions
 function cloneTab(route: TabDefinition): TabDefinition {
@@ -476,4 +513,4 @@ function equalTab(a: TabDefinition, b: TabDefinition) {
   return getTabKeyFromTab(a) === getTabKeyFromTab(b);
 }
 
-export { getTabKey };
+export { getTabKey, getAffixTabsSelector, getTabsSelector };
