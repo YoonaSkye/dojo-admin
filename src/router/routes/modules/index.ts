@@ -1,5 +1,6 @@
 import { dashboardRoutes } from './dashboard';
 import { demosRoutes } from './demos';
+import { examples } from './examples';
 import { manageRoutes } from './manage';
 
 /**
@@ -10,6 +11,7 @@ const frontendRoutes = [
   ...dashboardRoutes,
   ...demosRoutes,
   ...manageRoutes,
+  ...examples,
 ];
 
 export { dashboardRoutes, demosRoutes, frontendRoutes, manageRoutes };

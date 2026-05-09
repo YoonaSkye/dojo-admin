@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { AuthApi } from '@/api/core/auth';
 import { IconButton } from '@/components/icon';
+import SliderCaptcha from '@/components/slider-captcha';
 import { useAuthLogin } from '@/features/access';
 import {
   SvgGithubIcon,
@@ -45,6 +46,13 @@ export default function LoginForm() {
           rules={[{ required: true, message: t('authentication.passwordTip') }]}
         >
           <Input.Password type="password" placeholder="123456" />
+        </Form.Item>
+
+        <Form.Item
+          name="captcha"
+          // rules={[{ required: true, message: t('authentication.captchaTip') }]}
+        >
+          <SliderCaptcha />
         </Form.Item>
 
         <Form.Item>

@@ -1,6 +1,7 @@
 import authentication from './authentication.json';
 import common from './common.json';
 import demos from './demos.json';
+import examples from './examples.json';
 import page from './page.json';
 import preferences from './preferences.json';
 import system from './system.json';
@@ -14,4 +15,5 @@ export default {
   ui,
   demos,
   system,
+  examples,
 };
