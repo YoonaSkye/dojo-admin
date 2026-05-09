@@ -8,6 +8,8 @@ export interface SliderCaptchaProps {
   successText?: string;
   text?: string;
   value?: boolean;
+  actionIcon?: (isPassing: boolean) => React.ReactNode;
+  contentText?: (isPassing: boolean) => React.ReactNode;
   onChange?: (passed: boolean) => void;
   onSuccess?: (data: CaptchaVerifyPassingData) => void;
   onStart?: (e: MouseEvent | TouchEvent) => void;

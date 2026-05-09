@@ -1,4 +1,5 @@
 import { Button, Card, message } from 'antd';
+import { Bell, Sun } from 'lucide-react';
 import { useRef } from 'react';
 
 import Page from '@/components/page';
@@ -11,6 +12,9 @@ function SliderCaptchaPage() {
   const el1 = useRef<SliderCaptchaRef>(null);
   const el2 = useRef<SliderCaptchaRef>(null);
   const el3 = useRef<SliderCaptchaRef>(null);
+  const el4 = useRef<SliderCaptchaRef>(null);
+  const el5 = useRef<SliderCaptchaRef>(null);
+  const el6 = useRef<SliderCaptchaRef>(null);
 
   function handleSuccess(data: CaptchaVerifyPassingData) {
     const { time } = data;
@@ -68,6 +72,72 @@ function SliderCaptchaPage() {
             className="ml-2"
             type="primary"
             onClick={() => handleBtnClick(el3.current)}
+          >
+            还原
+          </Button>
+        </div>
+      </Card>
+
+      <Card className="mb-5" title="自定义拖拽图标">
+        <div className="flex-center p-4 px-[30%]">
+          <SliderCaptcha
+            ref={el4}
+            onSuccess={handleSuccess}
+            actionIcon={(isPassing) => {
+              return isPassing ? <Bell /> : <Sun />;
+            }}
+          />
+
+          <Button
+            className="ml-2"
+            type="primary"
+            onClick={() => handleBtnClick(el4.current)}
+          >
+            还原
+          </Button>
+        </div>
+      </Card>
+
+      <Card className="mb-5" title="自定义文本">
+        <div className="flex-center p-4 px-[30%]">
+          <SliderCaptcha
+            ref={el5}
+            successText="成功"
+            text="拖动"
+            onSuccess={handleSuccess}
+          />
+          <Button
+            className="ml-2"
+            type="primary"
+            onClick={() => handleBtnClick(el5.current)}
+          >
+            还原
+          </Button>
+        </div>
+      </Card>
+
+      <Card className="mb-5" title="自定义内容(slot)">
+        <div className="flex-center p-4 px-[30%]">
+          <SliderCaptcha
+            ref={el6}
+            onSuccess={handleSuccess}
+            contentText={(isPassing) => {
+              return isPassing ? (
+                <>
+                  <Bell className="mr-2 size-4" />
+                  成功
+                </>
+              ) : (
+                <>
+                  <Sun className="mr-2 size-4" /> 拖动
+                </>
+              );
+            }}
+          />
+          <Button
+            className="ml-2"
+            type="primary"
+            onClick={() => handleBtnClick(el6.current)}
           >
             还原
           </Button>

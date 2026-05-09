@@ -5,18 +5,27 @@ import type { SliderCaptchaContentRef } from './types';
 interface ContentProps {
   contentStyle?: React.CSSProperties;
   isPassing: boolean;
-  successText: string;
-  text: string;
-  children?: React.ReactNode | ((isPassing: boolean) => React.ReactNode);
+  successText?: string;
+  text?: string;
+  children?: React.ReactNode;
 }
 
 const SliderCaptchaContent = forwardRef<SliderCaptchaContentRef, ContentProps>(
-  ({ contentStyle, isPassing, successText, text, children }, ref) => {
+  (props, ref) => {
+    const {
+      contentStyle,
+      isPassing,
+      successText = '验证通过',
+      text = '拖动滑块验证',
+      children,
+    } = props;
     const contentRef = useRef<HTMLDivElement>(null);
 
     useImperativeHandle(ref, () => ({
       getEl: () => contentRef.current!,
     }));
+
+    const defaultText = isPassing ? successText : text;
 
     return (
       <div
@@ -24,11 +33,7 @@ const SliderCaptchaContent = forwardRef<SliderCaptchaContentRef, ContentProps>(
         className="flex-center absolute top-0 size-full select-none text-xs"
         style={contentStyle}
       >
-        {typeof children === 'function'
-          ? children(isPassing)
-          : isPassing
-            ? successText
-            : text}
+        {children || defaultText}
       </div>
     );
   },

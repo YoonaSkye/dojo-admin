@@ -28,15 +28,17 @@ const SliderCaptcha = React.forwardRef<SliderCaptchaRef, SliderCaptchaProps>(
   (props, ref) => {
     const {
       value,
+      text,
+      successText,
+      className,
+      wrapperStyle,
       onChange,
       onSuccess,
       onStart,
       onMove,
       onEnd,
-      text,
-      successText,
-      className,
-      wrapperStyle,
+      actionIcon,
+      contentText,
     } = props;
 
     // --- 1. 状态管理 ---
@@ -193,15 +195,19 @@ const SliderCaptcha = React.forwardRef<SliderCaptchaRef, SliderCaptchaProps>(
         <SliderCaptchaBar ref={barRef} />
         <SliderCaptchaContent
           isPassing={isPassing}
-          successText={successText || '验证成功'}
-          text={text || '拖动滑块验证'}
-        />
+          successText={successText}
+          text={text}
+        >
+          {contentText && contentText(isPassing)}
+        </SliderCaptchaContent>
         <SliderCaptchaAction
           ref={actionRef}
           isPassing={isPassing}
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}
-        />
+        >
+          {actionIcon && actionIcon(isPassing)}
+        </SliderCaptchaAction>
       </div>
     );
   },

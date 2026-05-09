@@ -12,15 +12,11 @@ import type { SliderCaptchaBarRef } from './types';
 
 interface BarProps {
   barStyle?: React.CSSProperties;
-  // toLeft 已经不再需要作为 Prop 传入，由父组件通过 class 或直接操作 style 控制
 }
 
 const SliderCaptchaBar = forwardRef<SliderCaptchaBarRef, BarProps>(
   ({ barStyle }, ref) => {
     const barRef = useRef<HTMLDivElement>(null);
-
-    // 此时不再需要 [width, setWidth] state
-    // 也不再需要 useMemo 监听 width
 
     useImperativeHandle(ref, () => ({
       getEl: () => barRef.current!,
