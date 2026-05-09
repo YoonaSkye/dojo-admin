@@ -110,3 +110,11 @@ body {
 .vben-link {
   @apply cursor-pointer text-primary hover:text-primary-hover active:text-primary-active;
 }
+
+/* captcha animation */
+/* 只有当存在此 class 时才开启过渡动画 */
+.captcha-animating {
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
