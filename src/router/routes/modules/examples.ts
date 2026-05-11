@@ -25,22 +25,22 @@ const examples = [
               title: 'examples.captcha.sliderCaptcha',
             },
           },
-          // {
-          //   name: 'RotateVerifyExample',
-          //   path: '/examples/captcha/slider-rotate',
-          //   component: '/examples/captcha/slider-rotate-captcha/index.tsx',
-          //   meta: {
-          //     title: 'examples.captcha.sliderRotateCaptcha',
-          //   },
-          // },
-          // {
-          //   name: 'TranslateVerifyExample',
-          //   path: '/examples/captcha/slider-translate',
-          //   component: '/examples/captcha/slider-translate-captcha/index.tsx',
-          //   meta: {
-          //     title: 'examples.captcha.sliderTranslateCaptcha',
-          //   },
-          // },
+          {
+            name: 'RotateVerifyExample',
+            path: '/examples/captcha/slider-rotate',
+            component: '/examples/captcha/slider-rotate-captcha/index.tsx',
+            handle: {
+              title: 'examples.captcha.sliderRotateCaptcha',
+            },
+          },
+          {
+            name: 'TranslateVerifyExample',
+            path: '/examples/captcha/slider-translate',
+            component: '/examples/captcha/slider-translate-captcha/index.tsx',
+            handle: {
+              title: 'examples.captcha.sliderTranslateCaptcha',
+            },
+          },
           // {
           //   name: 'CaptchaPointSelectionExample',
           //   path: '/examples/captcha/point-selection',
