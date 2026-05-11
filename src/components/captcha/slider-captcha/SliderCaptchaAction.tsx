@@ -4,7 +4,7 @@ import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import { cn } from '@/lib/utils';
 
-import type { SliderCaptchaActionRef } from './types';
+import type { SliderCaptchaActionRef } from '../types';
 
 interface ActionProps {
   actionStyle?: React.CSSProperties;

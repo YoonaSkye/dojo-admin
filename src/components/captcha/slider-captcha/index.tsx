@@ -1,5 +1,6 @@
 import React, {
   useCallback,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -14,9 +15,10 @@ import SliderCaptchaContent from './SliderCaptchaContent';
 import type {
   SliderCaptchaActionRef,
   SliderCaptchaBarRef,
+  SliderCaptchaContentRef,
   SliderCaptchaProps,
   SliderCaptchaRef,
-} from './types';
+} from '../types';
 
 const getEventPageX = (e: MouseEvent | TouchEvent): number => {
   if ('pageX' in e) return e.pageX;
@@ -39,6 +41,7 @@ const SliderCaptcha = React.forwardRef<SliderCaptchaRef, SliderCaptchaProps>(
       onEnd,
       actionIcon,
       contentText,
+      isSlot = false,
     } = props;
 
     // --- 1. 状态管理 ---
@@ -52,8 +55,15 @@ const SliderCaptcha = React.forwardRef<SliderCaptchaRef, SliderCaptchaProps>(
     const wrapperRef = useRef<HTMLDivElement>(null);
     const actionRef = useRef<SliderCaptchaActionRef>(null);
     const barRef = useRef<SliderCaptchaBarRef>(null);
+    const contentRef = useRef<SliderCaptchaContentRef>(null);
 
     const dragData = useRef({ startX: 0, startTime: 0 });
+
+    // 同步外部 value (modelValue) 到 Ref，确保 handleDragOver 的异步回调能拿到最新值
+    const latestValueRef = useRef(value);
+    useEffect(() => {
+      latestValueRef.current = value;
+    }, [value]);
 
     const updateValue = useCallback(
       (passed: boolean) => {
@@ -62,32 +72,12 @@ const SliderCaptcha = React.forwardRef<SliderCaptchaRef, SliderCaptchaProps>(
       },
       [isControlled, onChange],
     );
-
+    // --- 3. 核心功能函数 ---
     const getOffset = useCallback(() => {
       const wrapperWidth = wrapperRef.current?.offsetWidth ?? 220;
       const actionWidth = actionRef.current?.getEl()?.offsetWidth ?? 40;
       return { offset: wrapperWidth - actionWidth, actionWidth, wrapperWidth };
     }, []);
-
-    // --- 3. 核心功能函数 ---
-    const checkPass = useCallback(() => {
-      // 1. 计算耗时
-      const endTime = Date.now();
-      const startTime = dragData.current.startTime;
-
-      // 2. 计算秒数并保留一位小数 (得到的是字符串，如 "1.2")
-      const time = ((endTime - startTime) / 1000).toFixed(1);
-
-      // 3. 更新组件状态
-      setIsMoving(false);
-      updateValue(true);
-
-      // 4. 触发回调，数据格式与你要求的一致
-      onSuccess?.({
-        isPassing: true,
-        time: time, // 传递格式化后的字符串
-      });
-    }, [onSuccess, updateValue]);
 
     const resume = useCallback(() => {
       const actionNode = actionRef.current?.getEl();
@@ -111,8 +101,27 @@ const SliderCaptcha = React.forwardRef<SliderCaptchaRef, SliderCaptchaProps>(
       actionNode.addEventListener('transitionend', onEndAnimation);
     }, [updateValue]);
 
-    // --- 4. 事件处理器 ---
+    const checkPass = useCallback(() => {
+      // 对照 Vue 逻辑：isSlot 模式下内部 checkPass 直接触发重置
+      if (isSlot) {
+        resume();
+        return;
+      }
 
+      const endTime = Date.now();
+      const startTime = dragData.current.startTime;
+      const time = ((endTime - startTime) / 1000).toFixed(1);
+
+      setIsMoving(false);
+      updateValue(true);
+
+      onSuccess?.({
+        isPassing: true,
+        time: time,
+      });
+    }, [isSlot, resume, onSuccess, updateValue]);
+
+    // --- 4. 事件处理器 ---
     const handleDragStart = (e: React.MouseEvent | React.TouchEvent) => {
       if (isPassing) return;
 
@@ -135,44 +144,64 @@ const SliderCaptcha = React.forwardRef<SliderCaptchaRef, SliderCaptchaProps>(
       const { offset, actionWidth, wrapperWidth } = getOffset();
       const moveX = getEventPageX(e.nativeEvent) - dragData.current.startX;
 
-      // 判定是否滑过终点
-      if (moveX >= offset) {
-        checkPass(); // 同步触发成功逻辑
-        // 视觉强行锁死在终点
-        actionRef.current?.setTranslateX(offset);
-        barRef.current?.setWidth(`${wrapperWidth - actionWidth / 2}px`);
-        return;
-      }
-
       onMove?.({
         event: e.nativeEvent,
         moveDistance: dragData.current.startX,
         moveX,
       });
 
-      if (moveX > 0) {
-        requestAnimationFrame(() => {
-          actionRef.current?.setTranslateX(moveX);
-          barRef.current?.setWidth(`${moveX + actionWidth / 2}px`);
-        });
+      if (moveX > 0 && moveX <= offset) {
+        // 高性能 DOM 操作
+        actionRef.current?.setTranslateX(moveX);
+        barRef.current?.setWidth(`${moveX + actionWidth / 2}px`);
+      } else if (moveX > offset) {
+        // 触顶强制锁定
+        actionRef.current?.setTranslateX(wrapperWidth - actionWidth);
+        barRef.current?.setWidth(`${wrapperWidth - actionWidth / 2}px`);
+
+        // 对照 Vue 逻辑：只有非 slot 模式才在滑动中自动调 checkPass
+        if (!isSlot) {
+          checkPass();
+        }
       }
     };
 
     const handleDragOver = (e: React.MouseEvent | React.TouchEvent) => {
-      if (!isMoving) return;
+      if (!isMoving || isPassing) return;
 
+      // 1. 触发父组件 end 事件 (如计算旋转角度)
       onEnd?.(e.nativeEvent);
-      const { offset } = getOffset();
+
+      const { offset, actionWidth, wrapperWidth } = getOffset();
       const moveX = getEventPageX(e.nativeEvent) - dragData.current.startX;
 
-      // 如果没滑到位就松手，执行回弹
       if (moveX < offset) {
-        resume();
+        if (isSlot) {
+          // 2. 对照 Vue 逻辑：通过 setTimeout(0) 等待 React 完成父组件渲染循环
+          setTimeout(() => {
+            // 使用 latestValueRef.current 获取父组件更新后的最新状态，避开闭包快照问题
+            if (latestValueRef.current) {
+              const barEl = barRef.current?.getEl();
+              const contentEl = contentRef.current?.getEl();
+              if (barEl && contentEl) {
+                // 对照 Vue 逻辑：如果校验通过，对齐内容区宽度
+                contentEl.style.width = `${parseInt(barEl.style.width || '0', 10)}px`;
+              }
+            } else {
+              // 校验失败则执行回弹
+              resume();
+            }
+          }, 0);
+        } else {
+          resume();
+        }
       } else {
-        // 兜底：防止某些极端情况下 Moving 没捕捉到终点
-        if (!isPassing) checkPass();
-        else setIsMoving(false);
+        // 3. 滑到底部松手：强制位置修正并判定通过
+        actionRef.current?.setTranslateX(wrapperWidth - actionWidth);
+        barRef.current?.setWidth(`${wrapperWidth - actionWidth / 2}px`);
+        checkPass();
       }
+      setIsMoving(false);
     };
 
     useImperativeHandle(ref, () => ({ resume }));

@@ -8,7 +8,7 @@ import React, {
 
 import { cn } from '@/lib/utils';
 
-import type { SliderCaptchaBarRef } from './types';
+import type { SliderCaptchaBarRef } from '../types';
 
 interface BarProps {
   barStyle?: React.CSSProperties;

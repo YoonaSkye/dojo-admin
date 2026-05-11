@@ -1,6 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useMemo, useRef } from 'react';
 
-import type { SliderCaptchaContentRef } from './types';
+import type { SliderCaptchaContentRef } from '../types';
 
 interface ContentProps {
   contentStyle?: React.CSSProperties;

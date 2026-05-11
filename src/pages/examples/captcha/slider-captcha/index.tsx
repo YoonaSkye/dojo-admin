@@ -2,11 +2,12 @@ import { Button, Card, message } from 'antd';
 import { Bell, Sun } from 'lucide-react';
 import { useRef } from 'react';
 
-import Page from '@/components/page';
-import SliderCaptcha, {
+import {
+  SliderCaptcha,
   CaptchaVerifyPassingData,
   SliderCaptchaRef,
-} from '@/components/slider-captcha';
+} from '@/components/captcha';
+import Page from '@/components/page';
 
 function SliderCaptchaPage() {
   const el1 = useRef<SliderCaptchaRef>(null);
