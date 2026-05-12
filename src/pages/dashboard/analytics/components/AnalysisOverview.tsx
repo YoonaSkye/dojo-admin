@@ -1,5 +1,4 @@
-
-import CountToAnimator from '@/components/count-to-animator/CountToAnimator';
+import { CountTo } from '@/components/count-to';
 import { Iconify } from '@/components/icon';
 import {
   Card,
@@ -8,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { formatNumber } from '@/utils';
 
 import { AnalysisOverviewItem } from '../../typing';
 
@@ -24,22 +22,13 @@ export default function AnalysisOverview({ items }: AnalysisOverviewProps) {
             <CardTitle className="text-xl">{item.title}</CardTitle>
           </CardHeader>
           <CardContent className="flex items-center justify-between">
-            <CountToAnimator
-              end={item.value}
-              duration={1500}
-              formatter={formatNumber}
-              className="text-xl"
-            />
+            <CountTo endVal={item.value} duration={1500} className="text-xl" />
             <Iconify icon={item.icon} className="size-8 flex-shrink-0" />
           </CardContent>
           <CardFooter className="justify-between">
             <span>{item.totalTitle}</span>
 
-            <CountToAnimator
-              end={item.totalValue}
-              duration={1500}
-              formatter={formatNumber}
-            />
+            <CountTo endVal={item.totalValue} duration={1500} />
           </CardFooter>
         </Card>
       ))}

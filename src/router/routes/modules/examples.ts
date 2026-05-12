@@ -51,6 +51,15 @@ const examples = [
           // },
         ],
       },
+      {
+        name: 'CountTo',
+        path: '/examples/count-to',
+        component: '/examples/count-to/index.tsx',
+        handle: {
+          icon: 'mdi:animation-play',
+          title: 'CountTo',
+        },
+      },
     ],
   },
 ];

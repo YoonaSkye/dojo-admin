@@ -1,0 +1,18 @@
+.count-to {
+  display: inline-flex;
+  align-items: baseline;
+
+  &-prefix,
+  &-suffix {
+    font-size: 0.9em;
+  }
+
+  &-main {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-variant-numeric: tabular-nums; // 数字等宽，防止跳动
+
+    &-decimal {
+      font-size: 0.85em;
+    }
+  }
+}
