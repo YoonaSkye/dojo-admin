@@ -1,4 +1,5 @@
-export type LayoutType = 'vertical' | 'horizontal' | 'header-sidebar-nav';
+// export type LayoutType = 'vertical' | 'horizontal' | 'header-sidebar-nav';
+export type LayoutType = 'header-nav' | 'header-sidebar-nav' | 'sidebar-nav';
 
 export type ThemeModeType = 'system' | 'dark' | 'light';
 

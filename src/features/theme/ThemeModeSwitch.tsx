@@ -1,25 +1,23 @@
 import { type MouseEvent } from 'react';
 
-
 import { Iconify } from '@/components/icon';
 import { Button } from '@/components/ui/button';
-import { usePreferencesStore, useThemeMode } from '@/store/preferences';
+import { usePreferencesStore } from '@/store/preferences';
+import type { ThemeModeType } from '@/types';
 
-import { icons, useTheme } from './theme-context';
+import { THEME_MODE_ICONS, useTheme } from './theme-context';
 
-type ThemeModeType = 'dark' | 'light' | 'system';
-const ThemeModes: ThemeModeType[] = ['light', 'dark', 'system'];
+const THEME_MODES: ThemeModeType[] = ['light', 'dark', 'system'];
 
 const ThemeModeSwitch = () => {
-  const themeMode = useThemeMode();
+  const { mode: themeMode, isDark } = useTheme();
   const setTheme = usePreferencesStore((state) => state.setTheme);
-  const { isDark } = useTheme();
 
   function toggleThemeMode() {
-    const index = ThemeModes.findIndex((item) => item === themeMode);
-    const nextIndex = index === ThemeModes.length - 1 ? 0 : index + 1;
+    const index = THEME_MODES.findIndex((item) => item === themeMode);
+    const nextIndex = index === THEME_MODES.length - 1 ? 0 : index + 1;
 
-    setTheme({ mode: ThemeModes[nextIndex] });
+    setTheme({ mode: THEME_MODES[nextIndex] });
   }
 
   const toggleDark = (event: MouseEvent<HTMLButtonElement>) => {
@@ -72,7 +70,7 @@ const ThemeModeSwitch = () => {
       className="rounded-full"
       onClick={toggleDark}
     >
-      <Iconify icon={icons[themeMode]} />
+      <Iconify icon={THEME_MODE_ICONS[themeMode]} />
     </Button>
   );
 };

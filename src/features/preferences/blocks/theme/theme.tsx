@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 
-
 import { Iconify } from '@/components/icon';
-import { usePreferencesStore, useThemeMode } from '@/store/preferences';
+import { useTheme } from '@/features/theme';
+import { usePreferencesStore } from '@/store/preferences';
 
 import SwitchItem from '../switch-item';
 
@@ -24,7 +24,7 @@ const THEME_PRESET: Array<{
   },
 ];
 export function Theme() {
-  const themeMode = useThemeMode();
+  const { mode: themeMode, isDark } = useTheme();
   const setTheme = usePreferencesStore((state) => state.setTheme);
 
   const nameView = (name: string) => {
@@ -67,8 +67,19 @@ export function Theme() {
           </div>
         </div>
       ))}
-      <SwitchItem className="mt-6" title="深色侧边栏" />
-      <SwitchItem title="深色顶栏" />
+      <SwitchItem
+        className="mt-6"
+        title="深色侧边栏"
+        disabled={isDark}
+        tip="仅在浅色主题下可用"
+        onCheckedChange={(checked) => setTheme({ semiDarkSidebar: checked })}
+      />
+      <SwitchItem
+        title="深色顶栏"
+        disabled={isDark}
+        tip="仅在浅色主题下可用"
+        onCheckedChange={(checked) => setTheme({ semiDarkHeader: checked })}
+      />
     </div>
   );
 }

@@ -1,24 +1,18 @@
 import { createContext, useContext } from 'react';
 
-export enum ThemeMode {
-  LIGHT = 'light',
-  DARK = 'dark',
-  SYSTEM = 'system',
-}
-
-export type ThemeModeType = `${ThemeMode}`;
-
-export type ThemeType = 'light' | 'dark';
+import type { ThemeModeType } from '@/types';
 
 export type ThemeContextType = {
   isDark: boolean;
+  mode: ThemeModeType;
 };
 
 export const ThemeContext = createContext<ThemeContextType>({
   isDark: false,
+  mode: 'light',
 });
 
-export const icons: Record<ThemeModeType, string> = {
+export const THEME_MODE_ICONS: Record<ThemeModeType, string> = {
   dark: 'material-symbols:nightlight-rounded',
   light: 'material-symbols:sunny',
   system: 'material-symbols:hdr-auto',

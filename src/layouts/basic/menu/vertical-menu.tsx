@@ -98,7 +98,6 @@ export default function VerticalMenu({ mode, themeMode }: Props) {
   };
   const onClick: MenuProps['onClick'] = ({ key }) => {
     router.navigate(key);
-    console.log('key', key);
   };
 
   return (

@@ -2,8 +2,8 @@ import { Button, Checkbox, Col, Form, Input, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import { AuthApi } from '@/api/core/auth';
+import { SliderCaptcha } from '@/components/captcha';
 import { IconButton } from '@/components/icon';
-import SliderCaptcha from '@/components/slider-captcha';
 import { useAuthLogin } from '@/features/access';
 import {
   SvgGithubIcon,

@@ -1,19 +1,13 @@
-import { useLayoutMode } from '@/store/preferences';
+import { memo, type CSSProperties } from 'react';
 
 import TabsView from './tabs-view';
 import { useTabbar } from './use-tabbar';
 
-import type { CSSProperties } from 'react';
-
-// Components
-
 type TabsProps = {
-  siderCollapse?: boolean;
-  navCollapsedWidth?: number;
-  navWidth?: number;
+  style?: CSSProperties;
 };
 
-function Tabs({ siderCollapse, navCollapsedWidth, navWidth }: TabsProps) {
+const Tabs = memo(({ style }: TabsProps) => {
   const {
     createContextMenus,
     currentActive,
@@ -22,28 +16,10 @@ function Tabs({ siderCollapse, navCollapsedWidth, navWidth }: TabsProps) {
     handleClose,
   } = useTabbar();
 
-  const layoutMode = useLayoutMode();
-
-  const tabbarStyle: CSSProperties = {
-    height: '38px',
-    marginLeft: `${
-      layoutMode === 'header-sidebar-nav'
-        ? siderCollapse
-          ? navCollapsedWidth
-          : navWidth
-        : 0
-    }px`,
-    width: `${
-      layoutMode === 'header-sidebar-nav'
-        ? `calc(100% - ${siderCollapse ? navCollapsedWidth : navWidth}px)`
-        : '100%'
-    }`,
-  };
-
   return (
     <div
       className="flex w-full border-b border-border bg-background transition-all"
-      style={tabbarStyle}
+      style={style}
     >
       <TabsView
         active={currentActive}
@@ -55,6 +31,8 @@ function Tabs({ siderCollapse, navCollapsedWidth, navWidth }: TabsProps) {
       <div className="flex-center h-full"></div>
     </div>
   );
-}
+});
+
+Tabs.displayName = 'Tabs';
 
 export default Tabs;

@@ -20,7 +20,6 @@ import type {
   ThemePreferences,
 } from '@/types';
 
-
 type Actions = {
   setLayoutMode: (mode: LayoutType) => void;
   setHeader: (header: Partial<HeaderPreferences>) => void;
@@ -41,14 +40,14 @@ const defaultPreferences: Preferences = {
     dynamicTitle: true,
     enablePreferences: true,
     isMobile: false,
-    layout: 'vertical',
+    layout: 'sidebar-nav',
     locale: 'zh-CN',
     name: 'Dojo Admin',
   },
   header: {
     enable: true,
     hidden: false,
-    height: 48,
+    height: 50,
   },
   breadcrumb: {
     enable: true,
@@ -56,19 +55,19 @@ const defaultPreferences: Preferences = {
   },
   sider: {
     collapsed: false,
-    collapseWidth: 80,
+    collapseWidth: 60,
     enable: true,
     hidden: false,
-    width: 208,
+    width: 224,
   },
   footer: {
-    enable: true,
+    enable: false,
     fixed: false,
     height: 48,
   },
   tabbar: {
     enable: true,
-    height: 40,
+    height: 38,
     keepAlive: true,
     maxCount: 10,
   },

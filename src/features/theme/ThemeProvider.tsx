@@ -2,22 +2,17 @@ import { useEffect, useMemo, useState, type PropsWithChildren } from 'react';
 
 import { useThemeMode } from '@/store/preferences';
 
-import { ThemeContext, ThemeMode, ThemeType } from './theme-context';
-
+import { ThemeContext } from './theme-context';
 
 const useCurrentTheme = () => {
   const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
-  const [theme, setTheme] = useState<ThemeType>(() => {
-    return matchMedia?.matches ? ThemeMode.DARK : ThemeMode.LIGHT;
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    return matchMedia?.matches ? 'dark' : 'light';
   });
 
   useEffect(() => {
     const onThemeChange: MediaQueryList['onchange'] = (event) => {
-      if (event.matches) {
-        setTheme(ThemeMode.DARK);
-      } else {
-        setTheme(ThemeMode.LIGHT);
-      }
+      setTheme(event.matches ? 'dark' : 'light');
     };
 
     matchMedia?.addEventListener('change', onThemeChange);
@@ -35,14 +30,15 @@ const ThemeProvider = ({ children }: PropsWithChildren) => {
   const themeMode = useThemeMode();
 
   const currentTheme = useCurrentTheme();
-  const theme = themeMode === ThemeMode.SYSTEM ? currentTheme : themeMode;
-  const darkMode = theme === ThemeMode.DARK;
+  const resolvedTheme = themeMode === 'system' ? currentTheme : themeMode;
+  const isDark = resolvedTheme === 'dark';
 
   const themeContext = useMemo(
     () => ({
-      isDark: darkMode,
+      isDark,
+      mode: themeMode,
     }),
-    [darkMode],
+    [isDark, themeMode],
   );
   return (
     <ThemeContext.Provider value={themeContext}>

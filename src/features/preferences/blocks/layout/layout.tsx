@@ -1,8 +1,6 @@
 import clsx from 'clsx';
 import { useRef } from 'react';
 
-
-
 import { CircleHelp } from '@/icons';
 import { useLayoutMode, usePreferencesStore } from '@/store/preferences';
 import type { LayoutType } from '@/types';
@@ -16,8 +14,8 @@ interface PresetItem {
 }
 
 const components: Record<LayoutType, React.FC> = {
-  horizontal: HeaderNav,
-  vertical: SidebarNav,
+  'header-nav': HeaderNav,
+  'sidebar-nav': SidebarNav,
   'header-sidebar-nav': HeaderSidebarNav,
 };
 
@@ -25,12 +23,12 @@ const PRESET: PresetItem[] = [
   {
     name: '垂直',
     tip: '侧边垂直菜单模式',
-    type: 'vertical',
+    type: 'sidebar-nav',
   },
   {
     name: '水平',
     tip: '水平菜单模式，菜单全部显示在顶部',
-    type: 'horizontal',
+    type: 'header-nav',
   },
   {
     name: '侧边导航',
