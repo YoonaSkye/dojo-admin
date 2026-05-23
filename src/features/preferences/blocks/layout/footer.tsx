@@ -1,4 +1,4 @@
-import { useFooterSetting, usePreferencesStore } from '@/store/preferences';
+import { useFooterSetting, usePreferencesStore } from '@packages/stores';
 
 import SwitchItem from '../switch-item';
 

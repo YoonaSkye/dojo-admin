@@ -1,4 +1,4 @@
-import { useHeaderSetting, usePreferencesStore } from '@/store/preferences';
+import { useHeaderSetting, usePreferencesStore } from '@packages/stores';
 
 import SwitchItem from '../switch-item';
 

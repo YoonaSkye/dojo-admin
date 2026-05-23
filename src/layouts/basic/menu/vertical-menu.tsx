@@ -1,9 +1,8 @@
+import { useAccessMenus, useSiderSetting } from '@packages/stores';
 import { ConfigProvider, Menu } from 'antd';
 import { useEffect, useMemo, useState } from 'react';
 
 import { useRoute, useRouter } from '@/router';
-import { useAccessMenus } from '@/store/access';
-import { useSiderSetting } from '@/store/preferences';
 import { Route } from '@/types';
 
 import type { MenuProps } from 'antd';

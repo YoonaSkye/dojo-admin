@@ -1,8 +1,8 @@
+import { RotateCw } from '@packages/icons';
 import { useNavigate } from 'react-router-dom';
 
 import { Iconify } from '@/components/icon';
 import { Button } from '@/components/ui/button';
-import { RotateCw } from '@/icons';
 
 function InternalError() {
   const nav = useNavigate();

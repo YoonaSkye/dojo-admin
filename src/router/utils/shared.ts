@@ -1,4 +1,4 @@
-import { useAccessStore } from '@/store/access';
+import { useAccessStore } from '@packages/stores';
 
 /**
  * 检查用户是否已认证（已登录）

@@ -1,8 +1,8 @@
+import { usePreferencesStore } from '@packages/stores';
 import { theme as antdTheme, ConfigProviderProps } from 'antd';
 import { useMemo } from 'react';
 
 import { useTheme } from '@/features/theme';
-import { usePreferencesStore } from '@/store/preferences';
 
 /**
  * 用于适配Ant Design框架的设计系统

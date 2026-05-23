@@ -1,3 +1,5 @@
+import { Languages } from '@packages/icons';
+
 import { IconButton } from '@/components/icon';
 import {
   DropdownMenu,
@@ -7,7 +9,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { LANGUAGE_MAP, useLocale, type Locale } from '@/features/lang';
-import { Languages } from '@/icons';
 
 export default function LangSwitch() {
   const { locale, setLocale } = useLocale();

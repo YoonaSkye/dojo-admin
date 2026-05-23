@@ -1,3 +1,4 @@
+import { Copy, RotateCw, Settings, X } from '@packages/icons';
 import { CSSProperties } from 'react';
 
 import { IconButton } from '@/components/icon';
@@ -12,7 +13,6 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Copy, RotateCw, Settings, X } from '@/icons';
 
 import {
   Block,

@@ -1,4 +1,4 @@
-import { useAccessRoutes } from '@/store/access';
+import { useAccessRoutes } from '@packages/stores';
 
 export function usePermission() {
   const permissonRoutes = useAccessRoutes();

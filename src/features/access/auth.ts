@@ -1,3 +1,9 @@
+import {
+  clearAllStoresPersistence,
+  resetAllStores,
+  useAccessStore,
+  useUserStore,
+} from '@packages/stores';
 import { startTransition, useState } from 'react';
 
 import {
@@ -7,9 +13,6 @@ import {
   logoutApi,
 } from '@/api/core';
 import { router, useRouter } from '@/router';
-import { useAccessStore } from '@/store/access';
-import { useUserStore } from '@/store/user';
-import { resetAllStores } from '@/store/utils';
 import { Recordable, UserInfo } from '@/types';
 import { antdUtils } from '@/utils';
 
@@ -85,8 +88,7 @@ const useAuthLogin = () => {
 const cleanAuthState = () => {
   startTransition(() => {
     // 1. 清除持久化缓存，防止 store 重新初始化时读到旧数据
-    useAccessStore.persist.clearStorage();
-    useUserStore.persist.clearStorage();
+    clearAllStoresPersistence();
 
     // 2. 重置内存中的 store 状态
     resetAllStores();
@@ -111,9 +113,7 @@ const useSignOut = () => {
     // startTransition + Suspense 才是完整方案
     startTransition(() => {
       // 1. 先清除持久化缓存，防止 store 重新初始化时读到旧数据
-      useAccessStore.persist.clearStorage();
-      useUserStore.persist.clearStorage();
-      // preferences 不清除持久化
+      clearAllStoresPersistence();
 
       // 2. 重置内存中的 store 状态
       resetAllStores();

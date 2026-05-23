@@ -1,4 +1,4 @@
-import { createIconifyIcon } from '../create-icon';
+import { createIconifyIcon } from '@packages/@core/base/icons';
 
 const SvgGithubIcon = createIconifyIcon('svg:github');
 const SvgGoogleIcon = createIconifyIcon('svg:google');

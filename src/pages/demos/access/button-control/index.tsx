@@ -1,8 +1,8 @@
+import { useUserStore } from '@packages/stores';
 import { Button, Card } from 'antd';
 
 import Page from '@/components/page';
 import { AccessControl, useAccess } from '@/features/access';
-import { useUserStore } from '@/store/user';
 
 export default function ButtonControl() {
   const userRoles = useUserStore((store) => store.userRoles);

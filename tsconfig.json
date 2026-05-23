@@ -24,6 +24,7 @@
     /* alias */
     "paths": {
       "@/*": ["src/*"],
+      "@packages/*": ["src/packages/*"],
       "#/*": ["types/*"]
     }
   },

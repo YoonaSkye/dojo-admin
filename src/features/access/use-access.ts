@@ -1,8 +1,5 @@
+import { useAccessStore, usePreferencesStore, useUserStore } from '@packages/stores';
 import { useMemo } from 'react';
-
-import { useAccessStore } from '@/store/access';
-import { usePreferencesStore } from '@/store/preferences';
-import { useUserStore } from '@/store/user';
 
 function useAccess() {
   const accessCodes = useAccessStore((store) => store.accessCodes);

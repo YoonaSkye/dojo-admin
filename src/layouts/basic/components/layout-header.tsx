@@ -1,3 +1,9 @@
+import { Settings } from '@packages/icons';
+import {
+  useBreadCrumbSetting,
+  useLayoutMode,
+  usePreferencesStore,
+} from '@packages/stores';
 import { memo } from 'react';
 
 import { IconButton } from '@/components/icon';
@@ -5,13 +11,8 @@ import Logo from '@/components/logo';
 import { LangSwitch } from '@/features/lang';
 import { Preferences } from '@/features/preferences';
 import { ThemeModeSwitch, useTheme } from '@/features/theme';
-import { Settings } from '@/icons';
 import { cn } from '@/lib/utils';
-import {
-  useBreadCrumbSetting,
-  useLayoutMode,
-  usePreferencesStore,
-} from '@/store/preferences';
+
 
 import { HorizontalMenu } from '../menu';
 

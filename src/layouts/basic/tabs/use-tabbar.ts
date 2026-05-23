@@ -1,7 +1,3 @@
-import { useEffect, useMemo } from 'react';
-import { useShallow } from 'zustand/react/shallow';
-
-import { useLocale } from '@/features/lang';
 import {
   ArrowLeftToLine,
   ArrowRightLeft,
@@ -11,10 +7,14 @@ import {
   PinOff,
   RotateCw,
   X,
-} from '@/icons';
+} from '@packages/icons';
+import { getTabKey, getTabsSelector, useTabbarStore } from '@packages/stores';
+import { useEffect, useMemo } from 'react';
+import { useShallow } from 'zustand/react/shallow';
+
+import { useLocale } from '@/features/lang';
 import { $t } from '@/locales/i18n';
 import { useRoute, useRouter } from '@/router';
-import { getTabKey, getTabsSelector, useTabbarStore } from '@/store/tabs';
 import type { IContextMenuItem, TabDefinition } from '@/types';
 
 import { useTabs } from './use-tabs';

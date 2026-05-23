@@ -1,8 +1,8 @@
+import { usePreferencesStore } from '@packages/stores';
 import clsx from 'clsx';
 
 import { Iconify } from '@/components/icon';
 import { useTheme } from '@/features/theme';
-import { usePreferencesStore } from '@/store/preferences';
 
 import SwitchItem from '../switch-item';
 

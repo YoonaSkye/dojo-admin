@@ -1,18 +1,18 @@
 /**
  * 该文件可自行根据业务逻辑进行调整
  */
-import { AxiosResponseHeaders } from 'axios';
-import JSONBigInt from 'json-bigint';
 
-import { useAccessStore } from '@/store/access';
-import { cloneDeep } from '@/utils';
+import { useAccessStore } from '@packages/stores';
+import JSONBigInt from 'json-bigint';
 
 import {
   defaultResponseInterceptor,
   errorMessageResponseInterceptor,
   RequestClient,
   type RequestClientOptions,
-} from './request-client';
+  type AxiosResponseHeaders,
+} from '@/packages/effects/request';
+import { cloneDeep } from '@/utils';
 
 const apiURL = import.meta.env.VITE_APP_BASE_API;
 

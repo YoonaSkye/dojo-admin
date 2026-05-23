@@ -1,3 +1,4 @@
+import { useUserInfo } from '@packages/stores';
 import { Modal } from 'antd';
 import { BookOpenTextIcon, LogOutIcon } from 'lucide-react';
 import { useState } from 'react';
@@ -17,7 +18,6 @@ import {
 import { useSignOut } from '@/features/access';
 import { cn } from '@/lib/utils';
 import { useRouter } from '@/router/hooks';
-import { useUserInfo } from '@/store/user';
 
 const accountMenuItems: {
   label: string;

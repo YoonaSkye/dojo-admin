@@ -1,4 +1,4 @@
-import { useFooterSetting } from '@/store/preferences';
+import { useFooterSetting } from '@packages/stores';
 
 function LayoutFooter() {
   const { enable: footerVisible } = useFooterSetting();

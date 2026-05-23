@@ -1,6 +1,6 @@
+import { useBuiltinType, usePreferencesStore } from '@packages/stores';
 import clsx from 'clsx';
 
-import { usePreferencesStore, useBuiltinType } from '@/store/preferences';
 
 import {
   BUILT_IN_THEME_PRESETS,

@@ -1,7 +1,7 @@
+import { Pin, X } from '@packages/icons';
 import { forwardRef } from 'react';
 
 import { Iconify } from '@/components/icon';
-import { Pin, X } from '@/icons';
 import { TabConfig } from '@/types';
 import './label.scss';
 

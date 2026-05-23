@@ -1,7 +1,8 @@
+import { Palette } from '@packages/icons';
+import { useBuiltinType, usePreferencesStore } from '@packages/stores';
+
 import { Button } from '@/components/ui/button';
 import { BuiltinThemePreset, COLOR_PRESETS } from '@/features/preferences';
-import { Palette } from '@/icons';
-import { useBuiltinType, usePreferencesStore } from '@/store/preferences';
 
 function AuthenticationColorToggle() {
   const builtinType = useBuiltinType();

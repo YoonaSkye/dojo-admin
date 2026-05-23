@@ -1,5 +1,6 @@
+import { Bell } from '@packages/icons';
+
 import { Button } from '@/components/ui/button';
-import { Bell } from '@/icons';
 
 function Notification() {
   return (

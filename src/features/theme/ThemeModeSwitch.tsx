@@ -1,8 +1,8 @@
+import { usePreferencesStore } from '@packages/stores';
 import { type MouseEvent } from 'react';
 
 import { Iconify } from '@/components/icon';
 import { Button } from '@/components/ui/button';
-import { usePreferencesStore } from '@/store/preferences';
 import type { ThemeModeType } from '@/types';
 
 import { THEME_MODE_ICONS, useTheme } from './theme-context';

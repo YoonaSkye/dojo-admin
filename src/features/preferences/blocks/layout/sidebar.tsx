@@ -1,4 +1,4 @@
-import { usePreferencesStore, useSiderSetting } from '@/store/preferences';
+import { usePreferencesStore, useSiderSetting } from '@packages/stores';
 
 import SwitchItem from '../switch-item';
 

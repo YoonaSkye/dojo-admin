@@ -1,9 +1,9 @@
+import { useAccessMenus } from '@packages/stores';
 import { ConfigProvider, Menu } from 'antd';
 import { useMemo } from 'react';
 
 
 import { useRoute, useRouter } from '@/router';
-import { useAccessMenus } from '@/store/access';
 
 import type { MenuProps } from 'antd';
 import './index.scss';

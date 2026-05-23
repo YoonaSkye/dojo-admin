@@ -1,3 +1,4 @@
+import { ArrowUp, ArrowDown, CornerDownLeft, MdiKeyboardEsc } from '@packages/icons';
 import { type DialogProps } from '@radix-ui/react-dialog';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
@@ -15,7 +16,6 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command';
-import { ArrowUp, ArrowDown, CornerDownLeft, MdiKeyboardEsc } from '@/icons';
 import { cn } from '@/lib/utils';
 import { useFlattenedRoutes } from '@/router/hooks';
 import { useThemeToken } from '@/theme/hooks';

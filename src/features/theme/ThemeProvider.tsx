@@ -1,6 +1,6 @@
+import { useThemeMode } from '@packages/stores';
 import { useEffect, useMemo, useState, type PropsWithChildren } from 'react';
 
-import { useThemeMode } from '@/store/preferences';
 
 import { ThemeContext } from './theme-context';
 

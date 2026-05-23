@@ -1,5 +1,6 @@
+import { useHeaderSetting } from '@packages/stores';
+
 import { Preferences } from '@/features/preferences';
-import { useHeaderSetting } from '@/store/preferences';
 
 import {
   LayoutFooter,

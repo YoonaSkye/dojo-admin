@@ -1,12 +1,14 @@
+import { useTabbarStore } from '@packages/stores';
 import { useUpdateEffect } from 'ahooks';
 import KeepAlive, { useKeepAliveRef } from 'keepalive-for-react';
 import { Suspense } from 'react';
 import { useOutlet } from 'react-router-dom';
 
 import { useRoute } from '@/router';
-import { useTabbarStore } from '@/store/tabs';
 
 function KeepLiveArea() {
+  console.log('KeepLiveArea rendered');
+
   const route = useRoute();
   const outlet = useOutlet();
   const aliveRef = useKeepAliveRef();

@@ -1,9 +1,7 @@
+import { useAccessStore, useTabbarStore, useUserStore } from '@packages/stores';
 import { RouteObject } from 'react-router-dom';
 
 import { getAllMenusApi } from '@/api/core';
-import { useAccessStore } from '@/store/access';
-import { useTabbarStore } from '@/store/tabs';
-import { useUserStore } from '@/store/user';
 import type { RouteRecordStringComponent } from '@/types';
 
 import { frontendRoutes } from '../routes/modules';

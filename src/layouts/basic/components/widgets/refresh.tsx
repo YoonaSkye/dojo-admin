@@ -1,6 +1,7 @@
+import { RotateCw } from '@packages/icons';
+
 import { IconButton } from '@/components/icon';
 import { useRefresh } from '@/hooks/use-refresh';
-import { RotateCw } from '@/icons';
 
 export default function RefreshButton() {
   const { refresh } = useRefresh();

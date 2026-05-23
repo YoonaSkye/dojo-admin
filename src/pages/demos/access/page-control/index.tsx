@@ -1,10 +1,10 @@
+import { useUserStore } from '@packages/stores';
 import { Button, Card } from 'antd';
 
 import Page from '@/components/page';
 import { useAccess } from '@/features/access';
 import { cleanAuthState, useAuthLogin } from '@/features/access/auth';
 import { useRouter } from '@/router';
-import { useUserStore } from '@/store/user';
 import { Recordable } from '@/types';
 
 const accounts: Record<string, Recordable<any>> = {

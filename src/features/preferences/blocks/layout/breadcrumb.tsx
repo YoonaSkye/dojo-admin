@@ -1,4 +1,4 @@
-import { useBreadCrumbSetting, usePreferencesStore } from '@/store/preferences';
+import { useBreadCrumbSetting, usePreferencesStore } from '@packages/stores';
 
 import SwitchItem from '../switch-item';
 

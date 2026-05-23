@@ -1,11 +1,11 @@
-import { CSSProperties, useMemo } from 'react';
-
 import {
   useHeaderSetting,
   useLayoutMode,
   useSiderSetting,
   useTabSetting,
-} from '@/store/preferences';
+} from '@packages/stores';
+import { CSSProperties, useMemo } from 'react';
+
 
 import Tabs from '../tabs';
 

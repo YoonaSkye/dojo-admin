@@ -1,14 +1,14 @@
-import { CSSProperties } from 'react';
-
-import Logo from '@/components/logo';
-import { useTheme } from '@/features/theme';
-import { cn } from '@/lib/utils';
 import {
   useHeaderSetting,
   useLayoutMode,
   usePreferencesStore,
   useSiderSetting,
-} from '@/store/preferences';
+} from '@packages/stores';
+import { CSSProperties } from 'react';
+
+import Logo from '@/components/logo';
+import { useTheme } from '@/features/theme';
+import { cn } from '@/lib/utils';
 
 import { VerticalMenu } from '../menu';
 

@@ -1,3 +1,9 @@
+import {
+  SvgGithubIcon,
+  SvgGoogleIcon,
+  SvgQQChatIcon,
+  SvgWeChatIcon,
+} from '@packages/icons';
 import { Button, Checkbox, Col, Form, Input, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
 
@@ -5,12 +11,6 @@ import { AuthApi } from '@/api/core/auth';
 import { SliderCaptcha } from '@/components/captcha';
 import { IconButton } from '@/components/icon';
 import { useAuthLogin } from '@/features/access';
-import {
-  SvgGithubIcon,
-  SvgGoogleIcon,
-  SvgQQChatIcon,
-  SvgWeChatIcon,
-} from '@/icons';
 
 export default function LoginForm() {
   const { authLogin, loading } = useAuthLogin();

@@ -1,7 +1,7 @@
+import { useAccessStore } from '@packages/stores';
 import { createBrowserRouter, matchRoutes } from 'react-router-dom';
 
 
-import { useAccessStore } from '@/store/access';
 
 import { routes } from './routes';
 import { initAuthRoutes } from './utils/initRoutes';

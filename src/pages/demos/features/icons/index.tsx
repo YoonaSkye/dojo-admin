@@ -1,8 +1,3 @@
-import { Card, Input, Space } from 'antd';
-import { useState } from 'react';
-
-import Page from '@/components/page';
-import { IconPicker } from '@/features/icon-picker';
 import {
   MdiKeyboardEsc,
   SvgAvatar1Icon,
@@ -17,7 +12,12 @@ import {
   SvgGoogleIcon,
   SvgQQChatIcon,
   SvgWeChatIcon,
-} from '@/icons';
+} from '@packages/icons';
+import { Card, Input, Space } from 'antd';
+import { useState } from 'react';
+
+import Page from '@/components/page';
+import { IconPicker } from '@/features/icon-picker';
 
 export default function ButtonControl() {
   const [currentSelect, setCurrentSelect] = useState<string>(

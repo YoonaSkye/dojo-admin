@@ -1,11 +1,11 @@
-import { useShallow } from 'zustand/react/shallow';
-
-import { useRoute, useRouter } from '@/router';
 import {
   getAffixTabsSelector,
   getTabsSelector,
   useTabbarStore,
-} from '@/store/tabs';
+} from '@packages/stores';
+import { useShallow } from 'zustand/react/shallow';
+
+import { useRoute, useRouter } from '@/router';
 import type { TabDefinition } from '@/types';
 
 export function useTabs() {

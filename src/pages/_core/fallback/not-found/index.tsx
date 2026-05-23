@@ -1,8 +1,8 @@
+import { ArrowLeft } from '@packages/icons';
 import { useNavigate } from 'react-router-dom';
 
 import { Iconify } from '@/components/icon';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft } from '@/icons';
 
 const NotFound = () => {
   const nav = useNavigate();
