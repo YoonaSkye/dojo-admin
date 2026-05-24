@@ -1,7 +1,7 @@
+import { isFunction } from '@packages/@core/base/shared/utils';
 import axios from 'axios';
 
 import { $t } from '@/locales';
-import { isFunction } from '@/utils';
 
 import type { RequestClient } from './request-client';
 import type { MakeErrorMessageFn, ResponseInterceptorConfig } from './types';

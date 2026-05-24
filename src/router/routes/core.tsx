@@ -1,9 +1,9 @@
+import { traverseTreeValues } from '@packages/@core/base/shared/utils';
 import { lazy } from 'react';
 import { Navigate, RouteObject } from 'react-router-dom';
 
 
 import type { AppRouteObject } from '@/types';
-import { traverseTreeValues } from '@/utils';
 
 import ErrorPage from '../components/ErrorPage';
 

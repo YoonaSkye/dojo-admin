@@ -1,6 +1,6 @@
 import { requestClient } from '../request';
 
-import type { RequestResponse } from '../request-client';
+import type { RequestResponse } from '@packages/effects/request';
 
 /**
  * 下载文件，获取Blob

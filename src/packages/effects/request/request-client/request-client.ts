@@ -1,7 +1,7 @@
+import { bindMethods, isString, merge } from '@packages/@core/base/shared/utils';
 import axios from 'axios';
 import qs from 'qs';
 
-import { bindMethods, isString, merge } from '@/utils';
 
 import { FileDownloader } from './modules/downloader';
 import { InterceptorManager } from './modules/interceptor';

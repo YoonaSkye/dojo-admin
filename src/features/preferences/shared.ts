@@ -1,5 +1,6 @@
 
-import { generatorColorVariables } from '@/features/color';
+import { generatorColorVariables } from '@packages/@core/base/shared/color';
+
 import { ThemePreferences } from '@/types';
 
 import { BUILT_IN_THEME_PRESETS } from './constants';

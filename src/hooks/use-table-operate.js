@@ -2,7 +2,7 @@ import { Form } from 'antd';
 import { useState } from 'react';
 
 import useBoolean from './use-boolean';
-import { antdUtils } from '@/utils';
+import { antdUtils } from '@packages/@core/base/shared/utils';
 
 export function useTableOperate(data, getData, executeResActions) {
   const {

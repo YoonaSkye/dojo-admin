@@ -1,14 +1,14 @@
-import { Button, Card } from 'antd';
-import { useState } from 'react';
-
-import { downloadFile1, downloadFile2 } from '@/api/examples/download';
-import Page from '@/components/page';
 import {
   downloadFileFromBase64,
   downloadFileFromBlobPart,
   downloadFileFromImageUrl,
   downloadFileFromUrl,
-} from '@/utils';
+} from '@packages/@core/base/shared/utils';
+import { Button, Card } from 'antd';
+import { useState } from 'react';
+
+import { downloadFile1, downloadFile2 } from '@/api/examples/download';
+import Page from '@/components/page';
 
 import imageBase64 from './base64';
 

@@ -1,4 +1,4 @@
-import { isUndefined } from '@/utils';
+import { isUndefined } from '@packages/@core/base/shared/utils';
 
 import type { RequestClient } from '../request-client';
 import type { RequestClientConfig } from '../types';

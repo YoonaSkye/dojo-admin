@@ -1,11 +1,11 @@
 import PlusOutlined from '@ant-design/icons/PlusOutlined';
 import { ProTable } from '@ant-design/pro-components';
+import { antdUtils } from '@packages/@core/base/shared/utils';
 import { Button, Popconfirm, Tag } from 'antd';
 import { useRef, useState } from 'react';
 
 import { getMenuList, SystemMenuApi } from '@/api/system';
 import { $t } from '@/locales';
-import { antdUtils } from '@/utils';
 
 import MenuOperateModal from './MenuOperateModal';
 import { MenuOption } from './shared';

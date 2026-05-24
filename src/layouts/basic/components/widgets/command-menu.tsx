@@ -16,9 +16,9 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command';
+import { useThemeToken } from '@/hooks/use-theme-token';
 import { cn } from '@/lib/utils';
 import { useFlattenedRoutes } from '@/router/hooks';
-import { useThemeToken } from '@/theme/hooks';
 
 // TODO
 /**

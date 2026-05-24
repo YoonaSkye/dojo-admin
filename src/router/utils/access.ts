@@ -1,5 +1,6 @@
+import { filterTree } from '@packages/@core/base/shared/utils';
+
 import { AppRouteObject } from '@/types';
-import { filterTree } from '@/utils';
 
 /**
  * 动态生成路由 - 前端方式

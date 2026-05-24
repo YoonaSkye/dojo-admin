@@ -1,7 +1,7 @@
+import { antdUtils } from '@packages/@core/base/shared/utils';
 import { App } from 'antd';
 import { useEffect } from 'react';
 
-import { antdUtils } from '@/utils';
 
 function ContextHolder() {
   const { message, modal, notification } = App.useApp();

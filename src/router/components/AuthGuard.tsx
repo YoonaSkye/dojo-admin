@@ -1,9 +1,9 @@
+import { startProgress, stopProgress } from '@packages/@core/base/shared/utils';
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navigate, Outlet } from 'react-router-dom';
 
 import type { Route } from '@/types';
-import { startProgress, stopProgress } from '@/utils';
 
 import { usePrevious, useRoute } from '../hooks/use-route';
 import { coreRouteNames } from '../routes';

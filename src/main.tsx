@@ -1,15 +1,15 @@
+import { setupSvgIcons } from '@packages/@core/base/shared/utils';
 import ReactDOM from 'react-dom/client';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import { setupI18n } from '@/locales';
-import { setupSvgIcons } from '@/utils';
 
 import App from './App.tsx';
 import FallbackRender from './components/fallback-render.tsx';
 
 // setup
 // 样式文件
-import '@/theme';
+import '@packages/@core/base/design';
 
 async function bootstrap() {
   await setupI18n();

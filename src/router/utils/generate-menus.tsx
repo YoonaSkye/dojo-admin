@@ -1,9 +1,9 @@
+import { filterTree, mapTree } from '@packages/@core/base/shared/utils';
 import { useTranslation } from 'react-i18next';
 
 
 import { Iconify } from '@/components/icon';
 import type { AppRouteObject, RouteRecordStringComponent } from '@/types';
-import { filterTree, mapTree } from '@/utils';
 
 import type { MenuProps } from 'antd';
 

@@ -1,10 +1,10 @@
 import PlusOutlined from '@ant-design/icons/PlusOutlined';
 import { ProTable } from '@ant-design/pro-components';
+import { antdUtils } from '@packages/@core/base/shared/utils';
 import { Button, Popconfirm, Tag } from 'antd';
 import { useRef, useState } from 'react';
 
 import { getRoleList } from '@/api/system';
-import { antdUtils } from '@/utils';
 
 import RoleOperateDrawer from './UserOperateDrawer';
 

@@ -1,3 +1,4 @@
+import { antdUtils } from '@packages/@core/base/shared/utils';
 import {
   clearAllStoresPersistence,
   resetAllStores,
@@ -14,7 +15,6 @@ import {
 } from '@/api/core';
 import { router, useRouter } from '@/router';
 import { Recordable, UserInfo } from '@/types';
-import { antdUtils } from '@/utils';
 
 const LOGIN_PATH = '/auth/login';
 const HOME_PAGE = import.meta.env.VITE_APP_HOMEPAGE || '/dashboard/analytics';

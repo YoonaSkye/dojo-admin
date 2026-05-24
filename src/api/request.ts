@@ -2,6 +2,7 @@
  * 该文件可自行根据业务逻辑进行调整
  */
 
+import { cloneDeep } from '@packages/@core/base/shared/utils';
 import { useAccessStore } from '@packages/stores';
 import JSONBigInt from 'json-bigint';
 
@@ -12,7 +13,6 @@ import {
   type RequestClientOptions,
   type AxiosResponseHeaders,
 } from '@/packages/effects/request';
-import { cloneDeep } from '@/utils';
 
 const apiURL = import.meta.env.VITE_APP_BASE_API;
 
