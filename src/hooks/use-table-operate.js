@@ -11,8 +11,6 @@ export function useTableOperate(data, getData, executeResActions) {
     setTrue: openDrawer,
   } = useBoolean();
 
-  // const { t } = useTranslation();
-
   const [operateType, setOperateType] = useState('add');
 
   const [form] = Form.useForm();

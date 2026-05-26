@@ -1,8 +1,8 @@
 import { startProgress, stopProgress } from '@packages/@core/base/shared/utils';
 import { useEffect, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Navigate, Outlet } from 'react-router-dom';
 
+import { useLocale } from '@/features/lang';
 import type { Route } from '@/types';
 
 import { usePrevious, useRoute } from '../hooks/use-route';
@@ -73,11 +73,11 @@ const AuthGuard = () => {
     null,
   );
 
-  const { t } = useTranslation();
+  const { $t } = useLocale();
 
   useEffect(() => {
-    document.title = `${t(title ?? '')} - Dojo Vite`;
-  }, [title, t]);
+    document.title = `${$t(title ?? '')} - Dojo Vite`;
+  }, [title, $t]);
 
   useEffect(() => {
     stopProgress();

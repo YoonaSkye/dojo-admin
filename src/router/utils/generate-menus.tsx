@@ -1,22 +1,22 @@
 import { filterTree, mapTree } from '@packages/@core/base/shared/utils';
-import { useTranslation } from 'react-i18next';
-
 
 import { Iconify } from '@/components/icon';
+import { useLocale } from '@/features/lang';
 import type { AppRouteObject, RouteRecordStringComponent } from '@/types';
 
 import type { MenuProps } from 'antd';
-
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 /**
  * 菜单标签组件，支持动态翻译响应语言变化
+ * 注意：必须使用 useLocale 提供的 $t 函数（来自 react-i18next），而非 $t 静态代理。
+ * 静态 $t 不订阅语言变化，不会触发重渲染。
  */
 // eslint-disable-next-line react-refresh/only-export-components
 const MenuLabel = ({ label }: { label: string }) => {
-  const { t } = useTranslation();
-  return <>{t(label)}</>;
+  const { $t } = useLocale();
+  return <>{$t(label)}</>;
 };
 
 /**

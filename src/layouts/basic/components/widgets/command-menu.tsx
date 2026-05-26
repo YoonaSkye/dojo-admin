@@ -1,9 +1,9 @@
 import { ArrowUp, ArrowDown, CornerDownLeft, MdiKeyboardEsc } from '@packages/icons';
+import { $t } from '@packages/locales';
 import { type DialogProps } from '@radix-ui/react-dialog';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
@@ -34,7 +34,6 @@ export default function CommandMenu({ ...props }: DialogProps) {
   const [searchQuery, setSearchQuery] = useState('');
 
   const themeToken = useThemeToken();
-  const { t } = useTranslation();
   const navigete = useNavigate();
 
   useEffect(() => {
@@ -62,11 +61,11 @@ export default function CommandMenu({ ...props }: DialogProps) {
   useEffect(() => {
     const result = flattenedRoutes.filter(
       (item) =>
-        t(item.title).toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1 ||
-        t(item.key).toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1,
+        $t(item.title).toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1 ||
+        $t(item.key).toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1,
     );
     setSearchResult(result);
-  }, [searchQuery, flattenedRoutes, t]);
+  }, [searchQuery, flattenedRoutes]);
 
   const runCommand = useCallback((command: () => unknown) => {
     setOpen(false);
@@ -99,12 +98,12 @@ export default function CommandMenu({ ...props }: DialogProps) {
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup>
             {searchResult.map(({ key, title }) => {
-              const partsTitle = parse(t(title), match(t(title), searchQuery));
+              const partsTitle = parse($t(title), match($t(title), searchQuery));
               const partsKey = parse(key, match(key, searchQuery));
               return (
                 <CommandItem
                   key={key}
-                  value={t(title)}
+                  value={$t(title)}
                   keywords={[key]}
                   onSelect={() => {
                     runCommand(() => navigete(key as string));

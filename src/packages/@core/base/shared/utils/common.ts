@@ -1,4 +1,4 @@
-import { $t } from '@/locales';
+import { $t } from '@packages/locales';
 
 export const isFunction = (
   value: unknown,

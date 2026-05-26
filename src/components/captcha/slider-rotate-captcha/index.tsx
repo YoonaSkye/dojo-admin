@@ -1,3 +1,4 @@
+import { $t } from '@packages/locales';
 import {
   useState,
   useRef,
@@ -9,7 +10,6 @@ import {
 } from 'react';
 
 import { cn } from '@/lib/utils';
-import { $t } from '@/locales';
 
 import SliderCaptcha from '../slider-captcha';
 import { SliderCaptchaRef, SliderRotateCaptchaProps } from '../types';

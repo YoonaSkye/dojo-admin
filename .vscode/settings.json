@@ -25,10 +25,10 @@
     "tailwind.config.*": "postcss.*"
   },
 
-  "i18n-ally.localesPaths": ["src/locales/langs"],
+  "i18n-ally.localesPaths": ["src/packages/locales/langs"],
   "i18n-ally.pathMatcher": "{locale}/{namespace}.{ext}",
   "i18n-ally.enabledParsers": ["json"],
-  "i18n-ally.sourceLanguage": "zh",
+  "i18n-ally.sourceLanguage": "en-US",
   "i18n-ally.displayLanguage": "zh-CN",
   "i18n-ally.enabledFrameworks": ["vue", "react"],
   "i18n-ally.keystyle": "nested",

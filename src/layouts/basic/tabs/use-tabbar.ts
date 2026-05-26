@@ -8,12 +8,12 @@ import {
   RotateCw,
   X,
 } from '@packages/icons';
+import { $t } from '@packages/locales/i18n';
 import { getTabKey, getTabsSelector, useTabbarStore } from '@packages/stores';
 import { useEffect, useMemo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
 import { useLocale } from '@/features/lang';
-import { $t } from '@/locales/i18n';
 import { useRoute, useRouter } from '@/router';
 import type { IContextMenuItem, TabDefinition } from '@/types';
 

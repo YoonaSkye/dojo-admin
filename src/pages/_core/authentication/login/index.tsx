@@ -1,6 +1,5 @@
-import { useTranslation } from 'react-i18next';
-
 import logo from '@/assets/images/logo.png';
+import { useLocale } from '@/features/lang';
 
 import LoginForm from './LoginForm';
 import Slogan from './Slogan';
@@ -9,7 +8,7 @@ import AuthenticationToolbar from './toolbar';
 import './login.css';
 
 export default function Login() {
-  const { t } = useTranslation();
+  const { $t } = useLocale();
 
   return (
     <div className="flex min-h-full flex-1 select-none overflow-hidden">
@@ -30,11 +29,11 @@ export default function Login() {
             <Slogan />
             <div className="text-1xl mt-6 font-sans text-foreground lg:text-2xl">
               {/* 开箱即用的大型中后台管理系统 */}
-              {t('authentication.pageTitle')}
+              {$t('authentication.pageTitle')}
             </div>
             <div className="mt-2 dark:text-muted-foreground">
               {/* 工程化、高性能、跨组件库的前端模版 */}
-              {t('authentication.pageDesc')}
+              {$t('authentication.pageDesc')}
             </div>
           </div>
         </div>
@@ -44,11 +43,11 @@ export default function Login() {
         <div className="enter-x mt-6 w-full sm:mx-auto md:max-w-md">
           <div className="mb-7 sm:mx-auto sm:w-full sm:max-w-md">
             <h2 className="mb-3 text-3xl font-bold leading-9 tracking-tight text-foreground lg:text-4xl">
-              {t('authentication.welcomeBack')} 👋🏻{' '}
+              {$t('authentication.welcomeBack')} 👋🏻{' '}
             </h2>
             <p className="lg:text-md text-sm text-muted-foreground">
               <span className="text-muted-foreground">
-                {t('authentication.loginSubtitle')}
+                {$t('authentication.loginSubtitle')}
               </span>
             </p>
           </div>

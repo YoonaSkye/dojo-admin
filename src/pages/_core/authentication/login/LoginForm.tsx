@@ -5,16 +5,16 @@ import {
   SvgWeChatIcon,
 } from '@packages/icons';
 import { Button, Checkbox, Col, Form, Input, Row } from 'antd';
-import { useTranslation } from 'react-i18next';
 
 import { AuthApi } from '@/api/core/auth';
 import { SliderCaptcha } from '@/components/captcha';
 import { IconButton } from '@/components/icon';
 import { useAuthLogin } from '@/features/access';
+import { useLocale } from '@/features/lang';
 
 export default function LoginForm() {
   const { authLogin, loading } = useAuthLogin();
-  const { t } = useTranslation();
+  const { $t } = useLocale();
 
   const handleFinish = async ({ username, password }: AuthApi.LoginParams) => {
     try {
@@ -37,20 +37,20 @@ export default function LoginForm() {
       >
         <Form.Item
           name="username"
-          rules={[{ required: true, message: t('authentication.usernameTip') }]}
+          rules={[{ required: true, message: $t('authentication.usernameTip') }]}
         >
           <Input placeholder="dojo" />
         </Form.Item>
         <Form.Item
           name="password"
-          rules={[{ required: true, message: t('authentication.passwordTip') }]}
+          rules={[{ required: true, message: $t('authentication.passwordTip') }]}
         >
           <Input.Password type="password" placeholder="123456" />
         </Form.Item>
 
         <Form.Item
           name="captcha"
-          // rules={[{ required: true, message: t('authentication.captchaTip') }]}
+          // rules={[{ required: true, message: $t('authentication.captchaTip') }]}
         >
           <SliderCaptcha />
         </Form.Item>
@@ -59,12 +59,12 @@ export default function LoginForm() {
           <Row>
             <Col span={12}>
               <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>{t('authentication.rememberMe')}</Checkbox>
+                <Checkbox>{$t('authentication.rememberMe')}</Checkbox>
               </Form.Item>
             </Col>
             <Col span={12} className="text-right">
               <button className="underline">
-                {t('authentication.forgetPassword')}
+                {$t('authentication.forgetPassword')}
               </button>
             </Col>
           </Row>
@@ -76,19 +76,19 @@ export default function LoginForm() {
             className="w-full bg-blue-500"
             loading={loading}
           >
-            {t('common.login')}
+            {$t('common.login')}
           </Button>
         </Form.Item>
 
         <Row align="middle" gutter={8}>
           <Col span={12} flex="1">
             <Button className="w-full !text-sm">
-              {t('authentication.mobileLogin')}
+              {$t('authentication.mobileLogin')}
             </Button>
           </Col>
           <Col span={12} flex="1">
             <Button className="w-full !text-sm">
-              {t('authentication.qrcodeLogin')}
+              {$t('authentication.qrcodeLogin')}
             </Button>
           </Col>
         </Row>
@@ -97,7 +97,7 @@ export default function LoginForm() {
           <div className="mt-4 flex items-center justify-between">
             <span className="w-[35%] border-b border-input dark:border-gray-600"></span>
             <span className="text-center text-xs uppercase text-muted-foreground">
-              {t('authentication.thirdPartyLogin')}
+              {$t('authentication.thirdPartyLogin')}
             </span>
             <span className="w-[35%] border-b border-input dark:border-gray-600"></span>
           </div>
@@ -117,9 +117,9 @@ export default function LoginForm() {
           </div>
         </div>
         <div className="mt-3 text-center text-sm">
-          {t('authentication.accountTip')}
+          {$t('authentication.accountTip')}
           <span className="cursor-pointer text-sm font-normal text-primary hover:text-primary-hover active:text-primary-active">
-            {t('authentication.createAccount')}
+            {$t('authentication.createAccount')}
           </span>
         </div>
       </Form>

@@ -1,8 +1,8 @@
 import { setupSvgIcons } from '@packages/@core/base/shared/utils';
+import { setupI18n } from '@packages/locales';
 import ReactDOM from 'react-dom/client';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { setupI18n } from '@/locales';
 
 import App from './App.tsx';
 import FallbackRender from './components/fallback-render.tsx';

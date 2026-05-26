@@ -1,6 +1,6 @@
 import { AnimatePresence, motion as m } from 'motion/react';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+
 
 import { Iconify } from '@/components/icon';
 import {
@@ -10,6 +10,7 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import { useLocale } from '@/features/lang';
 import { useRoute } from '@/router';
 
 
@@ -20,7 +21,7 @@ type Crumbs = {
 };
 
 export default function BreadCrumb() {
-  const { t } = useTranslation();
+  const { $t } = useLocale();
   const route = useRoute();
 
   const [breadCrumbs, setBreadCrumbs] = useState<Crumbs[] | undefined>([]);
@@ -73,7 +74,7 @@ export default function BreadCrumb() {
                 <BreadcrumbLink>
                   <div className="flex-center">
                     <Iconify icon={crumb.icon} className="mr-1 size-4" />
-                    {t(crumb.title)}
+                    {$t(crumb.title)}
                   </div>
                 </BreadcrumbLink>
               </BreadcrumbItem>

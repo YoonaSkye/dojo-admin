@@ -1,5 +1,5 @@
+import { $t } from '@packages/locales';
 import { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { cn } from '@/lib/utils';
 import { TabConfig, TabsProps } from '@/types';
@@ -12,7 +12,6 @@ interface Props extends TabsProps {}
 
 function TabsView(props: Props) {
   const { tabs = [], active, contextMenus, onActiveChange, onClose } = props;
-  const { t } = useTranslation();
 
   const tabsView = useMemo(() => {
     return tabs.map((tab) => {
@@ -59,7 +58,7 @@ function TabsView(props: Props) {
                   closable={tabs.length > 1}
                   tab={tab}
                   tabIndex={index}
-                  title={t(tab.title)}
+                  title={$t(tab.title) as string}
                 />
               </TabContextMenu>
             </div>

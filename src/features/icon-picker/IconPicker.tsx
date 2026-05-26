@@ -1,7 +1,6 @@
 import { listIcons } from '@iconify/react';
 import { Input, Pagination, Space } from 'antd';
 import React, { useMemo, useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Iconify } from '@/components/icon';
 import { Button } from '@/components/ui/button';
@@ -10,6 +9,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { useLocale } from '@/features/lang';
 import { cn } from '@/lib/utils';
 
 import { fetchIconsData } from './icons';
@@ -58,7 +58,7 @@ function IconPicker({
   className,
   ...restProps
 }: Props) {
-  const { t } = useTranslation();
+  const { $t } = useLocale();
 
   const [visible, setVisible] = useState(false);
   const [currentSelect, setCurrentSelect] = useState('');
@@ -155,12 +155,12 @@ function IconPicker({
   // 搜索输入框属性
   const searchInputProps = useMemo(
     () => ({
-      placeholder: t('ui.iconPicker.search'),
+      placeholder: $t('ui.iconPicker.search'),
       value: keyword,
       onChange: handleKeywordChange,
       className: 'mx-2',
     }),
-    [keyword, t],
+    [keyword, $t],
   );
 
   // 默认图标（当没有选中图标时显示）
@@ -175,7 +175,7 @@ function IconPicker({
           <Input {...searchInputProps} />
         ) : (
           <Input
-            placeholder={t('ui.iconPicker.search')}
+            placeholder={$t('ui.iconPicker.search')}
             value={keyword}
             onChange={handleKeywordChange}
             className="mx-2 h-8 w-full"
@@ -220,7 +220,7 @@ function IconPicker({
       ) : (
         <div className="flex min-h-[150px] w-full flex-col items-center justify-center text-muted-foreground">
           <Iconify icon="mdi:folder-open-outline" className="size-10" />
-          <div className="mt-1 text-sm">{t('common.noData')}</div>
+          <div className="mt-1 text-sm">{$t('common.noData')}</div>
         </div>
       )}
     </div>
@@ -237,9 +237,9 @@ function IconPicker({
                   ? // - 处理 React 元素
                     React.cloneElement(inputComponent, {
                       [modelValueProp]: currentSelect,
-                      placeholder: t('ui.iconPicker.placeholder'),
+                      placeholder: $t('ui.iconPicker.placeholder'),
                       role: 'combobox',
-                      'aria-label': t('ui.iconPicker.placeholder'),
+                      'aria-label': $t('ui.iconPicker.placeholder'),
                       'aria-expanded': visible,
                       onChange: handleInputChange,
                       ...restProps,
@@ -258,10 +258,10 @@ function IconPicker({
             <div className={cn('relative w-full cursor-pointer', className)}>
               <Input
                 value={currentSelect}
-                placeholder={t('ui.iconPicker.placeholder')}
+                placeholder={$t('ui.iconPicker.placeholder')}
                 className="h-8 w-full pr-8"
                 role="combobox"
-                aria-label={t('ui.iconPicker.placeholder')}
+                aria-label={$t('ui.iconPicker.placeholder')}
                 aria-expanded={visible}
                 onChange={handleInputChange}
                 {...restProps}
